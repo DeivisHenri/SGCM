@@ -23,13 +23,14 @@
             dataType: "json",
             data: json,
             success: function (data) {
-                alert(data);
+                alert("success: " + data);
             },
             failure: function (data) {
-                alert(data.responseText);
+                alert("failure: " + data.responseText);
             }, //End of AJAX failure function  
+            
             error: function (data) {
-                alert(data.responseText);
+                alert("error: " + data);
             } //End of AJAX error function  
 
             });

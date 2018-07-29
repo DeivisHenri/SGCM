@@ -21,26 +21,23 @@ namespace SGCM.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult Post(EfetuarLoginModel Usuario){
             try {
-                var objLoginBLL = new LoginBLL();
-                var retorno = objLoginBLL.EfetuarLogin(Usuario);
+                if (ModelState.IsValid) {
+                    var objLoginBLL = new LoginBLL();
+                    var retorno = objLoginBLL.EfetuarLogin(Usuario);
 
-                if (retorno == null) {
-                    return RedirectPermanent("/Home/Index");
+                    if (retorno == null) {
+                        //return RedirectPermanent("/Home/Index");
+                        return BadRequest(retorno);
+                    } else {
+                        return Ok(retorno);
+                    }
                 } else {
-                    return Ok(retorno);
+                    return BadRequest(ModelState);
                 }
-
                 
-
-                //if (Usuario.User.Equals("deivis")){
-                //    return RedirectPermanent("/Home/Index");
-                //} else {
-                //    return RedirectPermanent("/Home/Contact");
-                //}
-                //return Ok();
             }
             catch (Exception ex) {
-                return BadRequest(ex);
+                return BadRequest(ex.Message);
             }
         }
 
