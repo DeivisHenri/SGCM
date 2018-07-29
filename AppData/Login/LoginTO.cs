@@ -6,8 +6,11 @@ using System.Web;
 namespace SGCM.AppData.Login {
 
     public class LoginTO {
-        public string USER { get; set; }
 
-        public string SENHA { get; set; }
+        public int ID { get; set; }
+
+        public string username { get; set; }
+
+        public string password { get; set; }
     }
 }

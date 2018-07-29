@@ -24,12 +24,13 @@ namespace SGCM.Controllers {
                 var objLoginBLL = new LoginBLL();
                 var retorno = objLoginBLL.EfetuarLogin(Usuario);
 
-                if (retorno == null) { 
-
-
+                if (retorno == null) {
+                    return RedirectPermanent("/Home/Index");
+                } else {
+                    return Ok(retorno);
                 }
 
-                return RedirectPermanent("/Home/Index");
+                
 
                 //if (Usuario.User.Equals("deivis")){
                 //    return RedirectPermanent("/Home/Index");
@@ -38,8 +39,8 @@ namespace SGCM.Controllers {
                 //}
                 //return Ok();
             }
-            catch {
-                return BadRequest();
+            catch (Exception ex) {
+                return BadRequest(ex);
             }
         }
 

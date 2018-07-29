@@ -57,6 +57,9 @@ namespace SGCM.Models {
     public class EfetuarLoginModel {
 
         [Required]
+        public int ID { get; set; }
+
+        [Required]
         [StringLength(100, ErrorMessage = "O {0} deve ter pelo menos {2} caracteres.", MinimumLength = 5)]
         [Display(Name = "Usuário")]
         public string username { get; set; }

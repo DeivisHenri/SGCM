@@ -12,13 +12,9 @@
     //$("#btnLogin").click(function () {
     $('#frmLogin').submit(function () {
         $("#spnMsg").text("Efetuando o Login...");
-        console.log("Efetuando o Login..");
         var token = gettoken()
-        console.log("token: " + token);
         var dadosLogin = { __RequestVerificationToken: token, username: $("#inputLogin").val(), password: $("#inputSenha").val() }
-        console.log("dadosLogin: " + dadosLogin);
         var json = JSON.stringify(dadosLogin);
-        console.log("json: " + json);
 
         $.ajax({
             type: "POST",
@@ -27,9 +23,7 @@
             dataType: "json",
             data: json,
             success: function (data) {
-                console.log(data)
-                alert(JSON.stringify(data));
-                //window.location.replace("Home/Index");
+                alert(data);
             },
             failure: function (data) {
                 alert(data.responseText);

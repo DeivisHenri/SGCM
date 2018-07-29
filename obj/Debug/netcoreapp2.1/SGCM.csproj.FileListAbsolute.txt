@@ -32,3 +32,4 @@ C:\Users\mselm\source\repos\SGCM\SGCM\obj\Debug\netcoreapp2.1\SGCM.Views.pdb
 C:\Users\mselm\source\repos\SGCM\SGCM\obj\Debug\netcoreapp2.1\SGCM.dll
 C:\Users\mselm\source\repos\SGCM\SGCM\obj\Debug\netcoreapp2.1\SGCM.pdb
 C:\Users\mselm\source\repos\SGCM\SGCM\obj\Debug\netcoreapp2.1\SGCM.csproj.CopyComplete
+C:\Users\mselm\source\repos\SGCM\SGCM\obj\Debug\netcoreapp2.1\SGCM.csprojAssemblyReference.cache
