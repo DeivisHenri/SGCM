@@ -9,8 +9,8 @@
         controlStart();
     });
 
-    //$("#btnLogin").click(function () {
-    $('#frmLogin').submit(function () {
+    $("#btnLogin").click(function () {
+        //$('#frmLogin').submit(function () {
         $("#spnMsg").text("Efetuando o Login...");
         var token = gettoken()
         var dadosLogin = { __RequestVerificationToken: token, username: $("#inputLogin").val(), password: $("#inputSenha").val() }
@@ -22,18 +22,22 @@
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             data: json,
-            success: function (data) {
+            success: function(data, textStatus, jqXHR) {
                 alert("success: " + data);
             },
-            failure: function (data) {
+            failure: function (data, textStatus, jqXHR) {
                 alert("failure: " + data.responseText);
             }, //End of AJAX failure function  
-            
-            error: function (data) {
-                alert("error: " + data);
+
+            error: function (data, textStatus, jqXHR) {
+                console.log("data: " + data);
+                console.log("textStatus: " + textStatus);
+                console.log("jqXHR: " + jqXHR);
+
+                alert("error: " + data + textStatus + jqXHR);
             } //End of AJAX error function  
 
-            });
+        });
     });
 
     //Login CallBack.

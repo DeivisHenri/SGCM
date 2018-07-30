@@ -8,13 +8,12 @@
 }
 
 @model SGCM.Models.EfetuarLoginModel
-
 @* Folha De Estilo *@
 <partial name="/Views/Login/Partials/_IndexStyle.cshtml" />
 
 @* Corpo da Página (HTML) *@
 <div class="login-page-container">
-    <form asp-controller="Login" asp-action="Post" id="frmLogin" method="post">
+    <form id="frmLogin" onsubmit="return false;">
 
         @* Token de Segurança *@
         @Html.AntiForgeryToken()
@@ -70,7 +69,7 @@
                     </tr>
                     <tr>
                         <td colspan="2" class="td-button">
-                            <button type="submit" id="btnLogin" class="btn btn-blue">
+                            <button id="btnLogin" class="btn btn-blue">
                                 ENTRAR
                             </button>
                         </td>

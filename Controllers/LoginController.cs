@@ -19,7 +19,7 @@ namespace SGCM.Controllers {
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Post(EfetuarLoginModel Usuario){
+        public ActionResult Post([FromBody] EfetuarLoginModel Usuario){
             try {
                 if (ModelState.IsValid) {
                     var objLoginBLL = new LoginBLL();
@@ -32,7 +32,8 @@ namespace SGCM.Controllers {
                         return Ok(retorno);
                     }
                 } else {
-                    return BadRequest(ModelState);
+                    //return View(model);
+                    return Json(ModelState);
                 }
                 
             }
