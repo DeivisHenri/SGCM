@@ -1,46 +1,118 @@
-﻿using SGCM.Models;
+﻿using SGCM.Models.Account;
 using System;
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using SGCM.AppData.Login;
+using Microsoft.AspNetCore.Authorization;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace SGCM.Controllers {
 
     public class LoginController : Controller {
-        public LoginController() {
-        }
 
+        //GET: /Login/Signin
         [HttpGet]
-        public ActionResult Index() {
+        public ActionResult Signin()
+        {
             ViewBag.Title = "Login";
 
             return View();
         }
 
+        // POST: /Login/Signin
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Post([FromBody] EfetuarLoginModel Usuario){
-            try {
-                if (ModelState.IsValid) {
-                    var objLoginBLL = new LoginBLL();
-                    var retorno = objLoginBLL.EfetuarLogin(Usuario);
-
-                    if (retorno == null) {
-                        //return RedirectPermanent("/Home/Index");
-                        return BadRequest(retorno);
-                    } else {
-                        return Ok(retorno);
-                    }
-                } else {
-                    //return View(model);
-                    return Json(ModelState);
+        public ActionResult Signin(LoginViewModel model, string returnUrl = null)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
                 }
-                
+                ViewData["ReturnUrl"] = returnUrl;
+
+                var objLoginBLL = new LoginBLL();
+                var retorno = objLoginBLL.EfetuarLogin(model);
+
+                if (!(retorno.ID != 0)) {
+                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    return View(model);
+                } else {
+                    CarregarDadosUsuarioParaSession(retorno);
+                    
+                    return Redirect("/Home/Index");
+                }
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Lockout()
+        {
+            return View();
+        }
+
+        private void CarregarDadosUsuarioParaSession(LoginTO loginTO)
+        {
+            HttpContext.Session.SetInt32("ID", loginTO.ID);
+            HttpContext.Session.SetString("Username", loginTO.username);
+            HttpContext.Session.SetString("Password", loginTO.password);
+            HttpContext.Session.SetInt32("TipoUsuario", loginTO.tipoUsuario);
+
+            HttpContext.Session.SetInt32("FlUsuarioI", loginTO.FlUsuarioI);
+            HttpContext.Session.SetInt32("FlUsuarioC", loginTO.FlUsuarioC);
+            HttpContext.Session.SetInt32("FlUsuarioA", loginTO.FlUsuarioA);
+            HttpContext.Session.SetInt32("FlUsuarioE", loginTO.FlUsuarioE);
+
+            HttpContext.Session.SetInt32("FlPacienteI", loginTO.FlPacienteI);
+            HttpContext.Session.SetInt32("FlPacienteC", loginTO.FlPacienteC);
+            HttpContext.Session.SetInt32("FlPacienteA", loginTO.FlPacienteA);
+            HttpContext.Session.SetInt32("FlPacienteE", loginTO.FlPacienteE);
+
+            HttpContext.Session.SetInt32("FlMedicamentoI", loginTO.FlMedicamentoI);
+            HttpContext.Session.SetInt32("FlMedicamentoC", loginTO.FlMedicamentoC);
+            HttpContext.Session.SetInt32("FlMedicamentoA", loginTO.FlMedicamentoA);
+            HttpContext.Session.SetInt32("FlMedicamentoE", loginTO.FlMedicamentoE);
+
+            HttpContext.Session.SetInt32("FlExamesI", loginTO.FlExamesI);
+            HttpContext.Session.SetInt32("FlExamesC", loginTO.FlExamesC);
+            HttpContext.Session.SetInt32("FlExamesA", loginTO.FlExamesA);
+            HttpContext.Session.SetInt32("FlExamesE", loginTO.FlExamesE);
+        }
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Post([FromBody] LoginViewModel Usuario){
+        //    try {
+        //        if (ModelState.IsValid) {
+        //            var objLoginBLL = new LoginBLL();
+        //            var retorno = objLoginBLL.EfetuarLogin(Usuario);
+
+        //            if (retorno == null) {
+        //                //return RedirectPermanent("/Home/Index");
+        //                return BadRequest(retorno);
+        //            } else {
+        //                return Ok(retorno);
+        //            }
+        //        } else {
+        //            //return View(model);
+        //            return Json(ModelState);
+        //        }
+
+        //    }
+        //    catch (Exception ex) {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
 
 
         // GET api/Login

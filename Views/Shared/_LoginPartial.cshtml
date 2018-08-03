@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNetCore.Http
+@using Newtonsoft.Json;
+
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    String IDCliente = HttpContextAccessor.HttpContext.Session.GetInt32("TipoUsuario").ToString();
+    string NomeCliente = HttpContextAccessor.HttpContext.Session.GetString("Username");
+    @*<h4 style="color:red">@IDCliente - @NomeCliente</h4>*@
+    if ((IDCliente != null) && (IDCliente != "") && (Convert.ToInt32(IDCliente) != 0))
+    {
+        <section class="col-lg-3">
+            <div class="navbar-collapse collapse text-right">
+                <ul class="nav navbar-nav inline-block">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Seja Bem Vindo @NomeCliente<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a asp-area="" asp-controller="Account" asp-action="MyAccount">Minha Conta</a></li>
+                            <li><a asp-area="" asp-controller="Account" asp-action="Signout">Sair</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    }
+    else
+    {
+        <section class="col-lg-1">
+            <div class="navbar-collapse collapse text-right">
+                <ul class="nav navbar-nav inline-block">
+                    <li><a asp-area="" asp-controller="Login" asp-action="Signin">Login</a></li>
+                </ul>
+            </div>
+        </section>
+    }
+}

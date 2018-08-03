@@ -11,6 +11,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using SGCM.AppData;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace SGCM
 {
@@ -35,9 +39,18 @@ namespace SGCM
 
             //services.AddDbContext<SGCMContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnection")));
 
+            services.AddMemoryCache();
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                //options.CookieName = ".MyApplication";
+            });
+
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -61,6 +74,7 @@ namespace SGCM
                     context.HttpContext.Response.StatusCode);
             });
 
+            app.UseSession();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
