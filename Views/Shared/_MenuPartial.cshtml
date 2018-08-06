@@ -3,9 +3,33 @@
 
 @{
     string IDCliente = HttpContextAccessor.HttpContext.Session.GetInt32("ID").ToString();
+
+    string FlUsuarioI = HttpContextAccessor.HttpContext.Session.GetInt32("FlUsuarioI").ToString();
+    string FlUsuarioC = HttpContextAccessor.HttpContext.Session.GetInt32("FlUsuarioC").ToString();
+    string FlUsuarioA = HttpContextAccessor.HttpContext.Session.GetInt32("FlUsuarioA").ToString();
+    string FlUsuarioE = HttpContextAccessor.HttpContext.Session.GetInt32("FlUsuarioE").ToString();
+
+    string FlPacienteI = HttpContextAccessor.HttpContext.Session.GetInt32("FlPacienteI").ToString();
+    string FlPacienteC = HttpContextAccessor.HttpContext.Session.GetInt32("FlPacienteC").ToString();
+    string FlPacienteA = HttpContextAccessor.HttpContext.Session.GetInt32("FlPacienteA").ToString();
+    string FlPacienteE = HttpContextAccessor.HttpContext.Session.GetInt32("FlPacienteE").ToString();
+
+    string FlMedicamentoI = HttpContextAccessor.HttpContext.Session.GetInt32("FlMedicamentoI").ToString();
+    string FlMedicamentoC = HttpContextAccessor.HttpContext.Session.GetInt32("FlMedicamentoC").ToString();
+    string FlMedicamentoA = HttpContextAccessor.HttpContext.Session.GetInt32("FlMedicamentoA").ToString();
+    string FlMedicamentoE = HttpContextAccessor.HttpContext.Session.GetInt32("FlMedicamentoE").ToString();
+
+    string FlExamesI = HttpContextAccessor.HttpContext.Session.GetInt32("FlExamesI").ToString();
+    string FlExamesC = HttpContextAccessor.HttpContext.Session.GetInt32("FlExamesC").ToString();
+    string FlExamesA = HttpContextAccessor.HttpContext.Session.GetInt32("FlExamesA").ToString();
+    string FlExamesE = HttpContextAccessor.HttpContext.Session.GetInt32("FlExamesE").ToString();
+
     if ((IDCliente != null) && (IDCliente != "") && (Convert.ToInt32(IDCliente) != 0))
     {
-        <section class="col-lg-8">
+<section class="col-lg-8">
+    @{ if ((FlPacienteI == "0") && (FlPacienteC == "0") && (FlPacienteA == "0") && (FlPacienteE == "0"))
+        {
+            <h4 style="color:red">@FlPacienteI - @FlPacienteC - @FlPacienteA - @FlPacienteE</h4>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
@@ -18,7 +42,10 @@
                     </li>
                 </ul>
             </div>
-        </section>        
+        }
+    }
+
+</section>        
     }
     else
     {

@@ -7,7 +7,7 @@
     String IDCliente = HttpContextAccessor.HttpContext.Session.GetInt32("TipoUsuario").ToString();
     string NomeCliente = HttpContextAccessor.HttpContext.Session.GetString("Username");
     @*<h4 style="color:red">@IDCliente - @NomeCliente</h4>*@
-    if ((IDCliente != null) && (IDCliente != "") && (Convert.ToInt32(IDCliente) != 0))
+    if ((IDCliente != null) && (IDCliente != ""))
     {
         <section class="col-lg-3">
             <div class="navbar-collapse collapse text-right">

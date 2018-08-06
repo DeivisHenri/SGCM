@@ -40,7 +40,7 @@ namespace SGCM.Controllers {
                 var retorno = objLoginBLL.EfetuarLogin(model);
 
                 if (!(retorno.ID != 0)) {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Usuário não encontrado!");
                     return View(model);
                 } else {
                     CarregarDadosUsuarioParaSession(retorno);
