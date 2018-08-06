@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using System.Data.SqlClient;
 
 namespace SGCM.Controllers {
 
@@ -47,10 +48,13 @@ namespace SGCM.Controllers {
                     
                     return Redirect("/Home/Index");
                 }
+            } catch (SqlException exSQL) {
+                ModelState.AddModelError(string.Empty, "Não foi possivel estabelecer uma conexão com o banco de dados!");
+                return View(model);
             }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
+            catch (Exception ex) {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return View(model);
             }
         }
 
@@ -77,6 +81,11 @@ namespace SGCM.Controllers {
             HttpContext.Session.SetInt32("FlPacienteC", loginTO.FlPacienteC);
             HttpContext.Session.SetInt32("FlPacienteA", loginTO.FlPacienteA);
             HttpContext.Session.SetInt32("FlPacienteE", loginTO.FlPacienteE);
+
+            HttpContext.Session.SetInt32("FlConsultaI", loginTO.FlPacienteI);
+            HttpContext.Session.SetInt32("FlConsultaC", loginTO.FlPacienteC);
+            HttpContext.Session.SetInt32("FlConsultaA", loginTO.FlPacienteA);
+            HttpContext.Session.SetInt32("FlConsultaE", loginTO.FlPacienteE);
 
             HttpContext.Session.SetInt32("FlMedicamentoI", loginTO.FlMedicamentoI);
             HttpContext.Session.SetInt32("FlMedicamentoC", loginTO.FlMedicamentoC);

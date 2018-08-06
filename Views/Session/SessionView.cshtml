@@ -1,0 +1,90 @@
+﻿<h2>Session</h2>
+
+<h4>ID: @ViewBag.ID - Username: @ViewBag.Username - Password: @ViewBag.Password - Tipo Usuário: @ViewBag.TipoUsuario</h4>
+
+<table border="1">
+    <tr>
+        <th align="center">Nome da Flag</th>
+        <th align="center">Sim</th>
+        <th align="center">Não</th>
+    </tr>
+    <tr>
+        <td>Inserir Usuário</td>
+        @if (ViewBag.FlUsuarioI == 1)
+        {
+            <td>@ViewBag.FlUsuarioI</td>
+            <td>0</td>
+        } else {
+            <td>0</td>
+            <td>@ViewBag.FlUsuarioI</td>
+        }
+    </tr>
+    <tr>
+        <td>Consultar Usuário</td>
+        @if (ViewBag.FlUsuarioC == 1)
+        {
+            <td>@ViewBag.FlUsuarioC</td>
+            <td>0</td>
+        } else {
+            <td>0</td>
+            <td>@ViewBag.FlUsuarioC</td>
+        }
+    </tr>
+    <tr>
+        <td>Alterar Usuário</td>
+        @if (ViewBag.FlUsuarioA == 1)
+        {
+            <td>@ViewBag.FlUsuarioA</td>
+            <td>0</td>
+        } else {
+            <td>0</td>
+            <td>@ViewBag.FlUsuarioA</td>
+        }
+    </tr>
+    <tr>
+        <td>Excluir Usuário</td>
+        @if (ViewBag.FlUsuarioE == 1)
+        {
+            <td>@ViewBag.FlUsuarioE</td>
+            <td>0</td>
+        } else {
+            <td>0</td>
+            <td>@ViewBag.FlUsuarioE</td>
+        }
+    </tr>
+    <tr>
+        <td>Laughing Bacchus Winecellars</td>
+        <td>Yoshi Tannamuri</td>
+        <td>Canada</td>
+    </tr>
+    <tr>
+        <td>Magazzini Alimentari Riuniti</td>
+        <td>Giovanni Rovelli</td>
+        <td>Italy</td>
+    </tr>
+</table>
+
+
+
+
+
+
+FlPacienteI
+FlPacienteC
+FlPacienteA
+FlPacienteE
+
+FlPacienteI
+FlPacienteC
+FlPacienteA
+FlPacienteE
+
+FlMedicamentoI
+FlMedicamentoC
+FlMedicamentoA
+FlMedicamentoE
+
+FlExamesI
+FlExamesC
+FlExamesA
+FlExamesE

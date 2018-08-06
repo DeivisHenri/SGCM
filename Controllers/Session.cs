@@ -8,30 +8,14 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SGCM.Models;
 
-namespace SGCM.Controllers {
-
-    public class HomeController : Controller {
-
-        public IActionResult Index()
-        {
+namespace SGCM.Controllers
+{
+    public class Session : Controller
+    {
+        public ActionResult SessionView(){
             if ((HttpContext.Session.GetInt32("ID") != null) && (HttpContext.Session.GetInt32("ID") != 0))
                 CarregaDadosUsuarioSessaoParaTela();
             return View();
-        }
-
-        public IActionResult Sobre() {
-            //ViewData["Message"] = "Your application description page.";
-            return View();
-        }
-
-        public IActionResult Contato() {
-            //ViewData["Message"] = "Your contact page.";
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error() {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
         private void CarregaDadosUsuarioSessaoParaTela()

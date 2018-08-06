@@ -14,6 +14,11 @@
     string FlPacienteA = HttpContextAccessor.HttpContext.Session.GetInt32("FlPacienteA").ToString();
     string FlPacienteE = HttpContextAccessor.HttpContext.Session.GetInt32("FlPacienteE").ToString();
 
+    string FlConsultaI = HttpContextAccessor.HttpContext.Session.GetInt32("FlConsultaI").ToString();
+    string FlConsultaC = HttpContextAccessor.HttpContext.Session.GetInt32("FlConsultaC").ToString();
+    string FlConsultaA = HttpContextAccessor.HttpContext.Session.GetInt32("FlConsultaA").ToString();
+    string FlConsultaE = HttpContextAccessor.HttpContext.Session.GetInt32("FlConsultaE").ToString();
+
     string FlMedicamentoI = HttpContextAccessor.HttpContext.Session.GetInt32("FlMedicamentoI").ToString();
     string FlMedicamentoC = HttpContextAccessor.HttpContext.Session.GetInt32("FlMedicamentoC").ToString();
     string FlMedicamentoA = HttpContextAccessor.HttpContext.Session.GetInt32("FlMedicamentoA").ToString();
@@ -24,28 +29,106 @@
     string FlExamesA = HttpContextAccessor.HttpContext.Session.GetInt32("FlExamesA").ToString();
     string FlExamesE = HttpContextAccessor.HttpContext.Session.GetInt32("FlExamesE").ToString();
 
+    @*<h4 style="color:red">
+        IDCliente: @IDCliente - FlUsuarioI: @FlUsuarioI - FlUsuarioC: @FlUsuarioC
+        FlUsuarioA: @FlUsuarioA - FlUsuarioE: @FlUsuarioE -
+        FlMedicamentoI: @FlMedicamentoI -
+        FlMedicamentoC: @FlMedicamentoC -
+        FlMedicamentoA: @FlMedicamentoA -
+        FlMedicamentoE: @FlMedicamentoE -
+        FlExamesI: @FlExamesI -
+        FlExamesC: @FlExamesC -
+        FlExamesA: @FlExamesA -
+        FlExamesE: @FlExamesE
+    </h4>*@
+
     if ((IDCliente != null) && (IDCliente != "") && (Convert.ToInt32(IDCliente) != 0))
     {
+        @*<h1 style="color:blue">TESTE</h1>*@
 <section class="col-lg-8">
-    @{ if ((FlPacienteI == "0") && (FlPacienteC == "0") && (FlPacienteA == "0") && (FlPacienteE == "0"))
+
+    @{ if (!(FlUsuarioI == "0") && !(FlUsuarioC == "0") && !(FlUsuarioA == "0") && !(FlUsuarioE == "0"))
         {
-            <h4 style="color:red">@FlPacienteI - @FlPacienteC - @FlPacienteA - @FlPacienteE</h4>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Paciente<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a asp-area="" asp-controller="Paciente" asp-action="CadastroPaciente">Cadastro Paciente</a></li>
-                            <li><a asp-area="" asp-controller="Paciente" asp-action="PesquisaPacientes">Pesquisar Paciente</a></li>
-                            <li><a asp-area="" asp-controller="Paciente" asp-action="Relatorio">Relatório</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+            @*<h4 style="color:red">@FlPacienteI - @FlPacienteC - @FlPacienteA - @FlPacienteE</h4>*@
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuário<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a asp-area="" asp-controller="Usuarios" asp-action="CadastroUsuario">Cadastro Usuário</a></li>
+                        <li><a asp-area="" asp-controller="Usuarios" asp-action="PesquisaUsuario">Pesquisar Usuário</a></li>
+                        <li><a asp-area="" asp-controller="Usuarios" asp-action="Relatorio">Relatório</a></li>
+                    </ul>
+                </li>
+            </ul>
         }
     }
 
-</section>        
+    @{ if (!(FlPacienteI == "0") && !(FlPacienteC == "0") && !(FlPacienteA == "0") && !(FlPacienteE == "0"))
+        {
+            @*<h4 style="color:red">@FlPacienteI - @FlPacienteC - @FlPacienteA - @FlPacienteE</h4>*@
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Paciente<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a asp-area="" asp-controller="Paciente" asp-action="CadastroPaciente">Cadastro Paciente</a></li>
+                        <li><a asp-area="" asp-controller="Paciente" asp-action="PesquisaPaciente">Pesquisar Paciente</a></li>
+                        <li><a asp-area="" asp-controller="Paciente" asp-action="Relatorio">Relatório</a></li>
+                    </ul>
+                </li>
+            </ul>
+        }
+    }
+
+    @{ if (!(FlConsultaI == "0") && !(FlConsultaC == "0") && !(FlConsultaA == "0") && !(FlConsultaE == "0"))
+        {
+            @*<h4 style="color:red">@FlPacienteI - @FlPacienteC - @FlPacienteA - @FlPacienteE</h4>*@
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Consulta<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a asp-area="" asp-controller="Consulta" asp-action="CadastroConsulta">Cadastro Consulta</a></li>
+                        <li><a asp-area="" asp-controller="Consulta" asp-action="PesquisaConsulta">Pesquisar Consulta</a></li>
+                        <li><a asp-area="" asp-controller="Consulta" asp-action="Relatorio">Relatório</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+        }
+    }
+
+    @{ if (!(FlMedicamentoI == "0") && !(FlMedicamentoC == "0") && !(FlMedicamentoA == "0") && !(FlMedicamentoE == "0"))
+        {
+            @*<h4 style="color:red">@FlMedicamentoI - @FlMedicamentoC - @FlMedicamentoA - @FlMedicamentoE</h4>*@
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Medicamento<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a asp-area="" asp-controller="Medicamento" asp-action="CadastroMedicamento">Cadastro Medicamento</a></li>
+                        <li><a asp-area="" asp-controller="Medicamento" asp-action="PesquisaMedicamento">Pesquisar Medicamento</a></li>
+                        <li><a asp-area="" asp-controller="Medicamento" asp-action="Relatorio">Relatório</a></li>
+                    </ul>
+                </li>
+            </ul>
+        }
+    }
+
+    @{ if (!(FlExamesI == "0") && !(FlExamesC == "0") && !(FlExamesA == "0") && !(FlExamesE == "0"))
+        {
+            @*<h4 style="color:red">@FlExamesI - @FlExamesC - @FlExamesA - @FlExamesE</h4>*@
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Exames<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a asp-area="" asp-controller="Exames" asp-action="CadastroExames">Cadastro Exames</a></li>
+                        <li><a asp-area="" asp-controller="Exames" asp-action="PesquisaExames">Pesquisar Exames</a></li>
+                        <li><a asp-area="" asp-controller="Exames" asp-action="Relatorio">Relatório</a></li>
+                    </ul>
+                </li>
+            </ul>
+        }
+    }
+
+</section>
     }
     else
     {
