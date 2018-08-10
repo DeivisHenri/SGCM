@@ -1,0 +1,102 @@
+﻿@using SGCM.Models.Usuarios
+@model UsuariosModel
+
+<div class="row margin-row">
+    <div class="col-lg-4 margin-right-15-px">
+        <div class="form-group">
+            <label asp-for="@Model.pessoa.Nome" class="control-label form-label"></label>
+            <input asp-for="@Model.pessoa.Nome" class="form-control form-input form-input-center"/>
+            <span asp-validation-for="@Model.pessoa.Nome" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="col-lg-2 margin-right-15-px">
+        <div class="form-group">
+            <label asp-for="@Model.pessoa.CPF" class="control-label form-label"></label>
+            <input asp-for="@Model.pessoa.CPF" class="form-control form-input form-input-center maskCPF" />
+            <span asp-validation-for="@Model.pessoa.CPF" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="col-lg-3 margin-right-15-px">
+        <div class="form-group display-inline-block">
+            <label asp-for="@Model.pessoa.TipoUsuario" class="control-label form-label"></label>
+            <div class="" style="display: flex;">
+                <div class="radio margin-left-right-15-px">
+                    <label asp-for="@Model.pessoa.TipoUsuario" class="radio-inline">
+                        <input id="tipoUsuarioMedico" asp-for="@Model.pessoa.TipoUsuario" type="radio" value="1">Médico
+                    </label>
+                </div>
+                <div class="radio margin-left-right-15-px">
+                    <label asp-for="@Model.pessoa.TipoUsuario" class="radio-inline">
+                        <input id="tipoUsuarioRecepcionista" asp-for="@Model.pessoa.TipoUsuario" type="radio" value="2">Recepcionista
+                    </label>
+                </div>
+            </div>
+            @*<input asp-for="@Model.pessoa.CPF" class="form-control form-input form-input-center" />*@
+            <span asp-validation-for="@Model.pessoa.TipoUsuario" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+
+<div class="row margin-row">
+    <div class="col-lg-3 margin-right-15-px">
+        <div class="form-group">
+            <label asp-for="@Model.pessoa.Estado" class="control-label form-label"></label>
+            <input asp-for="@Model.pessoa.Estado" class="form-control form-input form-input-center" />
+            <span asp-validation-for="@Model.pessoa.Estado" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="col-lg-3 margin-right-15-px">
+        <div class="form-group">
+            <label asp-for="@Model.pessoa.Cidade" class="control-label form-label"></label>
+            <input asp-for="@Model.pessoa.Cidade" class="form-control form-input form-input-center" />
+            <span asp-validation-for="@Model.pessoa.Cidade" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="col-lg-3 margin-right-15-px">
+        <div class="form-group">
+            <label asp-for="@Model.pessoa.Bairro" class="control-label form-label"></label>
+            <input asp-for="@Model.pessoa.Bairro" class="form-control form-input form-input-center" />
+            <span asp-validation-for="@Model.pessoa.Bairro" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+
+<div class="row margin-row">
+    <div class="col-lg-5 margin-right-15-px">
+        <div class="form-group">
+            <label asp-for="@Model.pessoa.Endereco" class="control-label form-label"></label>
+            <input asp-for="@Model.pessoa.Endereco" class="form-control form-input form-input-center" />
+            <span asp-validation-for="@Model.pessoa.Endereco" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="col-lg-1 margin-right-15-px">
+        <div class="form-group">
+            <label asp-for="@Model.pessoa.Numero" class="control-label form-label"></label>
+            <input asp-for="@Model.pessoa.Numero" class="form-control form-input form-input-center" />
+            <span asp-validation-for="@Model.pessoa.Numero" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+
+<div class="row margin-row">
+    <div class="col-lg-2 margin-right-15-px">
+        <div class="form-group">
+            <label asp-for="@Model.pessoa.Telefone_Celular" class="control-label form-label"></label>
+            <input asp-for="@Model.pessoa.Telefone_Celular" class="form-control form-input form-input-center maskTelefone" />
+            <span asp-validation-for="@Model.pessoa.Telefone_Celular" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="col-lg-3 margin-right-15-px">
+        <div class="form-group">
+            <label asp-for="@Model.pessoa.Email" class="control-label form-label"></label>
+            <input asp-for="@Model.pessoa.Email" class="form-control form-input form-input-center" />
+            <span asp-validation-for="@Model.pessoa.Email" class="text-danger"></span>
+        </div>
+    </div>
+</div>

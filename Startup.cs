@@ -15,6 +15,7 @@ using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using SGCM.AppData.Infraestrutura;
 
 namespace SGCM
 {
@@ -46,6 +47,11 @@ namespace SGCM
             });
 
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            services.AddMvc().AddMvcOptions(opts => {
+
+                opts.ModelMetadataDetailsProviders.Add(new CustomMetadataProvider());
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             

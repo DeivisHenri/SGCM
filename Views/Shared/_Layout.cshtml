@@ -16,9 +16,14 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
     <environment include="Development">
+        <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
+
+        <script src="~/lib/jquery.maskedinput/1.4.1/content/scripts/jquery.maskedinput.js"></script>
+        <script src="~/lib/jquery.maskedinput/1.4.1/content/scripts/jquery.maskedinput.min.js"></script>
+
     </environment>
     <environment exclude="Development">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
@@ -60,8 +65,6 @@
     <partial name="_CookieConsentPartial" />
 
     <div class="container body-content">
-        <br />
-        <br />
         @RenderBody()
     </div>
     <hr />

@@ -8,10 +8,10 @@
         <th align="center">Sim</th>
         <th align="center">Não</th>
     </tr>
+    @* USUÁRIO *@
     <tr>
         <td>Inserir Usuário</td>
-        @if (ViewBag.FlUsuarioI == 1)
-        {
+        @if (ViewBag.FlUsuarioI == 1) {
             <td>@ViewBag.FlUsuarioI</td>
             <td>0</td>
         } else {
@@ -21,8 +21,7 @@
     </tr>
     <tr>
         <td>Consultar Usuário</td>
-        @if (ViewBag.FlUsuarioC == 1)
-        {
+        @if (ViewBag.FlUsuarioC == 1) {
             <td>@ViewBag.FlUsuarioC</td>
             <td>0</td>
         } else {
@@ -32,8 +31,7 @@
     </tr>
     <tr>
         <td>Alterar Usuário</td>
-        @if (ViewBag.FlUsuarioA == 1)
-        {
+        @if (ViewBag.FlUsuarioA == 1) {
             <td>@ViewBag.FlUsuarioA</td>
             <td>0</td>
         } else {
@@ -43,8 +41,7 @@
     </tr>
     <tr>
         <td>Excluir Usuário</td>
-        @if (ViewBag.FlUsuarioE == 1)
-        {
+        @if (ViewBag.FlUsuarioE == 1) {
             <td>@ViewBag.FlUsuarioE</td>
             <td>0</td>
         } else {
@@ -52,15 +49,169 @@
             <td>@ViewBag.FlUsuarioE</td>
         }
     </tr>
+    @* PACIENTE *@
     <tr>
-        <td>Laughing Bacchus Winecellars</td>
-        <td>Yoshi Tannamuri</td>
-        <td>Canada</td>
+        <td>Inserir Paciente</td>
+        @if (ViewBag.FlPacienteI == 1) {
+            <td>@ViewBag.FlPacienteI</td>
+            <td>0</td>
+        } else {
+            <td>0</td>
+            <td>@ViewBag.FlPacienteI</td>
+        }
     </tr>
     <tr>
-        <td>Magazzini Alimentari Riuniti</td>
-        <td>Giovanni Rovelli</td>
-        <td>Italy</td>
+        <td>Consultar Paciente</td>
+        @if (ViewBag.FlPacienteC == 1) {
+            <td>@ViewBag.FlPacienteC</td>
+            <td>0</td>
+        } else {
+            <td>0</td>
+            <td>@ViewBag.FlPacienteC</td>
+        }
+    </tr>
+    <tr>
+        <td>Alterar Paciente</td>
+        @if (ViewBag.FlPacienteA == 1) {
+            <td>@ViewBag.FlPacienteA</td>
+            <td>0</td>
+        } else {
+            <td>0</td>
+            <td>@ViewBag.FlPacienteA</td>
+        }
+    </tr>
+    <tr>
+        <td>Excluir Paciente</td>
+        @if (ViewBag.FlPacienteE == 1) {
+            <td>@ViewBag.FlPacienteE</td>
+            <td>0</td>
+        } else {
+            <td>0</td>
+            <td>@ViewBag.FlPacienteE</td>
+        }
+    </tr>
+    @* Consulta *@
+    <tr>
+        <td>Inserir Consulta</td>
+        @if (ViewBag.FlConsultaI == 1) {
+            <td>@ViewBag.FlConsultaI</td>
+            <td>0</td>
+        } else {
+            <td>0</td>
+            <td>@ViewBag.FlConsultaI</td>
+        }
+    </tr>
+    <tr>
+        <td>Consultar Consulta</td>
+        @if (ViewBag.FlConsultaC == 1) {
+            <td>@ViewBag.FlConsultaC</td>
+            <td>0</td>
+        } else {
+            <td>0</td>
+            <td>@ViewBag.FlConsultaC</td>
+        }
+    </tr>
+    <tr>
+        <td>Alterar Consulta</td>
+        @if (ViewBag.FlConsultaA == 1) {
+            <td>@ViewBag.FlConsultaA</td>
+            <td>0</td>
+        } else {
+            <td>0</td>
+            <td>@ViewBag.FlConsultaA</td>
+        }
+    </tr>
+    <tr>
+        <td>Excluir Consulta</td>
+        @if (ViewBag.FlConsultaE == 1) {
+            <td>@ViewBag.FlConsultaE</td>
+            <td>0</td>
+        } else {
+            <td>0</td>
+            <td>@ViewBag.FlConsultaE</td>
+        }
+    </tr>
+    @* Medicamento *@
+    <tr>
+        <td>Inserir Medicamento</td>
+        @if (ViewBag.FlMedicamentoI == 1) {
+            <td>@ViewBag.FlMedicamentoI</td>
+            <td>0</td>
+        } else {
+            <td>0</td>
+            <td>@ViewBag.FlMedicamentoI</td>
+        }
+    </tr>
+    <tr>
+        <td>Consultar Consulta</td>
+        @if (ViewBag.FlMedicamentoC == 1) {
+            <td>@ViewBag.FlMedicamentoC</td>
+            <td>0</td>
+        } else {
+            <td>0</td>
+            <td>@ViewBag.FlMedicamentoC</td>
+        }
+    </tr>
+    <tr>
+        <td>Alterar Medicamento</td>
+        @if (ViewBag.FlMedicamentoA == 1) {
+            <td>@ViewBag.FlMedicamentoA</td>
+            <td>0</td>
+        } else {
+            <td>0</td>
+            <td>@ViewBag.FlMedicamentoA</td>
+        }
+    </tr>
+    <tr>
+        <td>Excluir Medicamento</td>
+        @if (ViewBag.FlMedicamentoE == 1) {
+            <td>@ViewBag.FlMedicamentoE</td>
+            <td>0</td>
+        } else {
+            <td>0</td>
+            <td>@ViewBag.FlMedicamentoE</td>
+        }
+    </tr>
+    @* Exame *@
+    <tr>
+        <td>Inserir Exames</td>
+        @if (ViewBag.FlExamesI == 1) {
+            <td>@ViewBag.FlExamesI</td>
+            <td>0</td>
+        } else {
+            <td>0</td>
+            <td>@ViewBag.FlExamesI</td>
+        }
+    </tr>
+    <tr>
+        <td>Consultar Exames</td>
+        @if (ViewBag.FlExamesC == 1) {
+            <td>@ViewBag.FlExamesC</td>
+            <td>0</td>
+        } else {
+            <td>0</td>
+            <td>@ViewBag.FlExamesC</td>
+        }
+    </tr>
+    <tr>
+        <td>Alterar Exames</td>
+        @if (ViewBag.FlExamesA == 1) {
+            <td>@ViewBag.FlExamesA</td>
+            <td>0</td>
+        } else {
+            <td>0</td>
+            <td>@ViewBag.FlExamesA</td>
+        }
+    </tr>
+    <tr>
+        <td>Excluir Exames</td>
+        @if (ViewBag.FlExamesE == 1) {
+            <td>@ViewBag.FlExamesE</td>
+            <td>0</td>
+        } else {
+            <td>0</td>
+            <td>@ViewBag.FlExamesE</td>
+        }
     </tr>
 </table>
 
@@ -69,22 +220,8 @@
 
 
 
-FlPacienteI
-FlPacienteC
-FlPacienteA
-FlPacienteE
 
-FlPacienteI
-FlPacienteC
-FlPacienteA
-FlPacienteE
 
-FlMedicamentoI
-FlMedicamentoC
-FlMedicamentoA
-FlMedicamentoE
 
-FlExamesI
-FlExamesC
-FlExamesA
-FlExamesE
+
+

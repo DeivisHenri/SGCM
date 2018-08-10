@@ -2,7 +2,9 @@
     ViewData["Title"] = "Home Page";
 }
 
-@model SGCM.Models.Account.LoginViewModel
+@model SGCM.Models.HomeModel
+
+<div id="MensagemErro" class="text-danger"><h3>@ViewBag.MensagemErro</h3></div>
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
     <ol class="carousel-indicators">

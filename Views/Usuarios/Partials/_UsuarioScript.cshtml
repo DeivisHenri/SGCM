@@ -1,0 +1,34 @@
+﻿<script type='text/javascript'>
+    (function ($) {
+        $(function () {
+            $(document).ready(function ($) {
+                $('.maskTelefone').mask('(99) 99999-9999');
+                $('.maskCPF').mask('999.999.999-99');
+
+                $('#nome').focus();
+
+            });
+        });
+    })(jQuery);
+
+    $("#tipoUsuarioMedico").click(function () {
+        console.log("1");
+        if ($('#tipoUsuarioRecepcionista').is(":checked")) {
+            console.log("2");
+            $("#tipoUsuarioRecepcionista").prop("checked", false);
+        }
+    });
+
+    $("#tipoUsuarioRecepcionista").click(function () {
+        console.log("3");
+        if ($('#tipoUsuarioMedico').is(":checked")) {
+            console.log("4");
+            $("#tipoUsuarioMedico").prop("checked", false);
+        }
+    }); 
+
+    $('#btnSelecionarTodos').click(function () {
+        $("input[type='checkbox']").prop("checked", true);
+    });
+
+</script>

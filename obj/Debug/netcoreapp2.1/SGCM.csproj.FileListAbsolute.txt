@@ -50,7 +50,6 @@ C:\Users\mselm\source\repos\SGCM\SGCM\bin\Debug\netcoreapp2.1\SGCM.pdb
 C:\Users\mselm\source\repos\SGCM\SGCM\bin\Debug\netcoreapp2.1\pt\SGCM.resources.dll
 C:\Users\mselm\source\repos\SGCM\SGCM\bin\Debug\netcoreapp2.1\SGCM.Views.dll
 C:\Users\mselm\source\repos\SGCM\SGCM\bin\Debug\netcoreapp2.1\SGCM.Views.pdb
-C:\Users\mselm\source\repos\SGCM\SGCM\obj\Debug\netcoreapp2.1\SGCM.csprojAssemblyReference.cache
 C:\Users\mselm\source\repos\SGCM\SGCM\obj\Debug\netcoreapp2.1\SGCM.Resources.ModelBindingMessages.pt.resources
 C:\Users\mselm\source\repos\SGCM\SGCM\obj\Debug\netcoreapp2.1\SGCM.csproj.GenerateResource.cache
 C:\Users\mselm\source\repos\SGCM\SGCM\obj\Debug\netcoreapp2.1\SGCM.csproj.CoreCompileInputs.cache
@@ -73,11 +72,19 @@ C:\Users\mselm\source\repos\SGCM\SGCM\obj\Debug\netcoreapp2.1\Razor\Views\Login2
 C:\Users\mselm\source\repos\SGCM\SGCM\obj\Debug\netcoreapp2.1\Razor\Views\Login\Partials\_IndexStyle.g.cshtml.cs
 C:\Users\mselm\source\repos\SGCM\SGCM\obj\Debug\netcoreapp2.1\Razor\Views\Login\Signin.g.cshtml.cs
 C:\Users\mselm\source\repos\SGCM\SGCM\obj\Debug\netcoreapp2.1\Razor\Views\Paciente\CadastroPaciente.g.cshtml.cs
+C:\Users\mselm\source\repos\SGCM\SGCM\obj\Debug\netcoreapp2.1\Razor\Views\Session\SessionView.g.cshtml.cs
 C:\Users\mselm\source\repos\SGCM\SGCM\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_CookieConsentPartial.g.cshtml.cs
 C:\Users\mselm\source\repos\SGCM\SGCM\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_Layout.g.cshtml.cs
 C:\Users\mselm\source\repos\SGCM\SGCM\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_LoginPartial.g.cshtml.cs
 C:\Users\mselm\source\repos\SGCM\SGCM\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_MenuPartial.g.cshtml.cs
 C:\Users\mselm\source\repos\SGCM\SGCM\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_ValidationScriptsPartial.g.cshtml.cs
+C:\Users\mselm\source\repos\SGCM\SGCM\obj\Debug\netcoreapp2.1\Razor\Views\Usuarios\CadastroUsuario.g.cshtml.cs
+C:\Users\mselm\source\repos\SGCM\SGCM\obj\Debug\netcoreapp2.1\Razor\Views\Usuarios\ConsultaUsuario.g.cshtml.cs
+C:\Users\mselm\source\repos\SGCM\SGCM\obj\Debug\netcoreapp2.1\Razor\Views\Usuarios\Partials\_CadastroUsuarioScript.g.cshtml.cs
+C:\Users\mselm\source\repos\SGCM\SGCM\obj\Debug\netcoreapp2.1\Razor\Views\Usuarios\Partials\_CadastroUsuarioStyle.g.cshtml.cs
+C:\Users\mselm\source\repos\SGCM\SGCM\obj\Debug\netcoreapp2.1\Razor\Views\Usuarios\Partials\_DadosLogin.g.cshtml.cs
+C:\Users\mselm\source\repos\SGCM\SGCM\obj\Debug\netcoreapp2.1\Razor\Views\Usuarios\Partials\_DadosPermissoes.g.cshtml.cs
+C:\Users\mselm\source\repos\SGCM\SGCM\obj\Debug\netcoreapp2.1\Razor\Views\Usuarios\Partials\_DadosPessoas.g.cshtml.cs
 C:\Users\mselm\source\repos\SGCM\SGCM\obj\Debug\netcoreapp2.1\Razor\Views\_ViewImports.g.cshtml.cs
 C:\Users\mselm\source\repos\SGCM\SGCM\obj\Debug\netcoreapp2.1\Razor\Views\_ViewStart.g.cshtml.cs
 C:\Users\mselm\source\repos\SGCM\SGCM\obj\Debug\netcoreapp2.1\SGCM.RazorTargetAssemblyInfo.cache
@@ -86,4 +93,4 @@ C:\Users\mselm\source\repos\SGCM\SGCM\obj\Debug\netcoreapp2.1\SGCM.Views.pdb
 C:\Users\mselm\source\repos\SGCM\SGCM\obj\Debug\netcoreapp2.1\SGCM.dll
 C:\Users\mselm\source\repos\SGCM\SGCM\obj\Debug\netcoreapp2.1\SGCM.pdb
 C:\Users\mselm\source\repos\SGCM\SGCM\obj\Debug\netcoreapp2.1\SGCM.csproj.CopyComplete
-C:\Users\mselm\source\repos\SGCM\SGCM\obj\Debug\netcoreapp2.1\Razor\Views\Session\SessionView.g.cshtml.cs
+C:\Users\mselm\source\repos\SGCM\SGCM\obj\Debug\netcoreapp2.1\SGCM.csprojAssemblyReference.cache
