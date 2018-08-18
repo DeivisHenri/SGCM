@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Text.RegularExpressions;
-using SGCM.AppData.Usuarios;
-using SGCM.Models.Usuarios;
+﻿using System.Text.RegularExpressions;
+using SGCM.Models.Usuario.CadastroUsuarioModel;
 
 namespace SGCM.AppData.Infraestrutura.UtilMetodo
 {
@@ -16,129 +11,132 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo
             return rgx.Replace(cpf, "").ToString();
         }
 
-        public static PermissoesTO ConversaoPermissoesStringParaInt(PermissoesTO permissoesTO, UsuariosModel usuario)
+        public static CadastroUsuarioModel ConversaoPermissoesStringParaInt(CadastroUsuarioModel usuario)
         {
+            int valorTrue = 1;
+            int valorFalse = 0;
+
             if ((usuario.permissoes.FlUsuarioI == "true") || (usuario.permissoes.FlUsuarioI == "True")) {
-                permissoesTO.Fl_Usuario_I = 1;
+                usuario.permissoes.FlUsuarioI = valorTrue.ToString();
             } else {
-                permissoesTO.Fl_Usuario_I = 0;
+                usuario.permissoes.FlUsuarioI = valorFalse.ToString();
             }
 
             if ((usuario.permissoes.FlUsuarioC == "true") || (usuario.permissoes.FlUsuarioC == "True")) {
-                permissoesTO.Fl_Usuario_C = 1;
+                usuario.permissoes.FlUsuarioC = valorTrue.ToString();
             } else {
-                permissoesTO.Fl_Usuario_C = 0;
+                usuario.permissoes.FlUsuarioC = valorFalse.ToString();
             }
 
             if ((usuario.permissoes.FlUsuarioA == "true") || (usuario.permissoes.FlUsuarioA == "True")) {
-                permissoesTO.Fl_Usuario_A = 1;
+                usuario.permissoes.FlUsuarioA = valorTrue.ToString();
             } else {
-                permissoesTO.Fl_Usuario_A = 0;
+                usuario.permissoes.FlUsuarioA = valorFalse.ToString();
             }
 
             if ((usuario.permissoes.FlUsuarioE == "true") || (usuario.permissoes.FlUsuarioE == "True")) {
-                permissoesTO.Fl_Usuario_E = 1;
+                usuario.permissoes.FlUsuarioE = valorTrue.ToString();
             } else {
-                permissoesTO.Fl_Usuario_E = 0;
+                usuario.permissoes.FlUsuarioE = valorFalse.ToString();
             }
 
             if ((usuario.permissoes.FlPacienteI == "true") || (usuario.permissoes.FlPacienteI == "True")) {
-                permissoesTO.Fl_Paciente_I = 1;
+                usuario.permissoes.FlPacienteI = valorTrue.ToString();
             } else {
-                permissoesTO.Fl_Paciente_I = 0;
+                usuario.permissoes.FlPacienteI = valorFalse.ToString();
             }
 
             if ((usuario.permissoes.FlPacienteC == "true") || (usuario.permissoes.FlPacienteC == "True")) {
-                permissoesTO.Fl_Paciente_C = 1;
+                usuario.permissoes.FlPacienteC = valorTrue.ToString();
             } else {
-                permissoesTO.Fl_Paciente_C = 0;
+                usuario.permissoes.FlPacienteC = valorFalse.ToString();
             }
 
             if ((usuario.permissoes.FlPacienteA == "true") || (usuario.permissoes.FlPacienteA == "True")) {
-                permissoesTO.Fl_Paciente_A = 1;
+                usuario.permissoes.FlPacienteA = valorTrue.ToString();
             } else {
-                permissoesTO.Fl_Paciente_A = 0;
+                usuario.permissoes.FlPacienteA = valorFalse.ToString();
             }
 
             if ((usuario.permissoes.FlPacienteE == "true") || (usuario.permissoes.FlPacienteE == "True")) {
-                permissoesTO.Fl_Paciente_E = 1;
+                usuario.permissoes.FlPacienteE = valorTrue.ToString();
             } else {
-                permissoesTO.Fl_Paciente_E = 0;
+                usuario.permissoes.FlPacienteE = valorFalse.ToString();
             }
 
             if ((usuario.permissoes.FlConsultaI == "true") || (usuario.permissoes.FlConsultaI == "True")) {
-                permissoesTO.Fl_Consulta_I = 1;
+                usuario.permissoes.FlConsultaI = valorTrue.ToString();
             } else {
-                permissoesTO.Fl_Consulta_I = 0;
+                usuario.permissoes.FlConsultaI = valorFalse.ToString();
             }
 
             if ((usuario.permissoes.FlConsultaC == "true") || (usuario.permissoes.FlConsultaC == "True")) {
-                permissoesTO.Fl_Consulta_C = 1;
+                usuario.permissoes.FlConsultaC = valorTrue.ToString();
             } else {
-                permissoesTO.Fl_Consulta_C = 0;
+                usuario.permissoes.FlConsultaC = valorFalse.ToString();
             }
 
             if ((usuario.permissoes.FlConsultaA == "true") || (usuario.permissoes.FlConsultaA == "True")) {
-                permissoesTO.Fl_Consulta_A = 1;
+                usuario.permissoes.FlConsultaA = valorTrue.ToString();
             } else {
-                permissoesTO.Fl_Consulta_A = 0;
+                usuario.permissoes.FlConsultaA = valorFalse.ToString();
             }
 
             if ((usuario.permissoes.FlConsultaE == "true") || (usuario.permissoes.FlConsultaE == "True")) {
-                permissoesTO.Fl_Consulta_E = 1;
+                usuario.permissoes.FlConsultaE = valorTrue.ToString();
             } else {
-                permissoesTO.Fl_Consulta_E = 0;
+                usuario.permissoes.FlConsultaE = valorFalse.ToString();
             }
 
             if ((usuario.permissoes.FlMedicamentoI == "true") || (usuario.permissoes.FlMedicamentoI == "True")) {
-                permissoesTO.Fl_Medicamento_I = 1;
+                usuario.permissoes.FlMedicamentoI = valorTrue.ToString();
             } else {
-                permissoesTO.Fl_Medicamento_I = 0;
+                usuario.permissoes.FlMedicamentoI = valorFalse.ToString();
             }
 
             if ((usuario.permissoes.FlMedicamentoC == "true") || (usuario.permissoes.FlMedicamentoC == "True")) {
-                permissoesTO.Fl_Medicamento_C = 1;
+                usuario.permissoes.FlMedicamentoC = valorTrue.ToString();
             } else {
-                permissoesTO.Fl_Medicamento_C = 0;
+                usuario.permissoes.FlMedicamentoC = valorFalse.ToString();
             }
 
             if ((usuario.permissoes.FlMedicamentoA == "true") || (usuario.permissoes.FlMedicamentoA == "True")) {
-                permissoesTO.Fl_Medicamento_A = 1;
+                usuario.permissoes.FlMedicamentoA = valorTrue.ToString();
             } else {
-                permissoesTO.Fl_Medicamento_A = 0;
+                usuario.permissoes.FlMedicamentoA = valorFalse.ToString();
             }
 
             if ((usuario.permissoes.FlMedicamentoE == "true") || (usuario.permissoes.FlMedicamentoE == "True")) {
-                permissoesTO.Fl_Medicamento_E = 1;
+                usuario.permissoes.FlMedicamentoE = valorTrue.ToString();
             } else {
-                permissoesTO.Fl_Medicamento_E = 0;
+                usuario.permissoes.FlMedicamentoE = valorFalse.ToString();
             }
 
             if ((usuario.permissoes.FlExamesI == "true") || (usuario.permissoes.FlExamesI == "True")) {
-                permissoesTO.Fl_Exames_I = 1;
+                usuario.permissoes.FlExamesI = valorTrue.ToString();
             } else {
-                permissoesTO.Fl_Exames_I = 0;
+                usuario.permissoes.FlExamesI = valorFalse.ToString();
             }
 
             if ((usuario.permissoes.FlExamesC == "true") || (usuario.permissoes.FlExamesC == "True")) {
-                permissoesTO.Fl_Exames_C = 1;
+                usuario.permissoes.FlExamesC = valorTrue.ToString();
             } else {
-                permissoesTO.Fl_Exames_C = 0;
+                usuario.permissoes.FlExamesC = valorFalse.ToString();
             }
 
             if ((usuario.permissoes.FlExamesA == "true") || (usuario.permissoes.FlExamesA == "True")) {
-                permissoesTO.Fl_Exames_A = 1;
+                usuario.permissoes.FlExamesA = valorTrue.ToString();
             } else {
-                permissoesTO.Fl_Exames_A = 0;
+                usuario.permissoes.FlExamesA = valorFalse.ToString();
             }
 
             if ((usuario.permissoes.FlExamesE == "true") || (usuario.permissoes.FlExamesE == "True")) {
-                permissoesTO.Fl_Exames_E = 1;
+                usuario.permissoes.FlExamesE = valorTrue.ToString();
             } else {
-                permissoesTO.Fl_Exames_E = 0;
+                usuario.permissoes.FlExamesE = valorFalse.ToString();
             }
 
-            return permissoesTO;
+            return usuario;
         }
     }
 }

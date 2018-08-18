@@ -1,0 +1,58 @@
+﻿@using SGCM.Models.Usuario.CadastroUsuarioModel
+@model List<CadastroUsuarioModel>
+
+@{
+    ViewData["Title"] = "Consulta Usuário";
+}
+
+<partial name="/Views/Usuario/Partials/Consultar/_UsuarioStyle.cshtml" />
+
+<div class="consulta-usuario-container">
+    <div class="medico-header">
+        <h3>Usuarios Cadastrador pelo Médico: @ViewBag.Nome</h3>
+    </div>
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <table title="Tabela dos Usuários" class="usuario-table" border="1">
+        <tr>
+            <td>Nome</td>
+            <td>CPF</td>
+            <td>Telefone Celular</td>
+            <td>Editar</td>
+        </tr>
+        @*@for (int i = 0; i < Model.Count; i++)*@
+
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.pessoa.Nome</td>
+                <td>@user.pessoa.CPF</td>
+                <td>@user.pessoa.Telefone_Celular</td>
+                <td>
+
+
+                    <div>
+                        <a asp-controller="Usuario" asp-action="EditarUsuario" asp-route-id="@user.pessoa.IdPessoa">Edit</a>
+                        @*<form asp-controller="Usuario" asp-action="EditarUsuario" method="GET">
+                                                <button type="submit" class="btn btn-default btn-brand btn-brand-big"
+                                        asp-fragment="@user.pessoa.IdPessoa">
+                                    &nbsp;Editar&nbsp;
+                                </button>
+                            </form>*@
+                    </div>
+                </td>
+                <td hidden="hidden">@user.pessoa.IdPessoa</td>
+                <td hidden="hidden">@user.usuario.IdUsuario</td>
+                <td hidden="hidden">@user.permissoes.IdPermissoes</td>
+            </tr>
+        }
+    </table>
+</div>
+
+
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+
+    <partial name="/Views/Usuario/Partials/Consultar/_UsuarioScript.cshtml" />
+}

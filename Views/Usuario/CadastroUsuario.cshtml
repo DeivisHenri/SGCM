@@ -1,0 +1,53 @@
+﻿@using SGCM.Models.Usuario.CadastroUsuarioModel;
+@model CadastroUsuarioModel
+
+@{
+    ViewData["Title"] = "Cadastro Usuário";
+}
+
+@* Folha De Estilo *@
+<partial name="/Views/Usuario/Partials/Cadastro/_UsuarioStyle.cshtml" />
+
+<div class="usuario-container">
+    <form asp-controller="Usuario" asp-action="CadastroUsuario" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal max-min-width">
+        @Html.AntiForgeryToken()
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#dadosPessoais">Dados Pessoais</a></li>
+            <li><a data-toggle="tab" href="#dadosLogin">Dados Login</a></li>
+            <li><a data-toggle="tab" href="#dadosPermissoes">Dados Permissões</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="dadosPessoais" class="tab-pane fade in active">
+                <h3>Pessoais</h3>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <partial name="/Views/Usuario/Partials/Cadastro/_DadosPessoas.cshtml" model="@Model" />
+
+            </div>
+            <div id="dadosLogin" class="tab-pane fade">
+                <h3>Login</h3>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <partial name="/Views/Usuario/Partials/Cadastro/_DadosLogin.cshtml" />
+            </div>
+            <div id="dadosPermissoes" class="tab-pane fade">
+                <h3>Permissões</h3>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <partial name="/Views/Usuario/Partials/Cadastro/_DadosPermissoes.cshtml" />
+            </div>
+        </div>
+        <div class="form-group padding-top-20px">
+            <button type="submit" class="btn btn-default btn-brand btn-brand-big">&nbsp;Salvar&nbsp;</button>
+        </div>
+    </form>
+</div>
+
+
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+
+    <partial name="/Views/Usuario/Partials/Cadastro/_UsuarioScript.cshtml" />
+}
+
+
+

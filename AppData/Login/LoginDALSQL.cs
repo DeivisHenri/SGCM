@@ -16,6 +16,7 @@ namespace SGCM.AppData.Login {
             command.AppendLine("       Usu.Password,");
 
             command.AppendLine("       Pes.Id_Pessoa,");
+            command.AppendLine("       Pes.Id_Medico,");
             command.AppendLine("       Pes.Nome,");
             command.AppendLine("       Pes.Cpf,");
             command.AppendLine("       Pes.Estado,");
@@ -48,10 +49,11 @@ namespace SGCM.AppData.Login {
             command.AppendLine("       Per.Fl_Exames_I,");
             command.AppendLine("       Per.Fl_Exames_C,");
             command.AppendLine("       Per.Fl_Exames_A,");
-            command.AppendLine("       Per.Fl_Exames_E");
+            command.AppendLine("       Per.Fl_Exames_E,");
+            command.AppendLine("       Usu.DatDst");
 
             command.AppendLine("From[dbo].[Usuario] Usu INNER JOIN [dbo].[Pessoa] Pes ON Usu.Id_Pessoa = Pes.Id_Pessoa INNER JOIN[dbo].[Permissoes] Per ON Usu.Id_Usuario = Per.Id_Usuario");
-            command.AppendLine("Where username = '" + usuario.Username + "' AND password = '" + usuario.Password + "'");
+            command.AppendLine("Where username = @USERNAME AND password = @PASSWORD");
             return command.ToString();
         }
 

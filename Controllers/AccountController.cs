@@ -5,10 +5,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SGCM.AppData.Infraestrutura;
 using SGCM.AppData.Login;
+using SGCM.AppData.Usuario;
 using SGCM.Models.Account;
 using System;
 using System.Threading.Tasks;
-using static SGCM.AppData.Infraestrutura.UtilObjetos.UtilObjetos;
 
 namespace SGCM.Controllers {
 
@@ -95,7 +95,7 @@ namespace SGCM.Controllers {
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> ConfirmEmail(string userId, string code)
+        public Task<IActionResult> ConfirmEmail(string userId, string code)
         {
             if (userId == null || code == null)
             {
@@ -196,6 +196,7 @@ namespace SGCM.Controllers {
             HttpContext.Session.SetString("Password", usuarioCompletoTO.usuarioTO.Password);
 
             HttpContext.Session.SetInt32("Id_Pessoa", usuarioCompletoTO.pessoaTO.Id_Pessoa);
+            HttpContext.Session.SetInt32("Id_Medico", usuarioCompletoTO.pessoaTO.Id_Medico);
             HttpContext.Session.SetString("Nome", usuarioCompletoTO.pessoaTO.Nome);
             HttpContext.Session.SetString("Cpf", usuarioCompletoTO.pessoaTO.Cpf);
             HttpContext.Session.SetString("Estado", usuarioCompletoTO.pessoaTO.Estado);
@@ -240,6 +241,7 @@ namespace SGCM.Controllers {
             ViewBag.Password = HttpContext.Session.GetString("Password");
 
             ViewBag.Id_Pessoa = HttpContext.Session.GetInt32("Id_Pessoa");
+            ViewBag.Id_Medico = HttpContext.Session.GetInt32("Id_Medico");
             ViewBag.Nome = HttpContext.Session.GetString("Nome");
             ViewBag.Cpf = HttpContext.Session.GetString("Cpf");
             ViewBag.Estado = HttpContext.Session.GetString("Estado");

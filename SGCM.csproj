@@ -33,10 +33,31 @@
     <Content Update="Views\Login\Partials\_IndexStyle.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Views\Usuarios\Partials\_DadosPermissoes.cshtml">
+    <Content Update="Views\Usuario\Partials\Consultar\_UsuarioScript.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Views\Usuarios\Partials\_DadosLogin.cshtml">
+    <Content Update="Views\Usuario\Partials\Consultar\_UsuarioStyle.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Usuario\Partials\Editar\_DadosLogin.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Usuario\Partials\Editar\_DadosPermissoes.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Usuario\Partials\Editar\_DadosPessoas.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Usuario\Partials\Cadastro\_DadosPermissoes.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Usuario\Partials\Cadastro\_DadosLogin.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Usuario\Partials\Editar\_UsuarioScript.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Usuario\Partials\Editar\_UsuarioStyle.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
   </ItemGroup>

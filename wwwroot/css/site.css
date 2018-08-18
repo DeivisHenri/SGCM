@@ -43,3 +43,12 @@ body {
         display: none;
     }
 }
+
+.usuario-container {
+    width: 100%;
+    display: flex;
+    padding-top: 2%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
