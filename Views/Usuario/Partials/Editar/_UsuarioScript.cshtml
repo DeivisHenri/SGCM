@@ -12,17 +12,13 @@
     })(jQuery);
 
     $("#tipoUsuarioMedico").click(function () {
-        console.log("1");
         if ($('#tipoUsuarioRecepcionista').is(":checked")) {
-            console.log("2");
             $("#tipoUsuarioRecepcionista").prop("checked", false);
         }
     });
 
     $("#tipoUsuarioRecepcionista").click(function () {
-        console.log("3");
         if ($('#tipoUsuarioMedico').is(":checked")) {
-            console.log("4");
             $("#tipoUsuarioMedico").prop("checked", false);
         }
     }); 

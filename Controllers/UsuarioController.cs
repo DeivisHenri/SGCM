@@ -111,8 +111,14 @@ namespace SGCM.Controllers {
 
                     var objUsuarioBLL = new UsuarioBLL();
                     EditarUsuarioModel viewModel = objUsuarioBLL.ConsultarUsuarioID(id);
+                    
+                    if (viewModel.usuario.DatDst == default(DateTime)) {
+                        viewModel.pessoa.Status = "1";
+                    } else {
+                        viewModel.pessoa.Status = "2";
+                    }
 
-                    CarregarDadosUsuarioParaSession(viewModel);
+                    //CarregarDadosUsuarioParaSession(viewModel);
 
                     return View(viewModel);
                 } else {
@@ -179,26 +185,111 @@ namespace SGCM.Controllers {
             HttpContext.Session.SetInt32("Tipo_Usuario", Int32.Parse(usuarioCompletoTO.pessoa.TipoUsuario));
 
             HttpContext.Session.SetInt32("IdPermissoes", usuarioCompletoTO.permissoes.IdPermissoes);
-            HttpContext.Session.SetInt32("FlUsuarioI", Int32.Parse(usuarioCompletoTO.permissoes.FlUsuarioI));
-            HttpContext.Session.SetInt32("FlUsuarioC", Int32.Parse(usuarioCompletoTO.permissoes.FlUsuarioC));
-            HttpContext.Session.SetInt32("FlUsuarioA", Int32.Parse(usuarioCompletoTO.permissoes.FlUsuarioA));
-            HttpContext.Session.SetInt32("FlUsuarioE", Int32.Parse(usuarioCompletoTO.permissoes.FlUsuarioE));
-            HttpContext.Session.SetInt32("FlPacienteI", Int32.Parse(usuarioCompletoTO.permissoes.FlPacienteI));
-            HttpContext.Session.SetInt32("FlPacienteC", Int32.Parse(usuarioCompletoTO.permissoes.FlPacienteC));
-            HttpContext.Session.SetInt32("FlPacienteA", Int32.Parse(usuarioCompletoTO.permissoes.FlPacienteA));
-            HttpContext.Session.SetInt32("FlPacienteE", Int32.Parse(usuarioCompletoTO.permissoes.FlPacienteE));
-            HttpContext.Session.SetInt32("FlConsultaI", Int32.Parse(usuarioCompletoTO.permissoes.FlPacienteI));
-            HttpContext.Session.SetInt32("FlConsultaC", Int32.Parse(usuarioCompletoTO.permissoes.FlPacienteC));
-            HttpContext.Session.SetInt32("FlConsultaA", Int32.Parse(usuarioCompletoTO.permissoes.FlPacienteA));
-            HttpContext.Session.SetInt32("FlConsultaE", Int32.Parse(usuarioCompletoTO.permissoes.FlPacienteE));
-            HttpContext.Session.SetInt32("FlMedicamentoI", Int32.Parse(usuarioCompletoTO.permissoes.FlMedicamentoI));
-            HttpContext.Session.SetInt32("FlMedicamentoC", Int32.Parse(usuarioCompletoTO.permissoes.FlMedicamentoC));
-            HttpContext.Session.SetInt32("FlMedicamentoA", Int32.Parse(usuarioCompletoTO.permissoes.FlMedicamentoA));
-            HttpContext.Session.SetInt32("FlMedicamentoE", Int32.Parse(usuarioCompletoTO.permissoes.FlMedicamentoE));
-            HttpContext.Session.SetInt32("FlExamesI", Int32.Parse(usuarioCompletoTO.permissoes.FlExamesI));
-            HttpContext.Session.SetInt32("FlExamesC", Int32.Parse(usuarioCompletoTO.permissoes.FlExamesC));
-            HttpContext.Session.SetInt32("FlExamesA", Int32.Parse(usuarioCompletoTO.permissoes.FlExamesA));
-            HttpContext.Session.SetInt32("FlExamesE", Int32.Parse(usuarioCompletoTO.permissoes.FlExamesE));
+
+            if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlUsuarioI)) {
+                HttpContext.Session.SetInt32("FlUsuarioI", 1);
+            } else {
+                HttpContext.Session.SetInt32("FlUsuarioI", 0);
+            }
+            if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlUsuarioC)) {
+                HttpContext.Session.SetInt32("FlUsuarioC", 1);
+            } else {
+                HttpContext.Session.SetInt32("FlUsuarioC", 0);
+            }
+            if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlUsuarioA)) {
+                HttpContext.Session.SetInt32("FlUsuarioA", 1);
+            } else {
+                HttpContext.Session.SetInt32("FlUsuarioA", 0);
+            }
+            if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlUsuarioE)) {
+                HttpContext.Session.SetInt32("FlUsuarioE", 1);
+            } else {
+                HttpContext.Session.SetInt32("FlUsuarioE", 0);
+            }
+
+            if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlPacienteI)) {
+                HttpContext.Session.SetInt32("FlPacienteI", 1);
+            } else {
+                HttpContext.Session.SetInt32("FlPacienteI", 0);
+            }
+            if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlPacienteC)) {
+                HttpContext.Session.SetInt32("FlPacienteC", 1);
+            } else {
+                HttpContext.Session.SetInt32("FlPacienteC", 0);
+            }
+            if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlPacienteA)) {
+                HttpContext.Session.SetInt32("FlPacienteA", 1);
+            } else {
+                HttpContext.Session.SetInt32("FlPacienteA", 0);
+            }
+            if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlPacienteE)) {
+                HttpContext.Session.SetInt32("FlPacienteE", 1);
+            } else {
+                HttpContext.Session.SetInt32("FlPacienteE", 0);
+            }
+
+            if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlConsultaI)) {
+                HttpContext.Session.SetInt32("FlConsultaI", 1);
+            } else {
+                HttpContext.Session.SetInt32("FlConsultaI", 0);
+            }
+            if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlConsultaC)) {
+                HttpContext.Session.SetInt32("FlConsultaC", 1);
+            } else {
+                HttpContext.Session.SetInt32("FlConsultaC", 0);
+            }
+            if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlConsultaA)) {
+                HttpContext.Session.SetInt32("FlConsultaA", 1);
+            } else {
+                HttpContext.Session.SetInt32("FlConsultaA", 0);
+            }
+            if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlConsultaE)) {
+                HttpContext.Session.SetInt32("FlConsultaE", 1);
+            } else {
+                HttpContext.Session.SetInt32("FlConsultaE", 0);
+            }
+
+            if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlMedicamentoI)) {
+                HttpContext.Session.SetInt32("FlMedicamentoI", 1);
+            } else {
+                HttpContext.Session.SetInt32("FlMedicamentoI", 0);
+            }
+            if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlMedicamentoC)) {
+                HttpContext.Session.SetInt32("FlMedicamentoC", 1);
+            } else {
+                HttpContext.Session.SetInt32("FlMedicamentoC", 0);
+            }
+            if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlMedicamentoA)) {
+                HttpContext.Session.SetInt32("FlMedicamentoA", 1);
+            } else {
+                HttpContext.Session.SetInt32("FlMedicamentoA", 0);
+            }
+            if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlMedicamentoE)) {
+                HttpContext.Session.SetInt32("FlMedicamentoE", 1);
+            } else {
+                HttpContext.Session.SetInt32("FlMedicamentoE", 0);
+            }
+
+            if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlExamesI)) {
+                HttpContext.Session.SetInt32("FlExamesI", 1);
+            } else {
+                HttpContext.Session.SetInt32("FlExamesI", 0);
+            }
+            if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlExamesC)) {
+                HttpContext.Session.SetInt32("FlExamesC", 1);
+            } else {
+                HttpContext.Session.SetInt32("FlExamesC", 0);
+            }
+            if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlExamesA)) {
+                HttpContext.Session.SetInt32("FlExamesA", 1);
+            } else {
+                HttpContext.Session.SetInt32("FlExamesA", 0);
+            }
+            if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlExamesE)) {
+                HttpContext.Session.SetInt32("FlExamesE", 1);
+            } else {
+                HttpContext.Session.SetInt32("FlExamesE", 0);
+            }
         }
 
         private void CarregarDadosUsuarioParaTela()

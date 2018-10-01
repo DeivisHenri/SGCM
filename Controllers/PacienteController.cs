@@ -1,4 +1,4 @@
-﻿using SGCM.Models;
+﻿using SGCM.Models.Paciente.CadastroPacienteModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using System.Threading.Tasks;
@@ -7,57 +7,105 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System.Data.SqlClient;
-using SGCM.AppData.Usuario;
+using SGCM.AppData.Paciente;
+using System;
 
 namespace SGCM.Controllers
 {
     public class PacienteController : Controller
     {
-        // GET: /Patient/CadastroPaciente 
-        private void CarregarDadosUsuarioParaSession(UsuarioCompletoTO usuarioCompletoTO)
+        //GET: /Paciente/CadastroPaciente
+        [HttpGet]
+        public ActionResult CadastroPaciente()
         {
-            HttpContext.Session.SetInt32("ID", usuarioCompletoTO.usuarioTO.ID_Usuario);
-            HttpContext.Session.SetString("Username", usuarioCompletoTO.usuarioTO.Username);
-            HttpContext.Session.SetString("Password", usuarioCompletoTO.usuarioTO.Password);
+            CarregarDadosUsuarioParaTela();
+            if ((ViewBag.ID != null) && (ViewBag.ID != 0))
+            {
+                if (ViewBag.FlPacienteI != 0) {
 
-            HttpContext.Session.SetInt32("Id_Pessoa", usuarioCompletoTO.pessoaTO.Id_Pessoa);
-            HttpContext.Session.SetInt32("Id_Medico", usuarioCompletoTO.pessoaTO.Id_Medico);
-            HttpContext.Session.SetString("Nome", usuarioCompletoTO.pessoaTO.Nome);
-            HttpContext.Session.SetString("Cpf", usuarioCompletoTO.pessoaTO.Cpf);
-            HttpContext.Session.SetString("Estado", usuarioCompletoTO.pessoaTO.Estado);
-            HttpContext.Session.SetString("Cidade", usuarioCompletoTO.pessoaTO.Cidade);
-            HttpContext.Session.SetString("Bairro", usuarioCompletoTO.pessoaTO.Bairro);
-            HttpContext.Session.SetString("Endereco", usuarioCompletoTO.pessoaTO.Endereco);
-            HttpContext.Session.SetInt32("Numero", usuarioCompletoTO.pessoaTO.Numero);
-            HttpContext.Session.SetString("Telefone_Celular", usuarioCompletoTO.pessoaTO.Telefone_Celular);
-            HttpContext.Session.SetString("Email", usuarioCompletoTO.pessoaTO.Email);
-            HttpContext.Session.SetInt32("Tipo_Usuario", usuarioCompletoTO.pessoaTO.Tipo_Usuario);
-
-            HttpContext.Session.SetInt32("FlUsuarioI", usuarioCompletoTO.permissoesTO.Fl_Usuario_I);
-            HttpContext.Session.SetInt32("FlUsuarioC", usuarioCompletoTO.permissoesTO.Fl_Usuario_C);
-            HttpContext.Session.SetInt32("FlUsuarioA", usuarioCompletoTO.permissoesTO.Fl_Usuario_A);
-            HttpContext.Session.SetInt32("FlUsuarioE", usuarioCompletoTO.permissoesTO.Fl_Usuario_E);
-
-            HttpContext.Session.SetInt32("FlPacienteI", usuarioCompletoTO.permissoesTO.Fl_Paciente_I);
-            HttpContext.Session.SetInt32("FlPacienteC", usuarioCompletoTO.permissoesTO.Fl_Paciente_C);
-            HttpContext.Session.SetInt32("FlPacienteA", usuarioCompletoTO.permissoesTO.Fl_Paciente_A);
-            HttpContext.Session.SetInt32("FlPacienteE", usuarioCompletoTO.permissoesTO.Fl_Paciente_E);
-
-            HttpContext.Session.SetInt32("FlConsultaI", usuarioCompletoTO.permissoesTO.Fl_Paciente_I);
-            HttpContext.Session.SetInt32("FlConsultaC", usuarioCompletoTO.permissoesTO.Fl_Paciente_C);
-            HttpContext.Session.SetInt32("FlConsultaA", usuarioCompletoTO.permissoesTO.Fl_Paciente_A);
-            HttpContext.Session.SetInt32("FlConsultaE", usuarioCompletoTO.permissoesTO.Fl_Paciente_E);
-
-            HttpContext.Session.SetInt32("FlMedicamentoI", usuarioCompletoTO.permissoesTO.Fl_Medicamento_I);
-            HttpContext.Session.SetInt32("FlMedicamentoC", usuarioCompletoTO.permissoesTO.Fl_Medicamento_C);
-            HttpContext.Session.SetInt32("FlMedicamentoA", usuarioCompletoTO.permissoesTO.Fl_Medicamento_A);
-            HttpContext.Session.SetInt32("FlMedicamentoE", usuarioCompletoTO.permissoesTO.Fl_Medicamento_E);
-
-            HttpContext.Session.SetInt32("FlExamesI", usuarioCompletoTO.permissoesTO.Fl_Exames_I);
-            HttpContext.Session.SetInt32("FlExamesC", usuarioCompletoTO.permissoesTO.Fl_Exames_C);
-            HttpContext.Session.SetInt32("FlExamesA", usuarioCompletoTO.permissoesTO.Fl_Exames_A);
-            HttpContext.Session.SetInt32("FlExamesE", usuarioCompletoTO.permissoesTO.Fl_Exames_E);
+                    ViewBag.Title = "Cadastro Paciente";
+                    var viewModel = new CadastroPacienteModel();
+                    return View(viewModel);
+                } else {
+                    HttpContext.Session.SetString("MensagemErro", "Você não tem premissão para acessar o cadastro de pacientes!");
+                    HttpContext.Session.SetInt32("FlMensagemErro", 1);
+                    return RedirectToAction("Index", "Home");
+                }
+            } else {
+                HttpContext.Session.SetString("MensagemErro", "Você não está logado no sistema! Realize o Login antes de acessar essa página!");
+                HttpContext.Session.SetInt32("FlMensagemErro", 1);
+                return RedirectToAction("Index", "Home");
+            }
         }
+
+        //POST: /Paciente/CadastroPaciente
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CadastroPaciente(CadastroPacienteModel model) {
+            try {
+                if (!ModelState.IsValid)
+                    return View(model);
+
+                model.pessoa.IdMedico = (int)HttpContext.Session.GetInt32("Id_Pessoa");
+                //ViewBag.Id_Medico
+
+                var objPacienteBLL = new PacienteBLL();
+                var retorno = objPacienteBLL.InserirPaciente(model);
+
+                if (retorno > 0) {
+                    HttpContext.Session.SetString("MensagemErro", "Paciente " + model.pessoa.Nome + " cadastrado com sucesso!");
+                    HttpContext.Session.SetInt32("FlMensagemErro", 1);
+                    return RedirectToAction("CadastroPaciente", "Paciente");
+                } else {
+                    HttpContext.Session.SetString("MensagemErro", "Cadastro do paciente " + model.pessoa.Nome + " não realizado!");
+                    HttpContext.Session.SetInt32("FlMensagemErro", 1);
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            catch (Exception ex) {
+                return null;
+            }
+        }
+
+        //public ActionResult CadastroUsuario(CadastroUsuarioModel model)
+        //{
+        //    try
+        //    {
+        //        if (!ModelState.IsValid)
+        //        {
+        //            return View(model);
+        //        }
+
+        //        model.pessoa.IdMedico = (int)HttpContext.Session.GetInt32("Id_Pessoa");
+
+        //        var objUsuariosBLL = new UsuarioBLL();
+        //        var retorno = objUsuariosBLL.InserirUsuario(model);
+
+        //        if (retorno > 0)
+        //        {
+        //            HttpContext.Session.SetString("MensagemErro", "Cadastro realizado com sucesso!");
+        //            HttpContext.Session.SetInt32("FlMensagemErro", 1);
+        //            return RedirectToAction("Index", "Home");
+        //            //return View(model);
+        //        }
+        //        else
+        //        {
+        //            //HttpContext.Session.SetString("MensagemErro", "Ocorreu algum!");
+        //            //HttpContext.Session.SetInt32("FlMensagemErro", 1);
+        //            return RedirectToAction("Index", "Home");
+        //        }
+        //    }
+        //    catch (SqlException exSQL)
+        //    {
+        //        ModelState.AddModelError(string.Empty, exSQL.Message);
+        //        return View(model);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ModelState.AddModelError(string.Empty, ex.Message);
+        //        return View(model);
+        //    }
+        //}
 
         private void CarregarDadosUsuarioParaTela()
         {

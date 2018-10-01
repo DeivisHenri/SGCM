@@ -138,5 +138,13 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo
 
             return usuario;
         }
+
+        public static string ArrumarDateFormatoBanco(string data)
+        {
+            var dataArray = data.Split('/');
+            var dataReturn = dataArray[2] + "-" + dataArray[1] + "-" + dataArray[0];
+
+            return dataReturn;
+        }
     }
 }

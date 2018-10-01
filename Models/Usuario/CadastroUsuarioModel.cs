@@ -22,6 +22,11 @@ namespace SGCM.Models.Usuario.CadastroUsuarioModel
         [Display(Name = "CPF")]
         public string CPF { get; set; }
 
+        [Required(ErrorMessage = "O campo RG é obrigatório.")]
+        [StringLength(14, ErrorMessage = "O campo CPF deve conter os 8 caracteres.", MinimumLength = 10)]
+        [Display(Name = "RG")]
+        public string RG { get; set; }
+
         [Required(ErrorMessage = "O campo Estado é obrigatório.")]
         [StringLength(20, ErrorMessage = "O campo Estado deve conter no máximo 20 caracteres.")]
         [Display(Name = "Estado")]
@@ -59,6 +64,11 @@ namespace SGCM.Models.Usuario.CadastroUsuarioModel
         [Required(ErrorMessage = "O campo Tipo Usuário é obrigatório.")]
         [Display(Name = "Tipo Usuário")]
         public string TipoUsuario { get; set; }
+
+        [Required(ErrorMessage = "O campo Data de Nascimento é obrigatório.")]
+        [StringLength(10, ErrorMessage = "O campo Data de Nascimento deve conter no máximo 10 caracteres")]
+        [Display(Name = "Data Nascimento")]
+        public string DataNascimento { get; set; }
 
         public int IdPessoa { get; set; }
 

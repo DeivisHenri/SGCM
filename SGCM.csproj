@@ -30,7 +30,22 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Views\Consulta\Partials\_ConsultaScript.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Consulta\Partials\_ConsultaStyle.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\Login\Partials\_IndexStyle.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Paciente\Cadastro\_DadosPessoas.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Paciente\_PacienteScript.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Paciente\_PacienteStyle.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\Usuario\Partials\Consultar\_UsuarioScript.cshtml">
@@ -60,6 +75,10 @@
     <Content Update="Views\Usuario\Partials\Editar\_UsuarioStyle.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Paciente\Consultar\" />
   </ItemGroup>
 
 </Project>

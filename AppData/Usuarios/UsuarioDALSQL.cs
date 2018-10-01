@@ -30,6 +30,8 @@ namespace SGCM.AppData.Usuario {
             command.AppendLine("                   Tipo_Usuario,");
             command.AppendLine("                   Nome,");
             command.AppendLine("                   Cpf,");
+            command.AppendLine("                   Rg,");
+            command.AppendLine("                   Data_Nascimento,");
             command.AppendLine("                   Estado,");
             command.AppendLine("                   Cidade,");
             command.AppendLine("                   Bairro,");
@@ -41,6 +43,8 @@ namespace SGCM.AppData.Usuario {
             command.AppendLine("              @TIPOUSUARIO,");
             command.AppendLine("              @NOME,");
             command.AppendLine("              @CPF,");
+            command.AppendLine("              @RG,");
+            command.AppendLine("              Convert(date, @DATA_NASCIMENTO),");
             command.AppendLine("              @ESTADO,");
             command.AppendLine("              @CIDADE,");
             command.AppendLine("              @BAIRRO,");

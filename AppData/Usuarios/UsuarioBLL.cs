@@ -11,6 +11,7 @@ namespace SGCM.AppData.Usuario
         {
             usuario.pessoa.CPF = UtilMetodo.RemovendoCaracteresEspeciais(usuario.pessoa.CPF);
             usuario.pessoa.Telefone_Celular = UtilMetodo.RemovendoCaracteresEspeciais(usuario.pessoa.Telefone_Celular);
+            usuario.pessoa.DataNascimento = UtilMetodo.ArrumarDateFormatoBanco(usuario.pessoa.DataNascimento);
 
             UsuarioDAL usuariosDAL = new UsuarioDAL();
             return usuariosDAL.InserirUsuario(usuario);

@@ -55,9 +55,6 @@ namespace SGCM.AppData.Usuario {
             }
         }
 
-
-
-
         public int InserirUsuario(CadastroUsuarioModel usuario) {
             try {
                 var DALSQL = new UsuarioDALSQL();
@@ -75,6 +72,8 @@ namespace SGCM.AppData.Usuario {
                         cmdPessoa.Parameters.Add("@TIPOUSUARIO", SqlDbType.Int).Value = usuario.pessoa.TipoUsuario;
                         cmdPessoa.Parameters.Add("@NOME", SqlDbType.Char).Value = usuario.pessoa.Nome;
                         cmdPessoa.Parameters.Add("@CPF", SqlDbType.Char).Value = usuario.pessoa.CPF;
+                        cmdPessoa.Parameters.Add("@RG", SqlDbType.Char).Value = usuario.pessoa.RG;
+                        cmdPessoa.Parameters.Add("@DATA_NASCIMENTO", SqlDbType.Date).Value = usuario.pessoa.DataNascimento;
                         cmdPessoa.Parameters.Add("@ESTADO", SqlDbType.Char).Value = usuario.pessoa.Estado;
                         cmdPessoa.Parameters.Add("@CIDADE", SqlDbType.Char).Value = usuario.pessoa.Cidade;
                         cmdPessoa.Parameters.Add("@BAIRRO", SqlDbType.Char).Value = usuario.pessoa.Bairro;
@@ -139,9 +138,6 @@ namespace SGCM.AppData.Usuario {
             }
         }
 
-
-
-
         public EditarUsuarioModel ConsultarUsuarioID(int IdPessoa) {
             try {
                 SqlConnection connection = new SqlConnection(getStringConnection());
@@ -164,125 +160,127 @@ namespace SGCM.AppData.Usuario {
                         usuarioCompletoTO.pessoa.TipoUsuario = reader.GetInt32(2).ToString();
                         usuarioCompletoTO.pessoa.Nome = reader.GetString(3);
                         usuarioCompletoTO.pessoa.CPF = reader.GetString(4);
-                        usuarioCompletoTO.pessoa.Estado = reader.GetString(5);
-                        usuarioCompletoTO.pessoa.Cidade = reader.GetString(6);
-                        usuarioCompletoTO.pessoa.Bairro = reader.GetString(7);
-                        usuarioCompletoTO.pessoa.Endereco = reader.GetString(8);
-                        usuarioCompletoTO.pessoa.Numero = reader.GetInt32(9);
-                        usuarioCompletoTO.pessoa.Telefone_Celular = reader.GetString(10);
-                        usuarioCompletoTO.pessoa.Email = reader.GetString(11);
+                        usuarioCompletoTO.pessoa.RG = reader.GetString(5);
+                        usuarioCompletoTO.pessoa.DataNascimento = reader.GetString(6);
+                        usuarioCompletoTO.pessoa.Estado = reader.GetString(7);
+                        usuarioCompletoTO.pessoa.Cidade = reader.GetString(8);
+                        usuarioCompletoTO.pessoa.Bairro = reader.GetString(9);
+                        usuarioCompletoTO.pessoa.Endereco = reader.GetString(10);
+                        usuarioCompletoTO.pessoa.Numero = reader.GetInt32(11);
+                        usuarioCompletoTO.pessoa.Telefone_Celular = reader.GetString(12);
+                        usuarioCompletoTO.pessoa.Email = reader.GetString(13);
 
-                        usuarioCompletoTO.usuario.IdUsuario = reader.GetInt32(12);
-                        usuarioCompletoTO.usuario.Username = reader.GetString(13);
-                        usuarioCompletoTO.usuario.Password = reader.GetString(14);
+                        usuarioCompletoTO.usuario.IdUsuario = reader.GetInt32(14);
+                        usuarioCompletoTO.usuario.Username = reader.GetString(15);
+                        usuarioCompletoTO.usuario.Password = reader.GetString(16);
 
-                        if (!reader.IsDBNull(15)) {
-                            usuarioCompletoTO.usuario.DatDst = DateTime.Parse(reader.GetString(15));
+                        if (!reader.IsDBNull(17)) {
+                            usuarioCompletoTO.usuario.DatDst = DateTime.Parse(reader.GetString(17));
                         }
 
-                        usuarioCompletoTO.permissoes.IdPermissoes = reader.GetInt32(16);
-                        usuarioCompletoTO.permissoes.IdUsuario = reader.GetInt32(17);
+                        usuarioCompletoTO.permissoes.IdPermissoes = reader.GetInt32(18);
+                        usuarioCompletoTO.permissoes.IdUsuario = reader.GetInt32(19);
 
-                        if (reader.GetInt32(18) == 1) {
+                        if (reader.GetInt32(20) == 1) {
                             usuarioCompletoTO.permissoes.FlUsuarioI = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlUsuarioI = "false";
                         }
-                        if (reader.GetInt32(19) == 1) {
+                        if (reader.GetInt32(21) == 1) {
                             usuarioCompletoTO.permissoes.FlUsuarioC = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlUsuarioC = "false";
                         }
-                        if (reader.GetInt32(20) == 1) {
+                        if (reader.GetInt32(22) == 1) {
                             usuarioCompletoTO.permissoes.FlUsuarioA = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlUsuarioA = "false";
                         }
-                        if (reader.GetInt32(21) == 1) {
+                        if (reader.GetInt32(23) == 1) {
                             usuarioCompletoTO.permissoes.FlUsuarioE = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlUsuarioE = "false";
                         }
 
-                        if (reader.GetInt32(22) == 1) {
+                        if (reader.GetInt32(24) == 1) {
                             usuarioCompletoTO.permissoes.FlPacienteI = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlPacienteI = "false";
                         }
-                        if (reader.GetInt32(23) == 1) {
+                        if (reader.GetInt32(25) == 1) {
                             usuarioCompletoTO.permissoes.FlPacienteC = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlPacienteC = "false";
                         }
-                        if (reader.GetInt32(24) == 1) {
+                        if (reader.GetInt32(26) == 1) {
                             usuarioCompletoTO.permissoes.FlPacienteA = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlPacienteA = "false";
                         }
-                        if (reader.GetInt32(25) == 1) {
+                        if (reader.GetInt32(27) == 1) {
                             usuarioCompletoTO.permissoes.FlPacienteE = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlPacienteE = "false";
                         }
 
-                        if (reader.GetInt32(26) == 1) {
+                        if (reader.GetInt32(28) == 1) {
                             usuarioCompletoTO.permissoes.FlConsultaI = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlConsultaI = "false";
                         }
-                        if (reader.GetInt32(27) == 1) {
+                        if (reader.GetInt32(29) == 1) {
                             usuarioCompletoTO.permissoes.FlConsultaC = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlConsultaC = "false";
                         }
-                        if (reader.GetInt32(28) == 1) {
+                        if (reader.GetInt32(30) == 1) {
                             usuarioCompletoTO.permissoes.FlConsultaA = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlConsultaA = "false";
                         }
-                        if (reader.GetInt32(29) == 1) {
+                        if (reader.GetInt32(31) == 1) {
                             usuarioCompletoTO.permissoes.FlConsultaE = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlConsultaE = "false";
                         }
 
-                        if (reader.GetInt32(30) == 1) {
+                        if (reader.GetInt32(32) == 1) {
                             usuarioCompletoTO.permissoes.FlMedicamentoI = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlMedicamentoI = "false";
                         }
-                        if (reader.GetInt32(31) == 1) {
+                        if (reader.GetInt32(33) == 1) {
                             usuarioCompletoTO.permissoes.FlMedicamentoC = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlMedicamentoC = "false";
                         }
-                        if (reader.GetInt32(32) == 1) {
+                        if (reader.GetInt32(34) == 1) {
                             usuarioCompletoTO.permissoes.FlMedicamentoA = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlMedicamentoA = "false";
                         }
-                        if (reader.GetInt32(33) == 1) {
+                        if (reader.GetInt32(35) == 1) {
                             usuarioCompletoTO.permissoes.FlMedicamentoE = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlMedicamentoE = "false";
                         }
 
-                        if (reader.GetInt32(34) == 1) {
+                        if (reader.GetInt32(36) == 1) {
                             usuarioCompletoTO.permissoes.FlExamesI = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlExamesI = "false";
                         }
-                        if (reader.GetInt32(35) == 1) {
+                        if (reader.GetInt32(37) == 1) {
                             usuarioCompletoTO.permissoes.FlExamesC = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlExamesC = "false";
                         }
-                        if (reader.GetInt32(36) == 1) {
+                        if (reader.GetInt32(35) == 1) {
                             usuarioCompletoTO.permissoes.FlExamesA = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlExamesA = "false";
                         }
-                        if (reader.GetInt32(37) == 1) {
+                        if (reader.GetInt32(36) == 1) {
                             usuarioCompletoTO.permissoes.FlExamesE = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlExamesE = "false";
