@@ -18,53 +18,55 @@ namespace SGCM.AppData.Usuario
 
     public class UsuarioTO {
 
-        public int ID_Usuario { get; set; }
+        public int idUsuario { get; set; }
 
-        public int ID_Pessoa { get; set; }
+        public int idPessoa { get; set; }
 
-        public string Username { get; set; }
+        public string Usuario { get; set; }
 
-        public string Password { get; set; }
+        public string Senha { get; set; }
     }
 
     public class PessoaTO
     {
-        public int Id_Pessoa { get; set; }
-        public int Id_Medico { get; set; }
+        public int idPessoa { get; set; }
+        public int idMedico { get; set; }
+        public int tipoUsuario { get; set; }
         public string Nome { get; set; }
         public string Cpf { get; set; }
-        public string Estado { get; set; }
-        public string Cidade { get; set; }
-        public string Bairro { get; set; }
-        public string Endereco { get; set; }
+        public string Rg { get; set; }
+        public string DataNascimento { get; set; }
+        public string Logradouro { get; set; }
         public int Numero { get; set; }
+        public string Bairro { get; set; }
+        public string Cidade { get; set; }
+        public string Uf { get; set; }
         public string Telefone_Celular { get; set; }
         public string Email { get; set; }
-        public int Tipo_Usuario { get; set; }
     }
 
     public class PermissoesTO {
-        public int Id_Permissoes { get; set; }
-        public int Id_Usuario { get; set; }
-        public int Fl_Usuario_I { get; set; }
-        public int Fl_Usuario_C { get; set; }
-        public int Fl_Usuario_A { get; set; }
-        public int Fl_Usuario_E { get; set; }
-        public int Fl_Paciente_I { get; set; }
-        public int Fl_Paciente_C { get; set; }
-        public int Fl_Paciente_A { get; set; }
-        public int Fl_Paciente_E { get; set; }
-        public int Fl_Consulta_I { get; set; }
-        public int Fl_Consulta_C { get; set; }
-        public int Fl_Consulta_A { get; set; }
-        public int Fl_Consulta_E { get; set; }
-        public int Fl_Medicamento_I { get; set; }
-        public int Fl_Medicamento_C { get; set; }
-        public int Fl_Medicamento_A { get; set; }
-        public int Fl_Medicamento_E { get; set; }
-        public int Fl_Exames_I { get; set; }
-        public int Fl_Exames_C { get; set; }
-        public int Fl_Exames_A { get; set; }
-        public int Fl_Exames_E { get; set; }
+        public int idPermissoes { get; set; }
+        public int IdUsuario { get; set; }
+        public int flUsuarioI { get; set; }
+        public int flUsuarioC { get; set; }
+        public int flUsuarioA { get; set; }
+        public int flUsuarioE { get; set; }
+        public int flPacienteI { get; set; }
+        public int flPacienteC { get; set; }
+        public int flPacienteA { get; set; }
+        public int flPacienteE { get; set; }
+        public int flConsultaI { get; set; }
+        public int flConsultaC { get; set; }
+        public int flConsultaA { get; set; }
+        public int flConsultaE { get; set; }
+        public int flMedicamentoI { get; set; }
+        public int flMedicamentoC { get; set; }
+        public int flMedicamentoA { get; set; }
+        public int flMedicamentoE { get; set; }
+        public int flExamesI { get; set; }
+        public int flExamesC { get; set; }
+        public int flExamesA { get; set; }
+        public int flExamesE { get; set; }
     }
 }

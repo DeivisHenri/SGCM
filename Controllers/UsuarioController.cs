@@ -31,9 +31,11 @@ namespace SGCM.Controllers {
                     return RedirectToAction("Index", "Home");
                 }
             } else {
+                ViewData.Add("ReturnUrl", ((object[])this.ControllerContext.RouteData.Values.Values)[0] + "/" + ((object[])this.ControllerContext.RouteData.Values.Values)[1]);
                 HttpContext.Session.SetString("MensagemErro", "Você não está logado no sistema! Realize o Login antes de acessar essa página!");
-                HttpContext.Session.SetInt32("FlMensagemErro", 1); 
-                return RedirectToAction("Index", "Home");
+                HttpContext.Session.SetInt32("FlMensagemErro", 1);
+                return RedirectToAction("Signin", "Login", new { ReturnUrl = ViewData["ReturnUrl"] } );
+                //return RedirectToAction("Signin", "Login");
             }
         }
 

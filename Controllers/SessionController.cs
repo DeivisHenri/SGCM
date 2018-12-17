@@ -21,92 +21,96 @@ namespace SGCM.Controllers
 
         private void CarregarDadosUsuarioParaSession(UsuarioCompletoTO usuarioCompletoTO)
         {
-            HttpContext.Session.SetInt32("ID", usuarioCompletoTO.usuarioTO.ID_Usuario);
-            HttpContext.Session.SetString("Username", usuarioCompletoTO.usuarioTO.Username);
-            HttpContext.Session.SetString("Password", usuarioCompletoTO.usuarioTO.Password);
+            HttpContext.Session.SetInt32("idUsuario", usuarioCompletoTO.usuarioTO.idUsuario);
+            HttpContext.Session.SetString("usuario", usuarioCompletoTO.usuarioTO.Usuario);
 
-            HttpContext.Session.SetInt32("Id_Pessoa", usuarioCompletoTO.pessoaTO.Id_Pessoa);
-            HttpContext.Session.SetInt32("Id_Medico", usuarioCompletoTO.pessoaTO.Id_Medico);
-            HttpContext.Session.SetString("Nome", usuarioCompletoTO.pessoaTO.Nome);
-            HttpContext.Session.SetString("Cpf", usuarioCompletoTO.pessoaTO.Cpf);
-            HttpContext.Session.SetString("Estado", usuarioCompletoTO.pessoaTO.Estado);
-            HttpContext.Session.SetString("Cidade", usuarioCompletoTO.pessoaTO.Cidade);
-            HttpContext.Session.SetString("Bairro", usuarioCompletoTO.pessoaTO.Bairro);
-            HttpContext.Session.SetString("Endereco", usuarioCompletoTO.pessoaTO.Endereco);
-            HttpContext.Session.SetInt32("Numero", usuarioCompletoTO.pessoaTO.Numero);
-            HttpContext.Session.SetString("Telefone_Celular", usuarioCompletoTO.pessoaTO.Telefone_Celular);
-            HttpContext.Session.SetString("Email", usuarioCompletoTO.pessoaTO.Email);
-            HttpContext.Session.SetInt32("Tipo_Usuario", usuarioCompletoTO.pessoaTO.Tipo_Usuario);
+            HttpContext.Session.SetInt32("idPessoa", usuarioCompletoTO.pessoaTO.idPessoa);
+            HttpContext.Session.SetInt32("idMedico", usuarioCompletoTO.pessoaTO.idMedico);
+            HttpContext.Session.SetInt32("tipoUsuario", usuarioCompletoTO.pessoaTO.tipoUsuario);
+            HttpContext.Session.SetString("nome", usuarioCompletoTO.pessoaTO.Nome);
+            HttpContext.Session.SetString("cpf", usuarioCompletoTO.pessoaTO.Cpf);
+            HttpContext.Session.SetString("rg", usuarioCompletoTO.pessoaTO.Rg);
+            HttpContext.Session.SetString("dataNascimento", usuarioCompletoTO.pessoaTO.DataNascimento);
+            HttpContext.Session.SetString("logradouro", usuarioCompletoTO.pessoaTO.Logradouro);
+            HttpContext.Session.SetInt32("numero", usuarioCompletoTO.pessoaTO.Numero);
+            HttpContext.Session.SetString("bairro", usuarioCompletoTO.pessoaTO.Bairro);
+            HttpContext.Session.SetString("cidade", usuarioCompletoTO.pessoaTO.Cidade);
+            HttpContext.Session.SetString("uf", usuarioCompletoTO.pessoaTO.Uf);
+            HttpContext.Session.SetString("telefoneCelular", usuarioCompletoTO.pessoaTO.Telefone_Celular);
+            HttpContext.Session.SetString("email", usuarioCompletoTO.pessoaTO.Email);
 
-            HttpContext.Session.SetInt32("FlUsuarioI", usuarioCompletoTO.permissoesTO.Fl_Usuario_I);
-            HttpContext.Session.SetInt32("FlUsuarioC", usuarioCompletoTO.permissoesTO.Fl_Usuario_C);
-            HttpContext.Session.SetInt32("FlUsuarioA", usuarioCompletoTO.permissoesTO.Fl_Usuario_A);
-            HttpContext.Session.SetInt32("FlUsuarioE", usuarioCompletoTO.permissoesTO.Fl_Usuario_E);
+            HttpContext.Session.SetInt32("FlUsuarioI", usuarioCompletoTO.permissoesTO.flUsuarioI);
+            HttpContext.Session.SetInt32("FlUsuarioC", usuarioCompletoTO.permissoesTO.flUsuarioC);
+            HttpContext.Session.SetInt32("FlUsuarioA", usuarioCompletoTO.permissoesTO.flUsuarioA);
+            HttpContext.Session.SetInt32("FlUsuarioE", usuarioCompletoTO.permissoesTO.flUsuarioE);
 
-            HttpContext.Session.SetInt32("FlPacienteI", usuarioCompletoTO.permissoesTO.Fl_Paciente_I);
-            HttpContext.Session.SetInt32("FlPacienteC", usuarioCompletoTO.permissoesTO.Fl_Paciente_C);
-            HttpContext.Session.SetInt32("FlPacienteA", usuarioCompletoTO.permissoesTO.Fl_Paciente_A);
-            HttpContext.Session.SetInt32("FlPacienteE", usuarioCompletoTO.permissoesTO.Fl_Paciente_E);
+            HttpContext.Session.SetInt32("FlPacienteI", usuarioCompletoTO.permissoesTO.flPacienteI);
+            HttpContext.Session.SetInt32("FlPacienteC", usuarioCompletoTO.permissoesTO.flPacienteC);
+            HttpContext.Session.SetInt32("FlPacienteA", usuarioCompletoTO.permissoesTO.flPacienteA);
+            HttpContext.Session.SetInt32("FlPacienteE", usuarioCompletoTO.permissoesTO.flPacienteE);
 
-            HttpContext.Session.SetInt32("FlConsultaI", usuarioCompletoTO.permissoesTO.Fl_Paciente_I);
-            HttpContext.Session.SetInt32("FlConsultaC", usuarioCompletoTO.permissoesTO.Fl_Paciente_C);
-            HttpContext.Session.SetInt32("FlConsultaA", usuarioCompletoTO.permissoesTO.Fl_Paciente_A);
-            HttpContext.Session.SetInt32("FlConsultaE", usuarioCompletoTO.permissoesTO.Fl_Paciente_E);
+            HttpContext.Session.SetInt32("FlConsultaI", usuarioCompletoTO.permissoesTO.flPacienteI);
+            HttpContext.Session.SetInt32("FlConsultaC", usuarioCompletoTO.permissoesTO.flPacienteC);
+            HttpContext.Session.SetInt32("FlConsultaA", usuarioCompletoTO.permissoesTO.flPacienteA);
+            HttpContext.Session.SetInt32("FlConsultaE", usuarioCompletoTO.permissoesTO.flPacienteE);
 
-            HttpContext.Session.SetInt32("FlMedicamentoI", usuarioCompletoTO.permissoesTO.Fl_Medicamento_I);
-            HttpContext.Session.SetInt32("FlMedicamentoC", usuarioCompletoTO.permissoesTO.Fl_Medicamento_C);
-            HttpContext.Session.SetInt32("FlMedicamentoA", usuarioCompletoTO.permissoesTO.Fl_Medicamento_A);
-            HttpContext.Session.SetInt32("FlMedicamentoE", usuarioCompletoTO.permissoesTO.Fl_Medicamento_E);
+            HttpContext.Session.SetInt32("FlMedicamentoI", usuarioCompletoTO.permissoesTO.flMedicamentoI);
+            HttpContext.Session.SetInt32("FlMedicamentoC", usuarioCompletoTO.permissoesTO.flMedicamentoC);
+            HttpContext.Session.SetInt32("FlMedicamentoA", usuarioCompletoTO.permissoesTO.flMedicamentoA);
+            HttpContext.Session.SetInt32("FlMedicamentoE", usuarioCompletoTO.permissoesTO.flMedicamentoE);
 
-            HttpContext.Session.SetInt32("FlExamesI", usuarioCompletoTO.permissoesTO.Fl_Exames_I);
-            HttpContext.Session.SetInt32("FlExamesC", usuarioCompletoTO.permissoesTO.Fl_Exames_C);
-            HttpContext.Session.SetInt32("FlExamesA", usuarioCompletoTO.permissoesTO.Fl_Exames_A);
-            HttpContext.Session.SetInt32("FlExamesE", usuarioCompletoTO.permissoesTO.Fl_Exames_E);
+            HttpContext.Session.SetInt32("FlExamesI", usuarioCompletoTO.permissoesTO.flExamesI);
+            HttpContext.Session.SetInt32("FlExamesC", usuarioCompletoTO.permissoesTO.flExamesC);
+            HttpContext.Session.SetInt32("FlExamesA", usuarioCompletoTO.permissoesTO.flExamesA);
+            HttpContext.Session.SetInt32("FlExamesE", usuarioCompletoTO.permissoesTO.flExamesE);
         }
 
         private void CarregarDadosUsuarioParaTela()
         {
-            ViewBag.ID = HttpContext.Session.GetInt32("ID");
-            ViewBag.Username = HttpContext.Session.GetString("Username");
-            ViewBag.Password = HttpContext.Session.GetString("Password");
+            ViewData.Add("idUsuario", HttpContext.Session.GetInt32("idUsuario"));
+            ViewData.Add("usuario", HttpContext.Session.GetString("usuario"));
 
-            ViewBag.Id_Pessoa = HttpContext.Session.GetInt32("Id_Pessoa");
-            ViewBag.Id_Medico = HttpContext.Session.GetInt32("Id_Medico");
-            ViewBag.Nome = HttpContext.Session.GetString("Nome");
-            ViewBag.Cpf = HttpContext.Session.GetString("Cpf");
-            ViewBag.Estado = HttpContext.Session.GetString("Estado");
-            ViewBag.Cidade = HttpContext.Session.GetString("Cidade");
-            ViewBag.Bairro = HttpContext.Session.GetString("Bairro");
-            ViewBag.Endereco = HttpContext.Session.GetString("Endereco");
-            ViewBag.Numero = HttpContext.Session.GetInt32("Numero");
-            ViewBag.Telefone_Celular = HttpContext.Session.GetString("Telefone_Celular");
-            ViewBag.Email = HttpContext.Session.GetString("Email");
-            ViewBag.Tipo_Usuario = HttpContext.Session.GetInt32("Tipo_Usuario");
+            ViewData.Add("idPessoa", HttpContext.Session.GetInt32("idPessoa"));
+            ViewData.Add("idMedico", HttpContext.Session.GetInt32("idMedico"));
+            ViewData.Add("tipoUsuario", HttpContext.Session.GetInt32("tipoUsuario"));
+            ViewData.Add("nome", HttpContext.Session.GetInt32("nome"));
+            ViewData.Add("cpf", HttpContext.Session.GetInt32("cpf"));
+            ViewData.Add("rg", HttpContext.Session.GetInt32("rg"));
+            ViewData.Add("dataNascimento", HttpContext.Session.GetInt32("dataNascimento"));
+            ViewData.Add("logradouro", HttpContext.Session.GetInt32("logradouro"));
+            ViewData.Add("numero", HttpContext.Session.GetInt32("numero"));
+            ViewData.Add("bairro", HttpContext.Session.GetInt32("bairro"));
+            ViewData.Add("cidade", HttpContext.Session.GetInt32("cidade"));
+            ViewData.Add("uf", HttpContext.Session.GetInt32("uf"));
+            ViewData.Add("telefoneCelular", HttpContext.Session.GetInt32("telefoneCelular"));
+            ViewData.Add("email", HttpContext.Session.GetInt32("email"));
 
-            ViewBag.FlUsuarioI = HttpContext.Session.GetInt32("FlUsuarioI");
-            ViewBag.FlUsuarioC = HttpContext.Session.GetInt32("FlUsuarioC");
-            ViewBag.FlUsuarioA = HttpContext.Session.GetInt32("FlUsuarioA");
-            ViewBag.FlUsuarioE = HttpContext.Session.GetInt32("FlUsuarioE");
+            ViewData.Add("IdPermissoes", HttpContext.Session.GetInt32("IdPermissoes"));
 
-            ViewBag.FlPacienteI = HttpContext.Session.GetInt32("FlPacienteI");
-            ViewBag.FlPacienteC = HttpContext.Session.GetInt32("FlPacienteC");
-            ViewBag.FlPacienteA = HttpContext.Session.GetInt32("FlPacienteA");
-            ViewBag.FlPacienteE = HttpContext.Session.GetInt32("FlPacienteE");
+            ViewData.Add("FlUsuarioI", HttpContext.Session.GetInt32("FlUsuarioI"));
+            ViewData.Add("FlUsuarioC", HttpContext.Session.GetInt32("FlUsuarioC"));
+            ViewData.Add("FlUsuarioA", HttpContext.Session.GetInt32("FlUsuarioA"));
+            ViewData.Add("FlUsuarioE", HttpContext.Session.GetInt32("FlUsuarioE"));
 
-            ViewBag.FlConsultaI = HttpContext.Session.GetInt32("FlConsultaI");
-            ViewBag.FlConsultaC = HttpContext.Session.GetInt32("FlConsultaC");
-            ViewBag.FlConsultaA = HttpContext.Session.GetInt32("FlConsultaA");
-            ViewBag.FlConsultaE = HttpContext.Session.GetInt32("FlConsultaE");
+            ViewData.Add("FlPacienteI", HttpContext.Session.GetInt32("FlPacienteI"));
+            ViewData.Add("FlPacienteC", HttpContext.Session.GetInt32("FlPacienteC"));
+            ViewData.Add("FlPacienteA", HttpContext.Session.GetInt32("FlPacienteA"));
+            ViewData.Add("FlPacienteE", HttpContext.Session.GetInt32("FlPacienteE"));
 
-            ViewBag.FlMedicamentoI = HttpContext.Session.GetInt32("FlMedicamentoI");
-            ViewBag.FlMedicamentoC = HttpContext.Session.GetInt32("FlMedicamentoC");
-            ViewBag.FlMedicamentoA = HttpContext.Session.GetInt32("FlMedicamentoA");
-            ViewBag.FlMedicamentoE = HttpContext.Session.GetInt32("FlMedicamentoE");
+            ViewData.Add("FlConsultaI", HttpContext.Session.GetInt32("FlConsultaI"));
+            ViewData.Add("FlConsultaC", HttpContext.Session.GetInt32("FlConsultaC"));
+            ViewData.Add("FlConsultaA", HttpContext.Session.GetInt32("FlConsultaA"));
+            ViewData.Add("FlConsultaE", HttpContext.Session.GetInt32("FlConsultaE"));
 
-            ViewBag.FlExamesI = HttpContext.Session.GetInt32("FlExamesI");
-            ViewBag.FlExamesC = HttpContext.Session.GetInt32("FlExamesC");
-            ViewBag.FlExamesA = HttpContext.Session.GetInt32("FlExamesA");
-            ViewBag.FlExamesE = HttpContext.Session.GetInt32("FlExamesE");
+            ViewData.Add("FlMedicamentoI", HttpContext.Session.GetInt32("FlMedicamentoI"));
+            ViewData.Add("FlMedicamentoC", HttpContext.Session.GetInt32("FlMedicamentoC"));
+            ViewData.Add("FlMedicamentoA", HttpContext.Session.GetInt32("FlMedicamentoA"));
+            ViewData.Add("FlMedicamentoE", HttpContext.Session.GetInt32("FlMedicamentoE"));
+
+            ViewData.Add("FlExamesI", HttpContext.Session.GetInt32("FlExamesI"));
+            ViewData.Add("FlExamesC", HttpContext.Session.GetInt32("FlExamesC"));
+            ViewData.Add("FlExamesA", HttpContext.Session.GetInt32("FlExamesA"));
+            ViewData.Add("flExamesE", HttpContext.Session.GetInt32("flExamesE"));
         }
     }
 }
