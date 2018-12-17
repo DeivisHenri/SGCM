@@ -1,0 +1,38 @@
+﻿@using SGCM.Models.Usuario.EditarUsuarioModel;
+@model EditarUsuarioModel
+
+<div class="row margin-row">
+    <div class="col-lg-5"></div>
+    <div class="col-lg-2 margin-right-15-px">
+        <div class="form-group">
+            <label asp-for="@Model.usuario.Username" class="control-label form-label"></label>
+            <input asp-for="@Model.usuario.Username" class="form-control form-input form-input-center" id="nome" />
+            <span asp-validation-for="@Model.usuario.Username" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-lg-5"></div>
+</div>
+
+<div class="row margin-row">
+    <div class="col-lg-5"></div>
+    <div class="col-lg-2 margin-right-15-px">
+        <div class="form-group">
+            <label asp-for="@Model.usuario.Password" class="control-label form-label"></label>
+            <input asp-for="@Model.usuario.Password" class="form-control form-input form-input-center" />
+            <span asp-validation-for="@Model.usuario.Password" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-lg-5"></div>
+</div>
+
+<div class="row margin-row">
+    <div class="col-lg-5"></div>
+    <div class="col-lg-2 margin-right-15-px">
+        <div class="form-group">
+            <label asp-for="@Model.usuario.ConfirmPassword" class="control-label form-label"></label>
+            <input asp-for="@Model.usuario.ConfirmPassword" class="form-control form-input form-input-center" />
+            <span asp-validation-for="@Model.usuario.ConfirmPassword" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-lg-5"></div>
+</div>

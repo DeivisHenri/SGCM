@@ -1,0 +1,130 @@
+﻿<script type="text/javascript">
+
+    //Page Load.
+    $(document).ready(function () {
+        //Iniciando Página responsiva.
+        pageResponsive.start();
+
+        //Inicando Controles.
+        controlStart();
+    });
+
+    $("#btnLogin").click(function () {
+        //$('#frmLogin').submit(function () {
+        $("#spnMsg").text("Efetuando o Login...");
+        var token = gettoken()
+        var dadosLogin = { __RequestVerificationToken: token, username: $("#inputLogin").val(), password: $("#inputSenha").val() }
+        var json = JSON.stringify(dadosLogin);
+
+        $.ajax({
+            type: "POST",
+            url: "/Login/Post",
+            contentType: 'application/json; charset=utf-8',
+            dataType: "json",
+            data: json,
+            success: function(data, textStatus, jqXHR) {
+                alert("success: " + data);
+            },
+            failure: function (data, textStatus, jqXHR) {
+                alert("failure: " + data.responseText);
+            }, //End of AJAX failure function  
+
+            error: function (data, textStatus, jqXHR) {
+                console.log("data: " + data);
+                console.log("textStatus: " + textStatus);
+                console.log("jqXHR: " + jqXHR);
+
+                alert("error: " + data + textStatus + jqXHR);
+            } //End of AJAX error function  
+
+        });
+    });
+
+    //Login CallBack.
+    var EfetuarLoginCallBack = function (data) {
+        console.log("121");
+        if (data.CODIGO != 1) {
+            console.log("122");
+            $("#spnMsg").text(data.MENSAGEM);
+            $("#inputLogin").focus();
+        } else {
+            console.log("123");
+            $(location).attr('href', '@Url.Content("~/Paginas/Default/Index")');
+        };
+    };
+
+    function gettoken() {
+        var token = '@Html.AntiForgeryToken()';
+        token = $(token).val();
+        return token;
+   }
+
+    //Função dos Controles.
+    //Deivis Henrique Alves
+    var controlStart = function () {
+        try {
+            $('#inputLogin').keyup(function () { inputsLogin.valLogin(this); });
+            $('#inputLogin').blur(function () { inputsLogin.valLogin(this); });
+
+            $('#inputSenha').keyup(function () { inputsLogin.valSenha(this); });
+            $('#inputSenha').blur(function () { inputsLogin.valSenha(this); });
+        } catch (ex) {
+            console.log('ERRO: ' + ex.toLocaleString());
+        };
+    };
+
+    //Pagina Responsiva.
+    //Deivis Henrique Alves
+    var pageResponsive = {
+        base: function () {
+            try {
+                var tmoContainer = ($(window).height() - $('.container').height() - 200) + 'px';
+                $('.page-content').css('height', tmoContainer);
+                if ($('.page-content').height() <= 280) {
+                    $('.div-copyright').fadeOut();
+                } else {
+                    $('.div-copyright').fadeIn();
+                };
+            } catch (ex) {
+                console.log('ERRO: ' + ex.toLocaleString());
+            };
+        },
+        start: function () {
+            try {
+                pageResponsive.base();
+                $(window).resize(function () { pageResponsive.base(); });
+            } catch (ex) {
+                console.log('ERRO: ' + ex.toLocaleString());
+            };
+        }
+    };
+
+    //Validador de Login.
+    //Com Mensagem de Erro Customizada TGV.
+    //Leon Denis Paiva e Silva. [PrimeTeam]
+    var inputsLogin = {
+        valForm: function () {
+            try {
+                $('#tx-login-invalid').text($('#tx_login-error').text());
+                $('#tx-senha-invalid').text($('#tx_senha-error').text());
+            } catch (ex) {
+                console.log('ERRO: ' + ex.toLocaleString());
+            };
+        },
+        valLogin: function (inputObj) {
+            if ($(inputObj).val().length == 0) {
+                inputsLogin.valForm();
+            } else {
+                $('#tx-login-invalid').text('');
+            };
+        },
+        valSenha: function (inputObj) {
+            if ($(inputObj).val().length == 0) {
+                inputsLogin.valForm();
+            } else {
+                $('#tx-senha-invalid').text('');
+            };
+        }
+    };
+    //--
+</script>
