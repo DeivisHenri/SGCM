@@ -45,10 +45,10 @@ namespace SGCM.AppData.Usuario {
             command.AppendLine("              @CPF,");
             command.AppendLine("              @RG,");
             command.AppendLine("              Convert(date, @DATA_NASCIMENTO),");
-            command.AppendLine("              @ESTADO,");
+            command.AppendLine("              @UF,");
             command.AppendLine("              @CIDADE,");
             command.AppendLine("              @BAIRRO,");
-            command.AppendLine("              @ENDERECO,");
+            command.AppendLine("              @LOGRADOURO,");
             command.AppendLine("              @NUMERO,");
             command.AppendLine("              @TELEFONECELULAR,");
             command.AppendLine("              @EMAIL); ");

@@ -68,21 +68,21 @@
 
 <div class="row margin-row">
 
-    @* ESTADO *@
+    @* Logradouro *@
     <div class="col-lg-3 margin-right-15-px">
         <div class="form-group">
-            <label asp-for="@Model.pessoa.Estado" class="control-label form-label"></label>
-            <input asp-for="@Model.pessoa.Estado" class="form-control form-input form-input-center" />
-            <span asp-validation-for="@Model.pessoa.Estado" class="text-danger"></span>
+            <label asp-for="@Model.pessoa.Logradouro" class="control-label form-label"></label>
+            <input asp-for="@Model.pessoa.Logradouro" class="form-control form-input form-input-center" />
+            <span asp-validation-for="@Model.pessoa.Logradouro" class="text-danger"></span>
         </div>
     </div>
 
-    @* CIDADE *@
+    @* NÚMERO *@
     <div class="col-lg-3 margin-right-15-px">
         <div class="form-group">
-            <label asp-for="@Model.pessoa.Cidade" class="control-label form-label"></label>
-            <input asp-for="@Model.pessoa.Cidade" class="form-control form-input form-input-center" />
-            <span asp-validation-for="@Model.pessoa.Cidade" class="text-danger"></span>
+            <label asp-for="@Model.pessoa.Numero" class="control-label form-label"></label>
+            <input asp-for="@Model.pessoa.Numero" class="form-control form-input form-input-center" />
+            <span asp-validation-for="@Model.pessoa.Numero" class="text-danger"></span>
         </div>
     </div>
 
@@ -99,21 +99,21 @@
 
 <div class="row margin-row">
 
-    @* ENDEREÇO *@
+    @* CIDADE *@
     <div class="col-lg-5 margin-right-15-px">
         <div class="form-group">
-            <label asp-for="@Model.pessoa.Endereco" class="control-label form-label"></label>
-            <input asp-for="@Model.pessoa.Endereco" class="form-control form-input form-input-center" />
-            <span asp-validation-for="@Model.pessoa.Endereco" class="text-danger"></span>
+            <label asp-for="@Model.pessoa.Cidade" class="control-label form-label"></label>
+            <input asp-for="@Model.pessoa.Cidade" class="form-control form-input form-input-center" />
+            <span asp-validation-for="@Model.pessoa.Cidade" class="text-danger"></span>
         </div>
     </div>
 
-    @* NúMERO *@
+    @* UF *@
     <div class="col-lg-1 margin-right-15-px">
         <div class="form-group">
-            <label asp-for="@Model.pessoa.Numero" class="control-label form-label"></label>
-            <input asp-for="@Model.pessoa.Numero" class="form-control form-input form-input-center" />
-            <span asp-validation-for="@Model.pessoa.Numero" class="text-danger"></span>
+            <label asp-for="@Model.pessoa.UF" class="control-label form-label"></label>
+            <input asp-for="@Model.pessoa.UF" class="form-control form-input form-input-center" />
+            <span asp-validation-for="@Model.pessoa.UF" class="text-danger"></span>
         </div>
     </div>
 
@@ -139,4 +139,10 @@
         </div>
     </div>
 
+</div>
+
+<div class="form-group padding-top-15px">
+    <button id="moveProximoDadosPessoais" type="button" class="btn btn-primary btn-brand btn-brand-big">
+        &nbsp;Próximo&nbsp;
+    </button>
 </div>

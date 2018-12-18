@@ -61,7 +61,7 @@
     <Content Update="Views\Usuario\Partials\Editar\_DadosPermissoes.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Views\Usuario\Partials\Editar\_DadosPessoas.cshtml">
+    <Content Update="Views\Usuario\Partials\Editar\_DadosPessoais.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\Usuario\Partials\Cadastro\_DadosPermissoes.cshtml">

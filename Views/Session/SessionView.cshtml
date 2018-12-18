@@ -1,10 +1,9 @@
 ﻿<h2>Session</h2>
 
-<h4>ID: @ViewBag.ID</h4>
-<h4>Username: @ViewBag.Username</h4>
-<h4>Password: @ViewBag.Password</h4>
-<h4>Tipo Usuário: @ViewBag.TipoUsuario</h4>
-<h4>IdMedico: @ViewBag.Id_Medico</h4>
+<h4>ID: @ViewData["idUsuario"]</h4>
+<h4>Username: @ViewData["usuario"].</h4>
+<h4>Tipo Usuário: @ViewData["tipoUsuario"]</h4>
+<h4>IdMedico: @ViewData["idMedico"].</h4>
 
 <table border="1">
     <tr>
@@ -15,266 +14,266 @@
     @* USUÁRIO *@
     <tr>
         <td>Inserir Usuário</td>
-        @if (ViewBag.FlUsuarioI == 1)
+        @if ((int)ViewData["flUsuarioI"] == 1)
         {
-            <td>@ViewBag.FlUsuarioI</td>
+            <td>@ViewData["flUsuarioI"]</td>
             <td>0</td>
         }
         else
         {
             <td>0</td>
-            <td>@ViewBag.FlUsuarioI</td>
+            <td>@ViewData["flUsuarioI"]</td>
         }
     </tr>
     <tr>
         <td>Consultar Usuário</td>
-        @if (ViewBag.FlUsuarioC == 1)
+        @if ((int)ViewData["flUsuarioC"] == 1)
         {
-            <td>@ViewBag.FlUsuarioC</td>
+            <td>@ViewData["flUsuarioC"]</td>
             <td>0</td>
         }
         else
         {
             <td>0</td>
-            <td>@ViewBag.FlUsuarioC</td>
+            <td>@ViewData["flUsuarioC"]</td>
         }
     </tr>
     <tr>
         <td>Alterar Usuário</td>
-        @if (ViewBag.FlUsuarioA == 1)
+        @if ((int)ViewData["flUsuarioA"] == 1)
         {
-            <td>@ViewBag.FlUsuarioA</td>
+            <td>@ViewData["flUsuarioA"]</td>
             <td>0</td>
         }
         else
         {
             <td>0</td>
-            <td>@ViewBag.FlUsuarioA</td>
+            <td>@ViewData["flUsuarioA"]</td>
         }
     </tr>
     <tr>
         <td>Excluir Usuário</td>
-        @if (ViewBag.FlUsuarioE == 1)
+        @if ((int)ViewData["flUsuarioE"] == 1)
         {
-            <td>@ViewBag.FlUsuarioE</td>
+            <td>@ViewData["flUsuarioE"]</td>
             <td>0</td>
         }
         else
         {
             <td>0</td>
-            <td>@ViewBag.FlUsuarioE</td>
+            <td>@ViewData["flUsuarioE"]</td>
         }
     </tr>
     @* PACIENTE *@
     <tr>
         <td>Inserir Paciente</td>
-        @if (ViewBag.FlPacienteI == 1)
+        @if ((int)ViewData["flPacienteI"] == 1)
         {
-            <td>@ViewBag.FlPacienteI</td>
+            <td>@ViewData["flPacienteI"]</td>
             <td>0</td>
         }
         else
         {
             <td>0</td>
-            <td>@ViewBag.FlPacienteI</td>
+            <td>@ViewData["flPacienteI"]</td>
         }
     </tr>
     <tr>
         <td>Consultar Paciente</td>
-        @if (ViewBag.FlPacienteC == 1)
+        @if ((int)ViewData["flPacienteC"] == 1)
         {
-            <td>@ViewBag.FlPacienteC</td>
+            <td>@ViewData["flPacienteC"]</td>
             <td>0</td>
         }
         else
         {
             <td>0</td>
-            <td>@ViewBag.FlPacienteC</td>
+            <td>@ViewData["flPacienteC"]</td>
         }
     </tr>
     <tr>
         <td>Alterar Paciente</td>
-        @if (ViewBag.FlPacienteA == 1)
+        @if ((int)ViewData["flPacienteA"] == 1)
         {
-            <td>@ViewBag.FlPacienteA</td>
+            <td>@ViewData["flPacienteA"]</td>
             <td>0</td>
         }
         else
         {
             <td>0</td>
-            <td>@ViewBag.FlPacienteA</td>
+            <td>@ViewData["flPacienteA"]</td>
         }
     </tr>
     <tr>
         <td>Excluir Paciente</td>
-        @if (ViewBag.FlPacienteE == 1)
+        @if ((int)ViewData["flPacienteE"] == 1)
         {
-            <td>@ViewBag.FlPacienteE</td>
+            <td>@ViewData["flPacienteE"]</td>
             <td>0</td>
         }
         else
         {
             <td>0</td>
-            <td>@ViewBag.FlPacienteE</td>
+            <td>@ViewData["flPacienteE"]</td>
         }
     </tr>
     @* Consulta *@
     <tr>
         <td>Inserir Consulta</td>
-        @if (ViewBag.FlConsultaI == 1)
+        @if ((int)ViewData["flConsultaI"] == 1)
         {
-            <td>@ViewBag.FlConsultaI</td>
+            <td>@ViewData["flConsultaI"]</td>
             <td>0</td>
         }
         else
         {
             <td>0</td>
-            <td>@ViewBag.FlConsultaI</td>
+            <td>@ViewData["flConsultaI"]</td>
         }
     </tr>
     <tr>
         <td>Consultar Consulta</td>
-        @if (ViewBag.FlConsultaC == 1)
+        @if ((int)ViewData["flConsultaC"] == 1)
         {
-            <td>@ViewBag.FlConsultaC</td>
+            <td>@ViewData["flConsultaC"]</td>
             <td>0</td>
         }
         else
         {
             <td>0</td>
-            <td>@ViewBag.FlConsultaC</td>
+            <td>@ViewData["flConsultaC"]</td>
         }
     </tr>
     <tr>
         <td>Alterar Consulta</td>
-        @if (ViewBag.FlConsultaA == 1)
+        @if ((int)ViewData["flConsultaA"] == 1)
         {
-            <td>@ViewBag.FlConsultaA</td>
+            <td>@ViewData["flConsultaA"]</td>
             <td>0</td>
         }
         else
         {
             <td>0</td>
-            <td>@ViewBag.FlConsultaA</td>
+            <td>@ViewData["flConsultaA"]</td>
         }
     </tr>
     <tr>
         <td>Excluir Consulta</td>
-        @if (ViewBag.FlConsultaE == 1)
+        @if ((int)ViewData["flConsultaE"] == 1)
         {
-            <td>@ViewBag.FlConsultaE</td>
+            <td>@ViewData["flConsultaE"]</td>
             <td>0</td>
         }
         else
         {
             <td>0</td>
-            <td>@ViewBag.FlConsultaE</td>
+            <td>@ViewData["flConsultaE"]</td>
         }
     </tr>
     @* Medicamento *@
     <tr>
         <td>Inserir Medicamento</td>
-        @if (ViewBag.FlMedicamentoI == 1)
+        @if ((int)ViewData["flMedicamentoI"] == 1)
         {
-            <td>@ViewBag.FlMedicamentoI</td>
+            <td>@ViewData["flMedicamentoI"]</td>
             <td>0</td>
         }
         else
         {
             <td>0</td>
-            <td>@ViewBag.FlMedicamentoI</td>
+            <td>@ViewData["flMedicamentoI"]</td>
         }
     </tr>
     <tr>
         <td>Consultar Consulta</td>
-        @if (ViewBag.FlMedicamentoC == 1)
+        @if ((int)ViewData["flMedicamentoC"] == 1)
         {
-            <td>@ViewBag.FlMedicamentoC</td>
+            <td>@ViewData["flMedicamentoC"]</td>
             <td>0</td>
         }
         else
         {
             <td>0</td>
-            <td>@ViewBag.FlMedicamentoC</td>
+            <td>@ViewData["flMedicamentoC"]</td>
         }
     </tr>
     <tr>
         <td>Alterar Medicamento</td>
-        @if (ViewBag.FlMedicamentoA == 1)
+        @if ((int)ViewData["flMedicamentoA"] == 1)
         {
-            <td>@ViewBag.FlMedicamentoA</td>
+            <td>@ViewData["flMedicamentoA"]</td>
             <td>0</td>
         }
         else
         {
             <td>0</td>
-            <td>@ViewBag.FlMedicamentoA</td>
+            <td>@ViewData["flMedicamentoA"]</td>
         }
     </tr>
     <tr>
         <td>Excluir Medicamento</td>
-        @if (ViewBag.FlMedicamentoE == 1)
+        @if ((int)ViewData["flMedicamentoE"] == 1)
         {
-            <td>@ViewBag.FlMedicamentoE</td>
+            <td>@ViewData["flMedicamentoE"]</td>
             <td>0</td>
         }
         else
         {
             <td>0</td>
-            <td>@ViewBag.FlMedicamentoE</td>
+            <td>@ViewData["flMedicamentoE"]</td>
         }
     </tr>
     @* Exame *@
     <tr>
         <td>Inserir Exames</td>
-        @if (ViewBag.FlExamesI == 1)
+        @if ((int)ViewData["flExamesI"] == 1)
         {
-            <td>@ViewBag.FlExamesI</td>
+            <td>@ViewData["flExamesI"]</td>
             <td>0</td>
         }
         else
         {
             <td>0</td>
-            <td>@ViewBag.FlExamesI</td>
+            <td>@ViewData["flExamesI"]</td>
         }
     </tr>
     <tr>
         <td>Consultar Exames</td>
-        @if (ViewBag.FlExamesC == 1)
+        @if ((int)ViewData["flExamesC"] == 1)
         {
-            <td>@ViewBag.FlExamesC</td>
+            <td>@ViewData["flExamesC"]</td>
             <td>0</td>
         }
         else
         {
             <td>0</td>
-            <td>@ViewBag.FlExamesC</td>
+            <td>@ViewData["flExamesC"]</td>
         }
     </tr>
     <tr>
         <td>Alterar Exames</td>
-        @if (ViewBag.FlExamesA == 1)
+        @if ((int)ViewData["flExamesA"] == 1)
         {
-            <td>@ViewBag.FlExamesA</td>
+            <td>@ViewData["flExamesA"]</td>
             <td>0</td>
         }
         else
         {
             <td>0</td>
-            <td>@ViewBag.FlExamesA</td>
+            <td>@ViewData["flExamesA"]</td>
         }
     </tr>
     <tr>
         <td>Excluir Exames</td>
-        @if (ViewBag.FlExamesE == 1)
+        @if ((int)ViewData["flExamesE"] == 1)
         {
-            <td>@ViewBag.FlExamesE</td>
+            <td>@ViewData["flExamesE"]</td>
             <td>0</td>
         }
         else
         {
             <td>0</td>
-            <td>@ViewBag.FlExamesE</td>
+            <td>@ViewData["flExamesE"]</td>
         }
     </tr>
 </table>

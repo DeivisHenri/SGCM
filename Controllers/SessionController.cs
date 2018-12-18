@@ -14,8 +14,15 @@ namespace SGCM.Controllers
     public class SessionController : Controller
     {
         public ActionResult SessionView(){
-            if ((HttpContext.Session.GetInt32("ID") != null) && (HttpContext.Session.GetInt32("ID") != 0))
+            if ((HttpContext.Session.GetInt32("idUsuario") != null) && (HttpContext.Session.GetInt32("idUsuario") != 0))
+            {
                 CarregarDadosUsuarioParaTela();
+            }
+            else
+            {
+                ViewData.Add("ReturnUrl", ((object[])this.ControllerContext.RouteData.Values.Values)[0] + "/" + ((object[])this.ControllerContext.RouteData.Values.Values)[1]);
+                return RedirectToAction("Signin", "Login", new { ReturnUrl = ViewData["ReturnUrl"] });
+            }
             return View();
         }
 
@@ -85,31 +92,29 @@ namespace SGCM.Controllers
             ViewData.Add("telefoneCelular", HttpContext.Session.GetInt32("telefoneCelular"));
             ViewData.Add("email", HttpContext.Session.GetInt32("email"));
 
-            ViewData.Add("IdPermissoes", HttpContext.Session.GetInt32("IdPermissoes"));
+            ViewData.Add("flUsuarioI", HttpContext.Session.GetInt32("flUsuarioI"));
+            ViewData.Add("flUsuarioC", HttpContext.Session.GetInt32("flUsuarioC"));
+            ViewData.Add("flUsuarioA", HttpContext.Session.GetInt32("flUsuarioA"));
+            ViewData.Add("flUsuarioE", HttpContext.Session.GetInt32("flUsuarioE"));
 
-            ViewData.Add("FlUsuarioI", HttpContext.Session.GetInt32("FlUsuarioI"));
-            ViewData.Add("FlUsuarioC", HttpContext.Session.GetInt32("FlUsuarioC"));
-            ViewData.Add("FlUsuarioA", HttpContext.Session.GetInt32("FlUsuarioA"));
-            ViewData.Add("FlUsuarioE", HttpContext.Session.GetInt32("FlUsuarioE"));
+            ViewData.Add("flPacienteI", HttpContext.Session.GetInt32("flPacienteI"));
+            ViewData.Add("flPacienteC", HttpContext.Session.GetInt32("flPacienteC"));
+            ViewData.Add("flPacienteA", HttpContext.Session.GetInt32("flPacienteA"));
+            ViewData.Add("flPacienteE", HttpContext.Session.GetInt32("flPacienteE"));
 
-            ViewData.Add("FlPacienteI", HttpContext.Session.GetInt32("FlPacienteI"));
-            ViewData.Add("FlPacienteC", HttpContext.Session.GetInt32("FlPacienteC"));
-            ViewData.Add("FlPacienteA", HttpContext.Session.GetInt32("FlPacienteA"));
-            ViewData.Add("FlPacienteE", HttpContext.Session.GetInt32("FlPacienteE"));
+            ViewData.Add("flConsultaI", HttpContext.Session.GetInt32("flConsultaI"));
+            ViewData.Add("flConsultaC", HttpContext.Session.GetInt32("flConsultaC"));
+            ViewData.Add("flConsultaA", HttpContext.Session.GetInt32("flConsultaA"));
+            ViewData.Add("flConsultaE", HttpContext.Session.GetInt32("flConsultaE"));
 
-            ViewData.Add("FlConsultaI", HttpContext.Session.GetInt32("FlConsultaI"));
-            ViewData.Add("FlConsultaC", HttpContext.Session.GetInt32("FlConsultaC"));
-            ViewData.Add("FlConsultaA", HttpContext.Session.GetInt32("FlConsultaA"));
-            ViewData.Add("FlConsultaE", HttpContext.Session.GetInt32("FlConsultaE"));
+            ViewData.Add("flMedicamentoI", HttpContext.Session.GetInt32("flMedicamentoI"));
+            ViewData.Add("flMedicamentoC", HttpContext.Session.GetInt32("flMedicamentoC"));
+            ViewData.Add("flMedicamentoA", HttpContext.Session.GetInt32("flMedicamentoA"));
+            ViewData.Add("flMedicamentoE", HttpContext.Session.GetInt32("flMedicamentoE"));
 
-            ViewData.Add("FlMedicamentoI", HttpContext.Session.GetInt32("FlMedicamentoI"));
-            ViewData.Add("FlMedicamentoC", HttpContext.Session.GetInt32("FlMedicamentoC"));
-            ViewData.Add("FlMedicamentoA", HttpContext.Session.GetInt32("FlMedicamentoA"));
-            ViewData.Add("FlMedicamentoE", HttpContext.Session.GetInt32("FlMedicamentoE"));
-
-            ViewData.Add("FlExamesI", HttpContext.Session.GetInt32("FlExamesI"));
-            ViewData.Add("FlExamesC", HttpContext.Session.GetInt32("FlExamesC"));
-            ViewData.Add("FlExamesA", HttpContext.Session.GetInt32("FlExamesA"));
+            ViewData.Add("flExamesI", HttpContext.Session.GetInt32("flExamesI"));
+            ViewData.Add("flExamesC", HttpContext.Session.GetInt32("flExamesC"));
+            ViewData.Add("flExamesA", HttpContext.Session.GetInt32("flExamesA"));
             ViewData.Add("flExamesE", HttpContext.Session.GetInt32("flExamesE"));
         }
     }

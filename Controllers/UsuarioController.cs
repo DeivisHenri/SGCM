@@ -15,10 +15,10 @@ namespace SGCM.Controllers {
         [HttpGet]
         public ActionResult CadastroUsuario() {
             CarregarDadosUsuarioParaTela();
-            if ((ViewBag.ID != null) && (ViewBag.ID != 0)) {
-                if (ViewBag.FlUsuarioI != 0) {
+            if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
+                if ((int)ViewData["flUsuarioI"] != 0) {
 
-                    ViewBag.Title = "Cadastro Usuário";
+                    ViewData["Title"] = "Cadastro Usuário";
                     var viewModel = new CadastroUsuarioModel();
                     viewModel.usuario = new Models.Usuario.CadastroUsuarioModel.DadosLogin();
                     viewModel.permissoes = new Models.Usuario.CadastroUsuarioModel.DadosPermissoes();
@@ -26,16 +26,13 @@ namespace SGCM.Controllers {
 
                     return View(viewModel);
                 } else {
-                    HttpContext.Session.SetString("MensagemErro", "Você não tem premissão para acessar o cadastro de usuários!");
-                    HttpContext.Session.SetInt32("FlMensagemErro", 1);
                     return RedirectToAction("Index", "Home");
                 }
             } else {
                 ViewData.Add("ReturnUrl", ((object[])this.ControllerContext.RouteData.Values.Values)[0] + "/" + ((object[])this.ControllerContext.RouteData.Values.Values)[1]);
-                HttpContext.Session.SetString("MensagemErro", "Você não está logado no sistema! Realize o Login antes de acessar essa página!");
-                HttpContext.Session.SetInt32("FlMensagemErro", 1);
+                //HttpContext.Session.SetString("MensagemErro", "Você não está logado no sistema! Realize o Login antes de acessar essa página!");
+                //HttpContext.Session.SetInt32("FlMensagemErro", 1);
                 return RedirectToAction("Signin", "Login", new { ReturnUrl = ViewData["ReturnUrl"] } );
-                //return RedirectToAction("Signin", "Login");
             }
         }
 
@@ -83,13 +80,13 @@ namespace SGCM.Controllers {
         public ActionResult ConsultaUsuario()
         {
             CarregarDadosUsuarioParaTela();
-            if ((ViewBag.ID != null) && (ViewBag.ID != 0)) {
-                if (ViewBag.FlUsuarioI != 0) {
+            if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
+                if ((int)ViewData["flUsuarioC"] != 0) {
 
-                    ViewBag.Title = "Consultar Usuário";
+                    ViewData["Title"] = "Consultar Usuário";
                     
                     var objUsuariosBLL = new UsuarioBLL();
-                    List<CadastroUsuarioModel> viewModel = objUsuariosBLL.ConsultarUsuario((int) ViewBag.Id_Pessoa);
+                    List<CadastroUsuarioModel> viewModel = objUsuariosBLL.ConsultarUsuario((int) ViewData["idPessoa"]);
 
                     return View(viewModel);
                 } else {
@@ -107,9 +104,9 @@ namespace SGCM.Controllers {
         [HttpGet]
         public ActionResult EditarUsuario(int id) {
             CarregarDadosUsuarioParaTela();
-            if ((ViewBag.ID != null) && (ViewBag.ID != 0)) {
-                if (ViewBag.FlUsuarioA != 0) {
-                    ViewBag.Title = "Editar Usuário";
+            if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
+                if ((int)ViewData["flUsuarioA"] != 0) {
+                    ViewData["Title"] = "Editar Usuário";
 
                     var objUsuarioBLL = new UsuarioBLL();
                     EditarUsuarioModel viewModel = objUsuarioBLL.ConsultarUsuarioID(id);
@@ -140,9 +137,9 @@ namespace SGCM.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult EditarUsuario(EditarUsuarioModel model) {
             CarregarDadosUsuarioParaTela();
-            if ((ViewBag.ID != null) && (ViewBag.ID != 0)) {
-                if (ViewBag.FlUsuarioA != 0) {
-                    ViewBag.Title = "Editar Usuário";
+            if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
+                if ((int)ViewData["flUsuarioA"] != 0) {
+                    ViewData["Title"] = "Editar Usuário";
                     return View();
                 } else {
                     HttpContext.Session.SetString("MensagemErro", "Você não tem premissão para acessar a tela de Edição de Usuários!");
@@ -161,7 +158,7 @@ namespace SGCM.Controllers {
         [HttpGet]
         public ActionResult Relatorio()
         {
-            ViewBag.Title = "Relatório";
+            ViewData["Title"] = "Relatório";
 
             return View();
         }
@@ -186,157 +183,156 @@ namespace SGCM.Controllers {
             HttpContext.Session.SetString("Email", usuarioCompletoTO.pessoa.Email);
             HttpContext.Session.SetInt32("Tipo_Usuario", Int32.Parse(usuarioCompletoTO.pessoa.TipoUsuario));
 
-            HttpContext.Session.SetInt32("IdPermissoes", usuarioCompletoTO.permissoes.IdPermissoes);
-
             if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlUsuarioI)) {
-                HttpContext.Session.SetInt32("FlUsuarioI", 1);
+                HttpContext.Session.SetInt32("flUsuarioI", 1);
             } else {
-                HttpContext.Session.SetInt32("FlUsuarioI", 0);
+                HttpContext.Session.SetInt32("flUsuarioI", 0);
             }
             if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlUsuarioC)) {
-                HttpContext.Session.SetInt32("FlUsuarioC", 1);
+                HttpContext.Session.SetInt32("flUsuarioC", 1);
             } else {
-                HttpContext.Session.SetInt32("FlUsuarioC", 0);
+                HttpContext.Session.SetInt32("flUsuarioC", 0);
             }
             if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlUsuarioA)) {
-                HttpContext.Session.SetInt32("FlUsuarioA", 1);
+                HttpContext.Session.SetInt32("flUsuarioA", 1);
             } else {
-                HttpContext.Session.SetInt32("FlUsuarioA", 0);
+                HttpContext.Session.SetInt32("flUsuarioA", 0);
             }
             if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlUsuarioE)) {
-                HttpContext.Session.SetInt32("FlUsuarioE", 1);
+                HttpContext.Session.SetInt32("flUsuarioE", 1);
             } else {
-                HttpContext.Session.SetInt32("FlUsuarioE", 0);
+                HttpContext.Session.SetInt32("flUsuarioE", 0);
             }
 
             if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlPacienteI)) {
-                HttpContext.Session.SetInt32("FlPacienteI", 1);
+                HttpContext.Session.SetInt32("flPacienteI", 1);
             } else {
-                HttpContext.Session.SetInt32("FlPacienteI", 0);
+                HttpContext.Session.SetInt32("flPacienteI", 0);
             }
             if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlPacienteC)) {
-                HttpContext.Session.SetInt32("FlPacienteC", 1);
+                HttpContext.Session.SetInt32("flPacienteC", 1);
             } else {
-                HttpContext.Session.SetInt32("FlPacienteC", 0);
+                HttpContext.Session.SetInt32("flPacienteC", 0);
             }
             if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlPacienteA)) {
-                HttpContext.Session.SetInt32("FlPacienteA", 1);
+                HttpContext.Session.SetInt32("flPacienteA", 1);
             } else {
-                HttpContext.Session.SetInt32("FlPacienteA", 0);
+                HttpContext.Session.SetInt32("flPacienteA", 0);
             }
             if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlPacienteE)) {
-                HttpContext.Session.SetInt32("FlPacienteE", 1);
+                HttpContext.Session.SetInt32("flPacienteE", 1);
             } else {
-                HttpContext.Session.SetInt32("FlPacienteE", 0);
+                HttpContext.Session.SetInt32("flPacienteE", 0);
             }
 
             if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlConsultaI)) {
-                HttpContext.Session.SetInt32("FlConsultaI", 1);
+                HttpContext.Session.SetInt32("flConsultaI", 1);
             } else {
-                HttpContext.Session.SetInt32("FlConsultaI", 0);
+                HttpContext.Session.SetInt32("flConsultaI", 0);
             }
             if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlConsultaC)) {
-                HttpContext.Session.SetInt32("FlConsultaC", 1);
+                HttpContext.Session.SetInt32("flConsultaC", 1);
             } else {
-                HttpContext.Session.SetInt32("FlConsultaC", 0);
+                HttpContext.Session.SetInt32("flConsultaC", 0);
             }
             if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlConsultaA)) {
-                HttpContext.Session.SetInt32("FlConsultaA", 1);
+                HttpContext.Session.SetInt32("flConsultaA", 1);
             } else {
-                HttpContext.Session.SetInt32("FlConsultaA", 0);
+                HttpContext.Session.SetInt32("flConsultaA", 0);
             }
             if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlConsultaE)) {
-                HttpContext.Session.SetInt32("FlConsultaE", 1);
+                HttpContext.Session.SetInt32("flConsultaE", 1);
             } else {
-                HttpContext.Session.SetInt32("FlConsultaE", 0);
+                HttpContext.Session.SetInt32("flConsultaE", 0);
             }
 
             if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlMedicamentoI)) {
                 HttpContext.Session.SetInt32("FlMedicamentoI", 1);
             } else {
-                HttpContext.Session.SetInt32("FlMedicamentoI", 0);
+                HttpContext.Session.SetInt32("flMedicamentoI", 0);
             }
             if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlMedicamentoC)) {
-                HttpContext.Session.SetInt32("FlMedicamentoC", 1);
+                HttpContext.Session.SetInt32("flMedicamentoC", 1);
             } else {
-                HttpContext.Session.SetInt32("FlMedicamentoC", 0);
+                HttpContext.Session.SetInt32("flMedicamentoC", 0);
             }
             if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlMedicamentoA)) {
-                HttpContext.Session.SetInt32("FlMedicamentoA", 1);
+                HttpContext.Session.SetInt32("flMedicamentoA", 1);
             } else {
-                HttpContext.Session.SetInt32("FlMedicamentoA", 0);
+                HttpContext.Session.SetInt32("flMedicamentoA", 0);
             }
             if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlMedicamentoE)) {
-                HttpContext.Session.SetInt32("FlMedicamentoE", 1);
+                HttpContext.Session.SetInt32("flMedicamentoE", 1);
             } else {
-                HttpContext.Session.SetInt32("FlMedicamentoE", 0);
+                HttpContext.Session.SetInt32("flMedicamentoE", 0);
             }
 
             if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlExamesI)) {
-                HttpContext.Session.SetInt32("FlExamesI", 1);
+                HttpContext.Session.SetInt32("flExamesI", 1);
             } else {
-                HttpContext.Session.SetInt32("FlExamesI", 0);
+                HttpContext.Session.SetInt32("flExamesI", 0);
             }
             if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlExamesC)) {
-                HttpContext.Session.SetInt32("FlExamesC", 1);
+                HttpContext.Session.SetInt32("flExamesC", 1);
             } else {
-                HttpContext.Session.SetInt32("FlExamesC", 0);
+                HttpContext.Session.SetInt32("flExamesC", 0);
             }
             if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlExamesA)) {
-                HttpContext.Session.SetInt32("FlExamesA", 1);
+                HttpContext.Session.SetInt32("flExamesA", 1);
             } else {
-                HttpContext.Session.SetInt32("FlExamesA", 0);
+                HttpContext.Session.SetInt32("flExamesA", 0);
             }
             if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlExamesE)) {
-                HttpContext.Session.SetInt32("FlExamesE", 1);
+                HttpContext.Session.SetInt32("flExamesE", 1);
             } else {
-                HttpContext.Session.SetInt32("FlExamesE", 0);
+                HttpContext.Session.SetInt32("flExamesE", 0);
             }
         }
 
         private void CarregarDadosUsuarioParaTela()
         {
-            ViewBag.ID = HttpContext.Session.GetInt32("ID");
-            ViewBag.Username = HttpContext.Session.GetString("Username");
-            ViewBag.Password = HttpContext.Session.GetString("Password");
+            ViewData.Add("idUsuario", HttpContext.Session.GetInt32("idUsuario"));
+            ViewData.Add("usuario", HttpContext.Session.GetString("usuario"));
 
-            ViewBag.Id_Pessoa = HttpContext.Session.GetInt32("Id_Pessoa");
-            ViewBag.Id_Medico = HttpContext.Session.GetInt32("Id_Medico");
-            ViewBag.Nome = HttpContext.Session.GetString("Nome");
-            ViewBag.Cpf = HttpContext.Session.GetString("Cpf");
-            ViewBag.Estado = HttpContext.Session.GetString("Estado");
-            ViewBag.Cidade = HttpContext.Session.GetString("Cidade");
-            ViewBag.Bairro = HttpContext.Session.GetString("Bairro");
-            ViewBag.Endereco = HttpContext.Session.GetString("Endereco");
-            ViewBag.Numero = HttpContext.Session.GetInt32("Numero");
-            ViewBag.Telefone_Celular = HttpContext.Session.GetString("Telefone_Celular");
-            ViewBag.Email = HttpContext.Session.GetString("Email");
-            ViewBag.Tipo_Usuario = HttpContext.Session.GetInt32("Tipo_Usuario");
+            ViewData.Add("idPessoa", HttpContext.Session.GetInt32("idPessoa"));
+            ViewData.Add("idMedico", HttpContext.Session.GetInt32("idMedico"));
+            ViewData.Add("tipoUsuario", HttpContext.Session.GetInt32("tipoUsuario"));
+            ViewData.Add("nome", HttpContext.Session.GetInt32("nome"));
+            ViewData.Add("cpf", HttpContext.Session.GetInt32("cpf"));
+            ViewData.Add("rg", HttpContext.Session.GetInt32("rg"));
+            ViewData.Add("dataNascimento", HttpContext.Session.GetInt32("dataNascimento"));
+            ViewData.Add("logradouro", HttpContext.Session.GetInt32("logradouro"));
+            ViewData.Add("numero", HttpContext.Session.GetInt32("numero"));
+            ViewData.Add("bairro", HttpContext.Session.GetInt32("bairro"));
+            ViewData.Add("cidade", HttpContext.Session.GetInt32("cidade"));
+            ViewData.Add("uf", HttpContext.Session.GetInt32("uf"));
+            ViewData.Add("telefoneCelular", HttpContext.Session.GetInt32("telefoneCelular"));
+            ViewData.Add("email", HttpContext.Session.GetInt32("email"));
 
-            ViewBag.FlUsuarioI = HttpContext.Session.GetInt32("FlUsuarioI");
-            ViewBag.FlUsuarioC = HttpContext.Session.GetInt32("FlUsuarioC");
-            ViewBag.FlUsuarioA = HttpContext.Session.GetInt32("FlUsuarioA");
-            ViewBag.FlUsuarioE = HttpContext.Session.GetInt32("FlUsuarioE");
+            ViewData.Add("flUsuarioI", HttpContext.Session.GetInt32("flUsuarioI"));
+            ViewData.Add("flUsuarioC", HttpContext.Session.GetInt32("flUsuarioC"));
+            ViewData.Add("flUsuarioA", HttpContext.Session.GetInt32("flUsuarioA"));
+            ViewData.Add("flUsuarioE", HttpContext.Session.GetInt32("flUsuarioE"));
 
-            ViewBag.FlPacienteI = HttpContext.Session.GetInt32("FlPacienteI");
-            ViewBag.FlPacienteC = HttpContext.Session.GetInt32("FlPacienteC");
-            ViewBag.FlPacienteA = HttpContext.Session.GetInt32("FlPacienteA");
-            ViewBag.FlPacienteE = HttpContext.Session.GetInt32("FlPacienteE");
+            ViewData.Add("flPacienteI", HttpContext.Session.GetInt32("flPacienteI"));
+            ViewData.Add("flPacienteC", HttpContext.Session.GetInt32("flPacienteC"));
+            ViewData.Add("flPacienteA", HttpContext.Session.GetInt32("flPacienteA"));
+            ViewData.Add("flPacienteE", HttpContext.Session.GetInt32("flPacienteE"));
 
-            ViewBag.FlConsultaI = HttpContext.Session.GetInt32("FlConsultaI");
-            ViewBag.FlConsultaC = HttpContext.Session.GetInt32("FlConsultaC");
-            ViewBag.FlConsultaA = HttpContext.Session.GetInt32("FlConsultaA");
-            ViewBag.FlConsultaE = HttpContext.Session.GetInt32("FlConsultaE");
+            ViewData.Add("flConsultaI", HttpContext.Session.GetInt32("flConsultaI"));
+            ViewData.Add("flConsultaC", HttpContext.Session.GetInt32("flConsultaC"));
+            ViewData.Add("flConsultaA", HttpContext.Session.GetInt32("flConsultaA"));
+            ViewData.Add("flConsultaE", HttpContext.Session.GetInt32("flConsultaE"));
 
-            ViewBag.FlMedicamentoI = HttpContext.Session.GetInt32("FlMedicamentoI");
-            ViewBag.FlMedicamentoC = HttpContext.Session.GetInt32("FlMedicamentoC");
-            ViewBag.FlMedicamentoA = HttpContext.Session.GetInt32("FlMedicamentoA");
-            ViewBag.FlMedicamentoE = HttpContext.Session.GetInt32("FlMedicamentoE");
+            ViewData.Add("flMedicamentoI", HttpContext.Session.GetInt32("flMedicamentoI"));
+            ViewData.Add("flMedicamentoC", HttpContext.Session.GetInt32("flMedicamentoC"));
+            ViewData.Add("flMedicamentoA", HttpContext.Session.GetInt32("flMedicamentoA"));
+            ViewData.Add("flMedicamentoE", HttpContext.Session.GetInt32("flMedicamentoE"));
 
-            ViewBag.FlExamesI = HttpContext.Session.GetInt32("FlExamesI");
-            ViewBag.FlExamesC = HttpContext.Session.GetInt32("FlExamesC");
-            ViewBag.FlExamesA = HttpContext.Session.GetInt32("FlExamesA");
-            ViewBag.FlExamesE = HttpContext.Session.GetInt32("FlExamesE");
+            ViewData.Add("flExamesI", HttpContext.Session.GetInt32("flExamesI"));
+            ViewData.Add("flExamesC", HttpContext.Session.GetInt32("flExamesC"));
+            ViewData.Add("flExamesA", HttpContext.Session.GetInt32("flExamesA"));
+            ViewData.Add("flExamesE", HttpContext.Session.GetInt32("flExamesE"));
         }
     }
 }

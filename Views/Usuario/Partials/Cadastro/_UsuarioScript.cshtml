@@ -33,4 +33,28 @@
         $("input[type='checkbox']").prop("checked", true);
     });
 
+    $('#moveProximoDadosPessoais').click(function() {
+        var target = $(".nav-tabs li.active");
+        var sibbling = target.next();
+        sibbling.children("a").tab("show");
+    });
+
+    $('#moveAnteriorDadosLogin').click(function () {
+        var target = $(".nav-tabs li.active");
+        var sibbling = target.prev();
+        sibbling.children("a").tab("show");
+    });
+
+    $('#moveProximoDadosLogin').click(function () {
+        var target = $(".nav-tabs li.active");
+        var sibbling = target.next();
+        sibbling.children("a").tab("show");
+    });
+
+    $('#moveAnteriorDadosPermissoes').click(function () {
+        var target = $(".nav-tabs li.active");
+        var sibbling = target.prev();
+        sibbling.children("a").tab("show");
+    });
+
 </script>

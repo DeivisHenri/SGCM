@@ -2,32 +2,32 @@
 @inject IHttpContextAccessor HttpContextAccessor
 
 @{
-    string IDCliente = HttpContextAccessor.HttpContext.Session.GetInt32("ID").ToString();
+    string IDCliente = HttpContextAccessor.HttpContext.Session.GetInt32("idUsuario").ToString();
 
-    string FlUsuarioI = HttpContextAccessor.HttpContext.Session.GetInt32("FlUsuarioI").ToString();
-    string FlUsuarioC = HttpContextAccessor.HttpContext.Session.GetInt32("FlUsuarioC").ToString();
-    string FlUsuarioA = HttpContextAccessor.HttpContext.Session.GetInt32("FlUsuarioA").ToString();
-    string FlUsuarioE = HttpContextAccessor.HttpContext.Session.GetInt32("FlUsuarioE").ToString();
+    string FlUsuarioI = HttpContextAccessor.HttpContext.Session.GetInt32("flUsuarioI").ToString();
+    string FlUsuarioC = HttpContextAccessor.HttpContext.Session.GetInt32("flUsuarioC").ToString();
+    string FlUsuarioA = HttpContextAccessor.HttpContext.Session.GetInt32("flUsuarioA").ToString();
+    string FlUsuarioE = HttpContextAccessor.HttpContext.Session.GetInt32("flUsuarioE").ToString();
 
-    string FlPacienteI = HttpContextAccessor.HttpContext.Session.GetInt32("FlPacienteI").ToString();
-    string FlPacienteC = HttpContextAccessor.HttpContext.Session.GetInt32("FlPacienteC").ToString();
-    string FlPacienteA = HttpContextAccessor.HttpContext.Session.GetInt32("FlPacienteA").ToString();
-    string FlPacienteE = HttpContextAccessor.HttpContext.Session.GetInt32("FlPacienteE").ToString();
+    string FlPacienteI = HttpContextAccessor.HttpContext.Session.GetInt32("flPacienteI").ToString();
+    string FlPacienteC = HttpContextAccessor.HttpContext.Session.GetInt32("flPacienteC").ToString();
+    string FlPacienteA = HttpContextAccessor.HttpContext.Session.GetInt32("flPacienteA").ToString();
+    string FlPacienteE = HttpContextAccessor.HttpContext.Session.GetInt32("flPacienteE").ToString();
 
-    string FlConsultaI = HttpContextAccessor.HttpContext.Session.GetInt32("FlConsultaI").ToString();
-    string FlConsultaC = HttpContextAccessor.HttpContext.Session.GetInt32("FlConsultaC").ToString();
-    string FlConsultaA = HttpContextAccessor.HttpContext.Session.GetInt32("FlConsultaA").ToString();
-    string FlConsultaE = HttpContextAccessor.HttpContext.Session.GetInt32("FlConsultaE").ToString();
+    string FlConsultaI = HttpContextAccessor.HttpContext.Session.GetInt32("flConsultaI").ToString();
+    string FlConsultaC = HttpContextAccessor.HttpContext.Session.GetInt32("flConsultaC").ToString();
+    string FlConsultaA = HttpContextAccessor.HttpContext.Session.GetInt32("flConsultaA").ToString();
+    string FlConsultaE = HttpContextAccessor.HttpContext.Session.GetInt32("flConsultaE").ToString();
 
-    string FlMedicamentoI = HttpContextAccessor.HttpContext.Session.GetInt32("FlMedicamentoI").ToString();
-    string FlMedicamentoC = HttpContextAccessor.HttpContext.Session.GetInt32("FlMedicamentoC").ToString();
-    string FlMedicamentoA = HttpContextAccessor.HttpContext.Session.GetInt32("FlMedicamentoA").ToString();
-    string FlMedicamentoE = HttpContextAccessor.HttpContext.Session.GetInt32("FlMedicamentoE").ToString();
+    string FlMedicamentoI = HttpContextAccessor.HttpContext.Session.GetInt32("flMedicamentoI").ToString();
+    string FlMedicamentoC = HttpContextAccessor.HttpContext.Session.GetInt32("flMedicamentoC").ToString();
+    string FlMedicamentoA = HttpContextAccessor.HttpContext.Session.GetInt32("flMedicamentoA").ToString();
+    string FlMedicamentoE = HttpContextAccessor.HttpContext.Session.GetInt32("flMedicamentoE").ToString();
 
-    string FlExamesI = HttpContextAccessor.HttpContext.Session.GetInt32("FlExamesI").ToString();
-    string FlExamesC = HttpContextAccessor.HttpContext.Session.GetInt32("FlExamesC").ToString();
-    string FlExamesA = HttpContextAccessor.HttpContext.Session.GetInt32("FlExamesA").ToString();
-    string FlExamesE = HttpContextAccessor.HttpContext.Session.GetInt32("FlExamesE").ToString();
+    string FlExamesI = HttpContextAccessor.HttpContext.Session.GetInt32("flExamesI").ToString();
+    string FlExamesC = HttpContextAccessor.HttpContext.Session.GetInt32("flExamesC").ToString();
+    string FlExamesA = HttpContextAccessor.HttpContext.Session.GetInt32("flExamesA").ToString();
+    string FlExamesE = HttpContextAccessor.HttpContext.Session.GetInt32("flExamesE").ToString();
 
     if ((IDCliente != null) && (IDCliente != "") && (Convert.ToInt32(IDCliente) != 0))
     {

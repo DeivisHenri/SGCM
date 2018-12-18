@@ -4,8 +4,8 @@
 @inject IHttpContextAccessor HttpContextAccessor
 
 @{
-    string IDCliente = HttpContextAccessor.HttpContext.Session.GetInt32("ID").ToString();
-    string NomeCliente = HttpContextAccessor.HttpContext.Session.GetString("Nome");
+    string IDCliente = HttpContextAccessor.HttpContext.Session.GetInt32("idUsuario").ToString();
+    string NomeCliente = HttpContextAccessor.HttpContext.Session.GetString("nome");
 
     if ((IDCliente != null) && (IDCliente != "") && (IDCliente != "0"))
     {

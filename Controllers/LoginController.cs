@@ -1,14 +1,8 @@
-﻿using SGCM.Models;
-using System;
-using System.Net;
+﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using SGCM.AppData.Login;
 using Microsoft.AspNetCore.Authorization;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
 using System.Data.SqlClient;
 using SGCM.AppData.Usuario;
 using SGCM.Models.Account;
@@ -19,19 +13,24 @@ namespace SGCM.Controllers {
 
         //GET: /Login/Signin
         [HttpGet]
-        public ActionResult Signin(string returnUrl = null)
-        {
+        public ActionResult Signin(string returnUrl = null) {
 
             if (returnUrl != null) ViewData.Add("ReturnUrl", returnUrl);
 
             CarregarDadosUsuarioParaTela();
-            if ((ViewBag.ID == null) || (ViewBag.ID == 0))
-            {
-                ViewBag.Title = "Login";
-                return View();
+            if ((ViewData["idUsuario"] == null) || ((int) ViewData["idUsuario"] == 0)){
+                var usuarioCookie = getCookie("usuario");
+                if (usuarioCookie == null) {
+                    ViewData["Title"] = "Login";
+                    return View();
+                } else {
+                    var objLoginBLL = new LoginBLL();
+                    var retorno = objLoginBLL.BuscarDadosUsuario(usuarioCookie);
+                    CarregarDadosUsuarioParaSession(retorno);
+                    CarregarDadosUsuarioParaTela();
+                    return RedirectToAction("Index", "Home");
+                }
             } else {
-                HttpContext.Session.SetString("MensagemErro", "Você já está logado no sistema! Para entrar com outra conta, saia primeiro dessa!");
-                HttpContext.Session.SetInt32("FlMensagemErro", 1);
                 return RedirectToAction("Index", "Home");
             }
         }
@@ -51,6 +50,11 @@ namespace SGCM.Controllers {
                 var objLoginBLL = new LoginBLL();
                 var retorno = objLoginBLL.EfetuarLogin(model);
 
+                if (model.RememberMe)
+                {
+                    setCookie(model);
+                }
+
                 if (retorno.IdRetorno == 1) {
                     ModelState.AddModelError(string.Empty, "Usuário " + model.Username + " está desativado!");
                     return View(model);
@@ -66,11 +70,11 @@ namespace SGCM.Controllers {
                     }
                 }
             } catch (SqlException exSQL) {
-                ModelState.AddModelError(string.Empty, "Erro em acessar o banco de dados: " + exSQL);
+                ModelState.AddModelError(string.Empty, "Erro em acessar o banco de dados: " + exSQL.InnerException.Message);
                 return View(model);
             }
             catch (Exception ex) {
-                ModelState.AddModelError(string.Empty, ex.Message);
+                ModelState.AddModelError(string.Empty, ex.InnerException.Message.Split('(')[1].Split(')')[0]);
                 return View(model);
             }
         }
@@ -102,30 +106,30 @@ namespace SGCM.Controllers {
             HttpContext.Session.SetString("telefoneCelular", usuarioCompletoTO.pessoaTO.Telefone_Celular);
             HttpContext.Session.SetString("email", usuarioCompletoTO.pessoaTO.Email);
 
-            HttpContext.Session.SetInt32("FlUsuarioI", usuarioCompletoTO.permissoesTO.flUsuarioI);
-            HttpContext.Session.SetInt32("FlUsuarioC", usuarioCompletoTO.permissoesTO.flUsuarioC);
-            HttpContext.Session.SetInt32("FlUsuarioA", usuarioCompletoTO.permissoesTO.flUsuarioA);
-            HttpContext.Session.SetInt32("FlUsuarioE", usuarioCompletoTO.permissoesTO.flUsuarioE);
+            HttpContext.Session.SetInt32("flUsuarioI", usuarioCompletoTO.permissoesTO.flUsuarioI);
+            HttpContext.Session.SetInt32("flUsuarioC", usuarioCompletoTO.permissoesTO.flUsuarioC);
+            HttpContext.Session.SetInt32("flUsuarioA", usuarioCompletoTO.permissoesTO.flUsuarioA);
+            HttpContext.Session.SetInt32("flUsuarioE", usuarioCompletoTO.permissoesTO.flUsuarioE);
 
-            HttpContext.Session.SetInt32("FlPacienteI", usuarioCompletoTO.permissoesTO.flPacienteI);
-            HttpContext.Session.SetInt32("FlPacienteC", usuarioCompletoTO.permissoesTO.flPacienteC);
-            HttpContext.Session.SetInt32("FlPacienteA", usuarioCompletoTO.permissoesTO.flPacienteA);
-            HttpContext.Session.SetInt32("FlPacienteE", usuarioCompletoTO.permissoesTO.flPacienteE);
+            HttpContext.Session.SetInt32("flPacienteI", usuarioCompletoTO.permissoesTO.flPacienteI);
+            HttpContext.Session.SetInt32("flPacienteC", usuarioCompletoTO.permissoesTO.flPacienteC);
+            HttpContext.Session.SetInt32("flPacienteA", usuarioCompletoTO.permissoesTO.flPacienteA);
+            HttpContext.Session.SetInt32("flPacienteE", usuarioCompletoTO.permissoesTO.flPacienteE);
 
-            HttpContext.Session.SetInt32("FlConsultaI", usuarioCompletoTO.permissoesTO.flPacienteI);
-            HttpContext.Session.SetInt32("FlConsultaC", usuarioCompletoTO.permissoesTO.flPacienteC);
-            HttpContext.Session.SetInt32("FlConsultaA", usuarioCompletoTO.permissoesTO.flPacienteA);
-            HttpContext.Session.SetInt32("FlConsultaE", usuarioCompletoTO.permissoesTO.flPacienteE);
+            HttpContext.Session.SetInt32("flConsultaI", usuarioCompletoTO.permissoesTO.flPacienteI);
+            HttpContext.Session.SetInt32("flConsultaC", usuarioCompletoTO.permissoesTO.flPacienteC);
+            HttpContext.Session.SetInt32("flConsultaA", usuarioCompletoTO.permissoesTO.flPacienteA);
+            HttpContext.Session.SetInt32("flConsultaE", usuarioCompletoTO.permissoesTO.flPacienteE);
 
-            HttpContext.Session.SetInt32("FlMedicamentoI", usuarioCompletoTO.permissoesTO.flMedicamentoI);
-            HttpContext.Session.SetInt32("FlMedicamentoC", usuarioCompletoTO.permissoesTO.flMedicamentoC);
-            HttpContext.Session.SetInt32("FlMedicamentoA", usuarioCompletoTO.permissoesTO.flMedicamentoA);
-            HttpContext.Session.SetInt32("FlMedicamentoE", usuarioCompletoTO.permissoesTO.flMedicamentoE);
+            HttpContext.Session.SetInt32("flMedicamentoI", usuarioCompletoTO.permissoesTO.flMedicamentoI);
+            HttpContext.Session.SetInt32("flMedicamentoC", usuarioCompletoTO.permissoesTO.flMedicamentoC);
+            HttpContext.Session.SetInt32("flMedicamentoA", usuarioCompletoTO.permissoesTO.flMedicamentoA);
+            HttpContext.Session.SetInt32("flMedicamentoE", usuarioCompletoTO.permissoesTO.flMedicamentoE);
 
-            HttpContext.Session.SetInt32("FlExamesI", usuarioCompletoTO.permissoesTO.flExamesI);
-            HttpContext.Session.SetInt32("FlExamesC", usuarioCompletoTO.permissoesTO.flExamesC);
-            HttpContext.Session.SetInt32("FlExamesA", usuarioCompletoTO.permissoesTO.flExamesA);
-            HttpContext.Session.SetInt32("FlExamesE", usuarioCompletoTO.permissoesTO.flExamesE);
+            HttpContext.Session.SetInt32("flExamesI", usuarioCompletoTO.permissoesTO.flExamesI);
+            HttpContext.Session.SetInt32("flExamesC", usuarioCompletoTO.permissoesTO.flExamesC);
+            HttpContext.Session.SetInt32("flExamesA", usuarioCompletoTO.permissoesTO.flExamesA);
+            HttpContext.Session.SetInt32("flExamesE", usuarioCompletoTO.permissoesTO.flExamesE);
         }
 
         private void CarregarDadosUsuarioParaTela()
@@ -148,31 +152,29 @@ namespace SGCM.Controllers {
             ViewData.Add("telefoneCelular", HttpContext.Session.GetInt32("telefoneCelular"));
             ViewData.Add("email", HttpContext.Session.GetInt32("email"));
 
-            ViewData.Add("IdPermissoes", HttpContext.Session.GetInt32("IdPermissoes"));
+            ViewData.Add("flUsuarioI", HttpContext.Session.GetInt32("flUsuarioI"));
+            ViewData.Add("flUsuarioC", HttpContext.Session.GetInt32("flUsuarioC"));
+            ViewData.Add("flUsuarioA", HttpContext.Session.GetInt32("flUsuarioA"));
+            ViewData.Add("flUsuarioE", HttpContext.Session.GetInt32("flUsuarioE"));
 
-            ViewData.Add("FlUsuarioI", HttpContext.Session.GetInt32("FlUsuarioI"));
-            ViewData.Add("FlUsuarioC", HttpContext.Session.GetInt32("FlUsuarioC"));
-            ViewData.Add("FlUsuarioA", HttpContext.Session.GetInt32("FlUsuarioA"));
-            ViewData.Add("FlUsuarioE", HttpContext.Session.GetInt32("FlUsuarioE"));
+            ViewData.Add("flPacienteI", HttpContext.Session.GetInt32("flPacienteI"));
+            ViewData.Add("flPacienteC", HttpContext.Session.GetInt32("flPacienteC"));
+            ViewData.Add("flPacienteA", HttpContext.Session.GetInt32("flPacienteA"));
+            ViewData.Add("flPacienteE", HttpContext.Session.GetInt32("flPacienteE"));
 
-            ViewData.Add("FlPacienteI", HttpContext.Session.GetInt32("FlPacienteI"));
-            ViewData.Add("FlPacienteC", HttpContext.Session.GetInt32("FlPacienteC"));
-            ViewData.Add("FlPacienteA", HttpContext.Session.GetInt32("FlPacienteA"));
-            ViewData.Add("FlPacienteE", HttpContext.Session.GetInt32("FlPacienteE"));
+            ViewData.Add("flConsultaI", HttpContext.Session.GetInt32("flConsultaI"));
+            ViewData.Add("flConsultaC", HttpContext.Session.GetInt32("flConsultaC"));
+            ViewData.Add("flConsultaA", HttpContext.Session.GetInt32("flConsultaA"));
+            ViewData.Add("flConsultaE", HttpContext.Session.GetInt32("flConsultaE"));
 
-            ViewData.Add("FlConsultaI", HttpContext.Session.GetInt32("FlConsultaI"));
-            ViewData.Add("FlConsultaC", HttpContext.Session.GetInt32("FlConsultaC"));
-            ViewData.Add("FlConsultaA", HttpContext.Session.GetInt32("FlConsultaA"));
-            ViewData.Add("FlConsultaE", HttpContext.Session.GetInt32("FlConsultaE"));
+            ViewData.Add("flMedicamentoI", HttpContext.Session.GetInt32("flMedicamentoI"));
+            ViewData.Add("flMedicamentoC", HttpContext.Session.GetInt32("flMedicamentoC"));
+            ViewData.Add("flMedicamentoA", HttpContext.Session.GetInt32("flMedicamentoA"));
+            ViewData.Add("flMedicamentoE", HttpContext.Session.GetInt32("flMedicamentoE"));
 
-            ViewData.Add("FlMedicamentoI", HttpContext.Session.GetInt32("FlMedicamentoI"));
-            ViewData.Add("FlMedicamentoC", HttpContext.Session.GetInt32("FlMedicamentoC"));
-            ViewData.Add("FlMedicamentoA", HttpContext.Session.GetInt32("FlMedicamentoA"));
-            ViewData.Add("FlMedicamentoE", HttpContext.Session.GetInt32("FlMedicamentoE"));
-
-            ViewData.Add("FlExamesI", HttpContext.Session.GetInt32("FlExamesI"));
-            ViewData.Add("FlExamesC", HttpContext.Session.GetInt32("FlExamesC"));
-            ViewData.Add("FlExamesA", HttpContext.Session.GetInt32("FlExamesA"));
+            ViewData.Add("flExamesI", HttpContext.Session.GetInt32("flExamesI"));
+            ViewData.Add("flExamesC", HttpContext.Session.GetInt32("flExamesC"));
+            ViewData.Add("flExamesA", HttpContext.Session.GetInt32("flExamesA"));
             ViewData.Add("flExamesE", HttpContext.Session.GetInt32("flExamesE"));
         }
 
@@ -216,6 +218,24 @@ namespace SGCM.Controllers {
         //        LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
         //    };
         //}
+
+        public void setCookie(LoginViewModel model)
+        {
+            CookieOptions option = new CookieOptions();
+            option.Expires = DateTime.Now.AddMinutes(1440);
+            Response.Cookies.Append("usuario", model.Username, option);
+            Response.Cookies.Append("senha", model.Password, option);
+        }
+
+        public string getCookie(string key)
+        {
+            return Request.Cookies[key];
+        }
+
+        public void removeCookie(string key)
+        {
+            Response.Cookies.Delete(key);
+        }
 
     }
 }

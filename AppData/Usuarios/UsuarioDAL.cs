@@ -74,10 +74,10 @@ namespace SGCM.AppData.Usuario {
                         cmdPessoa.Parameters.Add("@CPF", SqlDbType.Char).Value = usuario.pessoa.CPF;
                         cmdPessoa.Parameters.Add("@RG", SqlDbType.Char).Value = usuario.pessoa.RG;
                         cmdPessoa.Parameters.Add("@DATA_NASCIMENTO", SqlDbType.Date).Value = usuario.pessoa.DataNascimento;
-                        cmdPessoa.Parameters.Add("@ESTADO", SqlDbType.Char).Value = usuario.pessoa.Estado;
+                        cmdPessoa.Parameters.Add("@UF", SqlDbType.Char).Value = usuario.pessoa.UF;
                         cmdPessoa.Parameters.Add("@CIDADE", SqlDbType.Char).Value = usuario.pessoa.Cidade;
                         cmdPessoa.Parameters.Add("@BAIRRO", SqlDbType.Char).Value = usuario.pessoa.Bairro;
-                        cmdPessoa.Parameters.Add("@ENDERECO", SqlDbType.Char).Value = usuario.pessoa.Endereco;
+                        cmdPessoa.Parameters.Add("@LOGRADOURO", SqlDbType.Char).Value = usuario.pessoa.Logradouro;
                         cmdPessoa.Parameters.Add("@NUMERO", SqlDbType.Int).Value = usuario.pessoa.Numero;
                         cmdPessoa.Parameters.Add("@TELEFONECELULAR", SqlDbType.Char).Value = usuario.pessoa.Telefone_Celular;
                         cmdPessoa.Parameters.Add("@EMAIL", SqlDbType.Char).Value = usuario.pessoa.Email;
