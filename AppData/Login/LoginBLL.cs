@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web;
-using SGCM.Models.Account;
-using SGCM.AppData.Login;
+﻿using SGCM.Models.Account;
 using SGCM.AppData.Usuario;
 
 namespace SGCM.AppData.Login { 

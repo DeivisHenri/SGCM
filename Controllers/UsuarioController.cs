@@ -6,6 +6,7 @@ using SGCM.AppData.Usuario;
 using System.Collections.Generic;
 using SGCM.Models.Usuario.CadastroUsuarioModel;
 using SGCM.Models.Usuario.EditarUsuarioModel;
+using SGCM.Models.UserMessage;
 
 namespace SGCM.Controllers {
 
@@ -16,60 +17,48 @@ namespace SGCM.Controllers {
         public ActionResult CadastroUsuario() {
             CarregarDadosUsuarioParaTela();
             if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
-                if ((int)ViewData["flUsuarioI"] != 0) {
-
+                if ((int)ViewData["flUsuarioI"] == 1) {
                     ViewData["Title"] = "Cadastro Usuário";
+
                     var viewModel = new CadastroUsuarioModel();
+
                     viewModel.usuario = new Models.Usuario.CadastroUsuarioModel.DadosLogin();
                     viewModel.permissoes = new Models.Usuario.CadastroUsuarioModel.DadosPermissoes();
                     viewModel.pessoa = new Models.Usuario.CadastroUsuarioModel.DadosPessoais();
 
                     return View(viewModel);
                 } else {
-                    return RedirectToAction("Index", "Home");
+                    HttpContext.Session.SetString("UserMessage", "O usuário " + ViewData["nome"] + " não tem acesso a página: 'Usuario/CadastroUsuario'!");
+                    return RedirectToAction("Error", "Home");
                 }
             } else {
                 ViewData.Add("ReturnUrl", ((object[])this.ControllerContext.RouteData.Values.Values)[0] + "/" + ((object[])this.ControllerContext.RouteData.Values.Values)[1]);
-                //HttpContext.Session.SetString("MensagemErro", "Você não está logado no sistema! Realize o Login antes de acessar essa página!");
-                //HttpContext.Session.SetInt32("FlMensagemErro", 1);
-                return RedirectToAction("Signin", "Login", new { ReturnUrl = ViewData["ReturnUrl"] } );
+                HttpContext.Session.SetString("UserMessage", "Você não está logado no sistema! Realize o Login antes de acessar essa a página: '" + ViewData["ReturnUrl"] + "' !");
+                return RedirectToAction("Signin", "Login", new { ReturnUrl = ViewData["ReturnUrl"] });
             }
         }
 
         // POST: /Usuario/CadastroUsuario
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CadastroUsuario(CadastroUsuarioModel model)
-        {
-            try
-            {
-                if (!ModelState.IsValid) {
-                    return View(model);
-                }
+        public ActionResult CadastroUsuario(CadastroUsuarioModel model) {
+            try {
+                if (!ModelState.IsValid) return View(model);
 
-                model.pessoa.IdMedico = (int)HttpContext.Session.GetInt32("Id_Pessoa");
+                model.pessoa.IdMedico = (int)HttpContext.Session.GetInt32("idPessoa");
 
                 var objUsuariosBLL = new UsuarioBLL();
                 var retorno = objUsuariosBLL.InserirUsuario(model);
 
                 if (retorno > 0) {
-                    HttpContext.Session.SetString("MensagemErro", "Cadastro realizado com sucesso!");
-                    HttpContext.Session.SetInt32("FlMensagemErro", 1);
-                    return RedirectToAction("Index", "Home");
-                    //return View(model);
+                    return View(model);
                 } else {
-                    //HttpContext.Session.SetString("MensagemErro", "Ocorreu algum!");
-                    //HttpContext.Session.SetInt32("FlMensagemErro", 1);
                     return RedirectToAction("Index", "Home");
                 }
-            }
-            catch (SqlException exSQL)
-            {
+            } catch (SqlException exSQL) {
                 ModelState.AddModelError(string.Empty, exSQL.Message);
                 return View(model);
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 ModelState.AddModelError(string.Empty, ex.Message);
                 return View(model);
             }
@@ -77,11 +66,9 @@ namespace SGCM.Controllers {
 
         //GET: /Usuario/ConsultaUsuario
         [HttpGet]
-        public ActionResult ConsultaUsuario()
-        {
+        public ActionResult ConsultaUsuario() {
             CarregarDadosUsuarioParaTela();
             if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
-                if ((int)ViewData["flUsuarioC"] != 0) {
 
                     ViewData["Title"] = "Consultar Usuário";
                     
@@ -89,15 +76,10 @@ namespace SGCM.Controllers {
                     List<CadastroUsuarioModel> viewModel = objUsuariosBLL.ConsultarUsuario((int) ViewData["idPessoa"]);
 
                     return View(viewModel);
-                } else {
-                    HttpContext.Session.SetString("MensagemErro", "Você não tem premissão para acessar a tela de Cadastro de Usuários!");
-                    HttpContext.Session.SetInt32("FlMensagemErro", 1);
-                    return RedirectToAction("Index", "Home");
-                }
             } else {
-                HttpContext.Session.SetString("MensagemErro", "Você não está logado no sistema! Realize o Login antes de acessar essa página!");
-                HttpContext.Session.SetInt32("FlMensagemErro", 1);
-                return RedirectToAction("Index", "Home");
+                HttpContext.Session.SetString("UserMessage", "Você não está logado no sistema! Realize o Login antes de acessar essa página!");
+                ViewData.Add("ReturnUrl", ((object[])this.ControllerContext.RouteData.Values.Values)[0] + "/" + ((object[])this.ControllerContext.RouteData.Values.Values)[1]);
+                return RedirectToAction("Signin", "Login", new { ReturnUrl = ViewData["ReturnUrl"] } );
             }
         }
 
@@ -111,13 +93,11 @@ namespace SGCM.Controllers {
                     var objUsuarioBLL = new UsuarioBLL();
                     EditarUsuarioModel viewModel = objUsuarioBLL.ConsultarUsuarioID(id);
                     
-                    if (viewModel.usuario.DatDst == default(DateTime)) {
+                    if (viewModel.usuario.DataDesativacao == default(DateTime)) {
                         viewModel.pessoa.Status = "1";
                     } else {
                         viewModel.pessoa.Status = "2";
                     }
-
-                    //CarregarDadosUsuarioParaSession(viewModel);
 
                     return View(viewModel);
                 } else {
@@ -139,8 +119,16 @@ namespace SGCM.Controllers {
             CarregarDadosUsuarioParaTela();
             if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
                 if ((int)ViewData["flUsuarioA"] != 0) {
-                    ViewData["Title"] = "Editar Usuário";
-                    return View();
+                    var objUsuarioBLL = new UsuarioBLL();
+                    var retorno = objUsuarioBLL.EditarUsuario(model);
+
+                    if (retorno == 3) {
+                        //RETORNA PARA A TELA DE CONSULTA DOS USUARIOS
+                        return RedirectToAction("Index", "Home");
+                    } else {
+                        // Mostrar mensagem de erro MAS QUAL????
+                        return View();
+                    }
                 } else {
                     HttpContext.Session.SetString("MensagemErro", "Você não tem premissão para acessar a tela de Edição de Usuários!");
                     HttpContext.Session.SetInt32("FlMensagemErro", 1);
@@ -152,7 +140,6 @@ namespace SGCM.Controllers {
                 return RedirectToAction("Index", "Home");
             }
         }
-
 
         //GET: /Usuario/Relatorio
         [HttpGet]
@@ -168,16 +155,17 @@ namespace SGCM.Controllers {
             HttpContext.Session.SetInt32("ID", usuarioCompletoTO.usuario.IdUsuario);
             HttpContext.Session.SetString("Username", usuarioCompletoTO.usuario.Username);
             HttpContext.Session.SetString("Password", usuarioCompletoTO.usuario.Password);
-            HttpContext.Session.SetString("DatDst", usuarioCompletoTO.usuario.DatDst.ToShortDateString());
+            //HttpContext.Session.SetString("DatDst", usuarioCompletoTO.usuario.DatDst.ToShortDateString());
 
             HttpContext.Session.SetInt32("Id_Pessoa", usuarioCompletoTO.pessoa.IdPessoa);
             HttpContext.Session.SetInt32("Id_Medico", usuarioCompletoTO.pessoa.IdMedico);
             HttpContext.Session.SetString("Nome", usuarioCompletoTO.pessoa.Nome);
             HttpContext.Session.SetString("Cpf", usuarioCompletoTO.pessoa.CPF);
-            HttpContext.Session.SetString("Estado", usuarioCompletoTO.pessoa.Estado);
+            HttpContext.Session.SetString("Rg", usuarioCompletoTO.pessoa.RG);
+            HttpContext.Session.SetString("Endereco", usuarioCompletoTO.pessoa.Logradouro);
+            HttpContext.Session.SetString("Estado", usuarioCompletoTO.pessoa.UF);
             HttpContext.Session.SetString("Cidade", usuarioCompletoTO.pessoa.Cidade);
             HttpContext.Session.SetString("Bairro", usuarioCompletoTO.pessoa.Bairro);
-            HttpContext.Session.SetString("Endereco", usuarioCompletoTO.pessoa.Endereco);
             HttpContext.Session.SetInt32("Numero", usuarioCompletoTO.pessoa.Numero);
             HttpContext.Session.SetString("Telefone_Celular", usuarioCompletoTO.pessoa.Telefone_Celular);
             HttpContext.Session.SetString("Email", usuarioCompletoTO.pessoa.Email);
@@ -297,17 +285,17 @@ namespace SGCM.Controllers {
             ViewData.Add("idPessoa", HttpContext.Session.GetInt32("idPessoa"));
             ViewData.Add("idMedico", HttpContext.Session.GetInt32("idMedico"));
             ViewData.Add("tipoUsuario", HttpContext.Session.GetInt32("tipoUsuario"));
-            ViewData.Add("nome", HttpContext.Session.GetInt32("nome"));
-            ViewData.Add("cpf", HttpContext.Session.GetInt32("cpf"));
-            ViewData.Add("rg", HttpContext.Session.GetInt32("rg"));
-            ViewData.Add("dataNascimento", HttpContext.Session.GetInt32("dataNascimento"));
-            ViewData.Add("logradouro", HttpContext.Session.GetInt32("logradouro"));
+            ViewData.Add("nome", HttpContext.Session.GetString("nome"));
+            ViewData.Add("cpf", HttpContext.Session.GetString("cpf"));
+            ViewData.Add("rg", HttpContext.Session.GetString("rg"));
+            ViewData.Add("dataNascimento", HttpContext.Session.GetString("dataNascimento"));
+            ViewData.Add("logradouro", HttpContext.Session.GetString("logradouro"));
             ViewData.Add("numero", HttpContext.Session.GetInt32("numero"));
-            ViewData.Add("bairro", HttpContext.Session.GetInt32("bairro"));
-            ViewData.Add("cidade", HttpContext.Session.GetInt32("cidade"));
-            ViewData.Add("uf", HttpContext.Session.GetInt32("uf"));
-            ViewData.Add("telefoneCelular", HttpContext.Session.GetInt32("telefoneCelular"));
-            ViewData.Add("email", HttpContext.Session.GetInt32("email"));
+            ViewData.Add("bairro", HttpContext.Session.GetString("bairro"));
+            ViewData.Add("cidade", HttpContext.Session.GetString("cidade"));
+            ViewData.Add("uf", HttpContext.Session.GetString("uf"));
+            ViewData.Add("telefoneCelular", HttpContext.Session.GetString("telefoneCelular"));
+            ViewData.Add("email", HttpContext.Session.GetString("email"));
 
             ViewData.Add("flUsuarioI", HttpContext.Session.GetInt32("flUsuarioI"));
             ViewData.Add("flUsuarioC", HttpContext.Session.GetInt32("flUsuarioC"));

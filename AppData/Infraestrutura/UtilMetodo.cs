@@ -1,5 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 using SGCM.Models.Usuario.CadastroUsuarioModel;
+using SGCM.Models.Usuario.EditarUsuarioModel;
 
 namespace SGCM.AppData.Infraestrutura.UtilMetodo
 {
@@ -11,132 +12,319 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo
             return rgx.Replace(cpf, "").ToString();
         }
 
-        public static CadastroUsuarioModel ConversaoPermissoesStringParaInt(CadastroUsuarioModel usuario)
+        public static Models.Usuario.CadastroUsuarioModel.DadosPermissoes ConversaoPermissoesStringParaIntCadastro(Models.Usuario.CadastroUsuarioModel.DadosPermissoes dadosPermissoes)
         {
             int valorTrue = 1;
             int valorFalse = 0;
 
-            if ((usuario.permissoes.FlUsuarioI == "true") || (usuario.permissoes.FlUsuarioI == "True")) {
-                usuario.permissoes.FlUsuarioI = valorTrue.ToString();
+            if ((dadosPermissoes.FlUsuarioI == "true") || (dadosPermissoes.FlUsuarioI == "True")) {
+                dadosPermissoes.FlUsuarioI = valorTrue.ToString();
             } else {
-                usuario.permissoes.FlUsuarioI = valorFalse.ToString();
+                dadosPermissoes.FlUsuarioI = valorFalse.ToString();
             }
 
-            if ((usuario.permissoes.FlUsuarioC == "true") || (usuario.permissoes.FlUsuarioC == "True")) {
-                usuario.permissoes.FlUsuarioC = valorTrue.ToString();
+            if ((dadosPermissoes.FlUsuarioC == "true") || (dadosPermissoes.FlUsuarioC == "True")) {
+                dadosPermissoes.FlUsuarioC = valorTrue.ToString();
             } else {
-                usuario.permissoes.FlUsuarioC = valorFalse.ToString();
+                dadosPermissoes.FlUsuarioC = valorFalse.ToString();
             }
 
-            if ((usuario.permissoes.FlUsuarioA == "true") || (usuario.permissoes.FlUsuarioA == "True")) {
-                usuario.permissoes.FlUsuarioA = valorTrue.ToString();
+            if ((dadosPermissoes.FlUsuarioA == "true") || (dadosPermissoes.FlUsuarioA == "True")) {
+                dadosPermissoes.FlUsuarioA = valorTrue.ToString();
             } else {
-                usuario.permissoes.FlUsuarioA = valorFalse.ToString();
+                dadosPermissoes.FlUsuarioA = valorFalse.ToString();
             }
 
-            if ((usuario.permissoes.FlUsuarioE == "true") || (usuario.permissoes.FlUsuarioE == "True")) {
-                usuario.permissoes.FlUsuarioE = valorTrue.ToString();
+            if ((dadosPermissoes.FlUsuarioE == "true") || (dadosPermissoes.FlUsuarioE == "True")) {
+                dadosPermissoes.FlUsuarioE = valorTrue.ToString();
             } else {
-                usuario.permissoes.FlUsuarioE = valorFalse.ToString();
+                dadosPermissoes.FlUsuarioE = valorFalse.ToString();
             }
 
-            if ((usuario.permissoes.FlPacienteI == "true") || (usuario.permissoes.FlPacienteI == "True")) {
-                usuario.permissoes.FlPacienteI = valorTrue.ToString();
+            if ((dadosPermissoes.FlPacienteI == "true") || (dadosPermissoes.FlPacienteI == "True")) {
+                dadosPermissoes.FlPacienteI = valorTrue.ToString();
             } else {
-                usuario.permissoes.FlPacienteI = valorFalse.ToString();
+                dadosPermissoes.FlPacienteI = valorFalse.ToString();
             }
 
-            if ((usuario.permissoes.FlPacienteC == "true") || (usuario.permissoes.FlPacienteC == "True")) {
-                usuario.permissoes.FlPacienteC = valorTrue.ToString();
+            if ((dadosPermissoes.FlPacienteC == "true") || (dadosPermissoes.FlPacienteC == "True")) {
+                dadosPermissoes.FlPacienteC = valorTrue.ToString();
             } else {
-                usuario.permissoes.FlPacienteC = valorFalse.ToString();
+                dadosPermissoes.FlPacienteC = valorFalse.ToString();
             }
 
-            if ((usuario.permissoes.FlPacienteA == "true") || (usuario.permissoes.FlPacienteA == "True")) {
-                usuario.permissoes.FlPacienteA = valorTrue.ToString();
+            if ((dadosPermissoes.FlPacienteA == "true") || (dadosPermissoes.FlPacienteA == "True")) {
+                dadosPermissoes.FlPacienteA = valorTrue.ToString();
             } else {
-                usuario.permissoes.FlPacienteA = valorFalse.ToString();
+                dadosPermissoes.FlPacienteA = valorFalse.ToString();
             }
 
-            if ((usuario.permissoes.FlPacienteE == "true") || (usuario.permissoes.FlPacienteE == "True")) {
-                usuario.permissoes.FlPacienteE = valorTrue.ToString();
+            if ((dadosPermissoes.FlPacienteE == "true") || (dadosPermissoes.FlPacienteE == "True")) {
+                dadosPermissoes.FlPacienteE = valorTrue.ToString();
             } else {
-                usuario.permissoes.FlPacienteE = valorFalse.ToString();
+                dadosPermissoes.FlPacienteE = valorFalse.ToString();
             }
 
-            if ((usuario.permissoes.FlConsultaI == "true") || (usuario.permissoes.FlConsultaI == "True")) {
-                usuario.permissoes.FlConsultaI = valorTrue.ToString();
+            if ((dadosPermissoes.FlConsultaI == "true") || (dadosPermissoes.FlConsultaI == "True")) {
+                dadosPermissoes.FlConsultaI = valorTrue.ToString();
             } else {
-                usuario.permissoes.FlConsultaI = valorFalse.ToString();
+                dadosPermissoes.FlConsultaI = valorFalse.ToString();
             }
 
-            if ((usuario.permissoes.FlConsultaC == "true") || (usuario.permissoes.FlConsultaC == "True")) {
-                usuario.permissoes.FlConsultaC = valorTrue.ToString();
+            if ((dadosPermissoes.FlConsultaC == "true") || (dadosPermissoes.FlConsultaC == "True")) {
+                dadosPermissoes.FlConsultaC = valorTrue.ToString();
             } else {
-                usuario.permissoes.FlConsultaC = valorFalse.ToString();
+                dadosPermissoes.FlConsultaC = valorFalse.ToString();
             }
 
-            if ((usuario.permissoes.FlConsultaA == "true") || (usuario.permissoes.FlConsultaA == "True")) {
-                usuario.permissoes.FlConsultaA = valorTrue.ToString();
+            if ((dadosPermissoes.FlConsultaA == "true") || (dadosPermissoes.FlConsultaA == "True")) {
+                dadosPermissoes.FlConsultaA = valorTrue.ToString();
             } else {
-                usuario.permissoes.FlConsultaA = valorFalse.ToString();
+                dadosPermissoes.FlConsultaA = valorFalse.ToString();
             }
 
-            if ((usuario.permissoes.FlConsultaE == "true") || (usuario.permissoes.FlConsultaE == "True")) {
-                usuario.permissoes.FlConsultaE = valorTrue.ToString();
+            if ((dadosPermissoes.FlConsultaE == "true") || (dadosPermissoes.FlConsultaE == "True")) {
+                dadosPermissoes.FlConsultaE = valorTrue.ToString();
             } else {
-                usuario.permissoes.FlConsultaE = valorFalse.ToString();
+                dadosPermissoes.FlConsultaE = valorFalse.ToString();
             }
 
-            if ((usuario.permissoes.FlMedicamentoI == "true") || (usuario.permissoes.FlMedicamentoI == "True")) {
-                usuario.permissoes.FlMedicamentoI = valorTrue.ToString();
+            if ((dadosPermissoes.FlMedicamentoI == "true") || (dadosPermissoes.FlMedicamentoI == "True")) {
+                dadosPermissoes.FlMedicamentoI = valorTrue.ToString();
             } else {
-                usuario.permissoes.FlMedicamentoI = valorFalse.ToString();
+                dadosPermissoes.FlMedicamentoI = valorFalse.ToString();
             }
 
-            if ((usuario.permissoes.FlMedicamentoC == "true") || (usuario.permissoes.FlMedicamentoC == "True")) {
-                usuario.permissoes.FlMedicamentoC = valorTrue.ToString();
+            if ((dadosPermissoes.FlMedicamentoC == "true") || (dadosPermissoes.FlMedicamentoC == "True")) {
+                dadosPermissoes.FlMedicamentoC = valorTrue.ToString();
             } else {
-                usuario.permissoes.FlMedicamentoC = valorFalse.ToString();
+                dadosPermissoes.FlMedicamentoC = valorFalse.ToString();
             }
 
-            if ((usuario.permissoes.FlMedicamentoA == "true") || (usuario.permissoes.FlMedicamentoA == "True")) {
-                usuario.permissoes.FlMedicamentoA = valorTrue.ToString();
+            if ((dadosPermissoes.FlMedicamentoA == "true") || (dadosPermissoes.FlMedicamentoA == "True")) {
+                dadosPermissoes.FlMedicamentoA = valorTrue.ToString();
             } else {
-                usuario.permissoes.FlMedicamentoA = valorFalse.ToString();
+                dadosPermissoes.FlMedicamentoA = valorFalse.ToString();
             }
 
-            if ((usuario.permissoes.FlMedicamentoE == "true") || (usuario.permissoes.FlMedicamentoE == "True")) {
-                usuario.permissoes.FlMedicamentoE = valorTrue.ToString();
+            if ((dadosPermissoes.FlMedicamentoE == "true") || (dadosPermissoes.FlMedicamentoE == "True")) {
+                dadosPermissoes.FlMedicamentoE = valorTrue.ToString();
             } else {
-                usuario.permissoes.FlMedicamentoE = valorFalse.ToString();
+                dadosPermissoes.FlMedicamentoE = valorFalse.ToString();
             }
 
-            if ((usuario.permissoes.FlExamesI == "true") || (usuario.permissoes.FlExamesI == "True")) {
-                usuario.permissoes.FlExamesI = valorTrue.ToString();
+            if ((dadosPermissoes.FlExamesI == "true") || (dadosPermissoes.FlExamesI == "True")) {
+                dadosPermissoes.FlExamesI = valorTrue.ToString();
             } else {
-                usuario.permissoes.FlExamesI = valorFalse.ToString();
+                dadosPermissoes.FlExamesI = valorFalse.ToString();
             }
 
-            if ((usuario.permissoes.FlExamesC == "true") || (usuario.permissoes.FlExamesC == "True")) {
-                usuario.permissoes.FlExamesC = valorTrue.ToString();
+            if ((dadosPermissoes.FlExamesC == "true") || (dadosPermissoes.FlExamesC == "True")) {
+                dadosPermissoes.FlExamesC = valorTrue.ToString();
             } else {
-                usuario.permissoes.FlExamesC = valorFalse.ToString();
+                dadosPermissoes.FlExamesC = valorFalse.ToString();
             }
 
-            if ((usuario.permissoes.FlExamesA == "true") || (usuario.permissoes.FlExamesA == "True")) {
-                usuario.permissoes.FlExamesA = valorTrue.ToString();
+            if ((dadosPermissoes.FlExamesA == "true") || (dadosPermissoes.FlExamesA == "True")) {
+                dadosPermissoes.FlExamesA = valorTrue.ToString();
             } else {
-                usuario.permissoes.FlExamesA = valorFalse.ToString();
+                dadosPermissoes.FlExamesA = valorFalse.ToString();
             }
 
-            if ((usuario.permissoes.FlExamesE == "true") || (usuario.permissoes.FlExamesE == "True")) {
-                usuario.permissoes.FlExamesE = valorTrue.ToString();
+            if ((dadosPermissoes.FlExamesE == "true") || (dadosPermissoes.FlExamesE == "True")) {
+                dadosPermissoes.FlExamesE = valorTrue.ToString();
             } else {
-                usuario.permissoes.FlExamesE = valorFalse.ToString();
+                dadosPermissoes.FlExamesE = valorFalse.ToString();
             }
 
-            return usuario;
+            return dadosPermissoes;
+        }
+
+        public static Models.Usuario.EditarUsuarioModel.DadosPermissoes ConversaoPermissoesStringParaIntEditar(Models.Usuario.EditarUsuarioModel.DadosPermissoes dadosPermissoes) {
+            int valorTrue = 1;
+            int valorFalse = 0;
+
+            if ((dadosPermissoes.FlUsuarioI == "true") || (dadosPermissoes.FlUsuarioI == "True"))
+            {
+                dadosPermissoes.FlUsuarioI = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.FlUsuarioI = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.FlUsuarioC == "true") || (dadosPermissoes.FlUsuarioC == "True"))
+            {
+                dadosPermissoes.FlUsuarioC = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.FlUsuarioC = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.FlUsuarioA == "true") || (dadosPermissoes.FlUsuarioA == "True"))
+            {
+                dadosPermissoes.FlUsuarioA = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.FlUsuarioA = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.FlUsuarioE == "true") || (dadosPermissoes.FlUsuarioE == "True"))
+            {
+                dadosPermissoes.FlUsuarioE = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.FlUsuarioE = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.FlPacienteI == "true") || (dadosPermissoes.FlPacienteI == "True"))
+            {
+                dadosPermissoes.FlPacienteI = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.FlPacienteI = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.FlPacienteC == "true") || (dadosPermissoes.FlPacienteC == "True"))
+            {
+                dadosPermissoes.FlPacienteC = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.FlPacienteC = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.FlPacienteA == "true") || (dadosPermissoes.FlPacienteA == "True"))
+            {
+                dadosPermissoes.FlPacienteA = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.FlPacienteA = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.FlPacienteE == "true") || (dadosPermissoes.FlPacienteE == "True"))
+            {
+                dadosPermissoes.FlPacienteE = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.FlPacienteE = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.FlConsultaI == "true") || (dadosPermissoes.FlConsultaI == "True"))
+            {
+                dadosPermissoes.FlConsultaI = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.FlConsultaI = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.FlConsultaC == "true") || (dadosPermissoes.FlConsultaC == "True"))
+            {
+                dadosPermissoes.FlConsultaC = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.FlConsultaC = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.FlConsultaA == "true") || (dadosPermissoes.FlConsultaA == "True"))
+            {
+                dadosPermissoes.FlConsultaA = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.FlConsultaA = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.FlConsultaE == "true") || (dadosPermissoes.FlConsultaE == "True"))
+            {
+                dadosPermissoes.FlConsultaE = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.FlConsultaE = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.FlMedicamentoI == "true") || (dadosPermissoes.FlMedicamentoI == "True"))
+            {
+                dadosPermissoes.FlMedicamentoI = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.FlMedicamentoI = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.FlMedicamentoC == "true") || (dadosPermissoes.FlMedicamentoC == "True"))
+            {
+                dadosPermissoes.FlMedicamentoC = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.FlMedicamentoC = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.FlMedicamentoA == "true") || (dadosPermissoes.FlMedicamentoA == "True"))
+            {
+                dadosPermissoes.FlMedicamentoA = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.FlMedicamentoA = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.FlMedicamentoE == "true") || (dadosPermissoes.FlMedicamentoE == "True"))
+            {
+                dadosPermissoes.FlMedicamentoE = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.FlMedicamentoE = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.FlExamesI == "true") || (dadosPermissoes.FlExamesI == "True"))
+            {
+                dadosPermissoes.FlExamesI = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.FlExamesI = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.FlExamesC == "true") || (dadosPermissoes.FlExamesC == "True"))
+            {
+                dadosPermissoes.FlExamesC = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.FlExamesC = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.FlExamesA == "true") || (dadosPermissoes.FlExamesA == "True"))
+            {
+                dadosPermissoes.FlExamesA = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.FlExamesA = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.FlExamesE == "true") || (dadosPermissoes.FlExamesE == "True"))
+            {
+                dadosPermissoes.FlExamesE = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.FlExamesE = valorFalse.ToString();
+            }
+
+            return dadosPermissoes;
         }
 
         public static string ArrumarDateFormatoBanco(string data)
@@ -145,6 +333,12 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo
             var dataReturn = dataArray[2] + "-" + dataArray[1] + "-" + dataArray[0];
 
             return dataReturn;
+        }
+
+        public static string ConsultarUltimoIdInseridoNoBanco()
+        {
+            return "SELECT LAST_INSERT_ID();";
+
         }
     }
 }

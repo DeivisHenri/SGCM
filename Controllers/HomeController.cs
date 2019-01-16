@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using SGCM.Models;
 using SGCM.AppData.Usuario;
 using SGCM.Models.Account;
+using SGCM.Models.UserMessage;
 using SGCM.AppData.Login;
 
 namespace SGCM.Controllers {
@@ -50,7 +45,9 @@ namespace SGCM.Controllers {
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error() {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            ViewData["UserMessage"] = new UserMessage { title = "Erro", userMessage = HttpContext.Session.GetString("UserMessage"), cssClassName = "alert-error" };
+            HttpContext.Session.SetString("UserMessage", "");
+            return View();
         }
 
         private void CarregarDadosUsuarioParaSession(UsuarioCompletoTO usuarioCompletoTO)

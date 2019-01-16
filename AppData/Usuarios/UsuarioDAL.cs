@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Transactions;
 using SGCM.AppData.Infraestrutura.UtilMetodo;
-using System.Data;
 using SGCM.Models.Usuario.CadastroUsuarioModel;
 using SGCM.Models.Usuario.EditarUsuarioModel;
+using MySql.Data.MySqlClient;
 
 namespace SGCM.AppData.Usuario {
     public class UsuarioDAL : SGCMContext {
@@ -16,14 +15,14 @@ namespace SGCM.AppData.Usuario {
             {
                 List<CadastroUsuarioModel> usuarioCompletoTOList = new List<CadastroUsuarioModel>();
 
-                SqlConnection connection = new SqlConnection(getStringConnection());
+                MySqlConnection connection = new MySqlConnection(getStringConnection());
                 connection.Open();
 
                 var DALSQL = new UsuarioDALSQL();
-                SqlCommand cmdUsuario = new SqlCommand(DALSQL.ConsultarUsuario(), connection);
-                cmdUsuario.Parameters.Add("@IDPESSOA", SqlDbType.Int).Value = IdPessoa;
+                MySqlCommand cmdUsuario = new MySqlCommand(DALSQL.ConsultarUsuario(), connection);
+                cmdUsuario.Parameters.Add("@IDPESSOA", MySqlDbType.Int32).Value = IdPessoa;
 
-                SqlDataReader reader = cmdUsuario.ExecuteReader();
+                MySqlDataReader reader = cmdUsuario.ExecuteReader();
                 if (reader.HasRows)
                 {
                     while (reader.Read())
@@ -56,97 +55,105 @@ namespace SGCM.AppData.Usuario {
         }
 
         public int InserirUsuario(CadastroUsuarioModel usuario) {
-            try {
-                var DALSQL = new UsuarioDALSQL();
-                Decimal retorno = 0;
+            using (TransactionScope scope = new TransactionScope()) {
+                try {
+                    var DALSQL = new UsuarioDALSQL();
+                    object lastId;
+                    int linhaInserida;
 
-                using (TransactionScope scope = new TransactionScope()) {
+                    using (MySqlConnection connection = new MySqlConnection(getStringConnection())) {
 
-                    using (SqlConnection connection = new SqlConnection(getStringConnection())) {
-                        
                         connection.Open();
 
-                        SqlCommand cmdPessoa = new SqlCommand(DALSQL.InserirPessoa(), connection);
-
-                        cmdPessoa.Parameters.Add("@IDMEDICO", SqlDbType.Int).Value = usuario.pessoa.IdMedico;
-                        cmdPessoa.Parameters.Add("@TIPOUSUARIO", SqlDbType.Int).Value = usuario.pessoa.TipoUsuario;
-                        cmdPessoa.Parameters.Add("@NOME", SqlDbType.Char).Value = usuario.pessoa.Nome;
-                        cmdPessoa.Parameters.Add("@CPF", SqlDbType.Char).Value = usuario.pessoa.CPF;
-                        cmdPessoa.Parameters.Add("@RG", SqlDbType.Char).Value = usuario.pessoa.RG;
-                        cmdPessoa.Parameters.Add("@DATA_NASCIMENTO", SqlDbType.Date).Value = usuario.pessoa.DataNascimento;
-                        cmdPessoa.Parameters.Add("@UF", SqlDbType.Char).Value = usuario.pessoa.UF;
-                        cmdPessoa.Parameters.Add("@CIDADE", SqlDbType.Char).Value = usuario.pessoa.Cidade;
-                        cmdPessoa.Parameters.Add("@BAIRRO", SqlDbType.Char).Value = usuario.pessoa.Bairro;
-                        cmdPessoa.Parameters.Add("@LOGRADOURO", SqlDbType.Char).Value = usuario.pessoa.Logradouro;
-                        cmdPessoa.Parameters.Add("@NUMERO", SqlDbType.Int).Value = usuario.pessoa.Numero;
-                        cmdPessoa.Parameters.Add("@TELEFONECELULAR", SqlDbType.Char).Value = usuario.pessoa.Telefone_Celular;
-                        cmdPessoa.Parameters.Add("@EMAIL", SqlDbType.Char).Value = usuario.pessoa.Email;
-
-                        retorno = (Decimal)cmdPessoa.ExecuteScalar();
-
-                        SqlCommand cmdUsuario = new SqlCommand(DALSQL.InserirUsuario(), connection);
-
-                        cmdUsuario.Parameters.Add("@IDPESSOA", SqlDbType.Int).Value = (int)retorno;
-                        cmdUsuario.Parameters.Add("@USERNAME", SqlDbType.Char).Value = usuario.usuario.Username;
-                        cmdUsuario.Parameters.Add("@PASSWORD", SqlDbType.Char).Value = usuario.usuario.Password;
-
-                        retorno = (Decimal)cmdUsuario.ExecuteScalar();
+                        MySqlCommand cmdLastId = new MySqlCommand(UtilMetodo.ConsultarUltimoIdInseridoNoBanco(), connection);
                         
-                        usuario = UtilMetodo.ConversaoPermissoesStringParaInt(usuario);
+                        MySqlCommand cmdPessoa = new MySqlCommand(DALSQL.InserirPessoa(), connection);
 
-                        SqlCommand cmdPermissoes = new SqlCommand(DALSQL.InserirPermissoes(), connection);
+                        cmdPessoa.Parameters.Add("@IDMEDICO", MySqlDbType.Int32).Value = usuario.pessoa.IdMedico;
+                        cmdPessoa.Parameters.Add("@TIPOUSUARIO", MySqlDbType.Int32).Value = usuario.pessoa.TipoUsuario;
+                        cmdPessoa.Parameters.Add("@NOME", MySqlDbType.String).Value = usuario.pessoa.Nome;
+                        cmdPessoa.Parameters.Add("@CPF", MySqlDbType.String).Value = usuario.pessoa.CPF;
+                        cmdPessoa.Parameters.Add("@RG", MySqlDbType.String).Value = usuario.pessoa.RG;
+                        cmdPessoa.Parameters.Add("@DATANASCIMENTO", MySqlDbType.String).Value = usuario.pessoa.DataNascimento.ToShortDateString();
+                        cmdPessoa.Parameters.Add("@LOGRADOURO", MySqlDbType.String).Value = usuario.pessoa.Logradouro;
+                        cmdPessoa.Parameters.Add("@NUMERO", MySqlDbType.Int32).Value = usuario.pessoa.Numero;
+                        cmdPessoa.Parameters.Add("@BAIRRO", MySqlDbType.String).Value = usuario.pessoa.Bairro;
+                        cmdPessoa.Parameters.Add("@CIDADE", MySqlDbType.String).Value = usuario.pessoa.Cidade;
+                        cmdPessoa.Parameters.Add("@UF", MySqlDbType.String).Value = usuario.pessoa.UF;
+                        cmdPessoa.Parameters.Add("@TELEFONECELULAR", MySqlDbType.String).Value = usuario.pessoa.Telefone_Celular;
+                        cmdPessoa.Parameters.Add("@EMAIL", MySqlDbType.String).Value = usuario.pessoa.Email;
 
-                        cmdPermissoes.Parameters.Add("@IDUSUARIO", SqlDbType.Int).Value = (int)retorno;
-                        cmdPermissoes.Parameters.Add("@FLUSUARIOI", SqlDbType.Int).Value = Int32.Parse(usuario.permissoes.FlUsuarioI);
-                        cmdPermissoes.Parameters.Add("@FLUSUARIOC", SqlDbType.Int).Value = Int32.Parse(usuario.permissoes.FlUsuarioC);
-                        cmdPermissoes.Parameters.Add("@FLUSUARIOA", SqlDbType.Int).Value = Int32.Parse(usuario.permissoes.FlUsuarioA);
-                        cmdPermissoes.Parameters.Add("@FLUSUARIOE", SqlDbType.Int).Value = Int32.Parse(usuario.permissoes.FlUsuarioE);
-                        cmdPermissoes.Parameters.Add("@FLPACIENTEI", SqlDbType.Int).Value = Int32.Parse(usuario.permissoes.FlPacienteI);
-                        cmdPermissoes.Parameters.Add("@FLPACIENTEC", SqlDbType.Int).Value = Int32.Parse(usuario.permissoes.FlPacienteC);
-                        cmdPermissoes.Parameters.Add("@FLPACIENTEA", SqlDbType.Int).Value = Int32.Parse(usuario.permissoes.FlPacienteA);
-                        cmdPermissoes.Parameters.Add("@FLPACIENTEE", SqlDbType.Int).Value = Int32.Parse(usuario.permissoes.FlPacienteE);
-                        cmdPermissoes.Parameters.Add("@FLCONSULTAI", SqlDbType.Int).Value = Int32.Parse(usuario.permissoes.FlConsultaI);
-                        cmdPermissoes.Parameters.Add("@FLCONSULTAC", SqlDbType.Int).Value = Int32.Parse(usuario.permissoes.FlConsultaC);
-                        cmdPermissoes.Parameters.Add("@FLCONSULTAA", SqlDbType.Int).Value = Int32.Parse(usuario.permissoes.FlConsultaA);
-                        cmdPermissoes.Parameters.Add("@FLCONSULTAE", SqlDbType.Int).Value = Int32.Parse(usuario.permissoes.FlConsultaE);
-                        cmdPermissoes.Parameters.Add("@FLMEDICAMENTOI", SqlDbType.Int).Value = Int32.Parse(usuario.permissoes.FlMedicamentoI);
-                        cmdPermissoes.Parameters.Add("@FLMEDICAMENTOC", SqlDbType.Int).Value = Int32.Parse(usuario.permissoes.FlMedicamentoC);
-                        cmdPermissoes.Parameters.Add("@FLMEDICAMENTOA", SqlDbType.Int).Value = Int32.Parse(usuario.permissoes.FlMedicamentoA);
-                        cmdPermissoes.Parameters.Add("@FLMEDICAMENTOE", SqlDbType.Int).Value = Int32.Parse(usuario.permissoes.FlMedicamentoE);
-                        cmdPermissoes.Parameters.Add("@FLEXAMESI", SqlDbType.Int).Value = Int32.Parse(usuario.permissoes.FlExamesI);
-                        cmdPermissoes.Parameters.Add("@FLEXAMESC", SqlDbType.Int).Value = Int32.Parse(usuario.permissoes.FlExamesC);
-                        cmdPermissoes.Parameters.Add("@FLEXAMESA", SqlDbType.Int).Value = Int32.Parse(usuario.permissoes.FlExamesA);
-                        cmdPermissoes.Parameters.Add("@FLEXAMESE", SqlDbType.Int).Value = Int32.Parse(usuario.permissoes.FlExamesE);
+                        linhaInserida = cmdPessoa.ExecuteNonQuery();
 
-                        retorno = (Decimal)cmdPermissoes.ExecuteScalar();
+                        lastId = cmdLastId.ExecuteScalar();
 
-                        if (retorno > 0) {
-                            scope.Complete();
-                        } else {
-                            throw new Exception();
-                        }
+                        MySqlCommand cmdUsuario = new MySqlCommand(DALSQL.InserirUsuario(), connection);
+
+                        cmdUsuario.Parameters.Add("@IDPESSOA", MySqlDbType.Int32).Value = lastId;
+                        cmdUsuario.Parameters.Add("@USUARIO", MySqlDbType.String).Value = usuario.usuario.Username;
+                        cmdUsuario.Parameters.Add("@SENHA", MySqlDbType.String).Value = usuario.usuario.Password;
+
+                        linhaInserida = cmdUsuario.ExecuteNonQuery();
+
+                        lastId = cmdLastId.ExecuteScalar();
+
+                        usuario.permissoes = UtilMetodo.ConversaoPermissoesStringParaIntCadastro(usuario.permissoes);
+
+                        MySqlCommand cmdPermissoes = new MySqlCommand(DALSQL.InserirPermissoes(), connection);
+
+                        cmdPermissoes.Parameters.Add("@IDUSUARIO", MySqlDbType.Int32).Value = lastId;
+                        cmdPermissoes.Parameters.Add("@FLUSUARIOI", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlUsuarioI);
+                        cmdPermissoes.Parameters.Add("@FLUSUARIOC", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlUsuarioC);
+                        cmdPermissoes.Parameters.Add("@FLUSUARIOA", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlUsuarioA);
+                        cmdPermissoes.Parameters.Add("@FLUSUARIOE", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlUsuarioE);
+                        cmdPermissoes.Parameters.Add("@FLPACIENTEI", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlPacienteI);
+                        cmdPermissoes.Parameters.Add("@FLPACIENTEC", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlPacienteC);
+                        cmdPermissoes.Parameters.Add("@FLPACIENTEA", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlPacienteA);
+                        cmdPermissoes.Parameters.Add("@FLPACIENTEE", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlPacienteE);
+                        cmdPermissoes.Parameters.Add("@FLCONSULTAI", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlConsultaI);
+                        cmdPermissoes.Parameters.Add("@FLCONSULTAC", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlConsultaC);
+                        cmdPermissoes.Parameters.Add("@FLCONSULTAA", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlConsultaA);
+                        cmdPermissoes.Parameters.Add("@FLCONSULTAE", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlConsultaE);
+                        cmdPermissoes.Parameters.Add("@FLMEDICAMENTOI", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlMedicamentoI);
+                        cmdPermissoes.Parameters.Add("@FLMEDICAMENTOC", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlMedicamentoC);
+                        cmdPermissoes.Parameters.Add("@FLMEDICAMENTOA", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlMedicamentoA);
+                        cmdPermissoes.Parameters.Add("@FLMEDICAMENTOE", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlMedicamentoE);
+                        cmdPermissoes.Parameters.Add("@FLEXAMESI", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlExamesI);
+                        cmdPermissoes.Parameters.Add("@FLEXAMESC", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlExamesC);
+                        cmdPermissoes.Parameters.Add("@FLEXAMESA", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlExamesA);
+                        cmdPermissoes.Parameters.Add("@FLEXAMESE", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlExamesE);
+
+                        linhaInserida = cmdPermissoes.ExecuteNonQuery();
+
+                        //if (retorno 0) {
+                        //    scope.Complete();
+                        //} else {
+                        //    throw new Exception();
+                        //}
+                        scope.Complete();
+                        return 0;
                     }
+                } catch (TransactionAbortedException ex) {
+                    scope.Dispose();
+                    throw ex;
+                } catch (Exception ex) {
+                    scope.Dispose();
+                    throw ex;
                 }
-                return (int)retorno;
-            }
-            catch (TransactionAbortedException ex)
-            {
-                throw ex;
-            }
-            catch (Exception ex) {
-                throw ex;
             }
         }
 
         public EditarUsuarioModel ConsultarUsuarioID(int IdPessoa) {
             try {
-                SqlConnection connection = new SqlConnection(getStringConnection());
+                MySqlConnection connection = new MySqlConnection(getStringConnection());
                 connection.Open();
 
                 var DALSQL = new UsuarioDALSQL();
-                SqlCommand cmdUsuario = new SqlCommand(DALSQL.ConsultarUsuarioID(), connection);
-                cmdUsuario.Parameters.Add("@IDPESSOA", SqlDbType.Int).Value = IdPessoa;
-                SqlDataReader reader = cmdUsuario.ExecuteReader();
+                MySqlCommand cmdUsuario = new MySqlCommand(DALSQL.ConsultarUsuarioID(), connection);
+
+                cmdUsuario.Parameters.Add("@IDPESSOA", MySqlDbType.Int32).Value = IdPessoa;
+
+                MySqlDataReader reader = cmdUsuario.ExecuteReader();
 
                 EditarUsuarioModel usuarioCompletoTO = new EditarUsuarioModel();
                 usuarioCompletoTO.pessoa = new Models.Usuario.EditarUsuarioModel.DadosPessoais();
@@ -161,126 +168,124 @@ namespace SGCM.AppData.Usuario {
                         usuarioCompletoTO.pessoa.Nome = reader.GetString(3);
                         usuarioCompletoTO.pessoa.CPF = reader.GetString(4);
                         usuarioCompletoTO.pessoa.RG = reader.GetString(5);
-                        usuarioCompletoTO.pessoa.DataNascimento = reader.GetString(6);
-                        usuarioCompletoTO.pessoa.Estado = reader.GetString(7);
-                        usuarioCompletoTO.pessoa.Cidade = reader.GetString(8);
+                        usuarioCompletoTO.pessoa.DataNascimento = reader.GetDateTime(6);
+                        usuarioCompletoTO.pessoa.Logradouro = reader.GetString(7);
+                        usuarioCompletoTO.pessoa.Numero = reader.GetInt32(8);
                         usuarioCompletoTO.pessoa.Bairro = reader.GetString(9);
-                        usuarioCompletoTO.pessoa.Endereco = reader.GetString(10);
-                        usuarioCompletoTO.pessoa.Numero = reader.GetInt32(11);
+                        usuarioCompletoTO.pessoa.Cidade = reader.GetString(10);
+                        usuarioCompletoTO.pessoa.UF = reader.GetString(11);
                         usuarioCompletoTO.pessoa.Telefone_Celular = reader.GetString(12);
                         usuarioCompletoTO.pessoa.Email = reader.GetString(13);
 
                         usuarioCompletoTO.usuario.IdUsuario = reader.GetInt32(14);
                         usuarioCompletoTO.usuario.Username = reader.GetString(15);
-                        usuarioCompletoTO.usuario.Password = reader.GetString(16);
-
-                        if (!reader.IsDBNull(17)) {
-                            usuarioCompletoTO.usuario.DatDst = DateTime.Parse(reader.GetString(17));
-                        }
+                        usuarioCompletoTO.usuario.DataCadastro = Convert.ToDateTime(reader.GetString(16));
+                        if (!(reader.IsDBNull(17)))
+                            usuarioCompletoTO.usuario.DataDesativacao = Convert.ToDateTime(reader.GetString(17));
+                        else
+                            usuarioCompletoTO.usuario.DataDesativacao = new DateTime();
 
                         usuarioCompletoTO.permissoes.IdPermissoes = reader.GetInt32(18);
-                        usuarioCompletoTO.permissoes.IdUsuario = reader.GetInt32(19);
-
-                        if (reader.GetInt32(20) == 1) {
+                        if (reader.GetInt32(19) == 1) {
                             usuarioCompletoTO.permissoes.FlUsuarioI = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlUsuarioI = "false";
                         }
-                        if (reader.GetInt32(21) == 1) {
+                        if (reader.GetInt32(20) == 1) {
                             usuarioCompletoTO.permissoes.FlUsuarioC = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlUsuarioC = "false";
                         }
-                        if (reader.GetInt32(22) == 1) {
+                        if (reader.GetInt32(21) == 1) {
                             usuarioCompletoTO.permissoes.FlUsuarioA = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlUsuarioA = "false";
                         }
-                        if (reader.GetInt32(23) == 1) {
+                        if (reader.GetInt32(22) == 1) {
                             usuarioCompletoTO.permissoes.FlUsuarioE = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlUsuarioE = "false";
                         }
 
-                        if (reader.GetInt32(24) == 1) {
+                        if (reader.GetInt32(23) == 1) {
                             usuarioCompletoTO.permissoes.FlPacienteI = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlPacienteI = "false";
                         }
-                        if (reader.GetInt32(25) == 1) {
+                        if (reader.GetInt32(24) == 1) {
                             usuarioCompletoTO.permissoes.FlPacienteC = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlPacienteC = "false";
                         }
-                        if (reader.GetInt32(26) == 1) {
+                        if (reader.GetInt32(25) == 1) {
                             usuarioCompletoTO.permissoes.FlPacienteA = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlPacienteA = "false";
                         }
-                        if (reader.GetInt32(27) == 1) {
+                        if (reader.GetInt32(26) == 1) {
                             usuarioCompletoTO.permissoes.FlPacienteE = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlPacienteE = "false";
                         }
 
-                        if (reader.GetInt32(28) == 1) {
+                        if (reader.GetInt32(27) == 1) {
                             usuarioCompletoTO.permissoes.FlConsultaI = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlConsultaI = "false";
                         }
-                        if (reader.GetInt32(29) == 1) {
+                        if (reader.GetInt32(28) == 1) {
                             usuarioCompletoTO.permissoes.FlConsultaC = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlConsultaC = "false";
                         }
-                        if (reader.GetInt32(30) == 1) {
+                        if (reader.GetInt32(29) == 1) {
                             usuarioCompletoTO.permissoes.FlConsultaA = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlConsultaA = "false";
                         }
-                        if (reader.GetInt32(31) == 1) {
+                        if (reader.GetInt32(30) == 1) {
                             usuarioCompletoTO.permissoes.FlConsultaE = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlConsultaE = "false";
                         }
 
-                        if (reader.GetInt32(32) == 1) {
+                        if (reader.GetInt32(31) == 1) {
                             usuarioCompletoTO.permissoes.FlMedicamentoI = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlMedicamentoI = "false";
                         }
-                        if (reader.GetInt32(33) == 1) {
+                        if (reader.GetInt32(32) == 1) {
                             usuarioCompletoTO.permissoes.FlMedicamentoC = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlMedicamentoC = "false";
                         }
-                        if (reader.GetInt32(34) == 1) {
+                        if (reader.GetInt32(33) == 1) {
                             usuarioCompletoTO.permissoes.FlMedicamentoA = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlMedicamentoA = "false";
                         }
-                        if (reader.GetInt32(35) == 1) {
+                        if (reader.GetInt32(34) == 1) {
                             usuarioCompletoTO.permissoes.FlMedicamentoE = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlMedicamentoE = "false";
                         }
 
-                        if (reader.GetInt32(36) == 1) {
+                        if (reader.GetInt32(35) == 1) {
                             usuarioCompletoTO.permissoes.FlExamesI = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlExamesI = "false";
                         }
-                        if (reader.GetInt32(37) == 1) {
+                        if (reader.GetInt32(36) == 1) {
                             usuarioCompletoTO.permissoes.FlExamesC = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlExamesC = "false";
                         }
-                        if (reader.GetInt32(35) == 1) {
+                        if (reader.GetInt32(37) == 1) {
                             usuarioCompletoTO.permissoes.FlExamesA = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlExamesA = "false";
                         }
-                        if (reader.GetInt32(36) == 1) {
+                        if (reader.GetInt32(38) == 1) {
                             usuarioCompletoTO.permissoes.FlExamesE = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlExamesE = "false";
@@ -295,6 +300,92 @@ namespace SGCM.AppData.Usuario {
 
             } catch (Exception ex) {
                 throw ex;
+            }
+        }
+
+        public int EditarUsuario(EditarUsuarioModel usuarioModel) {
+            using (TransactionScope scope = new TransactionScope()) {
+                try {
+                    var DALSQL = new UsuarioDALSQL();
+                    using (MySqlConnection connection = new MySqlConnection(getStringConnection())) {
+                        var retorno = 0;
+
+                        connection.Open();
+
+                        MySqlCommand cmdPessoa = new MySqlCommand(DALSQL.EditarPessoa(usuarioModel), connection);
+
+                        cmdPessoa.Parameters.Add("@IDPESSOA", MySqlDbType.Int32).Value = usuarioModel.pessoa.IdPessoa;
+                        cmdPessoa.Parameters.Add("@IDMEDICO", MySqlDbType.Int32).Value = usuarioModel.pessoa.IdMedico;
+                        cmdPessoa.Parameters.Add("@TIPOUSUARIO", MySqlDbType.Int32).Value = usuarioModel.pessoa.TipoUsuario;
+                        cmdPessoa.Parameters.Add("@NOME", MySqlDbType.String).Value = usuarioModel.pessoa.Nome;
+                        cmdPessoa.Parameters.Add("@CPF", MySqlDbType.String).Value = usuarioModel.pessoa.CPF;
+                        cmdPessoa.Parameters.Add("@RG", MySqlDbType.String).Value = usuarioModel.pessoa.RG;
+                        //cmdPessoa.Parameters.Add("@DATANASCIMENTO", MySqlDbType.Date).Value = usuarioModel.pessoa.DataNascimento.ToShortDateString().Split('/')[2] + "-" + usuarioModel.pessoa.DataNascimento.ToShortDateString().Split('/')[1] + "-" + usuarioModel.pessoa.DataNascimento.ToShortDateString().Split('/')[0];
+                        cmdPessoa.Parameters.Add("@DATANASCIMENTO", MySqlDbType.String).Value = usuarioModel.pessoa.DataNascimento.ToShortDateString();
+                        cmdPessoa.Parameters.Add("@LOGRADOURO", MySqlDbType.String).Value = usuarioModel.pessoa.Logradouro;
+                        cmdPessoa.Parameters.Add("@NUMERO", MySqlDbType.Int32).Value = usuarioModel.pessoa.Numero;
+                        cmdPessoa.Parameters.Add("@BAIRRO", MySqlDbType.String).Value = usuarioModel.pessoa.Bairro;
+                        cmdPessoa.Parameters.Add("@CIDADE", MySqlDbType.String).Value = usuarioModel.pessoa.Cidade;
+                        cmdPessoa.Parameters.Add("@UF", MySqlDbType.String).Value = usuarioModel.pessoa.UF;
+                        cmdPessoa.Parameters.Add("@TELEFONECELULAR", MySqlDbType.String).Value = usuarioModel.pessoa.Telefone_Celular;
+                        cmdPessoa.Parameters.Add("@EMAIL", MySqlDbType.String).Value = usuarioModel.pessoa.Email;
+
+                        retorno = cmdPessoa.ExecuteNonQuery();
+
+                        MySqlCommand cmdUsuario = new MySqlCommand(DALSQL.EditarUsuario(usuarioModel), connection);
+
+                        cmdUsuario.Parameters.Add("@IDUSUARIO", MySqlDbType.Int32).Value = usuarioModel.usuario.IdUsuario;
+                        cmdUsuario.Parameters.Add("@IDPESSOA", MySqlDbType.Int32).Value = usuarioModel.pessoa.IdPessoa;
+                        cmdUsuario.Parameters.Add("@USUARIO", MySqlDbType.String).Value = usuarioModel.usuario.Username;
+                        cmdUsuario.Parameters.Add("@SENHA", MySqlDbType.String).Value = usuarioModel.usuario.Password;
+                        cmdUsuario.Parameters.Add("@DATADESATIVACAO", MySqlDbType.String).Value = usuarioModel.usuario.DataDesativacao;
+
+                        retorno = retorno + cmdUsuario.ExecuteNonQuery();
+
+
+                        usuarioModel.permissoes = UtilMetodo.ConversaoPermissoesStringParaIntEditar(usuarioModel.permissoes);
+
+                        MySqlCommand cmdPermissoes = new MySqlCommand(DALSQL.EditarPermissoes(usuarioModel), connection);
+
+                        cmdPermissoes.Parameters.Add("@IDUSUARIO", MySqlDbType.Int32).Value = usuarioModel.usuario.IdUsuario;
+                        cmdPermissoes.Parameters.Add("@IDPERMISSOES", MySqlDbType.Int32).Value = usuarioModel.permissoes.IdPermissoes;
+                        cmdPermissoes.Parameters.Add("@FLUSUARIOI", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlUsuarioI);
+                        cmdPermissoes.Parameters.Add("@FLUSUARIOC", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlUsuarioC);
+                        cmdPermissoes.Parameters.Add("@FLUSUARIOA", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlUsuarioA);
+                        cmdPermissoes.Parameters.Add("@FLUSUARIOE", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlUsuarioE);
+                        cmdPermissoes.Parameters.Add("@FLPACIENTEI", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlPacienteI);
+                        cmdPermissoes.Parameters.Add("@FLPACIENTEC", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlPacienteC);
+                        cmdPermissoes.Parameters.Add("@FLPACIENTEA", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlPacienteA);
+                        cmdPermissoes.Parameters.Add("@FLPACIENTEE", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlPacienteE);
+                        cmdPermissoes.Parameters.Add("@FLCONSULTAI", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlConsultaI);
+                        cmdPermissoes.Parameters.Add("@FLCONSULTAC", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlConsultaC);
+                        cmdPermissoes.Parameters.Add("@FLCONSULTAA", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlConsultaA);
+                        cmdPermissoes.Parameters.Add("@FLCONSULTAE", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlConsultaE);
+                        cmdPermissoes.Parameters.Add("@FLMEDICAMENTOI", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlMedicamentoI);
+                        cmdPermissoes.Parameters.Add("@FLMEDICAMENTOC", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlMedicamentoC);
+                        cmdPermissoes.Parameters.Add("@FLMEDICAMENTOA", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlMedicamentoA);
+                        cmdPermissoes.Parameters.Add("@FLMEDICAMENTOE", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlMedicamentoE);
+                        cmdPermissoes.Parameters.Add("@FLEXAMESI", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlExamesI);
+                        cmdPermissoes.Parameters.Add("@FLEXAMESC", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlExamesC);
+                        cmdPermissoes.Parameters.Add("@FLEXAMESA", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlExamesA);
+                        cmdPermissoes.Parameters.Add("@FLEXAMESE", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlExamesE);
+
+                        retorno = retorno + cmdPermissoes.ExecuteNonQuery();
+
+                        if (retorno == 3) {
+                            scope.Complete();
+                            return 3;
+                        } else {
+                            throw new Exception();
+                        }
+                    }
+                } catch (TransactionAbortedException ex) {
+                    scope.Dispose();
+                    throw ex;
+                } catch (Exception ex) {
+                    scope.Dispose();
+                    throw ex;
+                }
             }
         }
     }

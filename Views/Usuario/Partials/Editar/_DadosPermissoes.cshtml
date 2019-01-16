@@ -119,7 +119,7 @@
 
     <div class="col-lg-2">
         <div class="form-check form-check-inline">
-            <input asp-for="@Model.permissoes.FlConsultaE" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" name="@Model.permissoes.FlConsultaE" value="True" />
+            <input asp-for="@Model.permissoes.FlConsultaE" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
         </div>
     </div>
 
@@ -187,4 +187,17 @@
         </div>
     </div>
 
+</div>
+
+<div class="form-group padding-top-15px">
+    <button id="moveAnteriorDadosPermissoes" type="button" class="btn btn-info btn-brand btn-brand-big margin-right-15-px">&nbsp;Anterior&nbsp;</button>
+    <button type="submit" class="btn btn-success btn-brand btn-brand-big">&nbsp;Salvar&nbsp;</button>
+</div>
+
+<div id="esconderInputs">
+    <div id="dataCadastro">
+        <label asp-for="@Model.permissoes.IdPermissoes" class="control-label form-label"></label>
+        <input asp-for="@Model.permissoes.IdPermissoes" class="form-control form-input form-input-center" />
+        <span asp-validation-for="@Model.permissoes.IdPermissoes" class="text-danger"></span>
+    </div>
 </div>

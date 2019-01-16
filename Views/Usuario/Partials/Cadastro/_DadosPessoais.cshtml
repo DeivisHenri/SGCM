@@ -59,7 +59,7 @@
     <div class="col-lg-2 margin-right-15-px">
         <div class="form-group">
             <label asp-for="@Model.pessoa.DataNascimento" class="control-label form-label"></label>
-            <input asp-for="@Model.pessoa.DataNascimento" class="form-control form-input form-input-center maskDatNas" />
+            <input asp-for="@Model.pessoa.DataNascimento" type="date" textmode="DateTimeLocal" class="form-control form-input form-input-center" />
             <span asp-validation-for="@Model.pessoa.DataNascimento" class="text-danger"></span>
         </div>
     </div>
@@ -78,10 +78,10 @@
     </div>
 
     @* NÚMERO *@
-    <div class="col-lg-3 margin-right-15-px">
+    <div class="col-lg-1 margin-right-15-px">
         <div class="form-group">
             <label asp-for="@Model.pessoa.Numero" class="control-label form-label"></label>
-            <input asp-for="@Model.pessoa.Numero" class="form-control form-input form-input-center" />
+            <input asp-for="@Model.pessoa.Numero" class="form-control form-input form-input-center" type="number" />
             <span asp-validation-for="@Model.pessoa.Numero" class="text-danger"></span>
         </div>
     </div>
@@ -100,7 +100,7 @@
 <div class="row margin-row">
 
     @* CIDADE *@
-    <div class="col-lg-5 margin-right-15-px">
+    <div class="col-lg-3 margin-right-15-px">
         <div class="form-group">
             <label asp-for="@Model.pessoa.Cidade" class="control-label form-label"></label>
             <input asp-for="@Model.pessoa.Cidade" class="form-control form-input form-input-center" />

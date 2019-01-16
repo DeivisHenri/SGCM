@@ -52,3 +52,19 @@ body {
     align-items: center;
     justify-content: center;
 }
+
+/* -------------------- MENSAGENS -------------------- */
+.alert-message {
+    padding: 10px;
+    margin-bottom: 5px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-sucess {
+    color: blue;
+}
+
+.alert-error {
+    color: red;
+}

@@ -1,4 +1,6 @@
 ﻿@using SGCM.Models.Usuario.CadastroUsuarioModel
+@using SGCM.Models.UserMessage
+
 @model List<CadastroUsuarioModel>
 
 @{
@@ -14,39 +16,46 @@
     </div>
 
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <table title="Tabela dos Usuários" class="usuario-table" border="1">
-        <tr>
-            <td>Nome</td>
-            <td>CPF</td>
-            <td>Telefone Celular</td>
-            <td>Editar</td>
-        </tr>
-        @*@for (int i = 0; i < Model.Count; i++)*@
 
-        @foreach (var user in Model)
-        {
+    @if (ViewData["UserMessage"] != null) {
+        var message = (UserMessage)ViewData["userMessage"];
+        <div class="alert-message @message.cssClassName">
+            <div id="Title" class="">
+                <strong>@message.title</strong>
+            </div>
+            <div id="message" class="">
+                @message.userMessage
+            </div>
+        </div>
+     }
+
+     <table title="Tabela dos Usuários" class="table table-striped table-bordered text-center" border="1">
+        <thead>
             <tr>
-                <td>@user.pessoa.Nome</td>
-                <td>@user.pessoa.CPF</td>
-                <td>@user.pessoa.Telefone_Celular</td>
-                <td>
-
-
-                    <div>
-                        <a asp-controller="Usuario" asp-action="EditarUsuario" asp-route-id="@user.pessoa.IdPessoa">Edit</a>
-                        @*<form asp-controller="Usuario" asp-action="EditarUsuario" method="GET">
-                                                <button type="submit" class="btn btn-default btn-brand btn-brand-big"
-                                        asp-fragment="@user.pessoa.IdPessoa">
-                                    &nbsp;Editar&nbsp;
-                                </button>
-                            </form>*@
-                    </div>
-                </td>
-                <td hidden="hidden">@user.pessoa.IdPessoa</td>
-                <td hidden="hidden">@user.usuario.IdUsuario</td>
-                <td hidden="hidden">@user.permissoes.IdPermissoes</td>
+                <td>Nome</td>
+                <td>CPF</td>
+                <td>Telefone Celular</td>
+                <td>Editar</td>
             </tr>
-        }
+        </thead>
+    
+         <tbody>
+            @foreach (var user in Model) {
+                <tr>
+                    <td>@user.pessoa.Nome</td>
+                    <td>@user.pessoa.CPF</td>
+                    <td>@user.pessoa.Telefone_Celular</td>
+                    <td>
+                        <div>
+                            <a asp-controller="Usuario" asp-action="EditarUsuario" asp-route-id="@user.pessoa.IdPessoa">Edit</a>
+                        </div>
+                    </td>
+                    <td hidden="hidden">@user.pessoa.IdPessoa</td>
+                    <td hidden="hidden">@user.usuario.IdUsuario</td>
+                    <td hidden="hidden">@user.permissoes.IdPermissoes</td>
+                </tr>
+             }
+        </tbody>
     </table>
 </div>
 

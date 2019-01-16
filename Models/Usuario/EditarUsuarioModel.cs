@@ -22,28 +22,31 @@ namespace SGCM.Models.Usuario.EditarUsuarioModel
         public string CPF { get; set; }
 
         [Required(ErrorMessage = "O campo RG é obrigatório.")]
-        [StringLength(14, ErrorMessage = "O campo CPF deve conter os 8 caracteres.", MinimumLength = 10)]
+        [StringLength(14, ErrorMessage = "O campo RG deve conter os 8 caracteres.", MinimumLength = 10)]
         [Display(Name = "RG")]
         public string RG { get; set; }
 
-        [StringLength(20, ErrorMessage = "O campo Estado deve conter no máximo 20 caracteres.")]
-        [Display(Name = "Estado")]
-        public string Estado { get; set; }
+        [Required(ErrorMessage = "O campo Data de Nascimento é obrigatório.")]
+        [Display(Name = "Data Nascimento")]
+        public DateTime  DataNascimento { get; set; }
 
-        [StringLength(30, ErrorMessage = "O campo Estado deve conter no máximo 30 caracteres.")]
-        [Display(Name = "Cidade")]
-        public string Cidade { get; set; }
+        [StringLength(35, ErrorMessage = "O campo Logradouro deve conter no máximo 35 caracteres.")]
+        [Display(Name = "Logradouro")]
+        public string Logradouro { get; set; }
+        [Display(Name = "Número")]
+        public int Numero { get; set; }
 
         [StringLength(40, ErrorMessage = "O campo Bairro deve conter no máximo 40 caracteres.")]
         [Display(Name = "Bairro")]
         public string Bairro { get; set; }
 
-        [StringLength(35, ErrorMessage = "O campo Endereco deve conter no máximo 35 caracteres.")]
-        [Display(Name = "Endereço")]
-        public string Endereco { get; set; }
+        [StringLength(30, ErrorMessage = "O campo Estado deve conter no máximo 30 caracteres.")]
+        [Display(Name = "Cidade")]
+        public string Cidade { get; set; }
 
-        [Display(Name = "Número")]
-        public int Numero { get; set; }
+        [StringLength(2, ErrorMessage = "O campo Estado deve conter no máximo 2 caracteres.")]
+        [Display(Name = "UF")]
+        public string UF { get; set; }
 
         [StringLength(15, ErrorMessage = "O campo Celular deve conter os 11 digitos com DDD.", MinimumLength = 15)]
         [Display(Name = "Celular")]
@@ -59,11 +62,6 @@ namespace SGCM.Models.Usuario.EditarUsuarioModel
 
         [Display(Name = "Status do Usuário")]
         public string Status { get; set; }
-
-        [Required(ErrorMessage = "O campo Data de Nascimento é obrigatório.")]
-        [StringLength(10, ErrorMessage = "O campo Data de Nascimento deve conter no máximo 10 caracteres")]
-        [Display(Name = "Data Nascimento")]
-        public string DataNascimento { get; set; }
 
         public int IdPessoa { get; set; }
 
@@ -89,7 +87,9 @@ namespace SGCM.Models.Usuario.EditarUsuarioModel
 
         public int IdUsuario { get; set; }
 
-        public DateTime DatDst { get; set; }
+        public DateTime DataCadastro { get; set; }
+
+        public DateTime DataDesativacao { get; set; }
     }
 
     public class DadosPermissoes

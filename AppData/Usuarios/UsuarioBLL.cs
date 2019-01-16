@@ -2,6 +2,7 @@
 using SGCM.Models.Usuario.EditarUsuarioModel;
 using SGCM.AppData.Infraestrutura.UtilMetodo;
 using System.Collections.Generic;
+using System;
 
 namespace SGCM.AppData.Usuario
 {
@@ -11,7 +12,6 @@ namespace SGCM.AppData.Usuario
         {
             usuario.pessoa.CPF = UtilMetodo.RemovendoCaracteresEspeciais(usuario.pessoa.CPF);
             usuario.pessoa.Telefone_Celular = UtilMetodo.RemovendoCaracteresEspeciais(usuario.pessoa.Telefone_Celular);
-            usuario.pessoa.DataNascimento = UtilMetodo.ArrumarDateFormatoBanco(usuario.pessoa.DataNascimento);
 
             UsuarioDAL usuariosDAL = new UsuarioDAL();
             return usuariosDAL.InserirUsuario(usuario);
@@ -26,6 +26,13 @@ namespace SGCM.AppData.Usuario
             UsuarioDAL usuariosDAL = new UsuarioDAL();
             return usuariosDAL.ConsultarUsuarioID(IdPessoa);
         }
-        
+
+        public int EditarUsuario(EditarUsuarioModel usuario) {
+            usuario.pessoa.CPF = UtilMetodo.RemovendoCaracteresEspeciais(usuario.pessoa.CPF);
+            usuario.pessoa.Telefone_Celular = UtilMetodo.RemovendoCaracteresEspeciais(usuario.pessoa.Telefone_Celular);
+
+            UsuarioDAL usuariosDAL = new UsuarioDAL();
+            return usuariosDAL.EditarUsuario(usuario);
+        }
     }
 }

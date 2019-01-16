@@ -3,9 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using SGCM.AppData.Login;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
-using System.Data.SqlClient;
 using SGCM.AppData.Usuario;
 using SGCM.Models.Account;
+using SGCM.Models.UserMessage;
+using MySql.Data.MySqlClient;
 
 namespace SGCM.Controllers {
 
@@ -14,54 +15,59 @@ namespace SGCM.Controllers {
         //GET: /Login/Signin
         [HttpGet]
         public ActionResult Signin(string returnUrl = null) {
-
             if (returnUrl != null) ViewData.Add("ReturnUrl", returnUrl);
 
             CarregarDadosUsuarioParaTela();
             if ((ViewData["idUsuario"] == null) || ((int) ViewData["idUsuario"] == 0)){
                 var usuarioCookie = getCookie("usuario");
-                if (usuarioCookie == null) {
-                    ViewData["Title"] = "Login";
-                    return View();
-                } else {
+                if (usuarioCookie != null) {
                     var objLoginBLL = new LoginBLL();
                     var retorno = objLoginBLL.BuscarDadosUsuario(usuarioCookie);
                     CarregarDadosUsuarioParaSession(retorno);
                     CarregarDadosUsuarioParaTela();
-                    return RedirectToAction("Index", "Home");
+
+                    if ((ViewData["ReturnUrl"] != null) && (ViewData["ReturnUrl"].ToString() != "")) {
+                        return Redirect("/" + returnUrl);
+                    } else {
+                        return Redirect("/Home/Index");
+                    }
+                } else {
+                    if ((HttpContext.Session.GetString("UserMessage") != null) && (HttpContext.Session.GetString("UserMessage") != "")) {
+                        ViewData["UserMessage"] = new UserMessage { title = "Erro", userMessage = HttpContext.Session.GetString("UserMessage"), cssClassName = "alert-error" };
+                        HttpContext.Session.SetString("UserMessage", "");
+                    }
+                    ViewData["Title"] = "Login";
+                    return View();
                 }
             } else {
-                return RedirectToAction("Index", "Home");
+                if ((ViewData["ReturnUrl"] != null) && (ViewData["ReturnUrl"].ToString() != "")) {
+                    return Redirect("/" + returnUrl);
+                } else {
+                    return Redirect("/Home/Index");
+                }
             }
         }
 
         // POST: /Login/Signin
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Signin(LoginViewModel model, string returnUrl = null)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    return View(model);
-                }
+        public ActionResult Signin(LoginViewModel model, string returnUrl = null) {
+            try {
+                if (!ModelState.IsValid) return View(model);
 
                 var objLoginBLL = new LoginBLL();
                 var retorno = objLoginBLL.EfetuarLogin(model);
 
-                if (model.RememberMe)
-                {
-                    setCookie(model);
-                }
+                if (model.RememberMe) setCookie(model);
 
                 if (retorno.IdRetorno == 1) {
-                    ModelState.AddModelError(string.Empty, "Usuário " + model.Username + " está desativado!");
+                    ViewData["UserMessage"] = new UserMessage { title = "Erro", userMessage = "Usuário " + model.Username + " está desativado!", cssClassName = "alert-error" };
                     return View(model);
                 } else if (retorno.IdRetorno == 2) {
-                    ModelState.AddModelError(string.Empty, "Usuário " + model.Username + " não está cadastrado!");
+                    ViewData["UserMessage"] = new UserMessage { title = "Erro", userMessage = "Usuário ou senha inválido", cssClassName = "alert-error" };
                     return View(model);
                 } else {
+                    ViewData["UserMessage"] = new UserMessage { title = "Sucesso", userMessage = "Login realizado com sucesso, redirecionando a página...", cssClassName = "alert-sucess" };
                     CarregarDadosUsuarioParaSession(retorno);
                     if (returnUrl != null) {
                         return Redirect("/" + returnUrl);
@@ -69,12 +75,12 @@ namespace SGCM.Controllers {
                         return Redirect("/Home/Index");
                     }
                 }
-            } catch (SqlException exSQL) {
-                ModelState.AddModelError(string.Empty, "Erro em acessar o banco de dados: " + exSQL.InnerException.Message);
+            } catch (MySqlException exSQL) {
+                ViewData["UserMessage"] = new UserMessage { title = "Erro", userMessage = "Erro em acessar o banco de dados: " + exSQL.InnerException.Message, cssClassName = "alert-error" };
                 return View(model);
             }
             catch (Exception ex) {
-                ModelState.AddModelError(string.Empty, ex.InnerException.Message.Split('(')[1].Split(')')[0]);
+                ViewData["UserMessage"] = new UserMessage { title = "Erro", userMessage = "Exceção: " + ex.Message, cssClassName = "alert -error" };
                 return View(model);
             }
         }

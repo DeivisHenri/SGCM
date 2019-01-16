@@ -1,4 +1,6 @@
 ﻿@using SGCM.Models.Usuario.CadastroUsuarioModel;
+@using SGCM.Models.UserMessage
+
 @model CadastroUsuarioModel
 
 @{
@@ -11,6 +13,19 @@
 <div class="center-form-container">
     <form asp-controller="Usuario" asp-action="CadastroUsuario" method="post" class="form-horizontal max-min-width">
         @Html.AntiForgeryToken()
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @if (ViewData["UserMessage"] != null)
+        {
+            var message = (UserMessage)ViewData["userMessage"];
+            <div class="alert-message @message.cssClassName">
+                <div id="Title" class="">
+                    <strong>@message.title</strong>
+                </div>
+                <div id="message" class="">
+                    @message.userMessage
+                </div>
+            </div>
+        }
         <ul class="nav nav-tabs">
             <li id="liDadosPessoais" class="active"><a data-toggle="tab" href="#dadosPessoais">Dados Pessoais</a></li>
             <li id="liDadosLogin"><a data-toggle="tab" href="#dadosLogin">Dados Login</a></li>
@@ -34,11 +49,9 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <partial name="/Views/Usuario/Partials/Cadastro/_DadosPermissoes.cshtml" />
             </div>
-        </div>        
+        </div>
     </form>
 </div>
-
-
 
 @section Scripts {
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }

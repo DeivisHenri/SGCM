@@ -5,26 +5,20 @@
                 $('.maskTelefone').mask('(99) 99999-9999');
                 $('.maskCPF').mask('999.999.999-99');
                 $('.maskRG').mask('99.999.999');
-                $('.maskDatNas').mask('99/99/9999');
 
                 $('#nome').focus();
-
             });
         });
     })(jQuery);
 
     $("#tipoUsuarioMedico").click(function () {
-        console.log("1");
         if ($('#tipoUsuarioRecepcionista').is(":checked")) {
-            console.log("2");
             $("#tipoUsuarioRecepcionista").prop("checked", false);
         }
     });
 
     $("#tipoUsuarioRecepcionista").click(function () {
-        console.log("3");
         if ($('#tipoUsuarioMedico').is(":checked")) {
-            console.log("4");
             $("#tipoUsuarioMedico").prop("checked", false);
         }
     }); 

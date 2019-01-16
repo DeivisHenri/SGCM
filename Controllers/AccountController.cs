@@ -145,48 +145,49 @@ namespace SGCM.Controllers {
             }
         }
 
-        private void LimparSession()
-        {
-            HttpContext.Session.SetInt32("ID", 0);
-            HttpContext.Session.SetString("Username", "");
-            HttpContext.Session.SetString("Password", "");
+        private void LimparSession() {
+            HttpContext.Session.SetInt32("idUsuario", 0);
+            HttpContext.Session.SetString("usuario", "");
 
-            HttpContext.Session.SetInt32("Id_Pessoa", 0);
-            HttpContext.Session.SetString("Nome", "");
-            HttpContext.Session.SetString("Cpf", "");
-            HttpContext.Session.SetString("Estado", "");
-            HttpContext.Session.SetString("Cidade", "");
-            HttpContext.Session.SetString("Bairro", "");
-            HttpContext.Session.SetString("Endereco", "");
-            HttpContext.Session.SetInt32("Numero", 0);
-            HttpContext.Session.SetString("Telefone_Celular", "");
-            HttpContext.Session.SetString("Email", "");
-            HttpContext.Session.SetInt32("Tipo_Usuario", 0);
+            HttpContext.Session.SetInt32("idPessoa", 0);
+            HttpContext.Session.SetInt32("idMedico", 0);
+            HttpContext.Session.SetInt32("tipoUsuario", 0);
+            HttpContext.Session.SetString("nome", "");
+            HttpContext.Session.SetString("cpf", "");
+            HttpContext.Session.SetString("rg", "");
+            HttpContext.Session.SetString("dataNascimento", "");
+            HttpContext.Session.SetString("logradouro", "");
+            HttpContext.Session.SetInt32("numero", 0);
+            HttpContext.Session.SetString("bairro", "");
+            HttpContext.Session.SetString("cidade", "");
+            HttpContext.Session.SetString("uf", "");
+            HttpContext.Session.SetString("telefoneCelular", "");
+            HttpContext.Session.SetString("email", "");
 
-            HttpContext.Session.SetInt32("FlUsuarioI", 0);
-            HttpContext.Session.SetInt32("FlUsuarioC", 0);
-            HttpContext.Session.SetInt32("FlUsuarioA", 0);
-            HttpContext.Session.SetInt32("FlUsuarioE", 0);
+            HttpContext.Session.SetInt32("flUsuarioI", 0);
+            HttpContext.Session.SetInt32("flUsuarioC", 0);
+            HttpContext.Session.SetInt32("flUsuarioA", 0);
+            HttpContext.Session.SetInt32("flUsuarioE", 0);
 
-            HttpContext.Session.SetInt32("FlPacienteI", 0);
-            HttpContext.Session.SetInt32("FlPacienteC", 0);
-            HttpContext.Session.SetInt32("FlPacienteA", 0);
-            HttpContext.Session.SetInt32("FlPacienteE", 0);
+            HttpContext.Session.SetInt32("flPacienteI", 0);
+            HttpContext.Session.SetInt32("flPacienteC", 0);
+            HttpContext.Session.SetInt32("flPacienteA", 0);
+            HttpContext.Session.SetInt32("flPacienteE", 0);
 
-            HttpContext.Session.SetInt32("FlConsultaI", 0);
-            HttpContext.Session.SetInt32("FlConsultaC", 0);
-            HttpContext.Session.SetInt32("FlConsultaA", 0);
-            HttpContext.Session.SetInt32("FlConsultaE", 0);
+            HttpContext.Session.SetInt32("flConsultaI", 0);
+            HttpContext.Session.SetInt32("flConsultaC", 0);
+            HttpContext.Session.SetInt32("flConsultaA", 0);
+            HttpContext.Session.SetInt32("flConsultaE", 0);
 
-            HttpContext.Session.SetInt32("FlMedicamentoI", 0);
-            HttpContext.Session.SetInt32("FlMedicamentoC", 0);
-            HttpContext.Session.SetInt32("FlMedicamentoA", 0);
-            HttpContext.Session.SetInt32("FlMedicamentoE", 0);
+            HttpContext.Session.SetInt32("flMedicamentoI", 0);
+            HttpContext.Session.SetInt32("flMedicamentoC", 0);
+            HttpContext.Session.SetInt32("flMedicamentoA", 0);
+            HttpContext.Session.SetInt32("flMedicamentoE", 0);
 
-            HttpContext.Session.SetInt32("FlExamesI", 0);
-            HttpContext.Session.SetInt32("FlExamesC", 0);
-            HttpContext.Session.SetInt32("FlExamesA", 0);
-            HttpContext.Session.SetInt32("FlExamesE", 0);
+            HttpContext.Session.SetInt32("flExamesI", 0);
+            HttpContext.Session.SetInt32("flExamesC", 0);
+            HttpContext.Session.SetInt32("flExamesA", 0);
+            HttpContext.Session.SetInt32("flExamesE", 0);
         }
 
         private void CarregarDadosUsuarioParaSession(UsuarioCompletoTO usuarioCompletoTO)

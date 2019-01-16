@@ -3,6 +3,8 @@
 
 <div class="row margin-row">
     <div class="col-lg-5"></div>
+
+    @* USERNAME *@
     <div class="col-lg-2 margin-right-15-px">
         <div class="form-group">
             <label asp-for="@Model.usuario.Username" class="control-label form-label"></label>
@@ -10,11 +12,14 @@
             <span asp-validation-for="@Model.usuario.Username" class="text-danger"></span>
         </div>
     </div>
+
     <div class="col-lg-5"></div>
 </div>
 
 <div class="row margin-row">
     <div class="col-lg-5"></div>
+
+    @* PASSWORD *@
     <div class="col-lg-2 margin-right-15-px">
         <div class="form-group">
             <label asp-for="@Model.usuario.Password" class="control-label form-label"></label>
@@ -22,11 +27,14 @@
             <span asp-validation-for="@Model.usuario.Password" class="text-danger"></span>
         </div>
     </div>
+
     <div class="col-lg-5"></div>
 </div>
 
 <div class="row margin-row">
     <div class="col-lg-5"></div>
+
+    @* CONFIRM PASSWORD *@
     <div class="col-lg-2 margin-right-15-px">
         <div class="form-group">
             <label asp-for="@Model.usuario.ConfirmPassword" class="control-label form-label"></label>
@@ -34,5 +42,31 @@
             <span asp-validation-for="@Model.usuario.ConfirmPassword" class="text-danger"></span>
         </div>
     </div>
+
     <div class="col-lg-5"></div>
+</div>
+
+<div class="form-group padding-top-15px">
+    <button id="moveAnteriorDadosLogin" type="button" class="btn btn-info btn-brand btn-brand-big margin-right-15-px">&nbsp;Anterior&nbsp;</button>
+    <button id="moveProximoDadosLogin" type="button" class="btn btn-primary btn-brand btn-brand-big">&nbsp;Próximo&nbsp;</button>
+</div>
+
+<div id="esconderInputs">
+    <div id="dataCadastro">
+        <label asp-for="@Model.usuario.IdUsuario" class="control-label form-label"></label>
+        <input asp-for="@Model.usuario.IdUsuario" class="form-control form-input form-input-center" />
+        <span asp-validation-for="@Model.usuario.IdUsuario" class="text-danger"></span>
+    </div>
+
+    <div id="dataCadastro">
+        <label asp-for="@Model.usuario.DataCadastro" class="control-label form-label"></label>
+        <input asp-for="@Model.usuario.DataCadastro" type="date" textmode="DateTimeLocal" class="form-control form-input form-input-center" />
+        <span asp-validation-for="@Model.usuario.DataCadastro" class="text-danger"></span>
+    </div>
+
+    <div id="dataDesativacao">
+        <label asp-for="@Model.usuario.DataDesativacao" class="control-label form-label"></label>
+        <input asp-for="@Model.usuario.DataDesativacao" type="date" textmode="DateTimeLocal" class="form-control form-input form-input-center" />
+        <span asp-validation-for="@Model.usuario.DataDesativacao" class="text-danger"></span>
+    </div>
 </div>
