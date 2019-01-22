@@ -1,10 +1,6 @@
-﻿using SGCM.Models.Usuario;
-using SGCM.Models.Usuario.EditarUsuarioModel;
+﻿using SGCM.Models.Usuario.EditarUsuarioModel;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace SGCM.AppData.Usuario {
     public class UsuarioDALSQL {
@@ -15,9 +11,9 @@ namespace SGCM.AppData.Usuario {
             command.AppendLine("       Pes.cpf,");
             command.AppendLine("       Pes.telefoneCelular,");
             command.AppendLine("       Pes.idPessoa,");
-            command.AppendLine("       Usu.idUsuario,");
+            command.AppendLine("       Usr.idUsuario,");
             command.AppendLine("       Per.idPermissoes");
-            command.AppendLine("From Usuario Usu INNER JOIN Pessoa Pes ON Usu.idPessoa = Pes.idPessoa INNER JOIN Permissoes Per ON Usu.idUsuario = Per.idUsuario");
+            command.AppendLine("From Usuario Usr INNER JOIN Pessoa Pes ON Usr.idPessoaUsuario = Pes.idPessoa INNER JOIN Permissoes Per ON Usr.idUsuario = Per.idUsuarioPermissoes");
             command.AppendLine("Where Pes.idMedico = @IDPESSOA");
 
             return command.ToString();
@@ -26,7 +22,7 @@ namespace SGCM.AppData.Usuario {
         public string InserirPessoa() {
             StringBuilder command = new StringBuilder();
             command.AppendLine("INSERT INTO Pessoa(idMedico,");
-            command.AppendLine("                   tipoUsuario,");
+            command.AppendLine("                   sexo,");
             command.AppendLine("                   nome,");
             command.AppendLine("                   cpf,");
             command.AppendLine("                   rg,");
@@ -39,11 +35,11 @@ namespace SGCM.AppData.Usuario {
             command.AppendLine("                   telefoneCelular,");
             command.AppendLine("                   email)");
             command.AppendLine("       VALUES(@IDMEDICO,");
-            command.AppendLine("              @TIPOUSUARIO,");
+            command.AppendLine("              @SEXO,");
             command.AppendLine("              @NOME,");
             command.AppendLine("              @CPF,");
             command.AppendLine("              @RG,");
-            command.AppendLine("              STR_TO_DATE(@DATANASCIMENTO, '%d-%m-%Y'),");
+            command.AppendLine("              STR_TO_DATE(@DATANASCIMENTO, '%d/%m/%Y'),");
             command.AppendLine("              @LOGRADOURO,");
             command.AppendLine("              @NUMERO,");
             command.AppendLine("              @BAIRRO,");
@@ -58,8 +54,8 @@ namespace SGCM.AppData.Usuario {
         public string InserirUsuario() {
             StringBuilder command = new StringBuilder();
 
-            command.AppendLine("INSERT INTO Usuario(idPessoa, usuario, senha, dataCadastro, dataDesativacao) ");
-            command.AppendLine("             VALUES(@IDPESSOA, @USUARIO, @SENHA, CURDATE(), null); ");
+            command.AppendLine("INSERT INTO Usuario(idPessoaUsuario, usuario, senha, tipoUsuario, dataCadastro, dataDesativacao) ");
+            command.AppendLine("             VALUES(@IDPESSOA, @USUARIO, @SENHA, @TIPOUSUARIO, CURDATE(), null); ");
 
             return command.ToString();
         }
@@ -67,7 +63,7 @@ namespace SGCM.AppData.Usuario {
         public string InserirPermissoes() {
             StringBuilder command = new StringBuilder();
 
-            command.AppendLine("INSERT INTO Permissoes(idUsuario,");
+            command.AppendLine("INSERT INTO Permissoes(idUsuarioPermissoes,");
             command.AppendLine("                       flUsuarioI,");
             command.AppendLine("                       flUsuarioC,");
             command.AppendLine("                       flUsuarioA,");
@@ -117,7 +113,7 @@ namespace SGCM.AppData.Usuario {
             StringBuilder command = new StringBuilder();
             command.AppendLine("Select Pes.idPessoa,");
             command.AppendLine("       Pes.idMedico,");
-            command.AppendLine("       Pes.tipoUsuario,");
+            command.AppendLine("       Pes.sexo,");
             command.AppendLine("	   Pes.nome,");
             command.AppendLine("	   Pes.cpf,");
             command.AppendLine("	   Pes.rg,");
@@ -130,10 +126,11 @@ namespace SGCM.AppData.Usuario {
             command.AppendLine("	   Pes.telefoneCelular,");
             command.AppendLine("	   Pes.email,");
 
-            command.AppendLine("	   Usu.idUsuario,");
-            command.AppendLine("	   Usu.usuario,");
-            command.AppendLine("	   Usu.dataCadastro,");
-            command.AppendLine("	   Usu.dataDesativacao,");
+            command.AppendLine("	   Usr.idUsuario,");
+            command.AppendLine("	   Usr.usuario,");
+            command.AppendLine("	   Usr.tipoUsuario,");
+            command.AppendLine("	   Usr.dataCadastro,");
+            command.AppendLine("	   Usr.dataDesativacao,");
 
             command.AppendLine("       Per.idPermissoes,");
             command.AppendLine("       Per.flUsuarioI,");
@@ -156,8 +153,8 @@ namespace SGCM.AppData.Usuario {
             command.AppendLine("       Per.flExamesC,");
             command.AppendLine("       Per.flExamesA,");
             command.AppendLine("       Per.flExamesE ");
-            command.AppendLine("From Pessoa Pes INNER JOIN Usuario Usu ON Pes.idPessoa = Usu.idPessoa ");
-            command.AppendLine("     INNER JOIN Permissoes Per ON Usu.idUsuario = Per.idUsuario ");
+            command.AppendLine("From Pessoa Pes INNER JOIN Usuario Usr ON Pes.idPessoa = Usr.idPessoaUsuario ");
+            command.AppendLine("     INNER JOIN Permissoes Per ON Usr.idUsuario = Per.idUsuarioPermissoes ");
             command.AppendLine("Where Pes.idPessoa = @IDPESSOA");
 
             return command.ToString();
@@ -167,88 +164,110 @@ namespace SGCM.AppData.Usuario {
             Boolean flagSet = false;
             StringBuilder command = new StringBuilder();
 
-            command.AppendLine("Update Pessoa");
+            command.AppendLine("Update Pessoa");            
 
-            if (usuario.pessoa.TipoUsuario != null) { 
-                command.AppendLine("Set    tipoUsuario = @TIPOUSUARIO,");
+            if (usuario.pessoa.Sexo != null) {
+                command.AppendLine("Set    sexo = @SEXO,");
                 flagSet = true;
             }
 
             if (usuario.pessoa.Nome != null) {
-                if (flagSet)
+                if (flagSet) { 
                     command.AppendLine("       nome = @NOME,");
-                else
+                } else {
                     command.AppendLine("Set    nome = @NOME,");
+                    flagSet = true;
+                }
             }
 
             if (usuario.pessoa.CPF != null) {
                 if (flagSet)
                     command.AppendLine("       cpf = @CPF,");
-                else
+                else {
                     command.AppendLine("Set    cpf = @CPF,");
+                    flagSet = true;
+                }
             }
 
             if (usuario.pessoa.RG != null) {
                 if (flagSet)
                     command.AppendLine("       rg = @RG,");
-                else
+                else {
                     command.AppendLine("Set    rg = @RG,");
+                    flagSet = true;
+                }
             }
 
-            if (usuario.pessoa.DataNascimento != null) {
+            if (usuario.pessoa.DataNascimento != null && usuario.pessoa.DataNascimento != default(DateTime)) {
                 if (flagSet)
                     command.AppendLine("       dataNascimento = STR_TO_DATE(@DATANASCIMENTO, '%d/%m/%Y'),");
-                else
+                else {
                     command.AppendLine("Set    dataNascimento = STR_TO_DATE(@DATANASCIMENTO, '%d/%m/%Y'),");
+                    flagSet = true;
+                }
             }
 
             if (usuario.pessoa.Logradouro != null) {
                 if (flagSet)
                     command.AppendLine("       logradouro = @LOGRADOURO,");
-                else
+                else {
                     command.AppendLine("Set    logradouro = @LOGRADOURO,");
+                    flagSet = true;
+                }
             }
 
             if (usuario.pessoa.Numero != 0) {
                 if (flagSet)
                     command.AppendLine("       numero = @NUMERO,");
-                else
+                else {
                     command.AppendLine("Set    numero = @NUMERO,");
+                    flagSet = true;
+                }
             }
 
             if (usuario.pessoa.Bairro != null) {
                 if (flagSet)
                     command.AppendLine("       bairro = @BAIRRO,");
-                else
+                else {
                     command.AppendLine("Set    bairro = @BAIRRO,");
+                    flagSet = true;
+                }
             }
 
             if (usuario.pessoa.Cidade != null) {
                 if (flagSet)
                     command.AppendLine("       cidade = @CIDADE,");
-                else
+                else {
                     command.AppendLine("Set    cidade = @CIDADE,");
+                    flagSet = true;
+                }
             }
 
             if (usuario.pessoa.UF != null) {
                 if (flagSet)
                     command.AppendLine("       uf = @UF,");
-                else
+                else {
                     command.AppendLine("Set    uf = @UF,");
+                    flagSet = true;
+                }
             }
 
             if (usuario.pessoa.Telefone_Celular != null) {
                 if (flagSet)
                     command.AppendLine("       telefoneCelular = @TELEFONECELULAR,");
-                else
+                else {
                     command.AppendLine("Set    telefoneCelular = @TELEFONECELULAR,");
+                    flagSet = true;
+                }
             }
 
             if (usuario.pessoa.Email != null) {
                 if (flagSet)
                     command.AppendLine("       email = @EMAIL,");
-                else
+                else {
                     command.AppendLine("Set    email = @EMAIL,");
+                    flagSet = true;
+                }
             }
 
             command = new StringBuilder(command.ToString().Remove(command.Length - 3, 3));           
@@ -267,27 +286,43 @@ namespace SGCM.AppData.Usuario {
             if (usuarioModel.usuario.Username != null) {
                 if (flagSet)
                     command.AppendLine("       usuario = @USUARIO,");
-                else
+                else {
                     command.AppendLine("Set    usuario = @USUARIO,");
+                    flagSet = true;
+                }
             }
 
             if (usuarioModel.usuario.Password != null) {
                 if (flagSet)
                     command.AppendLine("       senha = @SENHA,");
-                else
+                else {
                     command.AppendLine("Set    senha = @SENHA,");
-            }            
+                    flagSet = true;
+                }
+            }
+
+            if (usuarioModel.usuario.TipoUsuario != null)
+            {
+                if (flagSet)
+                    command.AppendLine("       tipoUsuario = @TIPOUSUARIO,");
+                else {
+                    command.AppendLine("Set    tipoUsuario = @TIPOUSUARIO,");
+                    flagSet = true;
+                }
+            }
 
             if (usuarioModel.usuario.DataDesativacao != default(DateTime)) {
                 if (flagSet)
                     command.AppendLine("       dataDesativacao = STR_TO_DATE(@DATADESATIVACAO, '%d/%m/%Y'),");
-                else
+                else {
                     command.AppendLine("Set    dataDesativacao = STR_TO_DATE(@DATADESATIVACAO, '%d/%m/%Y'),");
+                    flagSet = true;
+                }
             }
 
             command = new StringBuilder(command.ToString().Remove(command.Length - 3, 3));
 
-            command.AppendLine(" Where idUsuario = @IDUSUARIO AND idPessoa = @IDPESSOA");
+            command.AppendLine(" Where idUsuario = @IDUSUARIO AND idPessoaUsuario = @IDPESSOA");
             return command.ToString();
         }
 
@@ -314,7 +349,7 @@ namespace SGCM.AppData.Usuario {
             command.AppendLine("       flExamesC = @FLEXAMESC,");
             command.AppendLine("       flExamesA = @FLEXAMESA,");
             command.AppendLine("       flExamesE = @FLEXAMESE");
-            command.AppendLine("Where idPermissoes = @IDPERMISSOES AND idUsuario = @IDUSUARIO");
+            command.AppendLine("Where idPermissoes = @IDPERMISSOES AND idUsuarioPermissoes = @IDUSUARIO");
 
             return command.ToString();
         }

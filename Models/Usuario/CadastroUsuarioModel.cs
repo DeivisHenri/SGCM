@@ -16,11 +16,11 @@ namespace SGCM.Models.Usuario.CadastroUsuarioModel
         [Required(ErrorMessage = "O campo Nome é obrigatório.")]
         [StringLength(50, ErrorMessage = "O campo Nome deve ter no máximo 50 caracteres.")]
         [Display(Name = "Nome")]
-        public string Nome { get; set; }
+        public string Nome { get; set; }      
 
-        [Required(ErrorMessage = "O campo Tipo Usuário é obrigatório.")]
-        [Display(Name = "Tipo Usuário")]
-        public string TipoUsuario { get; set; }
+        [Required(ErrorMessage = "O campo Sexo é obrigatório.")]
+        [Display(Name = "Sexo")]
+        public string Sexo { get; set; }
 
         [Required(ErrorMessage = "O campo CPF é obrigatório.")]
         [StringLength(14, ErrorMessage = "O campo CPF deve conter os 11 caracteres.", MinimumLength = 14)]
@@ -95,6 +95,10 @@ namespace SGCM.Models.Usuario.CadastroUsuarioModel
         [StringLength(20, ErrorMessage = "O campo Senha deve ter no mínimo 6 caracteres e no máximo 20.", MinimumLength = 6)]
         [Compare("Password", ErrorMessage = "A campo Senha não é igual ao campo Confirmar Senha.")]
         public string ConfirmPassword { get; set; }
+
+        [Required(ErrorMessage = "O campo Tipo Usuário é obrigatório.")]
+        [Display(Name = "Tipo Usuário")]
+        public string TipoUsuario { get; set; }
 
         public int IdUsuario { get; set; }
     }

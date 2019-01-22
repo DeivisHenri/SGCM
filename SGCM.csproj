@@ -40,7 +40,16 @@
     <Content Update="Views\Login\Partials\_IndexStyle.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Views\Paciente\Cadastro\_DadosPessoas.cshtml">
+    <Content Update="Views\Paciente\EditarPaciente.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Paciente\ConsultarPaciente.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Paciente\Partials\Cadastro\_DadosPessoais.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Paciente\Partials\Editar\_DadosPessoais.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\Paciente\_PacienteScript.cshtml">
@@ -76,10 +85,6 @@
     <Content Update="Views\Usuario\Partials\Editar\_UsuarioStyle.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Paciente\Consultar\" />
   </ItemGroup>
 
 </Project>

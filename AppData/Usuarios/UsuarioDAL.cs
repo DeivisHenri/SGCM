@@ -23,8 +23,7 @@ namespace SGCM.AppData.Usuario {
                 cmdUsuario.Parameters.Add("@IDPESSOA", MySqlDbType.Int32).Value = IdPessoa;
 
                 MySqlDataReader reader = cmdUsuario.ExecuteReader();
-                if (reader.HasRows)
-                {
+                if (reader.HasRows) {
                     while (reader.Read())
                     {
                         CadastroUsuarioModel usuarioCompletoTO = new CadastroUsuarioModel();
@@ -42,6 +41,10 @@ namespace SGCM.AppData.Usuario {
                         usuarioCompletoTOList.Add(usuarioCompletoTO);
                     }
                     reader.NextResult();
+                } else {
+                    reader.Close();
+                    connection.Close();
+                    return null;
                 }
                 reader.Close();
                 connection.Close();
@@ -70,7 +73,7 @@ namespace SGCM.AppData.Usuario {
                         MySqlCommand cmdPessoa = new MySqlCommand(DALSQL.InserirPessoa(), connection);
 
                         cmdPessoa.Parameters.Add("@IDMEDICO", MySqlDbType.Int32).Value = usuario.pessoa.IdMedico;
-                        cmdPessoa.Parameters.Add("@TIPOUSUARIO", MySqlDbType.Int32).Value = usuario.pessoa.TipoUsuario;
+                        cmdPessoa.Parameters.Add("@SEXO", MySqlDbType.Int32).Value = usuario.pessoa.Sexo;
                         cmdPessoa.Parameters.Add("@NOME", MySqlDbType.String).Value = usuario.pessoa.Nome;
                         cmdPessoa.Parameters.Add("@CPF", MySqlDbType.String).Value = usuario.pessoa.CPF;
                         cmdPessoa.Parameters.Add("@RG", MySqlDbType.String).Value = usuario.pessoa.RG;
@@ -92,8 +95,9 @@ namespace SGCM.AppData.Usuario {
                         cmdUsuario.Parameters.Add("@IDPESSOA", MySqlDbType.Int32).Value = lastId;
                         cmdUsuario.Parameters.Add("@USUARIO", MySqlDbType.String).Value = usuario.usuario.Username;
                         cmdUsuario.Parameters.Add("@SENHA", MySqlDbType.String).Value = usuario.usuario.Password;
+                        cmdUsuario.Parameters.Add("@TIPOUSUARIO", MySqlDbType.Int32).Value = usuario.usuario.TipoUsuario;
 
-                        linhaInserida = cmdUsuario.ExecuteNonQuery();
+                        linhaInserida = linhaInserida + cmdUsuario.ExecuteNonQuery();
 
                         lastId = cmdLastId.ExecuteScalar();
 
@@ -123,15 +127,14 @@ namespace SGCM.AppData.Usuario {
                         cmdPermissoes.Parameters.Add("@FLEXAMESA", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlExamesA);
                         cmdPermissoes.Parameters.Add("@FLEXAMESE", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlExamesE);
 
-                        linhaInserida = cmdPermissoes.ExecuteNonQuery();
+                        linhaInserida = linhaInserida + cmdPermissoes.ExecuteNonQuery();
 
-                        //if (retorno 0) {
-                        //    scope.Complete();
-                        //} else {
-                        //    throw new Exception();
-                        //}
-                        scope.Complete();
-                        return 0;
+                        if (linhaInserida == 3) {
+                            scope.Complete();
+                            return linhaInserida;
+                        } else {
+                            throw new Exception();
+                        }
                     }
                 } catch (TransactionAbortedException ex) {
                     scope.Dispose();
@@ -164,7 +167,7 @@ namespace SGCM.AppData.Usuario {
                     while (reader.Read()) {
                         usuarioCompletoTO.pessoa.IdPessoa = reader.GetInt32(0);
                         usuarioCompletoTO.pessoa.IdMedico = reader.GetInt32(1);
-                        usuarioCompletoTO.pessoa.TipoUsuario = reader.GetInt32(2).ToString();
+                        usuarioCompletoTO.pessoa.Sexo = reader.GetInt32(2).ToString();
                         usuarioCompletoTO.pessoa.Nome = reader.GetString(3);
                         usuarioCompletoTO.pessoa.CPF = reader.GetString(4);
                         usuarioCompletoTO.pessoa.RG = reader.GetString(5);
@@ -179,113 +182,114 @@ namespace SGCM.AppData.Usuario {
 
                         usuarioCompletoTO.usuario.IdUsuario = reader.GetInt32(14);
                         usuarioCompletoTO.usuario.Username = reader.GetString(15);
-                        usuarioCompletoTO.usuario.DataCadastro = Convert.ToDateTime(reader.GetString(16));
-                        if (!(reader.IsDBNull(17)))
-                            usuarioCompletoTO.usuario.DataDesativacao = Convert.ToDateTime(reader.GetString(17));
+                        usuarioCompletoTO.usuario.TipoUsuario = reader.GetInt32(16).ToString();
+                        usuarioCompletoTO.usuario.DataCadastro = Convert.ToDateTime(reader.GetString(17));
+                        if (!(reader.IsDBNull(18)))
+                            usuarioCompletoTO.usuario.DataDesativacao = Convert.ToDateTime(reader.GetString(18));
                         else
                             usuarioCompletoTO.usuario.DataDesativacao = new DateTime();
 
-                        usuarioCompletoTO.permissoes.IdPermissoes = reader.GetInt32(18);
-                        if (reader.GetInt32(19) == 1) {
+                        usuarioCompletoTO.permissoes.IdPermissoes = reader.GetInt32(19);
+                        if (reader.GetInt32(20) == 1) {
                             usuarioCompletoTO.permissoes.FlUsuarioI = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlUsuarioI = "false";
                         }
-                        if (reader.GetInt32(20) == 1) {
+                        if (reader.GetInt32(21) == 1) {
                             usuarioCompletoTO.permissoes.FlUsuarioC = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlUsuarioC = "false";
                         }
-                        if (reader.GetInt32(21) == 1) {
+                        if (reader.GetInt32(22) == 1) {
                             usuarioCompletoTO.permissoes.FlUsuarioA = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlUsuarioA = "false";
                         }
-                        if (reader.GetInt32(22) == 1) {
+                        if (reader.GetInt32(23) == 1) {
                             usuarioCompletoTO.permissoes.FlUsuarioE = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlUsuarioE = "false";
                         }
 
-                        if (reader.GetInt32(23) == 1) {
+                        if (reader.GetInt32(24) == 1) {
                             usuarioCompletoTO.permissoes.FlPacienteI = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlPacienteI = "false";
                         }
-                        if (reader.GetInt32(24) == 1) {
+                        if (reader.GetInt32(25) == 1) {
                             usuarioCompletoTO.permissoes.FlPacienteC = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlPacienteC = "false";
                         }
-                        if (reader.GetInt32(25) == 1) {
+                        if (reader.GetInt32(26) == 1) {
                             usuarioCompletoTO.permissoes.FlPacienteA = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlPacienteA = "false";
                         }
-                        if (reader.GetInt32(26) == 1) {
+                        if (reader.GetInt32(27) == 1) {
                             usuarioCompletoTO.permissoes.FlPacienteE = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlPacienteE = "false";
                         }
 
-                        if (reader.GetInt32(27) == 1) {
+                        if (reader.GetInt32(28) == 1) {
                             usuarioCompletoTO.permissoes.FlConsultaI = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlConsultaI = "false";
                         }
-                        if (reader.GetInt32(28) == 1) {
+                        if (reader.GetInt32(29) == 1) {
                             usuarioCompletoTO.permissoes.FlConsultaC = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlConsultaC = "false";
                         }
-                        if (reader.GetInt32(29) == 1) {
+                        if (reader.GetInt32(30) == 1) {
                             usuarioCompletoTO.permissoes.FlConsultaA = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlConsultaA = "false";
                         }
-                        if (reader.GetInt32(30) == 1) {
+                        if (reader.GetInt32(31) == 1) {
                             usuarioCompletoTO.permissoes.FlConsultaE = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlConsultaE = "false";
                         }
 
-                        if (reader.GetInt32(31) == 1) {
+                        if (reader.GetInt32(32) == 1) {
                             usuarioCompletoTO.permissoes.FlMedicamentoI = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlMedicamentoI = "false";
                         }
-                        if (reader.GetInt32(32) == 1) {
+                        if (reader.GetInt32(33) == 1) {
                             usuarioCompletoTO.permissoes.FlMedicamentoC = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlMedicamentoC = "false";
                         }
-                        if (reader.GetInt32(33) == 1) {
+                        if (reader.GetInt32(34) == 1) {
                             usuarioCompletoTO.permissoes.FlMedicamentoA = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlMedicamentoA = "false";
                         }
-                        if (reader.GetInt32(34) == 1) {
+                        if (reader.GetInt32(35) == 1) {
                             usuarioCompletoTO.permissoes.FlMedicamentoE = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlMedicamentoE = "false";
                         }
 
-                        if (reader.GetInt32(35) == 1) {
+                        if (reader.GetInt32(36) == 1) {
                             usuarioCompletoTO.permissoes.FlExamesI = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlExamesI = "false";
                         }
-                        if (reader.GetInt32(36) == 1) {
+                        if (reader.GetInt32(37) == 1) {
                             usuarioCompletoTO.permissoes.FlExamesC = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlExamesC = "false";
                         }
-                        if (reader.GetInt32(37) == 1) {
+                        if (reader.GetInt32(38) == 1) {
                             usuarioCompletoTO.permissoes.FlExamesA = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlExamesA = "false";
                         }
-                        if (reader.GetInt32(38) == 1) {
+                        if (reader.GetInt32(39) == 1) {
                             usuarioCompletoTO.permissoes.FlExamesE = "True";
                         } else {
                             usuarioCompletoTO.permissoes.FlExamesE = "false";
@@ -316,11 +320,10 @@ namespace SGCM.AppData.Usuario {
 
                         cmdPessoa.Parameters.Add("@IDPESSOA", MySqlDbType.Int32).Value = usuarioModel.pessoa.IdPessoa;
                         cmdPessoa.Parameters.Add("@IDMEDICO", MySqlDbType.Int32).Value = usuarioModel.pessoa.IdMedico;
-                        cmdPessoa.Parameters.Add("@TIPOUSUARIO", MySqlDbType.Int32).Value = usuarioModel.pessoa.TipoUsuario;
+                        cmdPessoa.Parameters.Add("@SEXO", MySqlDbType.Int32).Value = usuarioModel.pessoa.Sexo;
                         cmdPessoa.Parameters.Add("@NOME", MySqlDbType.String).Value = usuarioModel.pessoa.Nome;
                         cmdPessoa.Parameters.Add("@CPF", MySqlDbType.String).Value = usuarioModel.pessoa.CPF;
                         cmdPessoa.Parameters.Add("@RG", MySqlDbType.String).Value = usuarioModel.pessoa.RG;
-                        //cmdPessoa.Parameters.Add("@DATANASCIMENTO", MySqlDbType.Date).Value = usuarioModel.pessoa.DataNascimento.ToShortDateString().Split('/')[2] + "-" + usuarioModel.pessoa.DataNascimento.ToShortDateString().Split('/')[1] + "-" + usuarioModel.pessoa.DataNascimento.ToShortDateString().Split('/')[0];
                         cmdPessoa.Parameters.Add("@DATANASCIMENTO", MySqlDbType.String).Value = usuarioModel.pessoa.DataNascimento.ToShortDateString();
                         cmdPessoa.Parameters.Add("@LOGRADOURO", MySqlDbType.String).Value = usuarioModel.pessoa.Logradouro;
                         cmdPessoa.Parameters.Add("@NUMERO", MySqlDbType.Int32).Value = usuarioModel.pessoa.Numero;
@@ -338,6 +341,7 @@ namespace SGCM.AppData.Usuario {
                         cmdUsuario.Parameters.Add("@IDPESSOA", MySqlDbType.Int32).Value = usuarioModel.pessoa.IdPessoa;
                         cmdUsuario.Parameters.Add("@USUARIO", MySqlDbType.String).Value = usuarioModel.usuario.Username;
                         cmdUsuario.Parameters.Add("@SENHA", MySqlDbType.String).Value = usuarioModel.usuario.Password;
+                        cmdUsuario.Parameters.Add("@TIPOUSUARIO", MySqlDbType.Int32).Value = Convert.ToInt32(usuarioModel.usuario.TipoUsuario);
                         cmdUsuario.Parameters.Add("@DATADESATIVACAO", MySqlDbType.String).Value = usuarioModel.usuario.DataDesativacao;
 
                         retorno = retorno + cmdUsuario.ExecuteNonQuery();

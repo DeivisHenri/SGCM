@@ -94,3 +94,33 @@
         </ul>
     </div>
 </div>
+
+<button type="button" id="btnModalIndex" class="btn btn-primary displayNone" data-toggle="modal" data-target="#indexModal"> </button>
+
+<div class="modal fade" id="indexModal" tabindex="-1" role="dialog" aria-labelledby="indexModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header displayFlex">
+                <h4 class="modal-title width100" id="indexModalLabel">@ViewBag.MensagemTitle</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5>@ViewBag.MensagemBody</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (ViewBag.MensagemBody.ToString() != "")
+{
+    <script>
+        $(document).ready(function () {
+            $('#btnModalIndex').click();
+        });
+    </script>
+}

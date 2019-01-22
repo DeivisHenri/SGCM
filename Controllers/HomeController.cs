@@ -10,10 +10,18 @@ namespace SGCM.Controllers {
 
     public class HomeController : Controller {
 
-        public IActionResult Index(HomeModel model)
-        {
+        public IActionResult Index(HomeModel model) {
+            ViewBag.MensagemBody = "";
             if ((HttpContext.Session.GetInt32("idUsuario") != null) && (HttpContext.Session.GetInt32("idUsuario") != 0)) {
+                if (HttpContext.Session.GetString("MensagemTitle") != null && HttpContext.Session.GetString("MensagemBody") != null && HttpContext.Session.GetString("MensagemTitle") != "" && HttpContext.Session.GetString("MensagemBody") != "")
+                {
+                    ViewBag.MensagemTitle = HttpContext.Session.GetString("MensagemTitle");
+                    ViewBag.MensagemBody = HttpContext.Session.GetString("MensagemBody");
+                    HttpContext.Session.SetString("MensagemTitle", "");
+                    HttpContext.Session.SetString("MensagemBody", "");
+                }
                 CarregarDadosUsuarioParaTela();
+                return View(model);
             } else {
                 var usuarioCookie = getCookie("usuario");
                 var senhaCookie = getCookie("senha");
@@ -21,7 +29,6 @@ namespace SGCM.Controllers {
                     ViewData["Title"] = "Home";
                     return View();
                 } else {
-
                     var objLoginBLL = new LoginBLL();
                     var retorno = objLoginBLL.EfetuarLogin(new LoginViewModel{Username = usuarioCookie, Password = senhaCookie});
                     CarregarDadosUsuarioParaSession(retorno);
@@ -29,8 +36,6 @@ namespace SGCM.Controllers {
                     return RedirectToAction("Index", "Home");
                 }
             }
-
-            return View(model);
         }
 
         public IActionResult Sobre() {

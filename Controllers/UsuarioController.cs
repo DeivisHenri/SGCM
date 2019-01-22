@@ -6,7 +6,6 @@ using SGCM.AppData.Usuario;
 using System.Collections.Generic;
 using SGCM.Models.Usuario.CadastroUsuarioModel;
 using SGCM.Models.Usuario.EditarUsuarioModel;
-using SGCM.Models.UserMessage;
 
 namespace SGCM.Controllers {
 
@@ -15,6 +14,7 @@ namespace SGCM.Controllers {
         //GET: /Usuario/CadastroUsuario
         [HttpGet]
         public ActionResult CadastroUsuario() {
+            ViewBag.MensagemBody = "";
             CarregarDadosUsuarioParaTela();
             if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
                 if ((int)ViewData["flUsuarioI"] == 1) {
@@ -28,12 +28,13 @@ namespace SGCM.Controllers {
 
                     return View(viewModel);
                 } else {
-                    HttpContext.Session.SetString("UserMessage", "O usuário " + ViewData["nome"] + " não tem acesso a página: 'Usuario/CadastroUsuario'!");
-                    return RedirectToAction("Error", "Home");
+                    HttpContext.Session.SetString("MensagemTitle", "Erro");
+                    HttpContext.Session.SetString("MensagemBody", "O usuário " + ViewData["nome"] + " não tem acesso a página: 'Usuario/CadastroUsuario'");
+                    return RedirectToAction("Index", "Home");
                 }
             } else {
                 ViewData.Add("ReturnUrl", ((object[])this.ControllerContext.RouteData.Values.Values)[0] + "/" + ((object[])this.ControllerContext.RouteData.Values.Values)[1]);
-                HttpContext.Session.SetString("UserMessage", "Você não está logado no sistema! Realize o Login antes de acessar essa a página: '" + ViewData["ReturnUrl"] + "' !");
+                HttpContext.Session.SetString("MensagemBody", "Você não está logado no sistema! Realize o Login antes de acessar essa a página: '" + ViewData["ReturnUrl"] + "' !");
                 return RedirectToAction("Signin", "Login", new { ReturnUrl = ViewData["ReturnUrl"] });
             }
         }
@@ -43,6 +44,7 @@ namespace SGCM.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult CadastroUsuario(CadastroUsuarioModel model) {
             try {
+                ViewBag.MensagemBody = "";
                 if (!ModelState.IsValid) return View(model);
 
                 model.pessoa.IdMedico = (int)HttpContext.Session.GetInt32("idPessoa");
@@ -50,16 +52,25 @@ namespace SGCM.Controllers {
                 var objUsuariosBLL = new UsuarioBLL();
                 var retorno = objUsuariosBLL.InserirUsuario(model);
 
-                if (retorno > 0) {
-                    return View(model);
+                if (retorno == 3) {
+                    ViewBag.MensagemTitle = "Sucesso";
+                    ViewBag.MensagemBody = "Usuário cadastrado com sucesso!";
+
+                    ModelState.Clear();
+
+                    return View();
                 } else {
-                    return RedirectToAction("Index", "Home");
+                    ViewBag.MensagemTitle = "Error";
+                    ViewBag.MensagemBody = "Ocorreu um erro ao cadastrar um usuário!";
+                    return View(model);
                 }
             } catch (SqlException exSQL) {
-                ModelState.AddModelError(string.Empty, exSQL.Message);
+                ViewBag.MensagemTitle = "Error";
+                ViewBag.MensagemBody = exSQL.Message;
                 return View(model);
             } catch (Exception ex) {
-                ModelState.AddModelError(string.Empty, ex.Message);
+                ViewBag.MensagemTitle = "Error";
+                ViewBag.MensagemBody = ex.Message;
                 return View(model);
             }
         }
@@ -67,78 +78,113 @@ namespace SGCM.Controllers {
         //GET: /Usuario/ConsultaUsuario
         [HttpGet]
         public ActionResult ConsultaUsuario() {
-            CarregarDadosUsuarioParaTela();
-            if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
-
-                    ViewData["Title"] = "Consultar Usuário";
-                    
+            try {
+                ViewBag.MensagemBody = "";
+                CarregarDadosUsuarioParaTela();
+                if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
                     var objUsuariosBLL = new UsuarioBLL();
-                    List<CadastroUsuarioModel> viewModel = objUsuariosBLL.ConsultarUsuario((int) ViewData["idPessoa"]);
+                    List<CadastroUsuarioModel> viewModel = objUsuariosBLL.ConsultarUsuario((int)ViewData["idPessoa"]);
 
-                    return View(viewModel);
-            } else {
-                HttpContext.Session.SetString("UserMessage", "Você não está logado no sistema! Realize o Login antes de acessar essa página!");
-                ViewData.Add("ReturnUrl", ((object[])this.ControllerContext.RouteData.Values.Values)[0] + "/" + ((object[])this.ControllerContext.RouteData.Values.Values)[1]);
-                return RedirectToAction("Signin", "Login", new { ReturnUrl = ViewData["ReturnUrl"] } );
-            }
-        }
-
-        [HttpGet]
-        public ActionResult EditarUsuario(int id) {
-            CarregarDadosUsuarioParaTela();
-            if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
-                if ((int)ViewData["flUsuarioA"] != 0) {
-                    ViewData["Title"] = "Editar Usuário";
-
-                    var objUsuarioBLL = new UsuarioBLL();
-                    EditarUsuarioModel viewModel = objUsuarioBLL.ConsultarUsuarioID(id);
-                    
-                    if (viewModel.usuario.DataDesativacao == default(DateTime)) {
-                        viewModel.pessoa.Status = "1";
+                    if (viewModel != null) {
+                        if (HttpContext.Session.GetString("MensagemTitle") != null && HttpContext.Session.GetString("MensagemBody") != null && HttpContext.Session.GetString("MensagemTitle") != "" && HttpContext.Session.GetString("MensagemBody") != "") {
+                            ViewBag.MensagemTitle = HttpContext.Session.GetString("MensagemTitle");
+                            ViewBag.MensagemBody = HttpContext.Session.GetString("MensagemBody");
+                            HttpContext.Session.SetString("MensagemTitle", "");
+                            HttpContext.Session.SetString("MensagemBody", "");
+                        }
+                        return View(viewModel);
                     } else {
-                        viewModel.pessoa.Status = "2";
-                    }
-
-                    return View(viewModel);
-                } else {
-                    HttpContext.Session.SetString("MensagemErro", "Você não tem premissão para acessar a tela de Edição de Usuários!");
-                    HttpContext.Session.SetInt32("FlMensagemErro", 1);
-                    return RedirectToAction("Index", "Home");
-                }
-
-            } else {
-                HttpContext.Session.SetString("MensagemErro", "Você não está logado no sistema! Realize o Login antes de acessar essa página!");
-                HttpContext.Session.SetInt32("FlMensagemErro", 1);
-                return RedirectToAction("Index", "Home");
-            }
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult EditarUsuario(EditarUsuarioModel model) {
-            CarregarDadosUsuarioParaTela();
-            if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
-                if ((int)ViewData["flUsuarioA"] != 0) {
-                    var objUsuarioBLL = new UsuarioBLL();
-                    var retorno = objUsuarioBLL.EditarUsuario(model);
-
-                    if (retorno == 3) {
-                        //RETORNA PARA A TELA DE CONSULTA DOS USUARIOS
-                        return RedirectToAction("Index", "Home");
-                    } else {
-                        // Mostrar mensagem de erro MAS QUAL????
+                        ViewBag.MensagemTitle = "Informação";
+                        ViewBag.MensagemBody = "Não existe nenhum Usuário cadastrado pelo usuário: " + ViewData["nome"];
                         return View();
                     }
                 } else {
-                    HttpContext.Session.SetString("MensagemErro", "Você não tem premissão para acessar a tela de Edição de Usuários!");
+                    HttpContext.Session.SetString("UserMessage", "Você não está logado no sistema! Realize o Login antes de acessar essa página!");
+                    ViewData.Add("ReturnUrl", ((object[])this.ControllerContext.RouteData.Values.Values)[0] + "/" + ((object[])this.ControllerContext.RouteData.Values.Values)[1]);
+                    return RedirectToAction("Signin", "Login", new { ReturnUrl = ViewData["ReturnUrl"] });
+                }
+            } catch (Exception ex) {
+                ViewBag.MensagemTitle = "Erro";
+                ViewBag.MensagemBody = ex.Message;
+                return View();
+            }
+            
+        }
+
+        //GET: /Usuario/EditarUsuario
+        [HttpGet]
+        public ActionResult EditarUsuario(int id) {
+            try {
+                ViewBag.MensagemBody = "";
+                CarregarDadosUsuarioParaTela();
+                if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
+                    if ((int)ViewData["flUsuarioA"] != 0) {
+                        ViewData["Title"] = "Editar Usuário";
+
+                        var objUsuarioBLL = new UsuarioBLL();
+                        EditarUsuarioModel viewModel = objUsuarioBLL.ConsultarUsuarioID(id);
+
+                        if (viewModel.usuario.DataDesativacao == default(DateTime)) {
+                            viewModel.pessoa.Status = "1";
+                        } else {
+                            viewModel.pessoa.Status = "2";
+                        }
+
+                        return View(viewModel);
+                    } else {
+                        HttpContext.Session.SetString("MensagemTitle", "Informação");
+                        HttpContext.Session.SetString("MensagemBody", "O usuário " + ViewData["nome"] + " não tem acesso a página: 'Usuario/EditarUsuario'");
+                        return RedirectToAction("Index", "Home");
+                    }
+                } else {
+                    HttpContext.Session.SetString("MensagemTitle", "Informação");
+                    HttpContext.Session.SetString("MensagemBody", "Você não está logado no sistema! Realize o Login antes de acessar essa página!");
+                    return RedirectToAction("Index", "Home");
+                }
+            } catch (Exception ex) {
+                ViewBag.MensagemTitle = "Erro";
+                ViewBag.MensagemBody = ex.Message;
+                return View();
+            }
+        }
+
+        //POST: /Usuario/EditarUsuario
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditarUsuario(EditarUsuarioModel model) {
+            try {
+                ViewBag.MensagemBody = "";
+                CarregarDadosUsuarioParaTela();
+                if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
+                    if ((int)ViewData["flUsuarioA"] != 0) {
+                        var objUsuarioBLL = new UsuarioBLL();
+                        var retorno = objUsuarioBLL.EditarUsuario(model);
+
+                        if (retorno == 3) {
+                            HttpContext.Session.SetString("MensagemTitle", "Sucesso");
+                            HttpContext.Session.SetString("MensagemBody", "O usuário " + model.pessoa.Nome + " foi atualizado com sucesso!");
+                            return RedirectToAction("ConsultaUsuario", "Usuario");
+                        } else {
+                            ViewBag.MensagemTitle = "Erro";
+                            ViewBag.MensagemBody = "Ocorreu um erro na tentiva de editar o usuário: " + ViewData["nome"];
+                            return View();
+                        }
+                    } else {
+                        HttpContext.Session.SetString("MensagemErro", "Você não tem premissão para acessar a tela de Edição de Usuários!");
+                        HttpContext.Session.SetInt32("FlMensagemErro", 1);
+                        return RedirectToAction("Index", "Home");
+                    }
+                } else {
+                    HttpContext.Session.SetString("MensagemErro", "Você não está logado no sistema! Realize o Login antes de acessar essa página!");
                     HttpContext.Session.SetInt32("FlMensagemErro", 1);
                     return RedirectToAction("Index", "Home");
                 }
-            } else {
-                HttpContext.Session.SetString("MensagemErro", "Você não está logado no sistema! Realize o Login antes de acessar essa página!");
-                HttpContext.Session.SetInt32("FlMensagemErro", 1);
-                return RedirectToAction("Index", "Home");
+            } catch (Exception ex) {
+                ViewBag.MensagemTitle = "Erro";
+                ViewBag.MensagemBody = ex.Message;
+                return View();
             }
+            
         }
 
         //GET: /Usuario/Relatorio
@@ -150,26 +196,90 @@ namespace SGCM.Controllers {
             return View();
         }
 
-        private void CarregarDadosUsuarioParaSession(EditarUsuarioModel usuarioCompletoTO)
+        [HttpPost]
+        public ActionResult VerificaUF(string valorCampo)
         {
-            HttpContext.Session.SetInt32("ID", usuarioCompletoTO.usuario.IdUsuario);
-            HttpContext.Session.SetString("Username", usuarioCompletoTO.usuario.Username);
-            HttpContext.Session.SetString("Password", usuarioCompletoTO.usuario.Password);
-            //HttpContext.Session.SetString("DatDst", usuarioCompletoTO.usuario.DatDst.ToShortDateString());
+            switch (valorCampo)
+            {
+                case "AC":
+                    break;
+                case "AL":
+                    break;
+                case "AP":
+                    break;
+                case "AM":
+                    break;
+                case "BA":
+                    break;
+                case "CE":
+                    break;
+                case "DF":
+                    break;
+                case "ES":
+                    break;
+                case "GO":
+                    break;
+                case "MA":
+                    break;
+                case "MT":
+                    break;
+                case "MS":
+                    break;
+                case "MG":
+                    break;
+                case "PA":
+                    break;
+                case "PB":
+                    break;
+                case "PR":
+                    break;
+                case "PE":
+                    break;
+                case "PI":
+                    break;
+                case "RJ":
+                    break;
+                case "RN":
+                    break;
+                case "RS":
+                    break;
+                case "RO":
+                    break;
+                case "RR":
+                    break;
+                case "SC":
+                    break;
+                case "SP":
+                    break;
+                case "SE":
+                    break;
+                case "TO":
+                    break;
+                default:
+                    break;
+            }
+            return null;
+        }
 
-            HttpContext.Session.SetInt32("Id_Pessoa", usuarioCompletoTO.pessoa.IdPessoa);
-            HttpContext.Session.SetInt32("Id_Medico", usuarioCompletoTO.pessoa.IdMedico);
-            HttpContext.Session.SetString("Nome", usuarioCompletoTO.pessoa.Nome);
-            HttpContext.Session.SetString("Cpf", usuarioCompletoTO.pessoa.CPF);
-            HttpContext.Session.SetString("Rg", usuarioCompletoTO.pessoa.RG);
-            HttpContext.Session.SetString("Endereco", usuarioCompletoTO.pessoa.Logradouro);
-            HttpContext.Session.SetString("Estado", usuarioCompletoTO.pessoa.UF);
-            HttpContext.Session.SetString("Cidade", usuarioCompletoTO.pessoa.Cidade);
-            HttpContext.Session.SetString("Bairro", usuarioCompletoTO.pessoa.Bairro);
-            HttpContext.Session.SetInt32("Numero", usuarioCompletoTO.pessoa.Numero);
-            HttpContext.Session.SetString("Telefone_Celular", usuarioCompletoTO.pessoa.Telefone_Celular);
-            HttpContext.Session.SetString("Email", usuarioCompletoTO.pessoa.Email);
-            HttpContext.Session.SetInt32("Tipo_Usuario", Int32.Parse(usuarioCompletoTO.pessoa.TipoUsuario));
+        private void CarregarDadosUsuarioParaSession(EditarUsuarioModel usuarioCompletoTO) {
+            HttpContext.Session.SetInt32("idUsuario", usuarioCompletoTO.usuario.IdUsuario);
+            HttpContext.Session.SetString("usuario", usuarioCompletoTO.usuario.Username);
+            HttpContext.Session.SetInt32("tipoUsuario", Int32.Parse(usuarioCompletoTO.usuario.TipoUsuario));
+
+            HttpContext.Session.SetInt32("idPessoa", usuarioCompletoTO.pessoa.IdPessoa);
+            HttpContext.Session.SetInt32("idMedico", usuarioCompletoTO.pessoa.IdMedico);
+            HttpContext.Session.SetString("nome", usuarioCompletoTO.pessoa.Nome);
+            HttpContext.Session.SetString("cpf", usuarioCompletoTO.pessoa.CPF);
+            HttpContext.Session.SetString("rg", usuarioCompletoTO.pessoa.RG);
+            HttpContext.Session.SetString("sexo", usuarioCompletoTO.pessoa.Sexo);
+            HttpContext.Session.SetString("dataNascimento", usuarioCompletoTO.pessoa.DataNascimento.ToShortDateString());
+            HttpContext.Session.SetString("logradouro", usuarioCompletoTO.pessoa.Logradouro);
+            HttpContext.Session.SetInt32("numero", usuarioCompletoTO.pessoa.Numero);
+            HttpContext.Session.SetString("bairro", usuarioCompletoTO.pessoa.Bairro);
+            HttpContext.Session.SetString("cidade", usuarioCompletoTO.pessoa.Cidade);
+            HttpContext.Session.SetString("uf", usuarioCompletoTO.pessoa.UF);
+            HttpContext.Session.SetString("telefoneCelular", usuarioCompletoTO.pessoa.Telefone_Celular);
+            HttpContext.Session.SetString("email", usuarioCompletoTO.pessoa.Email);
 
             if (Convert.ToBoolean(usuarioCompletoTO.permissoes.FlUsuarioI)) {
                 HttpContext.Session.SetInt32("flUsuarioI", 1);
@@ -277,17 +387,17 @@ namespace SGCM.Controllers {
             }
         }
 
-        private void CarregarDadosUsuarioParaTela()
-        {
+        private void CarregarDadosUsuarioParaTela() {
             ViewData.Add("idUsuario", HttpContext.Session.GetInt32("idUsuario"));
             ViewData.Add("usuario", HttpContext.Session.GetString("usuario"));
+            ViewData.Add("tipoUsuario", HttpContext.Session.GetString("tipoUsuario"));
 
             ViewData.Add("idPessoa", HttpContext.Session.GetInt32("idPessoa"));
             ViewData.Add("idMedico", HttpContext.Session.GetInt32("idMedico"));
-            ViewData.Add("tipoUsuario", HttpContext.Session.GetInt32("tipoUsuario"));
             ViewData.Add("nome", HttpContext.Session.GetString("nome"));
             ViewData.Add("cpf", HttpContext.Session.GetString("cpf"));
             ViewData.Add("rg", HttpContext.Session.GetString("rg"));
+            ViewData.Add("sexo", HttpContext.Session.GetString("sexo"));
             ViewData.Add("dataNascimento", HttpContext.Session.GetString("dataNascimento"));
             ViewData.Add("logradouro", HttpContext.Session.GetString("logradouro"));
             ViewData.Add("numero", HttpContext.Session.GetInt32("numero"));

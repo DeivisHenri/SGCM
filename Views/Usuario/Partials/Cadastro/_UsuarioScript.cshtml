@@ -7,6 +7,8 @@
                 $('.maskRG').mask('99.999.999');
 
                 $('#nome').focus();
+                var dataAtual = new Date();
+                $('#dataNascimento').val(dataAtual.toLocaleDateString().split('/')[2] + "-" + dataAtual.toLocaleDateString().split('/')[1] + "-" + dataAtual.toLocaleDateString().split('/')[0]);
             });
         });
     })(jQuery);
@@ -20,6 +22,18 @@
     $("#tipoUsuarioRecepcionista").click(function () {
         if ($('#tipoUsuarioMedico').is(":checked")) {
             $("#tipoUsuarioMedico").prop("checked", false);
+        }
+    });
+
+    $("#sexoFeminino").click(function () {
+        if ($('#sexoMasculino').is(":checked")) {
+            $("#sexoMasculino").prop("checked", false);
+        }
+    });
+
+    $("#sexoMasculino").click(function () {
+        if ($('#sexoFeminino').is(":checked")) {
+            $("#sexoFeminino").prop("checked", false);
         }
     }); 
 
@@ -50,5 +64,15 @@
         var sibbling = target.prev();
         sibbling.children("a").tab("show");
     });
+
+    function VerificaUF() {
+        var valorCampo = document.getElementById('pessoaUF').value.toUpperCase();
+
+        if (valorCampo !== null && valorCampo !== 'undefined' && valorCampo !== "" && valorCampo.length === 2) {
+            $.post('/Usuario/VerificaUF', { valorCampo: valorCampo }, function (data) {
+                alert(data);
+            });
+        }
+    }
 
 </script>

@@ -12,12 +12,12 @@ namespace SGCM.AppData.Login {
         public string EfetuarLogin() {
             StringBuilder command = new StringBuilder();
 
-            command.AppendLine("Select Usu.idUsuario,");
-            command.AppendLine("       Usu.usuario,");
-
+            command.AppendLine("Select Usr.idUsuario,");
+            command.AppendLine("       Usr.usuario,");
+            
             command.AppendLine("       Pes.idPessoa,");
             command.AppendLine("       Pes.idMedico,");
-            command.AppendLine("       Pes.tipoUsuario,");
+            command.AppendLine("       Usr.tipoUsuario,");
             command.AppendLine("       Pes.nome,");
             command.AppendLine("       Pes.cpf,");
             command.AppendLine("       Pes.rg,");
@@ -50,11 +50,11 @@ namespace SGCM.AppData.Login {
             command.AppendLine("       Per.FlExamesC,");
             command.AppendLine("       Per.FlExamesA,");
             command.AppendLine("       Per.flExamesE,");
-            command.AppendLine("       Usu.dataDesativacao");
-
-            command.AppendLine("From Usuario Usu INNER JOIN Pessoa Pes ON Usu.idPessoa = Pes.idPessoa");
-            command.AppendLine("     INNER JOIN Permissoes Per ON Usu.idUsuario = Per.idUsuario");
-            command.AppendLine("Where Usu.usuario = @USUARIO AND Usu.senha = @SENHA");
+            command.AppendLine("       Usr.dataDesativacao");
+                 
+            command.AppendLine("From Usuario Usr INNER JOIN Pessoa Pes ON Usr.idPessoaUsuario = Pes.idPessoa");
+            command.AppendLine("     INNER JOIN Permissoes Per ON Usr.idUsuario = Per.idUsuarioPermissoes");
+            command.AppendLine("Where Usr.usuario = @USUARIO AND Usr.senha = @SENHA");
             return command.ToString();
         }
 

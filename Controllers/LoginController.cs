@@ -16,7 +16,7 @@ namespace SGCM.Controllers {
         [HttpGet]
         public ActionResult Signin(string returnUrl = null) {
             if (returnUrl != null) ViewData.Add("ReturnUrl", returnUrl);
-
+            ViewBag.MensagemBody = "";
             CarregarDadosUsuarioParaTela();
             if ((ViewData["idUsuario"] == null) || ((int) ViewData["idUsuario"] == 0)){
                 var usuarioCookie = getCookie("usuario");
@@ -61,13 +61,19 @@ namespace SGCM.Controllers {
                 if (model.RememberMe) setCookie(model);
 
                 if (retorno.IdRetorno == 1) {
-                    ViewData["UserMessage"] = new UserMessage { title = "Erro", userMessage = "Usuário " + model.Username + " está desativado!", cssClassName = "alert-error" };
+                    ViewBag.MensagemTitle = "Erro";
+                    ViewBag.MensagemBody = "Usuário " + model.Username + " está desativado!";
+                    //ViewData["UserMessage"] = new UserMessage { title = "Erro", userMessage = "", cssClassName = "alert-error" };
                     return View(model);
                 } else if (retorno.IdRetorno == 2) {
-                    ViewData["UserMessage"] = new UserMessage { title = "Erro", userMessage = "Usuário ou senha inválido", cssClassName = "alert-error" };
-                    return View(model);
+                    ViewBag.MensagemTitle = "Erro";
+                    ViewBag.MensagemBody = "Usuário ou senha inválido!";
+                    //ViewData["UserMessage"] = new UserMessage { title = "Erro", userMessage = "", cssClassName = "alert-error" };
+                    return View();
                 } else {
-                    ViewData["UserMessage"] = new UserMessage { title = "Sucesso", userMessage = "Login realizado com sucesso, redirecionando a página...", cssClassName = "alert-sucess" };
+                    ViewBag.MensagemTitle = "Sucesso";
+                    ViewBag.MensagemBody = "Login realizado com sucesso, redirecionando a página...";
+                    //ViewData["UserMessage"] = new UserMessage { title = "Sucesso", userMessage = "", cssClassName = "alert-sucess" };
                     CarregarDadosUsuarioParaSession(retorno);
                     if (returnUrl != null) {
                         return Redirect("/" + returnUrl);
@@ -76,11 +82,15 @@ namespace SGCM.Controllers {
                     }
                 }
             } catch (MySqlException exSQL) {
-                ViewData["UserMessage"] = new UserMessage { title = "Erro", userMessage = "Erro em acessar o banco de dados: " + exSQL.InnerException.Message, cssClassName = "alert-error" };
+                ViewBag.MensagemTitle = "Erro";
+                ViewBag.MensagemBody = "Erro em acessar o banco de dados: " + exSQL.Message;
+                //ViewData["UserMessage"] = new UserMessage { title = "Erro", userMessage = , cssClassName = "alert-error" };
                 return View(model);
             }
             catch (Exception ex) {
-                ViewData["UserMessage"] = new UserMessage { title = "Erro", userMessage = "Exceção: " + ex.Message, cssClassName = "alert -error" };
+                ViewBag.MensagemTitle = "Erro";
+                ViewBag.MensagemBody = "Exceção: " + ex.Message;
+                //ViewData["UserMessage"] = new UserMessage { title = "Erro", userMessage = , cssClassName = "alert -error" };
                 return View(model);
             }
         }

@@ -57,8 +57,8 @@ namespace SGCM.Models.Usuario.EditarUsuarioModel
         [Display(Name = "E-mail")]
         public string Email { get; set; }
 
-        [Display(Name = "Tipo Usuário")]
-        public string TipoUsuario { get; set; }
+        [Display(Name = "Sexo")]
+        public string Sexo { get; set; }
 
         [Display(Name = "Status do Usuário")]
         public string Status { get; set; }
@@ -84,6 +84,9 @@ namespace SGCM.Models.Usuario.EditarUsuarioModel
         [StringLength(20, ErrorMessage = "O campo Senha deve ter no mínimo 6 caracteres e no máximo 20.", MinimumLength = 6)]
         [Compare("Password", ErrorMessage = "A campo Senha não é igual ao campo Confirmar Senha.")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "Tipo Usuário")]
+        public string TipoUsuario { get; set; }
 
         public int IdUsuario { get; set; }
 

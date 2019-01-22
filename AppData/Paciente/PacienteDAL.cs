@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
+﻿using SGCM.Models.Paciente.CadastroPacienteModel;
+using SGCM.Models.Paciente.ConsultarPacienteModel;
+using SGCM.Models.Paciente.EditarPacienteModel;
+using System;
 using System.Transactions;
+using MySql.Data.MySqlClient;
 using SGCM.AppData.Infraestrutura.UtilMetodo;
-using System.Data;
-using SGCM.Models.Paciente.CadastroPacienteModel;
-//using SGCM.Models.Paciente.EditarUsuarioModel;
+using System.Collections.Generic;
 
 namespace SGCM.AppData.Paciente
 {
@@ -57,217 +57,222 @@ namespace SGCM.AppData.Paciente
         //}
 
         public int InserirPaciente(CadastroPacienteModel paciente) {
-            try {
-                var DALSQL = new PacienteDALSQL();
-                Decimal retorno = 0;
+            using (TransactionScope scope = new TransactionScope()) {
+                try {
+                    var DALSQL = new PacienteDALSQL();
+                    Decimal retorno = 0;
 
-                using (TransactionScope scope = new TransactionScope()) {
-
-                    using (SqlConnection connection = new SqlConnection(getStringConnection())) {
+                    using (MySqlConnection connection = new MySqlConnection(getStringConnection())) {
                       
                         connection.Open();
 
-                        SqlCommand cmdPessoa = new SqlCommand(DALSQL.InserirPessoa(), connection);
+                        MySqlCommand cmdPessoa = new MySqlCommand(DALSQL.InserirPessoa(), connection);
 
-                        cmdPessoa.Parameters.Add("@IDMEDICO", SqlDbType.Int).Value = paciente.pessoa.IdMedico;
-                        cmdPessoa.Parameters.Add("@TIPOUSUARIO", SqlDbType.Int).Value = paciente.pessoa.TipoUsuario;
-                        cmdPessoa.Parameters.Add("@NOME", SqlDbType.Char).Value = paciente.pessoa.Nome;
-                        cmdPessoa.Parameters.Add("@CPF", SqlDbType.Char).Value = paciente.pessoa.CPF;
-                        cmdPessoa.Parameters.Add("@ESTADO", SqlDbType.Char).Value = paciente.pessoa.Estado;
-                        cmdPessoa.Parameters.Add("@CIDADE", SqlDbType.Char).Value = paciente.pessoa.Cidade;
-                        cmdPessoa.Parameters.Add("@BAIRRO", SqlDbType.Char).Value = paciente.pessoa.Bairro;
-                        cmdPessoa.Parameters.Add("@ENDERECO", SqlDbType.Char).Value = paciente.pessoa.Endereco;
-                        cmdPessoa.Parameters.Add("@NUMERO", SqlDbType.Int).Value = paciente.pessoa.Numero;
-                        cmdPessoa.Parameters.Add("@TELEFONECELULAR", SqlDbType.Char).Value = paciente.pessoa.Telefone_Celular;
-                        cmdPessoa.Parameters.Add("@EMAIL", SqlDbType.Char).Value = paciente.pessoa.Email;
+                        cmdPessoa.Parameters.Add("@IDMEDICO", MySqlDbType.String).Value = paciente.pessoa.IdMedico;
+                        cmdPessoa.Parameters.Add("@NOME", MySqlDbType.String).Value = paciente.pessoa.Nome;
+                        cmdPessoa.Parameters.Add("@SEXO", MySqlDbType.Int32).Value = paciente.pessoa.Sexo;
+                        cmdPessoa.Parameters.Add("@CPF", MySqlDbType.String).Value = paciente.pessoa.CPF;
+                        cmdPessoa.Parameters.Add("@RG", MySqlDbType.String).Value = paciente.pessoa.RG;
+                        cmdPessoa.Parameters.Add("@DATANASCIMENTO", MySqlDbType.String).Value = paciente.pessoa.DataNascimento;
+                        cmdPessoa.Parameters.Add("@LOGRADOURO", MySqlDbType.String).Value = paciente.pessoa.Logradouro;
+                        cmdPessoa.Parameters.Add("@NUMERO", MySqlDbType.Int32).Value = paciente.pessoa.Numero;
+                        cmdPessoa.Parameters.Add("@BAIRRO", MySqlDbType.String).Value = paciente.pessoa.Bairro;
+                        cmdPessoa.Parameters.Add("@CIDADE", MySqlDbType.String).Value = paciente.pessoa.Cidade;
+                        cmdPessoa.Parameters.Add("@UF", MySqlDbType.String).Value = paciente.pessoa.Uf;
+                        cmdPessoa.Parameters.Add("@TELEFONECELULAR", MySqlDbType.String).Value = paciente.pessoa.TelefoneCelular;
+                        cmdPessoa.Parameters.Add("@EMAIL", MySqlDbType.String).Value = paciente.pessoa.Email;
 
-                        retorno = (Decimal)cmdPessoa.ExecuteScalar();
+                        retorno = cmdPessoa.ExecuteNonQuery();
 
-                        //SqlCommand cmdUsuario = new SqlCommand(DALSQL.InserirPaciente(), connection);
+                        MySqlCommand cmdLastId = new MySqlCommand(UtilMetodo.ConsultarUltimoIdInseridoNoBanco(), connection);
+                        var lastId = cmdLastId.ExecuteScalar();
 
-                        //cmdUsuario.Parameters.Add("@IDPESSOA", SqlDbType.Int).Value = (int)retorno;
-                        //cmdUsuario.Parameters.Add("@USERNAME", SqlDbType.Char).Value = usuario.usuario.Username;
-                        //cmdUsuario.Parameters.Add("@PASSWORD", SqlDbType.Char).Value = usuario.usuario.Password;
+                        MySqlCommand cmdConsulta = new MySqlCommand(DALSQL.ConsultaIdConsulta(), connection);
+                        var idConsulta = cmdConsulta.ExecuteScalar();
 
-                        //retorno = (Decimal)cmdUsuario.ExecuteScalar();
-                      
-                        if (retorno > 0) {
-                            scope.Complete();
+                        if (idConsulta.ToString() == "") {
+                            idConsulta = 1;
                         } else {
+                            idConsulta = (int)idConsulta + 1;
+                        }
+
+                        MySqlCommand cmdExame = new MySqlCommand(DALSQL.ConsultaIdExame(), connection);
+                        var IdExame = cmdExame.ExecuteScalar();
+
+                        if (IdExame.ToString() == "") {
+                            IdExame = 1;
+                        } else {
+                            IdExame = (int)IdExame + 1;
+                        }
+
+                        MySqlCommand cmdMedicamento = new MySqlCommand(DALSQL.ConsultaIdMedicamento(), connection);
+                        var IdMedicamento = cmdMedicamento.ExecuteScalar();
+
+                        if (IdMedicamento.ToString() == "") {
+                            IdMedicamento = 1;
+                        } else {
+                            IdMedicamento = (int)IdMedicamento + 1;
+                        }
+
+                        MySqlCommand cmdReceita = new MySqlCommand(DALSQL.ConsultaIdReceita(), connection);
+                        var IdReceita = cmdReceita.ExecuteScalar();
+
+                        if (IdReceita.ToString() == "") {
+                            IdReceita = 1;
+                        } else {
+                            IdReceita = (int)IdReceita + 1;
+                        }
+
+                        MySqlCommand cmdPaciente = new MySqlCommand(DALSQL.InserirPaciente(), connection);
+
+                        cmdPaciente.Parameters.Add("@IDPESSOA", MySqlDbType.Int32).Value = Convert.ToInt32(lastId.ToString());
+                        cmdPaciente.Parameters.Add("@IDMEDICO", MySqlDbType.Int32).Value = Convert.ToInt32(paciente.pessoa.IdMedico);
+                        cmdPaciente.Parameters.Add("@IDCONSULTA", MySqlDbType.Int32).Value = Convert.ToInt32(idConsulta.ToString());
+                        cmdPaciente.Parameters.Add("@IDEXAME", MySqlDbType.Int32).Value = Convert.ToInt32(IdExame.ToString());
+                        cmdPaciente.Parameters.Add("@IDMEDICAMENTO", MySqlDbType.Int32).Value = Convert.ToInt32(IdMedicamento.ToString());
+                        cmdPaciente.Parameters.Add("@IDRECEITA", MySqlDbType.Int32).Value = Convert.ToInt32(IdReceita.ToString());
+
+                        retorno = retorno + cmdPaciente.ExecuteNonQuery();
+
+                        if (retorno == 2) {
+                            scope.Complete();
+                            connection.Close();
+                            return (int) retorno;
+                        } else {
+                            scope.Dispose();
+                            connection.Close();
                             throw new Exception();
                         }
                     }
+                } catch (Exception ex) {
+                    throw ex;
                 }
-                return (int)retorno;
             }
-            catch (TransactionAbortedException ex)
-            {
-                throw ex;
+        }
+
+        public List<ConsultarPacienteModel> ConsultarPaciente(int IdMedico) {
+            MySqlConnection connection = new MySqlConnection(getStringConnection());
+
+            try {
+                List<ConsultarPacienteModel> pacienteList = new List<ConsultarPacienteModel>();                
+                connection.Open();
+
+                var DALSQL = new PacienteDALSQL();
+                MySqlCommand cmdConsultarPaciente = new MySqlCommand(DALSQL.ConsultarPaciente(), connection);
+                cmdConsultarPaciente.Parameters.Add("@IDMEDICO", MySqlDbType.Int32).Value = IdMedico;
+
+                MySqlDataReader reader = cmdConsultarPaciente.ExecuteReader();
+
+                if (reader.HasRows) {
+                    while (reader.Read()) {
+                        ConsultarPacienteModel pacienteListModel = new ConsultarPacienteModel();
+                        pacienteListModel.pessoa = new Models.Paciente.ConsultarPacienteModel.DadosPessoais();
+
+                        pacienteListModel.pessoa.IdPessoa = reader.GetInt32(0);
+                        pacienteListModel.pessoa.Nome = reader.GetString(1);
+                        pacienteListModel.pessoa.CPF = reader.GetString(2);
+                        pacienteListModel.pessoa.TelefoneCelular = reader.GetString(3);
+
+                        pacienteList.Add(pacienteListModel);
+                    }
+                    reader.NextResult();
+                } else {
+                    reader.Close();
+                    connection.Close();
+                    return null;
+                }
+                reader.Close();
+                connection.Close();
+
+                return pacienteList;
             }
             catch (Exception ex) {
+                connection.Close();
                 throw ex;
             }
         }
 
+        public EditarPacienteModel ConsultarPacienteID(int IdPessoa) {
+            try {
+                MySqlConnection connection = new MySqlConnection(getStringConnection());
+                connection.Open();
 
+                var DALSQL = new PacienteDALSQL();
+                MySqlCommand cmdUsuario = new MySqlCommand(DALSQL.ConsultarPacienteID(), connection);
+                cmdUsuario.Parameters.Add("@IDPESSOA", MySqlDbType.Int32).Value = IdPessoa;
+                MySqlDataReader reader = cmdUsuario.ExecuteReader();
 
+                EditarPacienteModel pacienteCompleto = new EditarPacienteModel();
+                pacienteCompleto.pessoa = new Models.Paciente.EditarPacienteModel.DadosPessoais();
 
-        //public EditarUsuarioModel ConsultarUsuarioID(int IdPessoa) {
-        //    try {
-        //        SqlConnection connection = new SqlConnection(getStringConnection());
-        //        connection.Open();
+                if (reader.HasRows) {
+                    while (reader.Read()) {
+                        pacienteCompleto.pessoa.IdPessoa = reader.GetInt32(0);
+                        pacienteCompleto.pessoa.Nome = reader.GetString(1);
+                        pacienteCompleto.pessoa.CPF = reader.GetString(2);
+                        pacienteCompleto.pessoa.RG = reader.GetString(3);
+                        pacienteCompleto.pessoa.Sexo = reader.GetString(4);
+                        pacienteCompleto.pessoa.DataNascimento = reader.GetDateTime(5);
+                        pacienteCompleto.pessoa.Logradouro = reader.GetString(6);
+                        pacienteCompleto.pessoa.Numero = reader.GetInt32(7);
+                        pacienteCompleto.pessoa.Bairro = reader.GetString(8);
+                        pacienteCompleto.pessoa.Cidade = reader.GetString(9);
+                        pacienteCompleto.pessoa.Uf = reader.GetString(10);
+                        pacienteCompleto.pessoa.TelefoneCelular = reader.GetString(11);
+                        pacienteCompleto.pessoa.Email = reader.GetString(12);
+                    }
+                }
+                reader.Close();
+                connection.Close();
 
-        //        var DALSQL = new UsuarioDALSQL();
-        //        SqlCommand cmdUsuario = new SqlCommand(DALSQL.ConsultarUsuarioID(), connection);
-        //        cmdUsuario.Parameters.Add("@IDPESSOA", SqlDbType.Int).Value = IdPessoa;
-        //        SqlDataReader reader = cmdUsuario.ExecuteReader();
+                return pacienteCompleto;
 
-        //        EditarUsuarioModel usuarioCompletoTO = new EditarUsuarioModel();
-        //        usuarioCompletoTO.pessoa = new Models.Usuario.EditarUsuarioModel.DadosPessoais();
-        //        usuarioCompletoTO.usuario = new Models.Usuario.EditarUsuarioModel.DadosLogin();
-        //        usuarioCompletoTO.permissoes = new Models.Usuario.EditarUsuarioModel.DadosPermissoes();
+            } catch (Exception ex) {
+                throw ex;
+            }
+        }
 
-        //        if (reader.HasRows) {
-        //            while (reader.Read()) {
-        //                usuarioCompletoTO.pessoa.IdPessoa = reader.GetInt32(0);
-        //                usuarioCompletoTO.pessoa.IdMedico = reader.GetInt32(1);
-        //                usuarioCompletoTO.pessoa.TipoUsuario = reader.GetInt32(2).ToString();
-        //                usuarioCompletoTO.pessoa.Nome = reader.GetString(3);
-        //                usuarioCompletoTO.pessoa.CPF = reader.GetString(4);
-        //                usuarioCompletoTO.pessoa.Estado = reader.GetString(5);
-        //                usuarioCompletoTO.pessoa.Cidade = reader.GetString(6);
-        //                usuarioCompletoTO.pessoa.Bairro = reader.GetString(7);
-        //                usuarioCompletoTO.pessoa.Endereco = reader.GetString(8);
-        //                usuarioCompletoTO.pessoa.Numero = reader.GetInt32(9);
-        //                usuarioCompletoTO.pessoa.Telefone_Celular = reader.GetString(10);
-        //                usuarioCompletoTO.pessoa.Email = reader.GetString(11);
+        public int EditarPaciente(EditarPacienteModel pacienteModel) {
+            using (TransactionScope scope = new TransactionScope()) {
+                try {
+                    var DALSQL = new PacienteDALSQL();
+                    using (MySqlConnection connection = new MySqlConnection(getStringConnection())) {
+                        var retorno = 0;
 
-        //                usuarioCompletoTO.usuario.IdUsuario = reader.GetInt32(12);
-        //                usuarioCompletoTO.usuario.Username = reader.GetString(13);
-        //                usuarioCompletoTO.usuario.Password = reader.GetString(14);
+                        connection.Open();
 
-        //                if (!reader.IsDBNull(15)) {
-        //                    usuarioCompletoTO.usuario.DatDst = DateTime.Parse(reader.GetString(15));
-        //                }
+                        MySqlCommand cmdPessoa = new MySqlCommand(DALSQL.EditarPessoa(pacienteModel), connection);
 
-        //                usuarioCompletoTO.permissoes.IdPermissoes = reader.GetInt32(16);
-        //                usuarioCompletoTO.permissoes.IdUsuario = reader.GetInt32(17);
+                        cmdPessoa.Parameters.Add("@IDPESSOA", MySqlDbType.Int32).Value = pacienteModel.pessoa.IdPessoa;
+                        cmdPessoa.Parameters.Add("@SEXO", MySqlDbType.Int32).Value = pacienteModel.pessoa.Sexo;
+                        cmdPessoa.Parameters.Add("@NOME", MySqlDbType.String).Value = pacienteModel.pessoa.Nome;
+                        cmdPessoa.Parameters.Add("@CPF", MySqlDbType.String).Value = pacienteModel.pessoa.CPF;
+                        cmdPessoa.Parameters.Add("@RG", MySqlDbType.String).Value = pacienteModel.pessoa.RG;
+                        cmdPessoa.Parameters.Add("@DATANASCIMENTO", MySqlDbType.String).Value = pacienteModel.pessoa.DataNascimento.ToShortDateString();
+                        cmdPessoa.Parameters.Add("@LOGRADOURO", MySqlDbType.String).Value = pacienteModel.pessoa.Logradouro;
+                        cmdPessoa.Parameters.Add("@NUMERO", MySqlDbType.Int32).Value = pacienteModel.pessoa.Numero;
+                        cmdPessoa.Parameters.Add("@BAIRRO", MySqlDbType.String).Value = pacienteModel.pessoa.Bairro;
+                        cmdPessoa.Parameters.Add("@CIDADE", MySqlDbType.String).Value = pacienteModel.pessoa.Cidade;
+                        cmdPessoa.Parameters.Add("@UF", MySqlDbType.String).Value = pacienteModel.pessoa.Uf;
+                        cmdPessoa.Parameters.Add("@TELEFONECELULAR", MySqlDbType.String).Value = pacienteModel.pessoa.TelefoneCelular;
+                        cmdPessoa.Parameters.Add("@EMAIL", MySqlDbType.String).Value = pacienteModel.pessoa.Email;
 
-        //                if (reader.GetInt32(18) == 1) {
-        //                    usuarioCompletoTO.permissoes.FlUsuarioI = "True";
-        //                } else {
-        //                    usuarioCompletoTO.permissoes.FlUsuarioI = "false";
-        //                }
-        //                if (reader.GetInt32(19) == 1) {
-        //                    usuarioCompletoTO.permissoes.FlUsuarioC = "True";
-        //                } else {
-        //                    usuarioCompletoTO.permissoes.FlUsuarioC = "false";
-        //                }
-        //                if (reader.GetInt32(20) == 1) {
-        //                    usuarioCompletoTO.permissoes.FlUsuarioA = "True";
-        //                } else {
-        //                    usuarioCompletoTO.permissoes.FlUsuarioA = "false";
-        //                }
-        //                if (reader.GetInt32(21) == 1) {
-        //                    usuarioCompletoTO.permissoes.FlUsuarioE = "True";
-        //                } else {
-        //                    usuarioCompletoTO.permissoes.FlUsuarioE = "false";
-        //                }
+                        retorno = cmdPessoa.ExecuteNonQuery();
 
-        //                if (reader.GetInt32(22) == 1) {
-        //                    usuarioCompletoTO.permissoes.FlPacienteI = "True";
-        //                } else {
-        //                    usuarioCompletoTO.permissoes.FlPacienteI = "false";
-        //                }
-        //                if (reader.GetInt32(23) == 1) {
-        //                    usuarioCompletoTO.permissoes.FlPacienteC = "True";
-        //                } else {
-        //                    usuarioCompletoTO.permissoes.FlPacienteC = "false";
-        //                }
-        //                if (reader.GetInt32(24) == 1) {
-        //                    usuarioCompletoTO.permissoes.FlPacienteA = "True";
-        //                } else {
-        //                    usuarioCompletoTO.permissoes.FlPacienteA = "false";
-        //                }
-        //                if (reader.GetInt32(25) == 1) {
-        //                    usuarioCompletoTO.permissoes.FlPacienteE = "True";
-        //                } else {
-        //                    usuarioCompletoTO.permissoes.FlPacienteE = "false";
-        //                }
-
-        //                if (reader.GetInt32(26) == 1) {
-        //                    usuarioCompletoTO.permissoes.FlConsultaI = "True";
-        //                } else {
-        //                    usuarioCompletoTO.permissoes.FlConsultaI = "false";
-        //                }
-        //                if (reader.GetInt32(27) == 1) {
-        //                    usuarioCompletoTO.permissoes.FlConsultaC = "True";
-        //                } else {
-        //                    usuarioCompletoTO.permissoes.FlConsultaC = "false";
-        //                }
-        //                if (reader.GetInt32(28) == 1) {
-        //                    usuarioCompletoTO.permissoes.FlConsultaA = "True";
-        //                } else {
-        //                    usuarioCompletoTO.permissoes.FlConsultaA = "false";
-        //                }
-        //                if (reader.GetInt32(29) == 1) {
-        //                    usuarioCompletoTO.permissoes.FlConsultaE = "True";
-        //                } else {
-        //                    usuarioCompletoTO.permissoes.FlConsultaE = "false";
-        //                }
-
-        //                if (reader.GetInt32(30) == 1) {
-        //                    usuarioCompletoTO.permissoes.FlMedicamentoI = "True";
-        //                } else {
-        //                    usuarioCompletoTO.permissoes.FlMedicamentoI = "false";
-        //                }
-        //                if (reader.GetInt32(31) == 1) {
-        //                    usuarioCompletoTO.permissoes.FlMedicamentoC = "True";
-        //                } else {
-        //                    usuarioCompletoTO.permissoes.FlMedicamentoC = "false";
-        //                }
-        //                if (reader.GetInt32(32) == 1) {
-        //                    usuarioCompletoTO.permissoes.FlMedicamentoA = "True";
-        //                } else {
-        //                    usuarioCompletoTO.permissoes.FlMedicamentoA = "false";
-        //                }
-        //                if (reader.GetInt32(33) == 1) {
-        //                    usuarioCompletoTO.permissoes.FlMedicamentoE = "True";
-        //                } else {
-        //                    usuarioCompletoTO.permissoes.FlMedicamentoE = "false";
-        //                }
-
-        //                if (reader.GetInt32(34) == 1) {
-        //                    usuarioCompletoTO.permissoes.FlExamesI = "True";
-        //                } else {
-        //                    usuarioCompletoTO.permissoes.FlExamesI = "false";
-        //                }
-        //                if (reader.GetInt32(35) == 1) {
-        //                    usuarioCompletoTO.permissoes.FlExamesC = "True";
-        //                } else {
-        //                    usuarioCompletoTO.permissoes.FlExamesC = "false";
-        //                }
-        //                if (reader.GetInt32(36) == 1) {
-        //                    usuarioCompletoTO.permissoes.FlExamesA = "True";
-        //                } else {
-        //                    usuarioCompletoTO.permissoes.FlExamesA = "false";
-        //                }
-        //                if (reader.GetInt32(37) == 1) {
-        //                    usuarioCompletoTO.permissoes.FlExamesE = "True";
-        //                } else {
-        //                    usuarioCompletoTO.permissoes.FlExamesE = "false";
-        //                }
-        //            }
-        //        }
-
-        //        reader.Close();
-        //        connection.Close();
-
-        //        return usuarioCompletoTO;
-
-        //    } catch (Exception ex) {
-        //        throw ex;
-        //    }
-        //}
+                        if (retorno == 1) {
+                            scope.Complete();
+                            connection.Close();
+                            return retorno;
+                        } else {
+                            connection.Close();
+                            throw new Exception();
+                        }
+                    }
+                } catch (Exception ex) {
+                    scope.Dispose();
+                    throw ex;
+                }
+            }
+        }
     }
 }

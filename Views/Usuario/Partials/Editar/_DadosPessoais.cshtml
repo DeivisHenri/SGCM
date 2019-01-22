@@ -15,21 +15,21 @@
     @* Tipo Usuário *@
     <div class="col-lg-3 margin-right-15-px">
         <div class="form-group display-inline-block">
-            <label asp-for="@Model.pessoa.TipoUsuario" class="control-label form-label"></label>
+            <label asp-for="@Model.usuario.TipoUsuario" class="control-label form-label"></label>
             <div class="" style="display: flex;">
                 <div class="radio margin-left-right-15-px">
-                    <label asp-for="@Model.pessoa.TipoUsuario" class="radio-inline">
-                        <input id="tipoUsuarioMedico" asp-for="@Model.pessoa.TipoUsuario" type="radio" value="1">Médico
+                    <label asp-for="@Model.usuario.TipoUsuario" class="radio-inline">
+                        <input id="tipoUsuarioMedico" asp-for="@Model.usuario.TipoUsuario" type="radio" value="1">Médico
                     </label>
                 </div>
                 <div class="radio margin-left-right-15-px">
-                    <label asp-for="@Model.pessoa.TipoUsuario" class="radio-inline">
-                        <input id="tipoUsuarioRecepcionista" asp-for="@Model.pessoa.TipoUsuario" type="radio" value="2">Recepcionista
+                    <label asp-for="@Model.usuario.TipoUsuario" class="radio-inline">
+                        <input id="tipoUsuarioRecepcionista" asp-for="@Model.usuario.TipoUsuario" type="radio" value="2">Recepcionista
                     </label>
                 </div>
             </div>
             @*<input asp-for="@Model.pessoa.CPF" class="form-control form-input form-input-center" />*@
-            <span asp-validation-for="@Model.pessoa.TipoUsuario" class="text-danger"></span>
+            <span asp-validation-for="@Model.usuario.TipoUsuario" class="text-danger"></span>
         </div>
     </div>
 
@@ -84,6 +84,26 @@
         </div>
     </div>
 
+    @* Sexo *@
+    <div class="col-lg-3 margin-right-15-px">
+        <div class="form-group display-inline-block">
+            <label asp-for="@Model.pessoa.Sexo" class="control-label form-label"></label>
+            <div class="" style="display: flex;">
+                <div class="radio margin-left-right-15-px">
+                    <label asp-for="@Model.pessoa.Sexo" class="radio-inline">
+                        <input id="sexoFeminino" asp-for="@Model.pessoa.Sexo" type="radio" value="1">Feminino
+                    </label>
+                </div>
+                <div class="radio margin-left-right-15-px">
+                    <label asp-for="@Model.pessoa.Sexo" class="radio-inline">
+                        <input id="sexoMasculino" asp-for="@Model.pessoa.Sexo" type="radio" value="2">Masculino
+                    </label>
+                </div>
+            </div>
+            <span asp-validation-for="@Model.pessoa.Sexo" class="text-danger"></span>
+        </div>
+    </div>
+
 </div>
 
 <div class="row margin-row">
@@ -100,7 +120,7 @@
     <div class="col-lg-1 margin-right-15-px">
         <div class="form-group">
             <label asp-for="@Model.pessoa.Numero" class="control-label form-label"></label>
-            <input asp-for="@Model.pessoa.Numero" class="form-control form-input form-input-center" type="number" />
+            <input asp-for="@Model.pessoa.Numero" class="form-control form-input form-input-center" type="number" min="1" />
             <span asp-validation-for="@Model.pessoa.Numero" class="text-danger"></span>
         </div>
     </div>
@@ -165,7 +185,7 @@
     </button>
 </div>
 
-<div id="esconderInputs">
+<div id="esconderInputs" class="displayNone">
     <div id="dataCadastro">
         <label asp-for="@Model.pessoa.IdPessoa" class="control-label form-label"></label>
         <input asp-for="@Model.pessoa.IdPessoa" class="form-control form-input form-input-center" />

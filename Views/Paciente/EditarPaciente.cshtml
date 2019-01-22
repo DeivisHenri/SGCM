@@ -1,15 +1,15 @@
-﻿@using SGCM.Models.Paciente.CadastroPacienteModel;
-@model CadastroPacienteModel
+﻿@using SGCM.Models.Paciente.EditarPacienteModel;
+@model EditarPacienteModel
 
 @{
-    ViewData["Title"] = "Cadastro Paciente";
+    ViewData["Title"] = "Editar Paciente";
 }
 
 @* Folha De Estilo *@
 <partial name="/Views/Paciente/_PacienteStyle.cshtml" />
 
 <div class="center-form-container">
-    <form asp-controller="Paciente" asp-action="CadastroPaciente" method="post" class="form-horizontal max-min-width">
+    <form asp-controller="Paciente" asp-action="EditarPaciente" method="post" class="form-horizontal max-min-width">
         @Html.AntiForgeryToken()
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#dadosPessoais">Dados Paciente</a></li>
@@ -19,7 +19,7 @@
             <div id="dadosPessoais" class="tab-pane fade in active">
                 <h3>Paciente</h3>
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <partial name="/Views/Paciente/Partials/Cadastro/_DadosPessoais.cshtml" model="@Model" />
+                <partial name="/Views/Paciente/Partials/Editar/_DadosPessoais.cshtml" model="@Model" />
             </div>
         </div>
 
@@ -47,7 +47,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <h5>@ViewBag.MensagemBody
+                <h5>@ViewBag.MensagemBody</h5>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
