@@ -2,12 +2,9 @@
 using SGCM.Models.Usuario.CadastroUsuarioModel;
 using SGCM.Models.Usuario.EditarUsuarioModel;
 
-namespace SGCM.AppData.Infraestrutura.UtilMetodo
-{
-    public class UtilMetodo
-    {
-        public static string RemovendoCaracteresEspeciais(string cpf)
-        {
+namespace SGCM.AppData.Infraestrutura.UtilMetodo {
+    public class UtilMetodo {
+        public static string RemovendoCaracteresEspeciais(string cpf) {
             Regex rgx = new Regex(@"[^\d]");
             return rgx.Replace(cpf, "").ToString();
         }
@@ -339,6 +336,43 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo
         {
             return "SELECT LAST_INSERT_ID();";
 
+        }
+
+        public static string VerificaDiaDaSemana(int dia, int mes, int ano) {
+            if (mes == 1) {
+                mes = 13;
+                ano--;
+            }
+
+            if (mes == 2) {
+                mes = 14;
+                ano--;
+            }
+
+            int q = dia;
+            int m = mes;
+            int k = ano % 100;
+            int j = ano / 100;
+            int h = q + 13 * (m + 1) / 5 + k + k / 4 + j / 4 + 5 * j;
+            h = h % 7;
+
+            switch (h) {
+                case 0:
+                    return "sábado";
+                case 1:
+                    return "domingo";
+                case 2:
+                    return "segunda-feira";
+                case 3:
+                    return "terça-feira";
+                case 4:
+                    return "quarta-feira";
+                case 5:
+                    return "quinta-feira";
+                case 6:
+                    return "sexta-feira";
+            }
+            return "";
         }
     }
 }

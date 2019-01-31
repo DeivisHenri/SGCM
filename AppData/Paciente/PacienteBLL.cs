@@ -34,6 +34,5 @@ namespace SGCM.AppData.Paciente
             PacienteDAL pacienteDAL = new PacienteDAL();
             return pacienteDAL.EditarPaciente(pacienteModel);
         }
-
     }
 }

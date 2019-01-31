@@ -2,12 +2,189 @@
     (function ($) {
         $(function () {
             $(document).ready(function ($) {
+                var dataTable = $("#myDataTable").DataTable({
+                    "language": {
+                        "lengthMenu": "Exibe _MENU_ Registros por página",
+                        "search": "Procurar",
+                        "paginate": { "previous": "Retorna", "next": "Avança" },
+                        "zeroRecords": "Nada foi encontrado",
+                        "info": "Exibindo página _PAGE_ de _PAGES_",
+                        "infoEmpty": "Sem registros",
+                        "infoFiltered": "(filtrado de _MAX_ regitros totais)"
+                    },
+                    "processing": true, // mostrar a progress bar
+                    //"serverSide": true, // processamento no servidor
+                    "filter": true, // habilita o filtro(search box)
+                    "lengthMenu": [[3, 5, 10, 25, 50, -1], [3, 5, 10, 25, 50, "Todos"]],
+                    "pageLength": 3, // define o tamanho da página
+                    //"ajax": {
+                    //    "url": "/Clientes/GetClientes",
+                    //    "type": "GET",
+                    //    "dataType": "json"
+                    //},
+                    "columns": [
+                        { "data": "nome", "title": "Nome", "autowidth": true },
+                        { "data": "cpf", "title": "CPF", "autowidth": true },
+                        { "data": "idPaciente", "title": "paciente", "autowidth": true }
+                    ]
+                });
+
+                $('#myDataTable tbody').on('click', 'tr', function () {
+                    if ($(this).hasClass('active')) {
+                        $(this).removeClass('active');
+                        $(this).children().removeClass('mudarBackColor');
+                    }
+                    else {
+                        dataTable.$('tr.active').removeClass('active');
+                        dataTable.$('td.mudarBackColor').removeClass('mudarBackColor');
+                        $(this).addClass('active');
+                        $(this).children().addClass('mudarBackColor');
+                    }
+                });
+
+                $('#btnSelecionarPacienteModal').click(function () {
+                    let nome = dataTable.$('tr.active').children()[0].textContent;
+                    let cpf = dataTable.$('tr.active').children()[1].textContent;
+                    let idPaciente = dataTable.$('tr.active').children()[2].textContent;
+
+                    console.log("nome: ", nome);
+                    console.log("cpf: ", cpf);
+                    console.log("idPaciente: ", idPaciente);
+
+                    $('#paciente_Nome').val(nome);
+                    $('#paciente_CPF').val(cpf);
+                    $('#paciente_idPaciente').val(idPaciente);
+
+                    $('#paciente_CPF').focus();
+                    $('#paciente_Nome').focus();
+                    $('#paciente_CPF').focus();
+                    $('#paciente_Nome').focus();
+
+                    limparModalConsultaPaciente();
+                    $('#btnFecharPacienteModal').click();
+                });
+
                 $('.maskTelefone').mask('(99) 99999-9999');
                 $('.maskCPF').mask('999.999.999-99');
+                $('.maskDateTime').mask('99/99/9999 99:99');
 
-                $('#nome').focus();
+                var dataAtual = new Date();
+                $('#dataConsulta').val(dataAtual.toLocaleDateString() + " " + dataAtual.getHours() + ":" + dataAtual.getMinutes());
+
+                $('#paciente_Nome').focus();
+
+                $('#btnPesquisaPaciente').click(function () {
+                    $('#btnconsultaPaciente').click();
+                });
+
+                $('#btnBuscarPacienteModal').click(function () {
+                    var nomePaciente = document.getElementById("modalInputNome").value;
+                    var cpfPaciente = document.getElementById("modalInputCPF").value;
+
+                    if (nomePaciente !== "" && nomePaciente.length < 3) {
+                        limparModalConsultaPaciente();
+                        $('#btnFecharPacienteModal').click();
+                        $('#cadastroConsultaModalLabel').html('Informação');
+                        $('#mensagemBody').html('Informe pelo menos 3 caracteres para consultar o paciente pelo nome!');
+                        $('#btnModalCadastroConsulta').click();
+                    } else if (cpfPaciente !== "" && cpfPaciente.length !== 14) {
+                        limparModalConsultaPaciente();
+                        $('#btnFecharPacienteModal').click();
+                        $('#cadastroConsultaModalLabel').html('Informação');
+                        $('#mensagemBody').html('Informe todos os 11 dígitos do CPF!');
+                        $('#btnModalCadastroConsulta').click();
+                    } else {
+                        $.post('/Consulta/ConsultarPaciente', { nome: nomePaciente, cpf: cpfPaciente }, function (data) {
+                            if (data !== null) $('#myDataTable').DataTable().clear().rows.add(data).draw();
+                            else {
+                                limparModalConsultaPaciente();
+                                $('#btnFecharPacienteModal').click();
+                                $('#cadastroConsultaModalLabel').html('Informação');
+                                $('#mensagemBody').html('Não existe nenhum registro com os dados informados!');
+                                $('#btnModalCadastroConsulta').click();
+                            }
+                        });
+                    }
+                });
+
+                function limparModalConsultaPaciente() {
+                    $('#modalInputNome').val('');
+                    $('#modalInputCPF').val('');
+                    dataTable.clear();
+                }
 
             });
         });
     })(jQuery);
+
+    function limparModalConsultaPaciente() {
+        $('#modalInputNome').val('');
+        $('#modalInputCPF').val('');
+    }
+
+    function zeroPadded(val) {
+        if (val >= 10)
+            return val;
+        else
+            return '0' + val;
+    }
+
+    //function ConsultarNome() {
+    //    var valorCampo = document.getElementById('paciente_Nome').value;
+
+    //    if (valorCampo !== null && valorCampo !== 'undefined' && valorCampo !== "" && valorCampo.length >= 3) {
+    //        $.post('/Consulta/ConsultarNome', { nome: valorCampo }, function (data) {
+    //            console.log("data: ", data);
+    //        });
+    //    }
+    //}
+
+    //function ConsultarCPF() {
+    //    var valorCampo = document.getElementById('paciente_CPF').value;
+
+    //    if (valorCampo !== null && valorCampo !== 'undefined' && valorCampo !== "" && valorCampo.length >= 3) {
+    //        $.post('/Consulta/ConsultarCpf', { cpf: valorCampo }, function (data) { });
+    //    }
+    //}
 </script>
+
+
+
+
+@*<script type="text/javascript">
+        $(document).ready(function () {
+            //Pega os dados do banco de dados para preencher o datatable
+            var oTable = $("#myDataTable").DataTable({
+                "language": {
+                    "lengthMenu": "Exibe _MENU_ Registros por página",
+                    "search": "Procurar",
+                    "paginate": { "previous": "Retorna", "next": "Avança" },
+                    "zeroRecords": "Nada foi encontrado",
+                    "info": "Exibindo página _PAGE_ de _PAGES_",
+                    "infoEmpty": "Sem registros",
+                    "infoFiltered": "(filtrado de _MAX_ regitros totais)"
+                },
+                "processing": true, // mostrar a progress bar
+                //"serverSide": true, // processamento no servidor
+                "filter": true, // habilita o filtro(search box)
+                "lengthMenu": [[3, 5, 10, 25, 50, -1], [3, 5, 10, 25, 50, "Todos"]],
+                "pageLength": 3, // define o tamanho da página
+                "ajax": {
+                    "url": "/Clientes/GetClientes",
+                    "type": "GET",
+                    "dataType": "json"
+                },
+                "columns": [{
+                    "data": "ClienteImagem", "title": "Perfil", "width": "50px", "render": function (data) {
+                        return '<img class="rounded img-thumbnail" style="width:90px; height:50px;" src="/Imagens/Clientes/' + data + '"/>';
+                    }
+                },
+                { "data": "ID", "title": "Código", "autowidth": true },
+                { "data": "ClienteNome", "title": "Nome", "autowidth": true },
+                { "data": "ClienteEmail", "title": "Email", "autowidth": true },
+                { "data": "ClienteFone", "title": "Telefone", "autowidth": true },
+                { "data": "ClienteEstado", "title": "Estado", "autowidth": true }
+                ]
+            });
+        });
+    </script>*@

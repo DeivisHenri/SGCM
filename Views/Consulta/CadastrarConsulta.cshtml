@@ -1,0 +1,122 @@
+﻿@using SGCM.Models.Consulta.CadastroConsultaModel;
+@model CadastroConsultaModel
+@*@model List<CadastroConsultaModel>*@
+
+@{ ViewData["Title"] = "Cadastro Consulta"; }
+
+@* Folha De Estilo *@
+<partial name="/Views/Consulta/Partials/_ConsultaStyle.cshtml" />
+
+<div class="center-form-container">
+    <form asp-controller="Consulta" asp-action="CadastrarConsulta" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal max-min-width">
+        @Html.AntiForgeryToken()
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#dadosPessoais">Dados Consulta</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="dadosConsulta" class="tab-pane fade in active">
+                <h3>Pessoais</h3>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <partial name="/Views/Consulta/Partials/Cadastro/_DadosConsulta.cshtml" model="@Model" />
+            </div>
+        </div>
+
+        <div class="form-group padding-top-20px">
+            <button type="submit" class="btn btn-success btn-brand btn-brand-big">&nbsp;Salvar&nbsp;</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    <partial name="/Views/Consulta/Partials/_ConsultaScript.cshtml" />
+}
+
+<button type="button" id="btnModalCadastroConsulta" class="btn btn-primary displayNone" data-toggle="modal" data-target="#cadastroConsultaModal"> </button>
+
+<div class="modal fade" id="cadastroConsultaModal" tabindex="-1" role="dialog" aria-labelledby="cadastroConsultaModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header displayFlex">
+                <h4 class="modal-title width100" id="cadastroConsultaModalLabel">@ViewBag.MensagemTitle</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @if (ViewBag.MensagemBodyController.ToString() != "")
+                {<h5>@ViewBag.MensagemBodyController</h5>}
+                @if (ViewBag.MensagemBodyAction.ToString() != "")
+                {<h5>@ViewBag.MensagemBodyAction</h5>}
+                <h5 id="mensagemBody">@ViewBag.MensagemBody</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (ViewBag.MensagemBody.ToString() != "")
+{
+    <script>
+        $(document).ready(function () {
+            $('#btnModalCadastroConsulta').click();
+        });
+    </script>
+}
+
+<button type="button" id="btnconsultaPaciente" class="btn btn-primary displayNone" data-toggle="modal" data-target="#consultaPaciente"> </button>
+
+<div class="modal fade" id="consultaPaciente" tabindex="-1" role="dialog" aria-labelledby="consultaPacienteLabel" aria-hidden="true">
+    <div class="modal-dialog width850px" role="document">
+        <div class="modal-content">
+            <div class="modal-header displayFlex">
+                <h4 class="modal-title width100" id="consultaPacienteLabel">Consulta Paciente</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row margin-row center margin-top-bottom">
+                    <div class="col-lg-1 margin-right-15-px">
+                        <label>Nome: </label>
+                    </div>
+                    <div class="col-lg-6 margin-right-15-px">
+                        <input class="form-control form-input form-input-center" id="modalInputNome" />
+                    </div>
+                </div>
+
+                <div class="row margin-row center margin-top-bottom">
+                    <div class="col-lg-1 margin-right-15-px">
+                        <label>CPF: </label>
+                    </div>
+                    <div class="col-lg-4 margin-right-15-px">
+                        <input class="form-control form-input form-input-center maskCPF" id="modalInputCPF" />
+                    </div>
+                </div>
+
+                <div class="row margin-row center margin-top-bottom">
+                    <div class="col-lg-12 margin-right-15-px">
+                        <table id="myDataTable" class="table table-bordered table-striped table-hover" title="Tabela dos Usuários" border="1">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>CPF</th>
+                                    <th>IdPaciente</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btnBuscarPacienteModal">Buscar</button>
+                    <button type="button" class="btn btn-success" id="btnSelecionarPacienteModal">Selecionar</button>
+                    <button type="button" class="btn btn-warning" id="btnFecharPacienteModal" onclick="limparModalConsultaPaciente()" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

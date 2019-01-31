@@ -109,8 +109,8 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Consulta<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a asp-area="" asp-controller="Consulta" asp-action="CadastroConsulta">Cadastro Consulta</a></li>
-                            <li><a asp-area="" asp-controller="Consulta" asp-action="PesquisaConsulta">Pesquisar Consulta</a></li>
+                            <li><a asp-area="" asp-controller="Consulta" asp-action="CadastrarConsulta">Cadastrar Consulta</a></li>
+                            <li><a asp-area="" asp-controller="Consulta" asp-action="ConsultarConsulta">Consultar Consulta</a></li>
                             <li><a asp-area="" asp-controller="Consulta" asp-action="Relatorio">Relatório</a></li>
                         </ul>
                     </li>
@@ -123,13 +123,13 @@
                             @{
                                 if (!(FlConsultaI == "0"))
                                 {
-                                    <li><a asp-area="" asp-controller="Consulta" asp-action="CadastroConsulta">Cadastro Consulta</a></li>
+                                    <li><a asp-area="" asp-controller="Consulta" asp-action="CadastrarConsulta">Cadastrar Consulta</a></li>
                                 }
                             }
 
                             @{
                                 if (!(FlConsultaC == "0")) { 
-                                    <li><a asp-area="" asp-controller="Consulta" asp-action="PesquisaConsulta">Pesquisar Consulta</a></li>
+                                    <li><a asp-area="" asp-controller="Consulta" asp-action="ConsultarConsulta">Consultar Consulta</a></li>
                                 }
                             }
                             <li><a asp-area="" asp-controller="Consulta" asp-action="Relatorio">Relatório</a></li>

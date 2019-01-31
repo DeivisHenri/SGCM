@@ -14,29 +14,40 @@ namespace SGCM.Controllers {
         //GET: /Usuario/CadastroUsuario
         [HttpGet]
         public ActionResult CadastroUsuario() {
-            ViewBag.MensagemBody = "";
-            CarregarDadosUsuarioParaTela();
-            if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
-                if ((int)ViewData["flUsuarioI"] == 1) {
-                    ViewData["Title"] = "Cadastro Usuário";
+            try {
+                ViewBag.MensagemBodyController = "";
+                ViewBag.MensagemBodyAction = "";
+                ViewBag.MensagemBody = "";
+                CarregarDadosUsuarioParaTela();
+                if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
+                    if ((int)ViewData["flUsuarioI"] == 1) {
+                        ViewData["Title"] = "Cadastro Usuário";
 
-                    var viewModel = new CadastroUsuarioModel();
+                        var viewModel = new CadastroUsuarioModel();
 
-                    viewModel.usuario = new Models.Usuario.CadastroUsuarioModel.DadosLogin();
-                    viewModel.permissoes = new Models.Usuario.CadastroUsuarioModel.DadosPermissoes();
-                    viewModel.pessoa = new Models.Usuario.CadastroUsuarioModel.DadosPessoais();
+                        viewModel.usuario = new Models.Usuario.CadastroUsuarioModel.DadosLogin();
+                        viewModel.permissoes = new Models.Usuario.CadastroUsuarioModel.DadosPermissoes();
+                        viewModel.pessoa = new Models.Usuario.CadastroUsuarioModel.DadosPessoais();
 
-                    return View(viewModel);
+                        return View(viewModel);
+                    } else {
+                        HttpContext.Session.SetString("MensagemTitle", "Erro");
+                        HttpContext.Session.SetString("MensagemBody", "O usuário " + ViewData["nome"] + " não tem acesso a página: 'Usuario/CadastroUsuario'");
+                        return RedirectToAction("Index", "Home");
+                    }
                 } else {
-                    HttpContext.Session.SetString("MensagemTitle", "Erro");
-                    HttpContext.Session.SetString("MensagemBody", "O usuário " + ViewData["nome"] + " não tem acesso a página: 'Usuario/CadastroUsuario'");
-                    return RedirectToAction("Index", "Home");
+                    ViewData.Add("ReturnUrl", ((object[])this.ControllerContext.RouteData.Values.Values)[0] + "/" + ((object[])this.ControllerContext.RouteData.Values.Values)[1]);
+                    HttpContext.Session.SetString("MensagemBody", "Você não está logado no sistema! Realize o Login antes de acessar essa a página: '" + ViewData["ReturnUrl"] + "' !");
+                    return RedirectToAction("Signin", "Login", new { ReturnUrl = ViewData["ReturnUrl"] });
                 }
-            } else {
-                ViewData.Add("ReturnUrl", ((object[])this.ControllerContext.RouteData.Values.Values)[0] + "/" + ((object[])this.ControllerContext.RouteData.Values.Values)[1]);
-                HttpContext.Session.SetString("MensagemBody", "Você não está logado no sistema! Realize o Login antes de acessar essa a página: '" + ViewData["ReturnUrl"] + "' !");
-                return RedirectToAction("Signin", "Login", new { ReturnUrl = ViewData["ReturnUrl"] });
+            } catch (Exception ex) {
+                ViewBag.MensagemTitle = "Erro";
+                ViewBag.MensagemBodyController = "Controller: ConsultaController";
+                ViewBag.MensagemBodyAction = "Action: CadasrarConsulta";
+                ViewBag.MensagemBody = "Exceção: " + ex.Message;
+                return View();
             }
+            
         }
 
         // POST: /Usuario/CadastroUsuario

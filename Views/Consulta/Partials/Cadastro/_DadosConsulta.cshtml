@@ -1,0 +1,55 @@
+﻿@using SGCM.Models.Consulta.CadastroConsultaModel;
+@model CadastroConsultaModel
+
+<div class="row margin-row">
+
+    @* Nome *@
+    <div class="col-lg-4 margin-right-15-px">
+        <div class="form-group">
+            <label asp-for="@Model.paciente.Nome" class="control-label form-label"></label>
+            @*<input asp-for="@Model.paciente.Nome" class="form-control form-input form-input-center" onblur="("location.href='"+ Url.Action("ConsultarNome","Consulta", new { nome = @Model.paciente.Nome} )+ "'")" />*@
+            @*<input asp-for="@Model.paciente.Nome" class="form-control form-input form-input-center" onblur="ConsultarNome()" />*@
+            <input asp-for="@Model.paciente.Nome" class="form-control form-input form-input-center" />
+            <span asp-validation-for="@Model.paciente.Nome" class="text-danger"></span>
+
+        </div>
+    </div>
+
+    @* CPF *@
+    <div class="col-lg-2 margin-right-15-px">
+        <div class="form-group">
+            <label asp-for="@Model.paciente.CPF" class="control-label form-label"></label>
+            <input asp-for="@Model.paciente.CPF" class="form-control form-input form-input-center maskCPF" />
+            <span asp-validation-for="@Model.paciente.CPF" class="text-danger"></span>
+        </div>
+    </div>
+
+    @* BOTÃO PESQUISA *@
+    <div class="col-lg-1">
+        <div class="form-group">
+            <button type="button" id="btnPesquisaPaciente" class="btn btn-primary margin-top-25-px"> <span class="glyphicon glyphicon-search"></span> </button>
+        </div>
+    </div>
+
+
+</div>
+
+<div class="row margin-row">
+
+    @* DATA Consulta *@
+    <div class="col-lg-3 margin-right-15-px">
+        <div class="form-group">
+            <label asp-for="@Model.consulta.DataConsulta" class="control-label form-label"></label>
+            <input asp-for="@Model.consulta.DataConsulta" type="datetime" textmode="DateTimeLocal" class="form-control form-input form-input-center maskDateTime" id="dataConsulta" />
+            <span asp-validation-for="@Model.consulta.DataConsulta" class="text-danger"></span>
+        </div>
+    </div>
+
+</div>
+
+@* idPaciente *@
+<div class="displayNone">
+    <div class="form-group">
+        <input asp-for="@Model.paciente.idPaciente" />
+    </div>
+</div>

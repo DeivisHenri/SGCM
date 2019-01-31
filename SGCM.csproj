@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\lib\Sweetalert\**" />
+    <Content Remove="wwwroot\lib\Sweetalert\**" />
+    <EmbeddedResource Remove="wwwroot\lib\Sweetalert\**" />
+    <None Remove="wwwroot\lib\Sweetalert\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="IT2media.Extensions.Logging.Abstractions" Version="2.0.0" />
     <PackageReference Include="jQuery.MaskedInput" Version="1.4.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
@@ -31,6 +38,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Views\Consulta\ConsultarConsulta.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Consulta\Partials\Cadastro\_DadosConsulta.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\Consulta\Partials\_ConsultaScript.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

@@ -11,51 +11,6 @@ namespace SGCM.AppData.Paciente
 {
     public class PacienteDAL : SGCMContext {
 
-        //public List<CadastroUsuarioModel> ConsultarUsuario(int IdPessoa)
-        //{
-        //    try
-        //    {
-        //        List<CadastroUsuarioModel> usuarioCompletoTOList = new List<CadastroUsuarioModel>();
-
-        //        SqlConnection connection = new SqlConnection(getStringConnection());
-        //        connection.Open();
-
-        //        var DALSQL = new UsuarioDALSQL();
-        //        SqlCommand cmdUsuario = new SqlCommand(DALSQL.ConsultarUsuario(), connection);
-        //        cmdUsuario.Parameters.Add("@IDPESSOA", SqlDbType.Int).Value = IdPessoa;
-
-        //        SqlDataReader reader = cmdUsuario.ExecuteReader();
-        //        if (reader.HasRows)
-        //        {
-        //            while (reader.Read())
-        //            {
-        //                CadastroUsuarioModel usuarioCompletoTO = new CadastroUsuarioModel();
-        //                usuarioCompletoTO.pessoa = new Models.Usuario.CadastroUsuarioModel.DadosPessoais();
-        //                usuarioCompletoTO.usuario = new Models.Usuario.CadastroUsuarioModel.DadosLogin();
-        //                usuarioCompletoTO.permissoes = new Models.Usuario.CadastroUsuarioModel.DadosPermissoes();
-
-        //                usuarioCompletoTO.pessoa.Nome = reader.GetString(0);
-        //                usuarioCompletoTO.pessoa.CPF = reader.GetString(1);
-        //                usuarioCompletoTO.pessoa.Telefone_Celular = reader.GetString(2);
-        //                usuarioCompletoTO.pessoa.IdPessoa = reader.GetInt32(3);
-        //                usuarioCompletoTO.usuario.IdUsuario = reader.GetInt32(4);
-        //                usuarioCompletoTO.permissoes.IdPermissoes = reader.GetInt32(5);
-
-        //                usuarioCompletoTOList.Add(usuarioCompletoTO);
-        //            }
-        //            reader.NextResult();
-        //        }
-        //        reader.Close();
-        //        connection.Close();
-
-        //        return usuarioCompletoTOList;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //}
-
         public int InserirPaciente(CadastroPacienteModel paciente) {
             using (TransactionScope scope = new TransactionScope()) {
                 try {

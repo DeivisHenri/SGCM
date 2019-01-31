@@ -226,7 +226,5 @@ namespace SGCM.Controllers
             ViewData.Add("flExamesA", HttpContext.Session.GetInt32("flExamesA"));
             ViewData.Add("flExamesE", HttpContext.Session.GetInt32("flExamesE"));
         }
-    }
-
-    
+    }    
 }
