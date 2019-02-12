@@ -38,10 +38,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Views\Consulta\EditarConsulta.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\Consulta\ConsultarConsulta.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\Consulta\Partials\Cadastro\_DadosConsulta.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Consulta\Partials\Editar\_DadosConsulta.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\Consulta\Partials\_ConsultaScript.cshtml">

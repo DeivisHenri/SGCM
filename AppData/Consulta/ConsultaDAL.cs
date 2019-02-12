@@ -4,20 +4,23 @@ using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 using SGCM.Models.Consulta.CadastroConsultaModel;
 using SGCM.Models.Consulta.ConsultaPacienteModel;
+using SGCM.Models.Consulta.ConsultarConsultaModel;
+using SGCM.Models.Consulta.EditarConsultaModel;
 
 namespace SGCM.AppData.Consulta
 {
     public class ConsultaDAL : SGCMContext {
 
-        public List<ConsultaPacienteModel> ConsultarPacienteNome(string nome, string cpf) {
+        public List<ConsultaPacienteModel> ConsultarPacienteNome(string nome, string cpf, int? idPaciente) {
             try {
                 MySqlConnection connection = new MySqlConnection(getStringConnection());
                 connection.Open();
 
                 var DALSQL = new ConsultaDALSQL();
-                MySqlCommand cmdPaciente = new MySqlCommand(DALSQL.ConsultarPacienteNome(nome, cpf), connection);
+                MySqlCommand cmdPaciente = new MySqlCommand(DALSQL.ConsultarPacienteNome(nome, cpf, idPaciente), connection);
                 if ( nome != null ) cmdPaciente.Parameters.AddWithValue("@NOME", "%" + nome + "%");
                 if ( cpf != null ) cmdPaciente.Parameters.AddWithValue("@CPF", cpf);
+                if (idPaciente != null ) cmdPaciente.Parameters.AddWithValue("@IDPACIENTE", idPaciente);
 
                 MySqlDataReader reader = cmdPaciente.ExecuteReader();
                 List<ConsultaPacienteModel> pacienteList = new List<ConsultaPacienteModel>();
@@ -44,7 +47,6 @@ namespace SGCM.AppData.Consulta
             }
         }
 
-
         public int CadastrarConsulta(CadastroConsultaModel model) {
             using (TransactionScope scope = new TransactionScope()) {
                 try {
@@ -59,8 +61,6 @@ namespace SGCM.AppData.Consulta
                         cmdConsulta.Parameters.Add("@IDPACIENTECONSULTA", MySqlDbType.Int32).Value = model.paciente.idPaciente;
                         if (model.consulta.flagPM) cmdConsulta.Parameters.Add("@FLAGPM", MySqlDbType.String).Value = "PM";
                         cmdConsulta.Parameters.Add("@DATACONSULTA", MySqlDbType.String).Value = model.consulta.DataConsulta.ToString();
-
-                        var teste = getGeneratedSql(cmdConsulta);
 
                         retorno = cmdConsulta.ExecuteNonQuery();
 
@@ -99,8 +99,6 @@ namespace SGCM.AppData.Consulta
                     cmdConsulta.Parameters.AddWithValue("@FLAGPM", "PM");
                 }
 
-                var teste = getGeneratedSql(cmdConsulta);
-
                 MySqlDataReader reader = cmdConsulta.ExecuteReader();
 
                 if (reader.HasRows) {
@@ -108,6 +106,100 @@ namespace SGCM.AppData.Consulta
                 } else {
                     return 0;
                 }
+            } catch (Exception ex) {
+                throw ex;
+            }
+        }
+
+        public List<ConsultasQuery> ConsultarConsultas(DateTime dataInicial, DateTime dataFinal) {
+            try {
+                MySqlConnection connection = new MySqlConnection(getStringConnection());
+                connection.Open();
+
+                var DALSQL = new ConsultaDALSQL();
+                MySqlCommand cmdConsulta = new MySqlCommand(DALSQL.ConsultarConsultas(), connection);
+                cmdConsulta.Parameters.AddWithValue("@DATAINICIAL", dataInicial);
+                cmdConsulta.Parameters.AddWithValue("@DATAFINAL", dataFinal);
+
+                MySqlDataReader reader = cmdConsulta.ExecuteReader();
+
+                List<ConsultasQuery> consultasCompletas = new List<ConsultasQuery>();
+
+                if (reader.HasRows) {
+                    while (reader.Read()) {
+                        ConsultasQuery consulta = new ConsultasQuery();
+                        consulta.idPaciente = reader.GetInt32(0);
+                        consulta.nome = reader.GetString(1);
+                        consulta.idConsulta = reader.GetInt32(2);
+                        consulta.idPacienteConsulta = reader.GetInt32(3);
+                        consulta.dataConsulta = reader.GetDateTime(4);
+
+                        consultasCompletas.Add(consulta);
+                    }
+                    reader.Close();
+                    connection.Close();
+                    return consultasCompletas;
+                } else {
+                    reader.Close();
+                    connection.Close();
+                    return null;
+                }
+            } catch (Exception ex) {
+                throw ex;
+            }
+        }
+
+        public EditarConsultaModel ConsultarConsulta(ConsultarConsulta consulta) {
+            try {
+                MySqlConnection connection = new MySqlConnection(getStringConnection());
+                connection.Open();
+
+                var DALSQL = new ConsultaDALSQL();
+                MySqlCommand cmdConsulta = new MySqlCommand(DALSQL.ConsultarConsulta(), connection);
+                cmdConsulta.Parameters.AddWithValue("@IDCONSULTA", consulta.idConsulta);
+
+                MySqlDataReader reader = cmdConsulta.ExecuteReader();
+
+                EditarConsultaModel retornoConsulta = new EditarConsultaModel();
+                retornoConsulta.paciente = new Models.Consulta.EditarConsultaModel.DadosPaciente();
+                retornoConsulta.consulta = new Models.Consulta.EditarConsultaModel.DadosConsulta();
+
+                if (reader.HasRows) {
+                    while (reader.Read()) {
+                        retornoConsulta.paciente.Nome = reader.GetString(0);
+                        retornoConsulta.paciente.idPaciente = reader.GetInt32(1);
+                        retornoConsulta.paciente.CPF = reader.GetString(2);
+                        retornoConsulta.consulta.DataConsulta = reader.GetDateTime(3);
+                        retornoConsulta.consulta.idConsulta = reader.GetInt32(4);
+                    }
+                    reader.Close();
+                    connection.Close();
+                    return retornoConsulta;
+                } else {
+                    reader.Close();
+                    connection.Close();
+                    return null;
+                }
+            } catch (Exception ex) {
+                throw ex;
+            }
+        }
+
+        public int EditarConsulta(EditarConsultaModel consulta) {
+            try {
+                MySqlConnection connection = new MySqlConnection(getStringConnection());
+                connection.Open();
+
+                var DALSQL = new ConsultaDALSQL();
+                MySqlCommand cmdEditarConsulta = new MySqlCommand(DALSQL.EditarConsulta(consulta), connection);
+                if (consulta.paciente.idPaciente != 0) cmdEditarConsulta.Parameters.AddWithValue("@IDPACIENTECONSULTA", consulta.paciente.idPaciente);
+                if (consulta.consulta.DataConsulta != default(DateTime)) cmdEditarConsulta.Parameters.Add("@DATACONSULTA", MySqlDbType.String).Value = consulta.consulta.DataConsulta.ToString();
+                cmdEditarConsulta.Parameters.AddWithValue("@IDCONSULTA", consulta.consulta.idConsulta);
+
+                Int32 retorno = cmdEditarConsulta.ExecuteNonQuery();
+
+                connection.Close();
+                return retorno;
             } catch (Exception ex) {
                 throw ex;
             }
@@ -123,5 +215,7 @@ namespace SGCM.AppData.Consulta
             }
             return result;
         }
+
+        
     }
 }

@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using SGCM.Models.Consulta.CadastroConsultaModel;
 using SGCM.Models.Consulta.ConsultaPacienteModel;
 using SGCM.AppData.Infraestrutura.UtilMetodo;
+using SGCM.Models.Consulta.ConsultarConsultaModel;
+using SGCM.Models.Consulta.EditarConsultaModel;
 
 namespace SGCM.AppData.Consulta
 {
     public class ConsultaBLL
     {
-        public List<ConsultaPacienteModel> ConsultarPaciente(string nome, string cpf) {
+        public List<ConsultaPacienteModel> ConsultarPaciente(string nome, string cpf, int? idPaciente) {
             if (cpf != null) cpf = UtilMetodo.RemovendoCaracteresEspeciais(cpf);
 
             ConsultaDAL consultaDAL = new ConsultaDAL();
-            return consultaDAL.ConsultarPacienteNome(nome, cpf);
+            return consultaDAL.ConsultarPacienteNome(nome, cpf, idPaciente);
         }
 
         public int CadastrarConsulta(CadastroConsultaModel model) {
@@ -138,5 +140,118 @@ namespace SGCM.AppData.Consulta
                 throw ex;
             }
         }
+
+        public ConsultarConsultasModel ConsultarConsultas(ConsultarConsultasModel model, string data, int id) {
+            try {
+                DateTime dataAtual = new DateTime();
+                if (data == null) dataAtual = DateTime.Today;
+                else {
+                    dataAtual = new DateTime(Convert.ToInt32(data.Split('/')[2]), Convert.ToInt32(data.Split('/')[1]), Convert.ToInt32(data.Split('/')[0]));
+                    if (id == 1) dataAtual = dataAtual.AddDays(-7);
+                    else if (id == 2) dataAtual = dataAtual.AddDays(7);
+                }
+
+                string diaDaSemana = UtilMetodo.VerificaDiaDaSemana(
+                                   Convert.ToInt32(dataAtual.ToShortDateString().Split('/')[0]),
+                                   Convert.ToInt32(dataAtual.ToShortDateString().Split('/')[1]),
+                                   Convert.ToInt32(dataAtual.ToShortDateString().Split('/')[2]));
+                DateTime dataInicial = new DateTime();
+                DateTime dataFinal = new DateTime(); ;
+                DateTime dataFinalAux = new DateTime();
+
+                if (diaDaSemana == "segunda") {
+                    dataInicial = dataAtual;
+                    dataFinalAux = dataAtual.AddDays(4);
+                    dataFinal = new DateTime(dataFinalAux.Year, dataFinalAux.Month, dataFinalAux.Day, 19, 00, 00, 00);
+                } else if (diaDaSemana == "terça") {
+                    dataInicial = dataAtual.AddDays(-1);
+                    dataFinalAux = dataAtual.AddDays(3);
+                    dataFinal = new DateTime(dataFinalAux.Year, dataFinalAux.Month, dataFinalAux.Day, 19, 00, 00, 00);
+                } else if (diaDaSemana == "quarta") {
+                    dataInicial = dataAtual.AddDays(-2);
+                    dataFinalAux = dataAtual.AddDays(2);
+                    dataFinal = new DateTime(dataFinalAux.Year, dataFinalAux.Month, dataFinalAux.Day, 19, 00, 00, 00);
+                } else if (diaDaSemana == "quinta") {
+                    dataInicial = dataAtual.AddDays(-3);
+                    dataFinalAux = dataAtual.AddDays(1);
+                    dataFinal = new DateTime(dataFinalAux.Year, dataFinalAux.Month, dataFinalAux.Day, 19, 00, 00, 00);
+                } else if (diaDaSemana == "sexta") {
+                    dataInicial = dataAtual.AddDays(-4);
+                    dataFinalAux = dataAtual;
+                    dataFinal = new DateTime(dataFinalAux.Year, dataFinalAux.Month, dataFinalAux.Day, 19, 00, 00, 00);
+                }
+
+                model.dataSegunda = dataInicial;
+                model.dataTerca = dataInicial.AddDays(1);
+                model.dataQuarta = dataInicial.AddDays(2);
+                model.dataQuinta = dataInicial.AddDays(3);
+                model.dataSexta = dataFinal;
+
+                ConsultaDAL consultaDAL = new ConsultaDAL();
+                List<ConsultasQuery> consultasCompletas = consultaDAL.ConsultarConsultas(dataInicial, dataFinal);
+
+                if (consultasCompletas == null) return null;
+                else {
+                    List<ConsultasQuery> listaConsultaSegunda = new List<ConsultasQuery>();
+                    List<ConsultasQuery> listaConsultaTerca = new List<ConsultasQuery>();
+                    List<ConsultasQuery> listaConsultaQuarta = new List<ConsultasQuery>();
+                    List<ConsultasQuery> listaConsultaQuinta = new List<ConsultasQuery>();
+                    List<ConsultasQuery> listaConsultaSexta = new List<ConsultasQuery>();
+
+                    foreach (ConsultasQuery consulta in consultasCompletas) {
+                        var diaSemana = UtilMetodo.VerificaDiaDaSemana(
+                                Convert.ToInt32(consulta.dataConsulta.ToShortDateString().Split('/')[0]),
+                                Convert.ToInt32(consulta.dataConsulta.ToShortDateString().Split('/')[1]),
+                                Convert.ToInt32(consulta.dataConsulta.ToShortDateString().Split('/')[2]));
+
+                        if (diaSemana == "segunda") {
+                            var hora = consulta.dataConsulta.ToShortTimeString().Split(':')[0];
+                            var minuto = consulta.dataConsulta.ToShortTimeString().Split(':')[1];
+                            UtilMetodo.AdicinarDadosBandoNaModelSegunda(hora, minuto, ref model, consulta);
+                        } else if (diaSemana == "terça") {
+                            var hora = consulta.dataConsulta.ToShortTimeString().Split(':')[0];
+                            var minuto = consulta.dataConsulta.ToShortTimeString().Split(':')[1];
+                            UtilMetodo.AdicinarDadosBandoNaModelTerca(hora, minuto, ref model, consulta);
+                        } else if (diaSemana == "quarta") {
+                            var hora = consulta.dataConsulta.ToShortTimeString().Split(':')[0];
+                            var minuto = consulta.dataConsulta.ToShortTimeString().Split(':')[1];
+                            UtilMetodo.AdicinarDadosBandoNaModelQuarta(hora, minuto, ref model, consulta);
+                        } else if (diaSemana == "quinta") {
+                            var hora = consulta.dataConsulta.ToShortTimeString().Split(':')[0];
+                            var minuto = consulta.dataConsulta.ToShortTimeString().Split(':')[1];
+                            UtilMetodo.AdicinarDadosBandoNaModelQuinta(hora, minuto, ref model, consulta);
+                        } else if (diaSemana == "sexta") {
+                            var hora = consulta.dataConsulta.ToShortTimeString().Split(':')[0];
+                            var minuto = consulta.dataConsulta.ToShortTimeString().Split(':')[1];
+                            UtilMetodo.AdicinarDadosBandoNaModelSexta(hora, minuto, ref model, consulta);
+                        }
+                    }
+                    return model;
+                }
+            } catch (Exception ex) {
+                throw ex;
+            }
+        }
+
+        public EditarConsultaModel ConsultarConsulta(ConsultarConsulta consulta) {
+            try {
+                ConsultaDAL consultaDAL = new ConsultaDAL();
+                return consultaDAL.ConsultarConsulta(consulta);
+            } catch (Exception ex) {
+                throw ex;
+            }
+        }
+
+        public int EditarConsulta(EditarConsultaModel consulta) {
+            try {
+                consulta.paciente.CPF = UtilMetodo.RemovendoCaracteresEspeciais(consulta.paciente.CPF);
+
+                ConsultaDAL consultaDAL = new ConsultaDAL();
+                return consultaDAL.EditarConsulta(consulta);
+            } catch (Exception ex) {
+                throw ex;
+            }
+        }
+
     }
 }

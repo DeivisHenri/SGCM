@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using static SGCM.AppData.Infraestrutura.CustomMetadataProvider;
 
-namespace SGCM.Models.Consulta.CadastroConsultaModel {
-
-    public class CadastroConsultaModel {
+namespace SGCM.Models.Consulta.EditarConsultaModel {
+    public class EditarConsultaModel {
         public DadosConsulta consulta { get; set; }
         public DadosPaciente paciente { get; set; }
         public List<DadosPaciente> pacienteList { get; set; }
-
     }
 
     public class DadosConsulta {
@@ -18,8 +16,6 @@ namespace SGCM.Models.Consulta.CadastroConsultaModel {
         public DateTime DataConsulta { get; set; }
 
         public int idConsulta { get; set; }
-
-        public Boolean flagPM { get; set; }
     }
 
     public class DadosPaciente {

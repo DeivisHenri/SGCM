@@ -143,18 +143,19 @@ namespace SGCM.Controllers {
 
                         return View(viewModel);
                     } else {
-                        HttpContext.Session.SetString("MensagemTitle", "Informação");
+                        HttpContext.Session.SetString("MensagemTitle", "Erro ao Cadastrar a Consulta");
                         HttpContext.Session.SetString("MensagemBody", "O usuário " + ViewData["nome"] + " não tem acesso a página: 'Usuario/EditarUsuario'");
                         return RedirectToAction("Index", "Home");
                     }
                 } else {
-                    HttpContext.Session.SetString("MensagemTitle", "Informação");
-                    HttpContext.Session.SetString("MensagemBody", "Você não está logado no sistema! Realize o Login antes de acessar essa página!");
-                    return RedirectToAction("Index", "Home");
+                    ViewData.Add("ReturnUrl", "Home/Index");
+                    return RedirectToAction("Signin", "Login", new { ReturnUrl = ViewData["ReturnUrl"] });
                 }
             } catch (Exception ex) {
                 ViewBag.MensagemTitle = "Erro";
-                ViewBag.MensagemBody = ex.Message;
+                ViewBag.MensagemBodyController = "Controller: UsuarioController";
+                ViewBag.MensagemBodyAction = "Action: EditarUsuario/ID";
+                ViewBag.MensagemBody = "Exceção: " + ex.Message;
                 return View();
             }
         }
@@ -181,18 +182,19 @@ namespace SGCM.Controllers {
                             return View();
                         }
                     } else {
-                        HttpContext.Session.SetString("MensagemErro", "Você não tem premissão para acessar a tela de Edição de Usuários!");
-                        HttpContext.Session.SetInt32("FlMensagemErro", 1);
+                        HttpContext.Session.SetString("MensagemTitle", "Erro");
+                        HttpContext.Session.SetString("MensagemBody", "Você não tem premissão para acessar a tela de Edição de Usuários!");
                         return RedirectToAction("Index", "Home");
                     }
                 } else {
-                    HttpContext.Session.SetString("MensagemErro", "Você não está logado no sistema! Realize o Login antes de acessar essa página!");
-                    HttpContext.Session.SetInt32("FlMensagemErro", 1);
-                    return RedirectToAction("Index", "Home");
+                    ViewData.Add("ReturnUrl", ((object[])this.ControllerContext.RouteData.Values.Values)[0] + "/" + ((object[])this.ControllerContext.RouteData.Values.Values)[1]);
+                    return RedirectToAction("Signin", "Login", new { ReturnUrl = ViewData["ReturnUrl"] });
                 }
             } catch (Exception ex) {
                 ViewBag.MensagemTitle = "Erro";
-                ViewBag.MensagemBody = ex.Message;
+                ViewBag.MensagemBodyController = "Controller: UsuarioController";
+                ViewBag.MensagemBodyAction = "Action: EditarUsuario/{USUÁRIO}";
+                ViewBag.MensagemBody = "Exceção: " + ex.Message;
                 return View();
             }
             

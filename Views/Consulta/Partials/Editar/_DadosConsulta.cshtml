@@ -1,5 +1,5 @@
-﻿@using SGCM.Models.Consulta.CadastroConsultaModel;
-@model CadastroConsultaModel
+﻿@using SGCM.Models.Consulta.EditarConsultaModel;
+@model EditarConsultaModel
 
 <div class="row margin-row">
 
@@ -7,8 +7,6 @@
     <div class="col-lg-4 margin-right-15-px">
         <div class="form-group">
             <label asp-for="@Model.paciente.Nome" class="control-label form-label"></label>
-            @*<input asp-for="@Model.paciente.Nome" class="form-control form-input form-input-center" onblur="("location.href='"+ Url.Action("ConsultarNome","Consulta", new { nome = @Model.paciente.Nome} )+ "'")" />*@
-            @*<input asp-for="@Model.paciente.Nome" class="form-control form-input form-input-center" onblur="ConsultarNome()" />*@
             <input asp-for="@Model.paciente.Nome" class="form-control form-input form-input-center" />
             <span asp-validation-for="@Model.paciente.Nome" class="text-danger"></span>
 
@@ -51,5 +49,9 @@
 <div class="displayNone">
     <div class="form-group">
         <input asp-for="@Model.paciente.idPaciente" />
+    </div>
+
+    <div class="form-group">
+        <input asp-for="@Model.consulta.idConsulta" />
     </div>
 </div>

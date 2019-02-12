@@ -1,30 +1,31 @@
-﻿@using SGCM.Models.Consulta.CadastroConsultaModel;
-@model CadastroConsultaModel
-@*@model List<CadastroConsultaModel>*@
+﻿@using SGCM.Models.Consulta.EditarConsultaModel;
+@model EditarConsultaModel
 
-@{ ViewData["Title"] = "Cadastro Consulta"; }
+@{ ViewData["Title"] = "Editar Consulta"; }
 
 @* Folha De Estilo *@
 <partial name="/Views/Consulta/Partials/_ConsultaStyle.cshtml" />
 
 <div class="center-form-container">
-    <form asp-controller="Consulta" asp-action="CadastrarConsulta" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal max-min-width">
+    <form asp-controller="Consulta" asp-action="EditarConsulta" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal max-min-width">
         @Html.AntiForgeryToken()
         <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#dadosPessoais">Dados Consulta</a></li>
+            <li class="active"><a data-toggle="tab" href="#dadosPessoais">Dados Editar</a></li>
         </ul>
 
         <div class="tab-content">
-            <div id="dadosConsulta" class="tab-pane fade in active">
+            <div id="dadosEditar" class="tab-pane fade in active">
                 <h3>Pessoais</h3>
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <partial name="/Views/Consulta/Partials/Cadastro/_DadosConsulta.cshtml" model="@Model" />
+                <partial name="/Views/Consulta/Partials/Editar/_DadosConsulta.cshtml" model="@Model" />
             </div>
         </div>
 
         <div class="form-group padding-top-20px">
-            <button type="submit" class="btn btn-success btn-brand btn-brand-big">&nbsp;Salvar&nbsp;</button>
+            <input id="btnVoltar" type="button" class="btn btn-warning btn-brand btn-brand-big" value="Voltar" onclick="location.href='@Url.Action("ConsultarConsulta", "Consulta")'" />
+            <button id="btnSalvarEdicao" type="submit" class="btn btn-success btn-brand btn-brand-big">&nbsp;Salvar&nbsp;</button>
         </div>
+        <span id="spanMensagem" class="displayNone" style="color: red;">Não pode alterar consultas antigas</span>
     </form>
 </div>
 
@@ -33,13 +34,13 @@
     <partial name="/Views/Consulta/Partials/_ConsultaScript.cshtml" />
 }
 
-<button type="button" id="btnModalCadastroConsulta" class="btn btn-primary displayNone" data-toggle="modal" data-target="#cadastroConsultaModal"> </button>
+<button type="button" id="btnModalEditarConsulta" class="btn btn-primary displayNone" data-toggle="modal" data-target="#editarConsultaModal"> </button>
 
-<div class="modal fade" id="cadastroConsultaModal" tabindex="-1" role="dialog" aria-labelledby="cadastroConsultaModalLabel" aria-hidden="true">
+<div class="modal fade" id="editarConsultaModal" tabindex="-1" role="dialog" aria-labelledby="editarConsultaModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header displayFlex">
-                <h4 class="modal-title width100" id="cadastroConsultaModalLabel">@ViewBag.MensagemTitle</h4>
+                <h4 class="modal-title width100" id="editarConsultaModalLabel">@ViewBag.MensagemTitle</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -62,10 +63,40 @@
 {
     <script>
         $(document).ready(function () {
-            $('#btnModalCadastroConsulta').click();
+            $('#btnModalEditarConsulta').click();
         });
     </script>
 }
+
+<script>
+    $(document).ready(function () {
+
+        var inputNome = $('#paciente_Nome');
+        var inputCPF = $('#paciente_CPF');
+        var inputDataConsulta = $('#dataConsulta');
+        var btnSlavar = $('#btnSalvarEdicao');
+        var btnPesquisaPaciente = $('#btnPesquisaPaciente');
+
+        var dataConsulta = $('#dataConsulta').val();
+        var dataAtual = new Date($.now()).toLocaleString();
+
+        if ( (new Date(dataConsulta)) <= (new Date(dataAtual)) ) {
+            inputNome.prop('disabled', true);
+            inputCPF.prop('disabled', true);
+            inputDataConsulta.prop('disabled', true);
+            btnSlavar.prop('disabled', true);
+            btnPesquisaPaciente.prop('disabled', true);
+            $('#spanMensagem').removeClass("displayNone");
+        } else {
+            inputNome.prop('disabled', false);
+            inputCPF.prop('disabled', false);
+            inputDataConsulta.prop('disabled', false);
+            btnSlavar.prop('disabled', false);
+            btnPesquisaPaciente.prop('disabled', false);
+            $('#spanMensagem').addClass("displayNone");
+        }
+    });
+</script>
 
 <button type="button" id="btnconsultaPaciente" class="btn btn-primary displayNone" data-toggle="modal" data-target="#consultaPaciente"> </button>
 
