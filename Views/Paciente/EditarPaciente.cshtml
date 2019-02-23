@@ -12,7 +12,46 @@
     <form asp-controller="Paciente" asp-action="EditarPaciente" method="post" class="form-horizontal max-min-width">
         @Html.AntiForgeryToken()
         <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#dadosPessoais">Dados Paciente</a></li>
+            <li class="active"><a data-toggle="tab" href="#dadosPessoais">Dados Pessoais Paciente</a></li>
+            @{
+                if (ViewData["flConsultaC"].ToString() == "1")
+                {
+                    <partial name="/Views/Paciente/Partials/ConsultaAnterior/_DadoConsulta.cshtml" model="@Model" />
+                    <li><a data-toggle="tab" href="#dadoConsulta">Dado Consulta</a></li>
+                }
+            }
+
+            @{
+                if (ViewData["flHistoriaPatologicaPregressaC"].ToString() == "1")
+                {
+                    <partial name="/Views/Paciente/Partials/HistoriaMolestiaAtual/_DadoMolestiaAtual.cshtml" model="@Model" />
+                    <li><a data-toggle="tab" href="#dadoMolestiaAtual">História Patológica Pregressa</a></li>
+                }
+            }
+
+            @{
+                if (ViewData["flHistoriaMolestiaAtualC"].ToString() == "1")
+                {
+                    <partial name="/Views/Paciente/Partials/HistoriaMolestiaAtual/_DadoMolestiaAtual.cshtml" model="@Model" />
+                    <li><a data-toggle="tab" href="#dadoMolestiaAtual">História da moléstia atual</a></li>
+                }
+            }
+
+            @{
+                if (ViewData["flExamesC"].ToString() == "1")
+                {
+                    <partial name="/Views/Paciente/Partials/Exame/_DadoExame.cshtml" model="@Model" />
+                    <li><a data-toggle="tab" href="#dadosPessoais">Dados Paciente</a></li>
+                }
+            }
+
+            @{
+                if (ViewData["flMedicamentoC"].ToString() == "1")
+                {
+                    <partial name="/Views/Paciente/Partials/Medicamento/_DadoMedicamento.cshtml" model="@Model" />
+                    <li><a data-toggle="tab" href="#dadosPessoais">Dados Paciente</a></li>
+                }
+            }
         </ul>
 
         <div class="tab-content">
@@ -21,30 +60,30 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <partial name="/Views/Paciente/Partials/Editar/_DadosPessoais.cshtml" model="@Model" />
                 @{
-                    if (ViewData["flConsultasAnteriores"].ToString() == "1")
+                    if (ViewData["flConsultaAnteriorC"].ToString() == "1")
                     {
-                        <partial name="/Views/Paciente/Partials/ConsultaAnterior/_DadosConsultas.cshtml" model="@Model" />
+                        <partial name="/Views/Paciente/Partials/ConsultaAnterior/_DadoConsulta.cshtml" model="@Model" />
                     }
                 }
 
                 @{
-                    if (ViewData["flHistoriaMolestiaAtual"].ToString() == "1")
+                    if (ViewData["flHistoriaMolestiaAtualC"].ToString() == "1")
                     {
-                        <partial name="/Views/Paciente/Partials/HistoriaMolestiaAtual/_DadosMolestiaAtual.cshtml" model="@Model" />
+                        <partial name="/Views/Paciente/Partials/HistoriaMolestiaAtual/_DadoMolestiaAtual.cshtml" model="@Model" />
                     }
                 }
 
                 @{
                     if (ViewData["flExamesC"].ToString() == "1")
                     {
-                        <partial name="/Views/Paciente/Partials/Exames/_DadosExames.cshtml" model="@Model" />
+                        <partial name="/Views/Paciente/Partials/Exame/_DadoExame.cshtml" model="@Model" />
                     }
                 }
 
                 @{
                     if (ViewData["flMedicamentoC"].ToString() == "1")
                     {
-                        <partial name="/Views/Paciente/Partials/Medicamentos/_DadosMedicamentos.cshtml" model="@Model" />
+                        <partial name="/Views/Paciente/Partials/Medicamento/_DadoMedicamento.cshtml" model="@Model" />
                     }
                 }
             </div>
