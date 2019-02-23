@@ -6,6 +6,7 @@ using SGCM.Models.Consulta.CadastroConsultaModel;
 using SGCM.Models.Consulta.ConsultaPacienteModel;
 using SGCM.Models.Consulta.ConsultarConsultaModel;
 using SGCM.Models.Consulta.EditarConsultaModel;
+using SGCM.Models.Ausencia.CadastrarAusenciaModel;
 
 namespace SGCM.AppData.Consulta
 {
@@ -205,6 +206,65 @@ namespace SGCM.AppData.Consulta
             }
         }
 
+        public CadastrarAusenciaBancoModel ConsultarAusencia(DateTime dataInicial) {
+            try {
+                MySqlConnection connection = new MySqlConnection(getStringConnection());
+                connection.Open();
+
+                var DALSQL = new ConsultaDALSQL();
+                MySqlCommand cmdAusencia = new MySqlCommand(DALSQL.ConsultarAusencia(), connection);
+                cmdAusencia.Parameters.AddWithValue("@DATAINICIAL", dataInicial.ToShortDateString());
+
+                var teste = getGeneratedSql(cmdAusencia);
+
+                MySqlDataReader reader = cmdAusencia.ExecuteReader();
+                CadastrarAusenciaBancoModel ausencia = new CadastrarAusenciaBancoModel();
+
+                if (reader.HasRows) {
+                    while (reader.Read()) {
+                        ausencia.idAusencia = reader.GetInt32(0);
+                        ausencia.DataFinal = reader.GetDateTime(1);
+                        ausencia.DataFinal = reader.GetDateTime(2);
+                        ausencia.Seis = reader.GetInt32(3);
+                        ausencia.SeisMeia = reader.GetInt32(4);
+                        ausencia.Sete = reader.GetInt32(5);
+                        ausencia.SeteMeia = reader.GetInt32(6);
+                        ausencia.Oito = reader.GetInt32(7);
+                        ausencia.OitoMeia = reader.GetInt32(8);
+                        ausencia.Nove = reader.GetInt32(9);
+                        ausencia.NoveMeia = reader.GetInt32(10);
+                        ausencia.Dez = reader.GetInt32(11);
+                        ausencia.DezMeia = reader.GetInt32(12);
+                        ausencia.Onze = reader.GetInt32(13);
+                        ausencia.OnzeMeia = reader.GetInt32(14);
+                        ausencia.Doze = reader.GetInt32(15);
+                        ausencia.DozeMeia = reader.GetInt32(16);
+                        ausencia.Treze = reader.GetInt32(17);
+                        ausencia.TrezeMeia = reader.GetInt32(18);
+                        ausencia.Quatorze = reader.GetInt32(19);
+                        ausencia.QuatorzeMeia = reader.GetInt32(20);
+                        ausencia.Quinze = reader.GetInt32(21);
+                        ausencia.QuinzeMeia = reader.GetInt32(22);
+                        ausencia.Dezesseis = reader.GetInt32(23);
+                        ausencia.DezesseisMeia = reader.GetInt32(24);
+                        ausencia.Dezessete = reader.GetInt32(25);
+                        ausencia.DezesseteMeia = reader.GetInt32(26);
+                        ausencia.Dezoito = reader.GetInt32(27);
+                        ausencia.DezoitoMeia = reader.GetInt32(28);
+                    }
+                    reader.Close();
+                    connection.Close();
+                    return ausencia;
+                } else {
+                    reader.Close();
+                    connection.Close();
+                    return null;
+                }
+            } catch (Exception ex) {
+                throw ex;
+            }
+        }
+
         private string getGeneratedSql(MySqlCommand cmd)
         {
             string result = cmd.CommandText.ToString();
@@ -219,3 +279,30 @@ namespace SGCM.AppData.Consulta
         
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

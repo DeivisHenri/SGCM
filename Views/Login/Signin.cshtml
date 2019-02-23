@@ -98,7 +98,11 @@
                 <h4 class="modal-title" id="myModalLabel">@ViewBag.MensagemTitle</h4>
             </div>
             <div class="modal-body">
-                @ViewBag.MensagemBody
+                @if (ViewBag.MensagemBodyController.ToString() != "")
+                {<h5>@ViewBag.MensagemBodyController</h5>}
+                @if (ViewBag.MensagemBodyAction.ToString() != "")
+                {<h5>@ViewBag.MensagemBodyAction</h5>}
+                <h5 id="mensagemBody">@ViewBag.MensagemBody</h5>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

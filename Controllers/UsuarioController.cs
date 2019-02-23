@@ -42,12 +42,11 @@ namespace SGCM.Controllers {
                 }
             } catch (Exception ex) {
                 ViewBag.MensagemTitle = "Erro";
-                ViewBag.MensagemBodyController = "Controller: ConsultaController";
-                ViewBag.MensagemBodyAction = "Action: CadasrarConsulta";
+                ViewBag.MensagemBodyController = "Controller: UsuarioController";
+                ViewBag.MensagemBodyAction = "Action: CadastroUsuario - GET";
                 ViewBag.MensagemBody = "Exceção: " + ex.Message;
                 return View();
             }
-            
         }
 
         // POST: /Usuario/CadastroUsuario
@@ -55,6 +54,8 @@ namespace SGCM.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult CadastroUsuario(CadastroUsuarioModel model) {
             try {
+                ViewBag.MensagemBodyController = "";
+                ViewBag.MensagemBodyAction = "";
                 ViewBag.MensagemBody = "";
                 if (!ModelState.IsValid) return View(model);
 
@@ -75,14 +76,12 @@ namespace SGCM.Controllers {
                     ViewBag.MensagemBody = "Ocorreu um erro ao cadastrar um usuário!";
                     return View(model);
                 }
-            } catch (SqlException exSQL) {
-                ViewBag.MensagemTitle = "Error";
-                ViewBag.MensagemBody = exSQL.Message;
-                return View(model);
             } catch (Exception ex) {
-                ViewBag.MensagemTitle = "Error";
-                ViewBag.MensagemBody = ex.Message;
-                return View(model);
+                ViewBag.MensagemTitle = "Erro";
+                ViewBag.MensagemBodyController = "Controller: UsuarioController";
+                ViewBag.MensagemBodyAction = "Action: CadastroUsuario - POST";
+                ViewBag.MensagemBody = "Exceção: " + ex.Message;
+                return View();
             }
         }
 
@@ -90,6 +89,8 @@ namespace SGCM.Controllers {
         [HttpGet]
         public ActionResult ConsultaUsuario() {
             try {
+                ViewBag.MensagemBodyController = "";
+                ViewBag.MensagemBodyAction = "";
                 ViewBag.MensagemBody = "";
                 CarregarDadosUsuarioParaTela();
                 if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
@@ -116,16 +117,19 @@ namespace SGCM.Controllers {
                 }
             } catch (Exception ex) {
                 ViewBag.MensagemTitle = "Erro";
-                ViewBag.MensagemBody = ex.Message;
+                ViewBag.MensagemBodyController = "Controller: UsuarioController";
+                ViewBag.MensagemBodyAction = "Action: ConsultaUsuario - GET";
+                ViewBag.MensagemBody = "Exceção: " + ex.Message;
                 return View();
             }
-            
         }
 
         //GET: /Usuario/EditarUsuario
         [HttpGet]
         public ActionResult EditarUsuario(int id) {
             try {
+                ViewBag.MensagemBodyController = "";
+                ViewBag.MensagemBodyAction = "";
                 ViewBag.MensagemBody = "";
                 CarregarDadosUsuarioParaTela();
                 if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
@@ -154,7 +158,7 @@ namespace SGCM.Controllers {
             } catch (Exception ex) {
                 ViewBag.MensagemTitle = "Erro";
                 ViewBag.MensagemBodyController = "Controller: UsuarioController";
-                ViewBag.MensagemBodyAction = "Action: EditarUsuario/ID";
+                ViewBag.MensagemBodyAction = "Action: EditarUsuario/ID - GET";
                 ViewBag.MensagemBody = "Exceção: " + ex.Message;
                 return View();
             }
@@ -165,6 +169,8 @@ namespace SGCM.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult EditarUsuario(EditarUsuarioModel model) {
             try {
+                ViewBag.MensagemBodyController = "";
+                ViewBag.MensagemBodyAction = "";
                 ViewBag.MensagemBody = "";
                 CarregarDadosUsuarioParaTela();
                 if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
@@ -193,11 +199,10 @@ namespace SGCM.Controllers {
             } catch (Exception ex) {
                 ViewBag.MensagemTitle = "Erro";
                 ViewBag.MensagemBodyController = "Controller: UsuarioController";
-                ViewBag.MensagemBodyAction = "Action: EditarUsuario/{USUÁRIO}";
+                ViewBag.MensagemBodyAction = "Action: EditarUsuario/{USUÁRIO} - POST";
                 ViewBag.MensagemBody = "Exceção: " + ex.Message;
                 return View();
             }
-            
         }
 
         //GET: /Usuario/Relatorio
@@ -400,17 +405,17 @@ namespace SGCM.Controllers {
             }
         }
 
-        private void CarregarDadosUsuarioParaTela() {
+        private void CarregarDadosUsuarioParaTela()
+        {
             ViewData.Add("idUsuario", HttpContext.Session.GetInt32("idUsuario"));
             ViewData.Add("usuario", HttpContext.Session.GetString("usuario"));
-            ViewData.Add("tipoUsuario", HttpContext.Session.GetString("tipoUsuario"));
 
             ViewData.Add("idPessoa", HttpContext.Session.GetInt32("idPessoa"));
             ViewData.Add("idMedico", HttpContext.Session.GetInt32("idMedico"));
+            ViewData.Add("tipoUsuario", HttpContext.Session.GetInt32("tipoUsuario"));
             ViewData.Add("nome", HttpContext.Session.GetString("nome"));
             ViewData.Add("cpf", HttpContext.Session.GetString("cpf"));
             ViewData.Add("rg", HttpContext.Session.GetString("rg"));
-            ViewData.Add("sexo", HttpContext.Session.GetString("sexo"));
             ViewData.Add("dataNascimento", HttpContext.Session.GetString("dataNascimento"));
             ViewData.Add("logradouro", HttpContext.Session.GetString("logradouro"));
             ViewData.Add("numero", HttpContext.Session.GetInt32("numero"));
@@ -434,6 +439,11 @@ namespace SGCM.Controllers {
             ViewData.Add("flConsultaC", HttpContext.Session.GetInt32("flConsultaC"));
             ViewData.Add("flConsultaA", HttpContext.Session.GetInt32("flConsultaA"));
             ViewData.Add("flConsultaE", HttpContext.Session.GetInt32("flConsultaE"));
+
+            ViewData.Add("flAusenciaI", HttpContext.Session.GetInt32("flAusenciaI"));
+            ViewData.Add("flAusenciaC", HttpContext.Session.GetInt32("flAusenciaC"));
+            ViewData.Add("flAusenciaA", HttpContext.Session.GetInt32("flAusenciaA"));
+            ViewData.Add("flAusenciaE", HttpContext.Session.GetInt32("flAusenciaE"));
 
             ViewData.Add("flMedicamentoI", HttpContext.Session.GetInt32("flMedicamentoI"));
             ViewData.Add("flMedicamentoC", HttpContext.Session.GetInt32("flMedicamentoC"));

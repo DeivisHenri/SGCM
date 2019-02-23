@@ -13,19 +13,6 @@
 <div class="center-form-container">
     <form asp-controller="Usuario" asp-action="EditarUsuario" method="post" class="form-horizontal max-min-width">
         @Html.AntiForgeryToken()
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        @if (ViewData["UserMessage"] != null)
-        {
-            var message = (UserMessage)ViewData["userMessage"];
-            <div class="alert-message @message.cssClassName">
-                <div id="Title" class="">
-                    <strong>@message.title</strong>
-                </div>
-                <div id="message" class="">
-                    @message.userMessage
-                </div>
-            </div>
-        }
         <ul class="nav nav-tabs">
             <li id="liDadosPessoais" class="active"><a data-toggle="tab" href="#dadosPessoais">Dados Pessoais</a></li>
             <li id="liDadosLogin"><a data-toggle="tab" href="#dadosLogin">Dados Login</a></li>
@@ -57,6 +44,40 @@
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 
     <partial name="/Views/Usuario/Partials/Editar/_UsuarioScript.cshtml" />
+}
+
+<button type="button" id="btnModalEditarUsuario" class="btn btn-primary displayNone" data-toggle="modal" data-target="#editarUsuarioModal"> </button>
+
+<div class="modal fade" id="editarUsuarioModal" tabindex="-1" role="dialog" aria-labelledby="editarUsuarioModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header displayFlex">
+                <h4 class="modal-title width100" id="editarUsuarioModalLabel">@ViewBag.MensagemTitle</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @if (ViewBag.MensagemBodyController.ToString() != "")
+                {<h5>@ViewBag.MensagemBodyController</h5>}
+                @if (ViewBag.MensagemBodyAction.ToString() != "")
+                {<h5>@ViewBag.MensagemBodyAction</h5>}
+                <h5 id="mensagemBody">@ViewBag.MensagemBody</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (ViewBag.MensagemBody.ToString() != "")
+{
+    <script>
+        $(document).ready(function () {
+            $('#btnModalEditarUsuario').click();
+        });
+    </script>
 }
 
 

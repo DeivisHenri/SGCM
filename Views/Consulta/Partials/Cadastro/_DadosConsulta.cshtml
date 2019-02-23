@@ -40,7 +40,7 @@
     <div class="col-lg-3 margin-right-15-px">
         <div class="form-group">
             <label asp-for="@Model.consulta.DataConsulta" class="control-label form-label"></label>
-            <input asp-for="@Model.consulta.DataConsulta" asp-format="{0:dd/MM/yyyy hh:mm}" type="datetime" textmode="DateTimeLocal" class="form-control form-input form-input-center maskDateTime" id="dataConsulta" />
+            <input asp-for="@Model.consulta.DataConsulta" asp-format="{0:dd/MM/yyyy HH:mm}" type="datetime" textmode="DateTimeLocal" class="form-control form-input form-input-center maskDateTime" id="dataConsulta" />
             <span asp-validation-for="@Model.consulta.DataConsulta" class="text-danger"></span>
         </div>
     </div>

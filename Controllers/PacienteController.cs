@@ -9,28 +9,37 @@ using SGCM.Models.Paciente.EditarPacienteModel;
 
 namespace SGCM.Controllers
 {
-    public class PacienteController : Controller
-    {
+    public class PacienteController : Controller {
+
         //GET: /Paciente/CadastroPaciente
         [HttpGet]
         public ActionResult CadastroPaciente() {
-            ViewBag.MensagemBody = "";
-            CarregarDadosUsuarioParaTela();
-            if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
-                if ((int)ViewData["FlPacienteI"] != 0) {
+            try {
+                ViewBag.MensagemBodyController = "";
+                ViewBag.MensagemBodyAction = "";
+                ViewBag.MensagemBody = "";
+                CarregarDadosUsuarioParaTela();
+                if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
+                    if ((int)ViewData["FlPacienteI"] != 0) {
+                        var viewModel = new CadastroPacienteModel();
+                        viewModel.pessoa = new Models.Paciente.CadastroPacienteModel.DadosPessoais();
 
-                    var viewModel = new CadastroPacienteModel();
-                    viewModel.pessoa = new Models.Paciente.CadastroPacienteModel.DadosPessoais();
-
-                    return View(viewModel);
+                        return View(viewModel);
+                    } else {
+                        HttpContext.Session.SetString("MensagemTitle", "Erro");
+                        HttpContext.Session.SetString("MensagemBody", "O usuário " + ViewData["nome"] + " não tem acesso a página: 'Paciente/CadastroPaciente'");
+                        return RedirectToAction("Index", "Home");
+                    }
                 } else {
-                    HttpContext.Session.SetString("MensagemTitle", "Erro");
-                    HttpContext.Session.SetString("MensagemBody", "O usuário " + ViewData["nome"] + " não tem acesso a página: 'Paciente/CadastroPaciente'");
-                    return RedirectToAction("Index", "Home");
+                    ViewData.Add("ReturnUrl", ((object[])this.ControllerContext.RouteData.Values.Values)[0] + "/" + ((object[])this.ControllerContext.RouteData.Values.Values)[1]);
+                    return RedirectToAction("Signin", "Login", new { ReturnUrl = ViewData["ReturnUrl"] });
                 }
-            } else {
-                ViewData.Add("ReturnUrl", ((object[])this.ControllerContext.RouteData.Values.Values)[0] + "/" + ((object[])this.ControllerContext.RouteData.Values.Values)[1]);
-                return RedirectToAction("Signin", "Login", new { ReturnUrl = ViewData["ReturnUrl"] });
+            } catch (Exception ex) {
+                ViewBag.MensagemTitle = "Erro";
+                ViewBag.MensagemBodyController = "Controller: PacienteController";
+                ViewBag.MensagemBodyAction = "Action: CadastroPaciente - GET";
+                ViewBag.MensagemBody = "Exceção: " + ex.Message;
+                return View();
             }
         }
 
@@ -39,6 +48,8 @@ namespace SGCM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CadastroPaciente(CadastroPacienteModel model) {
             try {
+                ViewBag.MensagemBodyController = "";
+                ViewBag.MensagemBodyAction = "";
                 ViewBag.MensagemBody = "";
                 if (!ModelState.IsValid) return View(model);
 
@@ -64,12 +75,11 @@ namespace SGCM.Controllers
                     HttpContext.Session.SetString("MensagemBody", "O usuário " + ViewData["nome"] + " não tem permissão para cadastrar pacientes!");
                     return RedirectToAction("Index", "Home");
                 }
-
-                
-            }
-            catch (Exception ex) {
-                ViewBag.MensagemTitle = "Erro no Cadastro de Paciente";
-                ViewBag.MensagemBody = "Ocorreu uma exceção: " + ex.Message;
+            } catch (Exception ex) {
+                ViewBag.MensagemTitle = "Erro";
+                ViewBag.MensagemBodyController = "Controller: PacienteController";
+                ViewBag.MensagemBodyAction = "Action: CadastroPaciente/{PACIENTE} - POST";
+                ViewBag.MensagemBody = "Exceção: " + ex.Message;
                 return View();
             }
         }
@@ -78,6 +88,8 @@ namespace SGCM.Controllers
         [HttpGet]
         public ActionResult ConsultarPaciente() {
             try {
+                ViewBag.MensagemBodyController = "";
+                ViewBag.MensagemBodyAction = "";
                 ViewBag.MensagemBody = "";
                 CarregarDadosUsuarioParaTela();
                 if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
@@ -108,17 +120,23 @@ namespace SGCM.Controllers
                     ViewData.Add("ReturnUrl", ((object[])this.ControllerContext.RouteData.Values.Values)[0] + "/" + ((object[])this.ControllerContext.RouteData.Values.Values)[1]);
                     return RedirectToAction("Signin", "Login", new { ReturnUrl = ViewData["ReturnUrl"] });
                 }
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 ViewBag.MensagemTitle = "Erro";
-                ViewBag.MensagemBody = ex.Message;
+                ViewBag.MensagemBodyController = "Controller: PacienteController";
+                ViewBag.MensagemBodyAction = "Action: ConsultarPaciente - GET";
+                ViewBag.MensagemBody = "Exceção: " + ex.Message;
                 return View();
             }
-            
+
         }
 
         [HttpGet]
         public ActionResult EditarPaciente(int id) {
             try {
+                ViewBag.MensagemBodyController = "";
+                ViewBag.MensagemBodyAction = "";
                 ViewBag.MensagemBody = "";
                 CarregarDadosUsuarioParaTela();
                 if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
@@ -137,17 +155,23 @@ namespace SGCM.Controllers
                     HttpContext.Session.SetString("MensagemBody", "Você não está logado no sistema! Realize o Login antes de acessar essa página!");
                     return RedirectToAction("Index", "Home");
                 }
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 ViewBag.MensagemTitle = "Erro";
-                ViewBag.MensagemBody = ex.Message;
+                ViewBag.MensagemBodyController = "Controller: PacienteController";
+                ViewBag.MensagemBodyAction = "Action: EditarPaciente/ID - GET";
+                ViewBag.MensagemBody = "Exceção: " + ex.Message;
                 return View();
             }
-            
+
         }
 
         [HttpPost]
         public ActionResult EditarPaciente(EditarPacienteModel pacienteModel) {
             try {
+                ViewBag.MensagemBodyController = "";
+                ViewBag.MensagemBodyAction = "";
                 ViewBag.MensagemBody = "";
                 CarregarDadosUsuarioParaTela();
                 if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
@@ -174,24 +198,28 @@ namespace SGCM.Controllers
                     HttpContext.Session.SetString("MensagemBody", "O usuário " + ViewData["nome"] + " não tem acesso a página: 'Paciente/EditarPaciente'");
                     return RedirectToAction("Index", "Home");
                 }
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 ViewBag.MensagemTitle = "Erro";
-                ViewBag.MensagemBody = ex.Message;
+                ViewBag.MensagemBodyController = "Controller: PacienteController";
+                ViewBag.MensagemBodyAction = "Action: EditarPaciente/{PACIENTE} - POST";
+                ViewBag.MensagemBody = "Exceção: " + ex.Message;
                 return View();
             }
         }
 
-        private void CarregarDadosUsuarioParaTela() {
+        private void CarregarDadosUsuarioParaTela()
+        {
             ViewData.Add("idUsuario", HttpContext.Session.GetInt32("idUsuario"));
             ViewData.Add("usuario", HttpContext.Session.GetString("usuario"));
-            ViewData.Add("tipoUsuario", HttpContext.Session.GetString("tipoUsuario"));
 
             ViewData.Add("idPessoa", HttpContext.Session.GetInt32("idPessoa"));
             ViewData.Add("idMedico", HttpContext.Session.GetInt32("idMedico"));
+            ViewData.Add("tipoUsuario", HttpContext.Session.GetInt32("tipoUsuario"));
             ViewData.Add("nome", HttpContext.Session.GetString("nome"));
             ViewData.Add("cpf", HttpContext.Session.GetString("cpf"));
             ViewData.Add("rg", HttpContext.Session.GetString("rg"));
-            ViewData.Add("sexo", HttpContext.Session.GetString("sexo"));
             ViewData.Add("dataNascimento", HttpContext.Session.GetString("dataNascimento"));
             ViewData.Add("logradouro", HttpContext.Session.GetString("logradouro"));
             ViewData.Add("numero", HttpContext.Session.GetInt32("numero"));
@@ -215,6 +243,11 @@ namespace SGCM.Controllers
             ViewData.Add("flConsultaC", HttpContext.Session.GetInt32("flConsultaC"));
             ViewData.Add("flConsultaA", HttpContext.Session.GetInt32("flConsultaA"));
             ViewData.Add("flConsultaE", HttpContext.Session.GetInt32("flConsultaE"));
+
+            ViewData.Add("flAusenciaI", HttpContext.Session.GetInt32("flAusenciaI"));
+            ViewData.Add("flAusenciaC", HttpContext.Session.GetInt32("flAusenciaC"));
+            ViewData.Add("flAusenciaA", HttpContext.Session.GetInt32("flAusenciaA"));
+            ViewData.Add("flAusenciaE", HttpContext.Session.GetInt32("flAusenciaE"));
 
             ViewData.Add("flMedicamentoI", HttpContext.Session.GetInt32("flMedicamentoI"));
             ViewData.Add("flMedicamentoC", HttpContext.Session.GetInt32("flMedicamentoC"));

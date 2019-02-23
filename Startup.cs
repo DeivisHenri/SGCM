@@ -42,7 +42,7 @@ namespace SGCM
 
             services.AddMemoryCache();
             services.AddSession(options => {
-                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.IdleTimeout = TimeSpan.FromHours(12);
                 //options.CookieName = ".MyApplication";
             });
 

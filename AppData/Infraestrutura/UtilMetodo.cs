@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using SGCM.Models.Consulta.ConsultarConsultaModel;
-using SGCM.Models.Usuario.CadastroUsuarioModel;
-using SGCM.Models.Usuario.EditarUsuarioModel;
+using SGCM.Models.Ausencia.CadastrarAusenciaModel;
+using SGCM.Models.Ausencia.EditarAusenciaModel;
 
 namespace SGCM.AppData.Infraestrutura.UtilMetodo {
     public class UtilMetodo {
@@ -359,7 +359,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
 
             switch (h) {
                 case 0:
-                    return "sábado";
+                    return "sabado";
                 case 1:
                     return "domingo";
                 case 2:
@@ -376,7 +376,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
             return "";
         }
 
-        public static void AdicinarDadosBandoNaModelSegunda (string hora, string minuto,
+        public static void AdicinarDadosBandoNaModelSegunda(string hora, string minuto,
                                                     ref ConsultarConsultasModel model, ConsultasQuery consultaDia)
         {
             switch (hora)
@@ -1453,6 +1453,180 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                     }
                     break;
             }
+        }
+
+        public static int[] DescobrirHora(int indice) {
+            int[] hora = new int[2];
+            switch (indice) {
+                case 1:
+                    hora[0] = 6;
+                    hora[1] = 00;
+                    break;
+                case 2:
+                    hora[0] = 6;
+                    hora[1] = 30;
+                    break;
+                case 3:
+                    hora[0] = 7;
+                    hora[1] = 00;
+                    break;
+                case 4:
+                    hora[0] = 7;
+                    hora[1] = 30;
+                    break;
+                case 5:
+                    hora[0] = 8;
+                    hora[1] = 00;
+                    break;
+                case 6:
+                    hora[0] = 8;
+                    hora[1] = 30;
+                    break;
+                case 7:
+                    hora[0] = 9;
+                    hora[1] = 00;
+                    break;
+                case 8:
+                    hora[0] = 9;
+                    hora[1] = 30;
+                    break;
+                case 9:
+                    hora[0] = 10;
+                    hora[1] = 00;
+                    break;
+                case 10:
+                    hora[0] = 10;
+                    hora[1] = 30;
+                    break;
+                case 11:
+                    hora[0] = 11;
+                    hora[1] = 00;
+                    break;
+                case 12:
+                    hora[0] = 11;
+                    hora[1] = 30;
+                    break;
+                case 13:
+                    hora[0] = 12;
+                    hora[1] = 00;
+                    break;
+                case 14:
+                    hora[0] = 12;
+                    hora[1] = 30;
+                    break;
+                case 15:
+                    hora[0] = 13;
+                    hora[1] = 00;
+                    break;
+                case 16:
+                    hora[0] = 13;
+                    hora[1] = 30;
+                    break;
+                case 17:
+                    hora[0] = 14;
+                    hora[1] = 00;
+                    break;
+                case 18:
+                    hora[0] = 14;
+                    hora[1] = 30;
+                    break;
+                case 19:
+                    hora[0] = 15;
+                    hora[1] = 00;
+                    break;
+                case 20:
+                    hora[0] = 15;
+                    hora[1] = 30;
+                    break;
+                case 21:
+                    hora[0] = 16;
+                    hora[1] = 00;
+                    break;
+                case 22:
+                    hora[0] = 16;
+                    hora[1] = 30;
+                    break;
+                case 23:
+                    hora[0] = 17;
+                    hora[1] = 00;
+                    break;
+                case 24:
+                    hora[0] = 17;
+                    hora[1] = 30;
+                    break;
+                case 25:
+                    hora[0] = 18;
+                    hora[1] = 00;
+                    break;
+                case 26:
+                    hora[0] = 18;
+                    hora[1] = 30;
+                    break;
+            }
+
+            return hora;
+        }
+
+        public static CadastrarAusenciaBancoModel MarcarAusenciaCadastrarNoBancoModel(CadastrarAusenciaBancoModel ausenciaBancoModel, int[] listAusencia) {
+
+            ausenciaBancoModel.Seis = listAusencia[0];
+            ausenciaBancoModel.SeisMeia = listAusencia[1];
+            ausenciaBancoModel.Sete = listAusencia[2];
+            ausenciaBancoModel.SeteMeia = listAusencia[3];
+            ausenciaBancoModel.Oito = listAusencia[4];
+            ausenciaBancoModel.OitoMeia = listAusencia[5];
+            ausenciaBancoModel.Nove = listAusencia[5];
+            ausenciaBancoModel.NoveMeia = listAusencia[7];
+            ausenciaBancoModel.Dez = listAusencia[8];
+            ausenciaBancoModel.DezMeia = listAusencia[9];
+            ausenciaBancoModel.Onze = listAusencia[10];
+            ausenciaBancoModel.OnzeMeia = listAusencia[11];
+            ausenciaBancoModel.Doze = listAusencia[12];
+            ausenciaBancoModel.DozeMeia = listAusencia[13];
+            ausenciaBancoModel.Treze = listAusencia[14];
+            ausenciaBancoModel.TrezeMeia = listAusencia[15];
+            ausenciaBancoModel.Quatorze = listAusencia[16];
+            ausenciaBancoModel.QuatorzeMeia = listAusencia[17];
+            ausenciaBancoModel.Quinze = listAusencia[18];
+            ausenciaBancoModel.QuinzeMeia = listAusencia[19];
+            ausenciaBancoModel.Dezesseis = listAusencia[20];
+            ausenciaBancoModel.DezesseisMeia = listAusencia[21];
+            ausenciaBancoModel.Dezessete = listAusencia[22];
+            ausenciaBancoModel.DezesseteMeia = listAusencia[23];
+            ausenciaBancoModel.Dezoito = listAusencia[24];
+            ausenciaBancoModel.DezoitoMeia = listAusencia[25];
+            return ausenciaBancoModel;
+        }
+
+        public static EditarAusenciaBancoModel MarcarAusenciaEditarNoBancoModel(EditarAusenciaBancoModel editarAusenciaBanco, int[] listAusencia){
+
+            editarAusenciaBanco.Seis = listAusencia[0];
+            editarAusenciaBanco.SeisMeia = listAusencia[1];
+            editarAusenciaBanco.Sete = listAusencia[2];
+            editarAusenciaBanco.SeteMeia = listAusencia[3];
+            editarAusenciaBanco.Oito = listAusencia[4];
+            editarAusenciaBanco.OitoMeia = listAusencia[5];
+            editarAusenciaBanco.Nove = listAusencia[5];
+            editarAusenciaBanco.NoveMeia = listAusencia[7];
+            editarAusenciaBanco.Dez = listAusencia[8];
+            editarAusenciaBanco.DezMeia = listAusencia[9];
+            editarAusenciaBanco.Onze = listAusencia[10];
+            editarAusenciaBanco.OnzeMeia = listAusencia[11];
+            editarAusenciaBanco.Doze = listAusencia[12];
+            editarAusenciaBanco.DozeMeia = listAusencia[13];
+            editarAusenciaBanco.Treze = listAusencia[14];
+            editarAusenciaBanco.TrezeMeia = listAusencia[15];
+            editarAusenciaBanco.Quatorze = listAusencia[16];
+            editarAusenciaBanco.QuatorzeMeia = listAusencia[17];
+            editarAusenciaBanco.Quinze = listAusencia[18];
+            editarAusenciaBanco.QuinzeMeia = listAusencia[19];
+            editarAusenciaBanco.Dezesseis = listAusencia[20];
+            editarAusenciaBanco.DezesseisMeia = listAusencia[21];
+            editarAusenciaBanco.Dezessete = listAusencia[22];
+            editarAusenciaBanco.DezesseteMeia = listAusencia[23];
+            editarAusenciaBanco.Dezoito = listAusencia[24];
+            editarAusenciaBanco.DezoitoMeia = listAusencia[25];
+            return editarAusenciaBanco;
         }
     }
 }

@@ -11,7 +11,7 @@
 
 @*<div class="center-form-container">*@
 <div class="consulta-usuario-container">
-    <div class="medico-header">
+    <div>
         <h3>Usuarios Cadastrador pelo Médico: @ViewData["nome"]</h3>
     </div>
 
@@ -57,19 +57,23 @@
     <partial name="/Views/Usuario/Partials/Consultar/_UsuarioScript.cshtml" />
 }
 
-<button type="button" id="btnModalConsultaUsuario" class="btn btn-primary displayNone" data-toggle="modal" data-target="#editarUsuarioModal"> </button>
+<button type="button" id="btnModalConsultaUsuario" class="btn btn-primary displayNone" data-toggle="modal" data-target="#consultarUsuarioModal"> </button>
 
-<div class="modal fade" id="editarUsuarioModal" tabindex="-1" role="dialog" aria-labelledby="editarUsuarioModalLabel" aria-hidden="true">
+<div class="modal fade" id="consultarUsuarioModal" tabindex="-1" role="dialog" aria-labelledby="consultarUsuarioModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header displayFlex">
-                <h4 class="modal-title width100" id="editarUsuarioModalLabel">@ViewBag.MensagemTitle</h4>
+                <h4 class="modal-title width100" id="consultarUsuarioModalLabel">@ViewBag.MensagemTitle</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <h5>@ViewBag.MensagemBody</h5>
+                @if (ViewBag.MensagemBodyController.ToString() != "")
+                {<h5>@ViewBag.MensagemBodyController</h5>}
+                @if (ViewBag.MensagemBodyAction.ToString() != "")
+                {<h5>@ViewBag.MensagemBodyAction</h5>}
+                <h5 id="mensagemBody">@ViewBag.MensagemBody</h5>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>

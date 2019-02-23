@@ -63,6 +63,7 @@
                 $('.maskTelefone').mask('(99) 99999-9999');
                 $('.maskCPF').mask('999.999.999-99');
                 $('.maskDateTime').mask('99/99/9999 99:99');
+                $('.maskDate').mask('99/99/9999');
 
                 $('#paciente_Nome').focus();
 
@@ -111,6 +112,12 @@
                     token = $(token).val();
                     return token;
                 }
+
+                $(".dropdown-menu li a").click(function () {
+                    $(this).parents(".btn-group").find('.selection').text($(this).text());
+                    $(this).parents(".btn-group").find('.selection').val($(this).text());
+                });
+
             });
         });
     })(jQuery);

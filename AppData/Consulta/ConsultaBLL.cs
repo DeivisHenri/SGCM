@@ -5,6 +5,7 @@ using SGCM.Models.Consulta.ConsultaPacienteModel;
 using SGCM.AppData.Infraestrutura.UtilMetodo;
 using SGCM.Models.Consulta.ConsultarConsultaModel;
 using SGCM.Models.Consulta.EditarConsultaModel;
+using SGCM.Models.Ausencia.CadastrarAusenciaModel;
 
 namespace SGCM.AppData.Consulta
 {
@@ -59,6 +60,12 @@ namespace SGCM.AppData.Consulta
             else if (minuto == 45) flagMinuto = true;
 
             if (!flagMinuto) return 7;
+
+            CadastrarAusenciaBancoModel ausenciaBancoModel = consultaDAL.ConsultarAusencia(model.consulta.DataConsulta);
+
+            if (ausenciaBancoModel != null) {
+                return 8;
+            }
 
             return consultaDAL.CadastrarConsulta(model);
         }
@@ -179,6 +186,14 @@ namespace SGCM.AppData.Consulta
                     dataInicial = dataAtual.AddDays(-4);
                     dataFinalAux = dataAtual;
                     dataFinal = new DateTime(dataFinalAux.Year, dataFinalAux.Month, dataFinalAux.Day, 19, 00, 00, 00);
+                } else if (diaDaSemana == "sabado") {
+                    dataInicial = dataAtual.AddDays(-5);
+                    dataFinalAux = dataAtual.AddDays(-1);
+                    dataFinal = new DateTime(dataFinalAux.Year, dataFinalAux.Month, dataFinalAux.Day, 19, 00, 00, 00);
+                } else if (diaDaSemana == "domingo") {
+                    dataInicial = dataAtual.AddDays(-6);
+                    dataFinalAux = dataAtual.AddDays(-2);
+                    dataFinal = new DateTime(dataFinalAux.Year, dataFinalAux.Month, dataFinalAux.Day, 19, 00, 00, 00);
                 }
 
                 model.dataSegunda = dataInicial;
@@ -188,6 +203,162 @@ namespace SGCM.AppData.Consulta
                 model.dataSexta = dataFinal;
 
                 ConsultaDAL consultaDAL = new ConsultaDAL();
+
+                CadastrarAusenciaBancoModel dataAusenciaBancoModelSegunda = consultaDAL.ConsultarAusencia(model.dataSegunda);
+                if (dataAusenciaBancoModelSegunda != null)
+                {
+                    model.dataSegundaAusenciaBancoModel.Seis = dataAusenciaBancoModelSegunda.Seis;
+                    model.dataSegundaAusenciaBancoModel.SeisMeia = dataAusenciaBancoModelSegunda.SeisMeia;
+                    model.dataSegundaAusenciaBancoModel.Sete = dataAusenciaBancoModelSegunda.Sete;
+                    model.dataSegundaAusenciaBancoModel.SeteMeia = dataAusenciaBancoModelSegunda.SeteMeia;
+                    model.dataSegundaAusenciaBancoModel.Oito = dataAusenciaBancoModelSegunda.Oito;
+                    model.dataSegundaAusenciaBancoModel.OitoMeia = dataAusenciaBancoModelSegunda.OitoMeia;
+                    model.dataSegundaAusenciaBancoModel.Nove = dataAusenciaBancoModelSegunda.Nove;
+                    model.dataSegundaAusenciaBancoModel.NoveMeia = dataAusenciaBancoModelSegunda.NoveMeia;
+                    model.dataSegundaAusenciaBancoModel.Dez = dataAusenciaBancoModelSegunda.Dez;
+                    model.dataSegundaAusenciaBancoModel.DezMeia = dataAusenciaBancoModelSegunda.DezMeia;
+                    model.dataSegundaAusenciaBancoModel.Onze = dataAusenciaBancoModelSegunda.Onze;
+                    model.dataSegundaAusenciaBancoModel.OnzeMeia = dataAusenciaBancoModelSegunda.OnzeMeia;
+                    model.dataSegundaAusenciaBancoModel.Doze = dataAusenciaBancoModelSegunda.Doze;
+                    model.dataSegundaAusenciaBancoModel.DozeMeia = dataAusenciaBancoModelSegunda.DozeMeia;
+                    model.dataSegundaAusenciaBancoModel.Treze = dataAusenciaBancoModelSegunda.Treze;
+                    model.dataSegundaAusenciaBancoModel.TrezeMeia = dataAusenciaBancoModelSegunda.TrezeMeia;
+                    model.dataSegundaAusenciaBancoModel.Quatorze = dataAusenciaBancoModelSegunda.Quatorze;
+                    model.dataSegundaAusenciaBancoModel.QuatorzeMeia = dataAusenciaBancoModelSegunda.QuatorzeMeia;
+                    model.dataSegundaAusenciaBancoModel.Quinze = dataAusenciaBancoModelSegunda.Quinze;
+                    model.dataSegundaAusenciaBancoModel.QuinzeMeia = dataAusenciaBancoModelSegunda.QuinzeMeia;
+                    model.dataSegundaAusenciaBancoModel.Dezesseis = dataAusenciaBancoModelSegunda.Dezesseis;
+                    model.dataSegundaAusenciaBancoModel.DezesseisMeia = dataAusenciaBancoModelSegunda.DezesseisMeia;
+                    model.dataSegundaAusenciaBancoModel.Dezessete = dataAusenciaBancoModelSegunda.Dezessete;
+                    model.dataSegundaAusenciaBancoModel.DezesseteMeia = dataAusenciaBancoModelSegunda.DezesseteMeia;
+                    model.dataSegundaAusenciaBancoModel.Dezoito = dataAusenciaBancoModelSegunda.Dezoito;
+                    model.dataSegundaAusenciaBancoModel.DezoitoMeia = dataAusenciaBancoModelSegunda.DezoitoMeia;
+                }
+
+                CadastrarAusenciaBancoModel dataAusenciaBancoModelTerca = consultaDAL.ConsultarAusencia(model.dataTerca);
+                if (dataAusenciaBancoModelTerca != null)
+                {
+                    model.dataTercaAusenciaBancoModel.Seis = dataAusenciaBancoModelTerca.Seis;
+                    model.dataTercaAusenciaBancoModel.SeisMeia = dataAusenciaBancoModelTerca.SeisMeia;
+                    model.dataTercaAusenciaBancoModel.Sete = dataAusenciaBancoModelTerca.Sete;
+                    model.dataTercaAusenciaBancoModel.SeteMeia = dataAusenciaBancoModelTerca.SeteMeia;
+                    model.dataTercaAusenciaBancoModel.Oito = dataAusenciaBancoModelTerca.Oito;
+                    model.dataTercaAusenciaBancoModel.OitoMeia = dataAusenciaBancoModelTerca.OitoMeia;
+                    model.dataTercaAusenciaBancoModel.Nove = dataAusenciaBancoModelTerca.Nove;
+                    model.dataTercaAusenciaBancoModel.NoveMeia = dataAusenciaBancoModelTerca.NoveMeia;
+                    model.dataTercaAusenciaBancoModel.Dez = dataAusenciaBancoModelTerca.Dez;
+                    model.dataTercaAusenciaBancoModel.DezMeia = dataAusenciaBancoModelTerca.DezMeia;
+                    model.dataTercaAusenciaBancoModel.Onze = dataAusenciaBancoModelTerca.Onze;
+                    model.dataTercaAusenciaBancoModel.OnzeMeia = dataAusenciaBancoModelTerca.OnzeMeia;
+                    model.dataTercaAusenciaBancoModel.Doze = dataAusenciaBancoModelTerca.Doze;
+                    model.dataTercaAusenciaBancoModel.DozeMeia = dataAusenciaBancoModelTerca.DozeMeia;
+                    model.dataTercaAusenciaBancoModel.Treze = dataAusenciaBancoModelTerca.Treze;
+                    model.dataTercaAusenciaBancoModel.TrezeMeia = dataAusenciaBancoModelTerca.TrezeMeia;
+                    model.dataTercaAusenciaBancoModel.Quatorze = dataAusenciaBancoModelTerca.Quatorze;
+                    model.dataTercaAusenciaBancoModel.QuatorzeMeia = dataAusenciaBancoModelTerca.QuatorzeMeia;
+                    model.dataTercaAusenciaBancoModel.Quinze = dataAusenciaBancoModelTerca.Quinze;
+                    model.dataTercaAusenciaBancoModel.QuinzeMeia = dataAusenciaBancoModelTerca.QuinzeMeia;
+                    model.dataTercaAusenciaBancoModel.Dezesseis = dataAusenciaBancoModelTerca.Dezesseis;
+                    model.dataTercaAusenciaBancoModel.DezesseisMeia = dataAusenciaBancoModelTerca.DezesseisMeia;
+                    model.dataTercaAusenciaBancoModel.Dezessete = dataAusenciaBancoModelTerca.Dezessete;
+                    model.dataTercaAusenciaBancoModel.DezesseteMeia = dataAusenciaBancoModelTerca.DezesseteMeia;
+                    model.dataTercaAusenciaBancoModel.Dezoito = dataAusenciaBancoModelTerca.Dezoito;
+                    model.dataTercaAusenciaBancoModel.DezoitoMeia = dataAusenciaBancoModelTerca.DezoitoMeia;
+                }
+
+                CadastrarAusenciaBancoModel dataAusenciaBancoModelQuarta = consultaDAL.ConsultarAusencia(model.dataQuarta);
+                if (dataAusenciaBancoModelQuarta != null)
+                {
+                    model.dataQuartaAusenciaBancoModel.Seis = dataAusenciaBancoModelQuarta.Seis;
+                    model.dataQuartaAusenciaBancoModel.SeisMeia = dataAusenciaBancoModelQuarta.SeisMeia;
+                    model.dataQuartaAusenciaBancoModel.Sete = dataAusenciaBancoModelQuarta.Sete;
+                    model.dataQuartaAusenciaBancoModel.SeteMeia = dataAusenciaBancoModelQuarta.SeteMeia;
+                    model.dataQuartaAusenciaBancoModel.Oito = dataAusenciaBancoModelQuarta.Oito;
+                    model.dataQuartaAusenciaBancoModel.OitoMeia = dataAusenciaBancoModelQuarta.OitoMeia;
+                    model.dataQuartaAusenciaBancoModel.Nove = dataAusenciaBancoModelQuarta.Nove;
+                    model.dataQuartaAusenciaBancoModel.NoveMeia = dataAusenciaBancoModelQuarta.NoveMeia;
+                    model.dataQuartaAusenciaBancoModel.Dez = dataAusenciaBancoModelQuarta.Dez;
+                    model.dataQuartaAusenciaBancoModel.DezMeia = dataAusenciaBancoModelQuarta.DezMeia;
+                    model.dataQuartaAusenciaBancoModel.Onze = dataAusenciaBancoModelQuarta.Onze;
+                    model.dataQuartaAusenciaBancoModel.OnzeMeia = dataAusenciaBancoModelQuarta.OnzeMeia;
+                    model.dataQuartaAusenciaBancoModel.Doze = dataAusenciaBancoModelQuarta.Doze;
+                    model.dataQuartaAusenciaBancoModel.DozeMeia = dataAusenciaBancoModelQuarta.DozeMeia;
+                    model.dataQuartaAusenciaBancoModel.Treze = dataAusenciaBancoModelQuarta.Treze;
+                    model.dataQuartaAusenciaBancoModel.TrezeMeia = dataAusenciaBancoModelQuarta.TrezeMeia;
+                    model.dataQuartaAusenciaBancoModel.Quatorze = dataAusenciaBancoModelQuarta.Quatorze;
+                    model.dataQuartaAusenciaBancoModel.QuatorzeMeia = dataAusenciaBancoModelQuarta.QuatorzeMeia;
+                    model.dataQuartaAusenciaBancoModel.Quinze = dataAusenciaBancoModelQuarta.Quinze;
+                    model.dataQuartaAusenciaBancoModel.QuinzeMeia = dataAusenciaBancoModelQuarta.QuinzeMeia;
+                    model.dataQuartaAusenciaBancoModel.Dezesseis = dataAusenciaBancoModelQuarta.Dezesseis;
+                    model.dataQuartaAusenciaBancoModel.DezesseisMeia = dataAusenciaBancoModelQuarta.DezesseisMeia;
+                    model.dataQuartaAusenciaBancoModel.Dezessete = dataAusenciaBancoModelQuarta.Dezessete;
+                    model.dataQuartaAusenciaBancoModel.DezesseteMeia = dataAusenciaBancoModelQuarta.DezesseteMeia;
+                    model.dataQuartaAusenciaBancoModel.Dezoito = dataAusenciaBancoModelQuarta.Dezoito;
+                    model.dataQuartaAusenciaBancoModel.DezoitoMeia = dataAusenciaBancoModelQuarta.DezoitoMeia;
+                }
+
+                CadastrarAusenciaBancoModel dataAusenciaBancoModelQuinta = consultaDAL.ConsultarAusencia(model.dataQuinta);
+                if (dataAusenciaBancoModelQuinta != null)
+                {
+                    model.dataQuintaAusenciaBancoModel.Seis = dataAusenciaBancoModelQuinta.Seis;
+                    model.dataQuintaAusenciaBancoModel.SeisMeia = dataAusenciaBancoModelQuinta.SeisMeia;
+                    model.dataQuintaAusenciaBancoModel.Sete = dataAusenciaBancoModelQuinta.Sete;
+                    model.dataQuintaAusenciaBancoModel.SeteMeia = dataAusenciaBancoModelQuinta.SeteMeia;
+                    model.dataQuintaAusenciaBancoModel.Oito = dataAusenciaBancoModelQuinta.Oito;
+                    model.dataQuintaAusenciaBancoModel.OitoMeia = dataAusenciaBancoModelQuinta.OitoMeia;
+                    model.dataQuintaAusenciaBancoModel.Nove = dataAusenciaBancoModelQuinta.Nove;
+                    model.dataQuintaAusenciaBancoModel.NoveMeia = dataAusenciaBancoModelQuinta.NoveMeia;
+                    model.dataQuintaAusenciaBancoModel.Dez = dataAusenciaBancoModelQuinta.Dez;
+                    model.dataQuintaAusenciaBancoModel.DezMeia = dataAusenciaBancoModelQuinta.DezMeia;
+                    model.dataQuintaAusenciaBancoModel.Onze = dataAusenciaBancoModelQuinta.Onze;
+                    model.dataQuintaAusenciaBancoModel.OnzeMeia = dataAusenciaBancoModelQuinta.OnzeMeia;
+                    model.dataQuintaAusenciaBancoModel.Doze = dataAusenciaBancoModelQuinta.Doze;
+                    model.dataQuintaAusenciaBancoModel.DozeMeia = dataAusenciaBancoModelQuinta.DozeMeia;
+                    model.dataQuintaAusenciaBancoModel.Treze = dataAusenciaBancoModelQuinta.Treze;
+                    model.dataQuintaAusenciaBancoModel.TrezeMeia = dataAusenciaBancoModelQuinta.TrezeMeia;
+                    model.dataQuintaAusenciaBancoModel.Quatorze = dataAusenciaBancoModelQuinta.Quatorze;
+                    model.dataQuintaAusenciaBancoModel.QuatorzeMeia = dataAusenciaBancoModelQuinta.QuatorzeMeia;
+                    model.dataQuintaAusenciaBancoModel.Quinze = dataAusenciaBancoModelQuinta.Quinze;
+                    model.dataQuintaAusenciaBancoModel.QuinzeMeia = dataAusenciaBancoModelQuinta.QuinzeMeia;
+                    model.dataQuintaAusenciaBancoModel.Dezesseis = dataAusenciaBancoModelQuinta.Dezesseis;
+                    model.dataQuintaAusenciaBancoModel.DezesseisMeia = dataAusenciaBancoModelQuinta.DezesseisMeia;
+                    model.dataQuintaAusenciaBancoModel.Dezessete = dataAusenciaBancoModelQuinta.Dezessete;
+                    model.dataQuintaAusenciaBancoModel.DezesseteMeia = dataAusenciaBancoModelQuinta.DezesseteMeia;
+                    model.dataQuintaAusenciaBancoModel.Dezoito = dataAusenciaBancoModelQuinta.Dezoito;
+                    model.dataQuintaAusenciaBancoModel.DezoitoMeia = dataAusenciaBancoModelQuinta.DezoitoMeia;
+                }
+
+                CadastrarAusenciaBancoModel dataAusenciaBancoModelSexta = consultaDAL.ConsultarAusencia(model.dataSexta);
+                if (dataAusenciaBancoModelSexta != null)
+                {
+                    model.dataSextaAusenciaBancoModel.Seis = dataAusenciaBancoModelSexta.Seis;
+                    model.dataSextaAusenciaBancoModel.SeisMeia = dataAusenciaBancoModelSexta.SeisMeia;
+                    model.dataSextaAusenciaBancoModel.Sete = dataAusenciaBancoModelSexta.Sete;
+                    model.dataSextaAusenciaBancoModel.SeteMeia = dataAusenciaBancoModelSexta.SeteMeia;
+                    model.dataSextaAusenciaBancoModel.Oito = dataAusenciaBancoModelSexta.Oito;
+                    model.dataSextaAusenciaBancoModel.OitoMeia = dataAusenciaBancoModelSexta.OitoMeia;
+                    model.dataSextaAusenciaBancoModel.Nove = dataAusenciaBancoModelSexta.Nove;
+                    model.dataSextaAusenciaBancoModel.NoveMeia = dataAusenciaBancoModelSexta.NoveMeia;
+                    model.dataSextaAusenciaBancoModel.Dez = dataAusenciaBancoModelSexta.Dez;
+                    model.dataSextaAusenciaBancoModel.DezMeia = dataAusenciaBancoModelSexta.DezMeia;
+                    model.dataSextaAusenciaBancoModel.Onze = dataAusenciaBancoModelSexta.Onze;
+                    model.dataSextaAusenciaBancoModel.OnzeMeia = dataAusenciaBancoModelSexta.OnzeMeia;
+                    model.dataSextaAusenciaBancoModel.Doze = dataAusenciaBancoModelSexta.Doze;
+                    model.dataSextaAusenciaBancoModel.DozeMeia = dataAusenciaBancoModelSexta.DozeMeia;
+                    model.dataSextaAusenciaBancoModel.Treze = dataAusenciaBancoModelSexta.Treze;
+                    model.dataSextaAusenciaBancoModel.TrezeMeia = dataAusenciaBancoModelSexta.TrezeMeia;
+                    model.dataSextaAusenciaBancoModel.Quatorze = dataAusenciaBancoModelSexta.Quatorze;
+                    model.dataSextaAusenciaBancoModel.QuatorzeMeia = dataAusenciaBancoModelSexta.QuatorzeMeia;
+                    model.dataSextaAusenciaBancoModel.Quinze = dataAusenciaBancoModelSexta.Quinze;
+                    model.dataSextaAusenciaBancoModel.QuinzeMeia = dataAusenciaBancoModelSexta.QuinzeMeia;
+                    model.dataSextaAusenciaBancoModel.Dezesseis = dataAusenciaBancoModelSexta.Dezesseis;
+                    model.dataSextaAusenciaBancoModel.DezesseisMeia = dataAusenciaBancoModelSexta.DezesseisMeia;
+                    model.dataSextaAusenciaBancoModel.Dezessete = dataAusenciaBancoModelSexta.Dezessete;
+                    model.dataSextaAusenciaBancoModel.DezesseteMeia = dataAusenciaBancoModelSexta.DezesseteMeia;
+                    model.dataSextaAusenciaBancoModel.Dezoito = dataAusenciaBancoModelSexta.Dezoito;
+                    model.dataSextaAusenciaBancoModel.DezoitoMeia = dataAusenciaBancoModelSexta.DezoitoMeia;
+                }
+
                 List<ConsultasQuery> consultasCompletas = consultaDAL.ConsultarConsultas(dataInicial, dataFinal);
 
                 if (consultasCompletas == null) return null;
@@ -252,6 +423,5 @@ namespace SGCM.AppData.Consulta
                 throw ex;
             }
         }
-
     }
 }

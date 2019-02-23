@@ -98,5 +98,77 @@ namespace SGCM.AppData.Consulta {
 
             return command.ToString();
         }
+
+        public string ConsultarAusencia() {
+            StringBuilder command = new StringBuilder();
+
+            command.AppendLine("Select idAusencia,");
+            command.AppendLine("       dataInicial,");
+            command.AppendLine("       dataFinal,");
+            command.AppendLine("       seis,");
+            command.AppendLine("       seisMeia,");
+            command.AppendLine("       sete,");
+            command.AppendLine("       seteMeia,");
+            command.AppendLine("       oito,");
+            command.AppendLine("       oitoMeia,");
+            command.AppendLine("       nove,");
+            command.AppendLine("       noveMeia,");
+            command.AppendLine("       dez,");
+            command.AppendLine("       dezMeia,");
+            command.AppendLine("       onze,");
+            command.AppendLine("       onzeMeia,");
+            command.AppendLine("       doze,");
+            command.AppendLine("       dozeMeia,");
+            command.AppendLine("       treze,");
+            command.AppendLine("       trezeMeia,");
+            command.AppendLine("       quatorze,");
+            command.AppendLine("       quatorzeMeia,");
+            command.AppendLine("       quinze,");
+            command.AppendLine("       quinzeMeia,");
+            command.AppendLine("       dezesseis,");
+            command.AppendLine("       dezesseisMeia,");
+            command.AppendLine("       dezessete,");
+            command.AppendLine("       dezesseteMeia,");
+            command.AppendLine("       dezoito,");
+            command.AppendLine("       dezoitoMeia");
+            command.AppendLine("From ausencia");
+            command.AppendLine("Where dataInicial = STR_TO_DATE(@DATAINICIAL, '%d/%m/%Y')");
+
+            return command.ToString();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

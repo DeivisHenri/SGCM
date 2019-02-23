@@ -15,37 +15,48 @@ namespace SGCM.Controllers {
         //GET: /Login/Signin
         [HttpGet]
         public ActionResult Signin(string returnUrl = null) {
-            if (returnUrl != null) ViewData.Add("ReturnUrl", returnUrl);
-            ViewBag.MensagemBody = "";
-            CarregarDadosUsuarioParaTela();
-            if ((ViewData["idUsuario"] == null) || ((int) ViewData["idUsuario"] == 0)){
-                var usuarioCookie = getCookie("usuario");
-                if (usuarioCookie != null) {
-                    var objLoginBLL = new LoginBLL();
-                    var retorno = objLoginBLL.BuscarDadosUsuario(usuarioCookie);
-                    CarregarDadosUsuarioParaSession(retorno);
-                    CarregarDadosUsuarioParaTela();
+            try {
+                if (returnUrl != null) ViewData.Add("ReturnUrl", returnUrl);
+                ViewBag.MensagemBodyController = "";
+                ViewBag.MensagemBodyAction = "";
+                ViewBag.MensagemBody = "";
+                CarregarDadosUsuarioParaTela();
+                if ((ViewData["idUsuario"] == null) || ((int)ViewData["idUsuario"] == 0)) {
+                    var usuarioCookie = getCookie("usuario");
+                    if (usuarioCookie != null) {
+                        var objLoginBLL = new LoginBLL();
+                        var retorno = objLoginBLL.BuscarDadosUsuario(usuarioCookie);
+                        CarregarDadosUsuarioParaSession(retorno);
+                        CarregarDadosUsuarioParaTela();
 
-                    if ((ViewData["ReturnUrl"] != null) && (ViewData["ReturnUrl"].ToString() != "")) {
+                        if ((ViewData["ReturnUrl"] != null) && (ViewData["ReturnUrl"].ToString() != "")) {
+                            return Redirect("/" + returnUrl);
+                        } else {
+                            return Redirect("/Home/Index");
+                        }
+                    } else {
+                        if ((HttpContext.Session.GetString("UserMessage") != null) && (HttpContext.Session.GetString("UserMessage") != "")) {
+                            ViewData["UserMessage"] = new UserMessage { title = "Erro", userMessage = HttpContext.Session.GetString("UserMessage"), cssClassName = "alert-error" };
+                            HttpContext.Session.SetString("UserMessage", "");
+                        }
+                        ViewData["Title"] = "Login";
+                        return View();
+                    }
+                } else {
+                    if ((ViewData["ReturnUrl"] != null) && (ViewData["ReturnUrl"].ToString() != "")){
                         return Redirect("/" + returnUrl);
                     } else {
                         return Redirect("/Home/Index");
                     }
-                } else {
-                    if ((HttpContext.Session.GetString("UserMessage") != null) && (HttpContext.Session.GetString("UserMessage") != "")) {
-                        ViewData["UserMessage"] = new UserMessage { title = "Erro", userMessage = HttpContext.Session.GetString("UserMessage"), cssClassName = "alert-error" };
-                        HttpContext.Session.SetString("UserMessage", "");
-                    }
-                    ViewData["Title"] = "Login";
-                    return View();
                 }
-            } else {
-                if ((ViewData["ReturnUrl"] != null) && (ViewData["ReturnUrl"].ToString() != "")) {
-                    return Redirect("/" + returnUrl);
-                } else {
-                    return Redirect("/Home/Index");
-                }
+            } catch (Exception ex) {
+                ViewBag.MensagemTitle = "Erro";
+                ViewBag.MensagemBodyController = "Controller: LoginController";
+                ViewBag.MensagemBodyAction = "Action: Signin - GET";
+                ViewBag.MensagemBody = "Exceção: " + ex.Message;
+                return View();
             }
+            
         }
 
         // POST: /Login/Signin
@@ -53,6 +64,9 @@ namespace SGCM.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult Signin(LoginViewModel model, string returnUrl = null) {
             try {
+                ViewBag.MensagemBodyController = "";
+                ViewBag.MensagemBodyAction = "";
+                ViewBag.MensagemBody = "";
                 if (!ModelState.IsValid) return View(model);
 
                 var objLoginBLL = new LoginBLL();
@@ -63,17 +77,14 @@ namespace SGCM.Controllers {
                 if (retorno.IdRetorno == 1) {
                     ViewBag.MensagemTitle = "Erro";
                     ViewBag.MensagemBody = "Usuário " + model.Username + " está desativado!";
-                    //ViewData["UserMessage"] = new UserMessage { title = "Erro", userMessage = "", cssClassName = "alert-error" };
                     return View(model);
                 } else if (retorno.IdRetorno == 2) {
                     ViewBag.MensagemTitle = "Erro";
                     ViewBag.MensagemBody = "Usuário ou senha inválido!";
-                    //ViewData["UserMessage"] = new UserMessage { title = "Erro", userMessage = "", cssClassName = "alert-error" };
                     return View();
                 } else {
                     ViewBag.MensagemTitle = "Sucesso";
                     ViewBag.MensagemBody = "Login realizado com sucesso, redirecionando a página...";
-                    //ViewData["UserMessage"] = new UserMessage { title = "Sucesso", userMessage = "", cssClassName = "alert-sucess" };
                     CarregarDadosUsuarioParaSession(retorno);
                     if (returnUrl != null) {
                         return Redirect("/" + returnUrl);
@@ -81,17 +92,12 @@ namespace SGCM.Controllers {
                         return Redirect("/Home/Index");
                     }
                 }
-            } catch (MySqlException exSQL) {
+            } catch (Exception ex) {
                 ViewBag.MensagemTitle = "Erro";
-                ViewBag.MensagemBody = "Erro em acessar o banco de dados: " + exSQL.Message;
-                //ViewData["UserMessage"] = new UserMessage { title = "Erro", userMessage = , cssClassName = "alert-error" };
-                return View(model);
-            }
-            catch (Exception ex) {
-                ViewBag.MensagemTitle = "Erro";
+                ViewBag.MensagemBodyController = "Controller: LoginController";
+                ViewBag.MensagemBodyAction = "Action: Signin/{LOGIN} - POST";
                 ViewBag.MensagemBody = "Exceção: " + ex.Message;
-                //ViewData["UserMessage"] = new UserMessage { title = "Erro", userMessage = , cssClassName = "alert -error" };
-                return View(model);
+                return View();
             }
         }
 
@@ -137,6 +143,11 @@ namespace SGCM.Controllers {
             HttpContext.Session.SetInt32("flConsultaA", usuarioCompletoTO.permissoesTO.flPacienteA);
             HttpContext.Session.SetInt32("flConsultaE", usuarioCompletoTO.permissoesTO.flPacienteE);
 
+            HttpContext.Session.SetInt32("flAusenciaI", usuarioCompletoTO.permissoesTO.flAusenciaI);
+            HttpContext.Session.SetInt32("flAusenciaC", usuarioCompletoTO.permissoesTO.flAusenciaC);
+            HttpContext.Session.SetInt32("flAusenciaA", usuarioCompletoTO.permissoesTO.flAusenciaA);
+            HttpContext.Session.SetInt32("flAusenciaE", usuarioCompletoTO.permissoesTO.flAusenciaE);
+
             HttpContext.Session.SetInt32("flMedicamentoI", usuarioCompletoTO.permissoesTO.flMedicamentoI);
             HttpContext.Session.SetInt32("flMedicamentoC", usuarioCompletoTO.permissoesTO.flMedicamentoC);
             HttpContext.Session.SetInt32("flMedicamentoA", usuarioCompletoTO.permissoesTO.flMedicamentoA);
@@ -156,17 +167,17 @@ namespace SGCM.Controllers {
             ViewData.Add("idPessoa", HttpContext.Session.GetInt32("idPessoa"));
             ViewData.Add("idMedico", HttpContext.Session.GetInt32("idMedico"));
             ViewData.Add("tipoUsuario", HttpContext.Session.GetInt32("tipoUsuario"));
-            ViewData.Add("nome", HttpContext.Session.GetInt32("nome"));
-            ViewData.Add("cpf", HttpContext.Session.GetInt32("cpf"));
-            ViewData.Add("rg", HttpContext.Session.GetInt32("rg"));
-            ViewData.Add("dataNascimento", HttpContext.Session.GetInt32("dataNascimento"));
-            ViewData.Add("logradouro", HttpContext.Session.GetInt32("logradouro"));
+            ViewData.Add("nome", HttpContext.Session.GetString("nome"));
+            ViewData.Add("cpf", HttpContext.Session.GetString("cpf"));
+            ViewData.Add("rg", HttpContext.Session.GetString("rg"));
+            ViewData.Add("dataNascimento", HttpContext.Session.GetString("dataNascimento"));
+            ViewData.Add("logradouro", HttpContext.Session.GetString("logradouro"));
             ViewData.Add("numero", HttpContext.Session.GetInt32("numero"));
-            ViewData.Add("bairro", HttpContext.Session.GetInt32("bairro"));
-            ViewData.Add("cidade", HttpContext.Session.GetInt32("cidade"));
-            ViewData.Add("uf", HttpContext.Session.GetInt32("uf"));
-            ViewData.Add("telefoneCelular", HttpContext.Session.GetInt32("telefoneCelular"));
-            ViewData.Add("email", HttpContext.Session.GetInt32("email"));
+            ViewData.Add("bairro", HttpContext.Session.GetString("bairro"));
+            ViewData.Add("cidade", HttpContext.Session.GetString("cidade"));
+            ViewData.Add("uf", HttpContext.Session.GetString("uf"));
+            ViewData.Add("telefoneCelular", HttpContext.Session.GetString("telefoneCelular"));
+            ViewData.Add("email", HttpContext.Session.GetString("email"));
 
             ViewData.Add("flUsuarioI", HttpContext.Session.GetInt32("flUsuarioI"));
             ViewData.Add("flUsuarioC", HttpContext.Session.GetInt32("flUsuarioC"));
@@ -182,6 +193,11 @@ namespace SGCM.Controllers {
             ViewData.Add("flConsultaC", HttpContext.Session.GetInt32("flConsultaC"));
             ViewData.Add("flConsultaA", HttpContext.Session.GetInt32("flConsultaA"));
             ViewData.Add("flConsultaE", HttpContext.Session.GetInt32("flConsultaE"));
+
+            ViewData.Add("flAusenciaI", HttpContext.Session.GetInt32("flAusenciaI"));
+            ViewData.Add("flAusenciaC", HttpContext.Session.GetInt32("flAusenciaC"));
+            ViewData.Add("flAusenciaA", HttpContext.Session.GetInt32("flAusenciaA"));
+            ViewData.Add("flAusenciaE", HttpContext.Session.GetInt32("flAusenciaE"));
 
             ViewData.Add("flMedicamentoI", HttpContext.Session.GetInt32("flMedicamentoI"));
             ViewData.Add("flMedicamentoC", HttpContext.Session.GetInt32("flMedicamentoC"));

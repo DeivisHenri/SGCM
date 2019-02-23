@@ -270,6 +270,11 @@ namespace SGCM.Controllers {
             ViewData.Add("flConsultaA", HttpContext.Session.GetInt32("flConsultaA"));
             ViewData.Add("flConsultaE", HttpContext.Session.GetInt32("flConsultaE"));
 
+            ViewData.Add("flAusenciaI", HttpContext.Session.GetInt32("flAusenciaI"));
+            ViewData.Add("flAusenciaC", HttpContext.Session.GetInt32("flAusenciaC"));
+            ViewData.Add("flAusenciaA", HttpContext.Session.GetInt32("flAusenciaA"));
+            ViewData.Add("flAusenciaE", HttpContext.Session.GetInt32("flAusenciaE"));
+
             ViewData.Add("flMedicamentoI", HttpContext.Session.GetInt32("flMedicamentoI"));
             ViewData.Add("flMedicamentoC", HttpContext.Session.GetInt32("flMedicamentoC"));
             ViewData.Add("flMedicamentoA", HttpContext.Session.GetInt32("flMedicamentoA"));

@@ -45,8 +45,7 @@ namespace SGCM.Controllers {
                 ViewBag.MensagemBodyAction = "Action: CadastrarConsulta";
                 ViewBag.MensagemBody = "Exceção: " + ex.Message;
                 return View();
-            }
-            
+            }            
         }
 
         //POST: /Consulta/CadastrarConsulta
@@ -64,7 +63,7 @@ namespace SGCM.Controllers {
                         model.consulta.flagPM = false;
 
                         if ( model.paciente.idPaciente == 0) {
-                            System.Collections.Generic.List<ConsultaPacienteModel> retornoPaciente = objConsultaBLL.ConsultarPaciente(model.paciente.Nome, model.paciente.CPF, null);
+                            List<ConsultaPacienteModel> retornoPaciente = objConsultaBLL.ConsultarPaciente(model.paciente.Nome, model.paciente.CPF, null);
                             if (retornoPaciente != null) model.paciente.idPaciente = retornoPaciente[0].idPaciente;
                             else {
                                 ViewBag.MensagemTitle = "Erro ao Cadastrar a Consulta";
@@ -103,6 +102,10 @@ namespace SGCM.Controllers {
                         } else if (retorno == 7) {
                             ViewBag.MensagemTitle = "Erro ao Cadastrar a Consulta";
                             ViewBag.MensagemBody = "A hora da consulta marcada está incorreto, insira uma hora com as seguintes minutagem 'XX:00, XX:30'!";
+                            return View();
+                        } else if (retorno == 8) {
+                            ViewBag.MensagemTitle = "Erro ao Cadastrar a Consulta";
+                            ViewBag.MensagemBody = "Não foi possivel cadastrar uma consulta nessa data, pois o médico estará ausente!";
                             return View();
                         } else {
                             ViewBag.MensagemTitle = "Erro ao Cadastrar a Consulta";
@@ -341,7 +344,13 @@ namespace SGCM.Controllers {
             model.quadroSextaDezesseteMeia = new QuadroSextaDezesseteMeia();
             model.quadroSextaDezoito = new QuadroSextaDezoito();
             model.quadroSextaDezoitoMeia = new QuadroSextaDezoitoMeia();
-        
+
+            model.dataSegundaAusenciaBancoModel = new Models.Consulta.ConsultarConsultaModel.MarcarDataAusenciaBancoModel();
+            model.dataTercaAusenciaBancoModel = new Models.Consulta.ConsultarConsultaModel.MarcarDataAusenciaBancoModel();
+            model.dataQuartaAusenciaBancoModel = new Models.Consulta.ConsultarConsultaModel.MarcarDataAusenciaBancoModel();
+            model.dataQuintaAusenciaBancoModel = new Models.Consulta.ConsultarConsultaModel.MarcarDataAusenciaBancoModel();
+            model.dataSextaAusenciaBancoModel = new Models.Consulta.ConsultarConsultaModel.MarcarDataAusenciaBancoModel();
+
             return model;
         }
 
@@ -418,6 +427,9 @@ namespace SGCM.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult EditarConsulta(EditarConsultaModel model) {
             try {
+                ViewBag.MensagemBodyController = "";
+                ViewBag.MensagemBodyAction = "";
+                ViewBag.MensagemBody = "";
                 CarregarDadosUsuarioParaTela();
                 if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
                     if ((int)ViewData["flConsultaA"] != 0) {
@@ -425,8 +437,8 @@ namespace SGCM.Controllers {
                         var retornoEditarConsulta = objConsultaBLL.EditarConsulta(model);
 
                         if (retornoEditarConsulta == 1) {
-                            HttpContext.Session.SetString("MensagemTitle", "Sucesso");
-                            HttpContext.Session.SetString("MensagemBody", "O consulta para o paciente: " + model.paciente.Nome + " foi alterada com sucesso! ");
+                            ViewBag.MensagemTitle = "Sucesso";
+                            ViewBag.MensagemBody = "O consulta para o paciente: " + model.paciente.Nome + " foi alterada com sucesso!";
                             return RedirectToAction("ConsultarConsulta", "Consulta");
                         } else {
                             ViewBag.MensagemTitle = "Erro";
@@ -451,18 +463,52 @@ namespace SGCM.Controllers {
             }
         }
 
+        [HttpGet]
+        public ActionResult ConsultarRelatorio() {
+            try {
+                ViewBag.MensagemBodyController = "";
+                ViewBag.MensagemBodyAction = "";
+                ViewBag.MensagemBody = "";
+                CarregarDadosUsuarioParaTela();
+                if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
+                    if ((int)ViewData["flConsultaC"] != 0) {
+                        var viewModel = new CadastroConsultaModel();
+                        viewModel.paciente = new Models.Consulta.CadastroConsultaModel.DadosPaciente();
+                        viewModel.pacienteList = new List<Models.Consulta.CadastroConsultaModel.DadosPaciente>();
+                        viewModel.consulta = new Models.Consulta.CadastroConsultaModel.DadosConsulta();
+
+                        viewModel.consulta.DataConsulta = DateTime.Now;
+
+                        return View(viewModel);
+                    } else {
+                        HttpContext.Session.SetString("MensagemTitle", "Erro");
+                        HttpContext.Session.SetString("MensagemBody", "O usuário " + ViewData["nome"] + " não tem acesso a página: 'Consulta/CadastrarConsulta'");
+                        return RedirectToAction("Index", "Home");
+                    }
+                } else {
+                    ViewData.Add("ReturnUrl", ((object[])this.ControllerContext.RouteData.Values.Values)[0] + "/" + ((object[])this.ControllerContext.RouteData.Values.Values)[1]);
+                    return RedirectToAction("Signin", "Login", new { ReturnUrl = ViewData["ReturnUrl"] });
+                }
+            } catch (Exception ex) {
+                ViewBag.MensagemTitle = "Erro";
+                ViewBag.MensagemBodyController = "Controller: ConsultaController";
+                ViewBag.MensagemBodyAction = "Action: CadastrarConsulta";
+                ViewBag.MensagemBody = "Exceção: " + ex.Message;
+                return View();
+            }
+        }
+
         private void CarregarDadosUsuarioParaTela()
         {
             ViewData.Add("idUsuario", HttpContext.Session.GetInt32("idUsuario"));
             ViewData.Add("usuario", HttpContext.Session.GetString("usuario"));
-            ViewData.Add("tipoUsuario", HttpContext.Session.GetString("tipoUsuario"));
 
             ViewData.Add("idPessoa", HttpContext.Session.GetInt32("idPessoa"));
             ViewData.Add("idMedico", HttpContext.Session.GetInt32("idMedico"));
+            ViewData.Add("tipoUsuario", HttpContext.Session.GetInt32("tipoUsuario"));
             ViewData.Add("nome", HttpContext.Session.GetString("nome"));
             ViewData.Add("cpf", HttpContext.Session.GetString("cpf"));
             ViewData.Add("rg", HttpContext.Session.GetString("rg"));
-            ViewData.Add("sexo", HttpContext.Session.GetString("sexo"));
             ViewData.Add("dataNascimento", HttpContext.Session.GetString("dataNascimento"));
             ViewData.Add("logradouro", HttpContext.Session.GetString("logradouro"));
             ViewData.Add("numero", HttpContext.Session.GetInt32("numero"));
@@ -486,6 +532,11 @@ namespace SGCM.Controllers {
             ViewData.Add("flConsultaC", HttpContext.Session.GetInt32("flConsultaC"));
             ViewData.Add("flConsultaA", HttpContext.Session.GetInt32("flConsultaA"));
             ViewData.Add("flConsultaE", HttpContext.Session.GetInt32("flConsultaE"));
+
+            ViewData.Add("flAusenciaI", HttpContext.Session.GetInt32("flAusenciaI"));
+            ViewData.Add("flAusenciaC", HttpContext.Session.GetInt32("flAusenciaC"));
+            ViewData.Add("flAusenciaA", HttpContext.Session.GetInt32("flAusenciaA"));
+            ViewData.Add("flAusenciaE", HttpContext.Session.GetInt32("flAusenciaE"));
 
             ViewData.Add("flMedicamentoI", HttpContext.Session.GetInt32("flMedicamentoI"));
             ViewData.Add("flMedicamentoC", HttpContext.Session.GetInt32("flMedicamentoC"));

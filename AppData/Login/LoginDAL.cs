@@ -33,7 +33,7 @@ namespace SGCM.AppData.Login {
                 if (dr.HasRows) {
                     while (dr.Read())
                     {
-                        if (dr.IsDBNull(36)) {
+                        if (dr.IsDBNull(40)) {
                             loginCompletoTO.usuarioTO.idUsuario = dr.GetInt32(0);
                             loginCompletoTO.usuarioTO.Usuario = dr.GetString(1);
                             
@@ -56,22 +56,31 @@ namespace SGCM.AppData.Login {
                             loginCompletoTO.permissoesTO.flUsuarioC = dr.GetInt32(17);
                             loginCompletoTO.permissoesTO.flUsuarioA = dr.GetInt32(18);
                             loginCompletoTO.permissoesTO.flUsuarioE = dr.GetInt32(19);
+
                             loginCompletoTO.permissoesTO.flPacienteI = dr.GetInt32(20);
                             loginCompletoTO.permissoesTO.flPacienteC = dr.GetInt32(21);
                             loginCompletoTO.permissoesTO.flPacienteA = dr.GetInt32(22);
                             loginCompletoTO.permissoesTO.flPacienteE = dr.GetInt32(23);
+
                             loginCompletoTO.permissoesTO.flConsultaI = dr.GetInt32(24);
                             loginCompletoTO.permissoesTO.flConsultaC = dr.GetInt32(25);
                             loginCompletoTO.permissoesTO.flConsultaA = dr.GetInt32(26);
                             loginCompletoTO.permissoesTO.flConsultaE = dr.GetInt32(27);
-                            loginCompletoTO.permissoesTO.flMedicamentoI = dr.GetInt32(28);
-                            loginCompletoTO.permissoesTO.flMedicamentoC = dr.GetInt32(29);
-                            loginCompletoTO.permissoesTO.flMedicamentoA = dr.GetInt32(30);
-                            loginCompletoTO.permissoesTO.flMedicamentoE = dr.GetInt32(31);
-                            loginCompletoTO.permissoesTO.flExamesI = dr.GetInt32(32);
-                            loginCompletoTO.permissoesTO.flExamesC = dr.GetInt32(33);
-                            loginCompletoTO.permissoesTO.flExamesA = dr.GetInt32(34);
-                            loginCompletoTO.permissoesTO.flExamesE = dr.GetInt32(35);
+
+                            loginCompletoTO.permissoesTO.flAusenciaI = dr.GetInt32(28);
+                            loginCompletoTO.permissoesTO.flAusenciaC = dr.GetInt32(29);
+                            loginCompletoTO.permissoesTO.flAusenciaA = dr.GetInt32(30);
+                            loginCompletoTO.permissoesTO.flAusenciaE = dr.GetInt32(31);
+
+                            loginCompletoTO.permissoesTO.flMedicamentoI = dr.GetInt32(32);
+                            loginCompletoTO.permissoesTO.flMedicamentoC = dr.GetInt32(33);
+                            loginCompletoTO.permissoesTO.flMedicamentoA = dr.GetInt32(34);
+                            loginCompletoTO.permissoesTO.flMedicamentoE = dr.GetInt32(35);
+
+                            loginCompletoTO.permissoesTO.flExamesI = dr.GetInt32(36);
+                            loginCompletoTO.permissoesTO.flExamesC = dr.GetInt32(37);
+                            loginCompletoTO.permissoesTO.flExamesA = dr.GetInt32(38);
+                            loginCompletoTO.permissoesTO.flExamesE = dr.GetInt32(39);
                         } else {
                             loginCompletoTO.IdRetorno = 1;
                             return loginCompletoTO;

@@ -34,18 +34,27 @@ namespace SGCM.AppData.Login {
             command.AppendLine("       Per.FlUsuarioC,");
             command.AppendLine("       Per.FlUsuarioA,");
             command.AppendLine("       Per.FlUsuarioE,");
+
             command.AppendLine("       Per.FlPacienteI,");
             command.AppendLine("       Per.FlPacienteC,");
             command.AppendLine("       Per.FlPacienteA,");
             command.AppendLine("       Per.FlPacienteE,");
+
             command.AppendLine("       Per.FlConsultaI,");
             command.AppendLine("       Per.FlConsultaC,");
             command.AppendLine("       Per.FlConsultaA,");
             command.AppendLine("       Per.FlConsultaE,");
+
+            command.AppendLine("       Per.FlAusenciaI,");
+            command.AppendLine("       Per.FlAusenciaC,");
+            command.AppendLine("       Per.FlAusenciaA,");
+            command.AppendLine("       Per.FlAusenciaE,");
+
             command.AppendLine("       Per.FlMedicamentoI,");
             command.AppendLine("       Per.FlMedicamentoC,");
             command.AppendLine("       Per.FlMedicamentoA,");
             command.AppendLine("       Per.FlMedicamentoE,");
+
             command.AppendLine("       Per.FlExamesI,");
             command.AppendLine("       Per.FlExamesC,");
             command.AppendLine("       Per.FlExamesA,");

@@ -60,6 +60,10 @@ namespace SGCM.AppData.Usuario
         public int flConsultaC { get; set; }
         public int flConsultaA { get; set; }
         public int flConsultaE { get; set; }
+        public int flAusenciaI { get; set; }
+        public int flAusenciaC { get; set; }
+        public int flAusenciaA { get; set; }
+        public int flAusenciaE { get; set; }
         public int flMedicamentoI { get; set; }
         public int flMedicamentoC { get; set; }
         public int flMedicamentoA { get; set; }

@@ -80,17 +80,17 @@ namespace SGCM.Controllers
             ViewData.Add("idPessoa", HttpContext.Session.GetInt32("idPessoa"));
             ViewData.Add("idMedico", HttpContext.Session.GetInt32("idMedico"));
             ViewData.Add("tipoUsuario", HttpContext.Session.GetInt32("tipoUsuario"));
-            ViewData.Add("nome", HttpContext.Session.GetInt32("nome"));
-            ViewData.Add("cpf", HttpContext.Session.GetInt32("cpf"));
-            ViewData.Add("rg", HttpContext.Session.GetInt32("rg"));
-            ViewData.Add("dataNascimento", HttpContext.Session.GetInt32("dataNascimento"));
-            ViewData.Add("logradouro", HttpContext.Session.GetInt32("logradouro"));
+            ViewData.Add("nome", HttpContext.Session.GetString("nome"));
+            ViewData.Add("cpf", HttpContext.Session.GetString("cpf"));
+            ViewData.Add("rg", HttpContext.Session.GetString("rg"));
+            ViewData.Add("dataNascimento", HttpContext.Session.GetString("dataNascimento"));
+            ViewData.Add("logradouro", HttpContext.Session.GetString("logradouro"));
             ViewData.Add("numero", HttpContext.Session.GetInt32("numero"));
-            ViewData.Add("bairro", HttpContext.Session.GetInt32("bairro"));
-            ViewData.Add("cidade", HttpContext.Session.GetInt32("cidade"));
-            ViewData.Add("uf", HttpContext.Session.GetInt32("uf"));
-            ViewData.Add("telefoneCelular", HttpContext.Session.GetInt32("telefoneCelular"));
-            ViewData.Add("email", HttpContext.Session.GetInt32("email"));
+            ViewData.Add("bairro", HttpContext.Session.GetString("bairro"));
+            ViewData.Add("cidade", HttpContext.Session.GetString("cidade"));
+            ViewData.Add("uf", HttpContext.Session.GetString("uf"));
+            ViewData.Add("telefoneCelular", HttpContext.Session.GetString("telefoneCelular"));
+            ViewData.Add("email", HttpContext.Session.GetString("email"));
 
             ViewData.Add("flUsuarioI", HttpContext.Session.GetInt32("flUsuarioI"));
             ViewData.Add("flUsuarioC", HttpContext.Session.GetInt32("flUsuarioC"));
@@ -106,6 +106,11 @@ namespace SGCM.Controllers
             ViewData.Add("flConsultaC", HttpContext.Session.GetInt32("flConsultaC"));
             ViewData.Add("flConsultaA", HttpContext.Session.GetInt32("flConsultaA"));
             ViewData.Add("flConsultaE", HttpContext.Session.GetInt32("flConsultaE"));
+
+            ViewData.Add("flAusenciaI", HttpContext.Session.GetInt32("flAusenciaI"));
+            ViewData.Add("flAusenciaC", HttpContext.Session.GetInt32("flAusenciaC"));
+            ViewData.Add("flAusenciaA", HttpContext.Session.GetInt32("flAusenciaA"));
+            ViewData.Add("flAusenciaE", HttpContext.Session.GetInt32("flAusenciaE"));
 
             ViewData.Add("flMedicamentoI", HttpContext.Session.GetInt32("flMedicamentoI"));
             ViewData.Add("flMedicamentoC", HttpContext.Session.GetInt32("flMedicamentoC"));
