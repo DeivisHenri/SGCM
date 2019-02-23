@@ -86,7 +86,7 @@ namespace SGCM.AppData.Paciente
         public string ConsultarPaciente() {
             StringBuilder command = new StringBuilder();
 
-            command.AppendLine("Select Pes.idPessoa, Pes.nome, Pes.cpf, Pes.telefoneCelular");
+            command.AppendLine("Select Pes.idPessoa, Pes.nome, Pes.cpf, Pes.telefoneCelular, Pac.idPaciente");
             command.AppendLine("From Pessoa Pes RIGHT JOIN Paciente Pac ON Pes.idPessoa = Pac.idPessoaPaciente ");
             command.AppendLine("Where Pes.idMedico = @IDMEDICO");
 
@@ -110,7 +110,7 @@ namespace SGCM.AppData.Paciente
             command.AppendLine("       Pes.telefoneCelular,");
             command.AppendLine("       Pes.email");
             command.AppendLine("From Pessoa Pes INNER JOIN Paciente Pac ON Pes.idPessoa = Pac.idPessoaPaciente");
-            command.AppendLine("Where Pes.idPessoa = @IDPESSOA");
+            command.AppendLine("Where Pac.idPaciente = @IDPACIENTE");
 
             return command.ToString();
         }

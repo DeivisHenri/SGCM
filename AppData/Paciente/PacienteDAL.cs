@@ -122,11 +122,13 @@ namespace SGCM.AppData.Paciente
                     while (reader.Read()) {
                         ConsultarPacienteModel pacienteListModel = new ConsultarPacienteModel();
                         pacienteListModel.pessoa = new Models.Paciente.ConsultarPacienteModel.DadosPessoais();
+                        pacienteListModel.paciente = new DadosPaciente();
 
                         pacienteListModel.pessoa.IdPessoa = reader.GetInt32(0);
                         pacienteListModel.pessoa.Nome = reader.GetString(1);
                         pacienteListModel.pessoa.CPF = reader.GetString(2);
                         pacienteListModel.pessoa.TelefoneCelular = reader.GetString(3);
+                        pacienteListModel.paciente.idPaciente = reader.GetInt32(4);
 
                         pacienteList.Add(pacienteListModel);
                     }
@@ -147,14 +149,14 @@ namespace SGCM.AppData.Paciente
             }
         }
 
-        public EditarPacienteModel ConsultarPacienteID(int IdPessoa) {
+        public EditarPacienteModel ConsultarPacienteID(int idPaciente) {
             try {
                 MySqlConnection connection = new MySqlConnection(getStringConnection());
                 connection.Open();
 
                 var DALSQL = new PacienteDALSQL();
                 MySqlCommand cmdUsuario = new MySqlCommand(DALSQL.ConsultarPacienteID(), connection);
-                cmdUsuario.Parameters.Add("@IDPESSOA", MySqlDbType.Int32).Value = IdPessoa;
+                cmdUsuario.Parameters.Add("@IDPACIENTE", MySqlDbType.Int32).Value = idPaciente;
                 MySqlDataReader reader = cmdUsuario.ExecuteReader();
 
                 EditarPacienteModel pacienteCompleto = new EditarPacienteModel();

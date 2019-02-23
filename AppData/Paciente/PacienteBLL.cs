@@ -22,9 +22,9 @@ namespace SGCM.AppData.Paciente
             return pacienteDAL.ConsultarPaciente(IdMedico);
         }
 
-        public EditarPacienteModel ConsultarPacienteID(int IdPessoa){
+        public EditarPacienteModel ConsultarPacienteID(int idPaciente){
             PacienteDAL pacienteDAL = new PacienteDAL();
-            return pacienteDAL.ConsultarPacienteID(IdPessoa);
+            return pacienteDAL.ConsultarPacienteID(idPaciente);
         }
 
         public int EditarPaciente(EditarPacienteModel pacienteModel) {

@@ -7,6 +7,7 @@ namespace SGCM.Models.Paciente.ConsultarPacienteModel
     public class ConsultarPacienteModel
     {
         public DadosPessoais pessoa { get; set; }
+        public DadosPaciente paciente { get; set; }
     }
 
     public class DadosPessoais
@@ -69,6 +70,11 @@ namespace SGCM.Models.Paciente.ConsultarPacienteModel
         public string Email { get; set; }
 
         public int IdPessoa { get; set; }
+    }
+
+    public class DadosPaciente
+    {
+        public Int32 idPaciente { get; set; }
     }
 
 }

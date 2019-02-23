@@ -56,5 +56,7 @@ namespace SGCM.Models.Ausencia.CadastrarAusenciaModel {
         public Int32 DezoitoMeia { get; set; }
         public Int32 horaInicio { get; set; }
         public Int32 horaFinal { get; set; }
+
+        public Int32 retorno { get; set; }
     }
 }

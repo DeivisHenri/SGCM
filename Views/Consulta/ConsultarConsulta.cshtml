@@ -56,14 +56,18 @@
                                 {
                                     if (Model.quadroSegundaSeis.seis != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSegundaSeis.seis</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Paciente" asp-action="EditarPaciente" asp-route-id="@Model.quadroSegundaSeis.idPacienteConsulta">@Model.quadroSegundaSeis.seis</a></label>
+                                        </div>
                                         <input id="@Model.quadroSegundaSeis.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSegundaSeis.idPacienteConsulta" class="displayNone" />
                                         <div>
                                             <a asp-controller="Consulta" asp-action="EditarConsulta" asp-route-id="@Model.quadroSegundaSeis.idConsulta">Edit</a>
                                         </div>
                                     }
-                                } else {
+                                }
+                                else
+                                {
                                     <span style="color: red;">Médico Ausente</span>
                                 }
                             }

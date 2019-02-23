@@ -64,7 +64,94 @@ namespace SGCM.AppData.Consulta
             CadastrarAusenciaBancoModel ausenciaBancoModel = consultaDAL.ConsultarAusencia(model.consulta.DataConsulta);
 
             if (ausenciaBancoModel != null) {
-                return 8;
+                CadastrarAusenciaBancoModel ausenciaComDataConsulta = UtilMetodo.ConvertandoHoraViewParaObjeto(model.consulta.DataConsulta);
+
+                int hora = Convert.ToInt32(model.consulta.DataConsulta.ToShortTimeString().Split(':')[0]);
+                int minutoDataConsulta = Convert.ToInt32(model.consulta.DataConsulta.ToShortTimeString().Split(':')[1]);
+
+                Boolean flag = false;
+                switch (ausenciaComDataConsulta.retorno) {
+                    case 1:
+                        if (ausenciaComDataConsulta.Seis == ausenciaBancoModel.Seis) flag = true;
+                        break;
+                    case 2:
+                        if (ausenciaComDataConsulta.SeisMeia == ausenciaBancoModel.SeisMeia) flag = true;
+                        break;
+                    case 3:
+                        if (ausenciaComDataConsulta.Sete == ausenciaBancoModel.Sete) flag = true;
+                        break;
+                    case 4:
+                        if (ausenciaComDataConsulta.SeteMeia == ausenciaBancoModel.SeteMeia) flag = true;
+                        break;
+                    case 5:
+                        if (ausenciaComDataConsulta.Oito == ausenciaBancoModel.Oito) flag = true;
+                        break;
+                    case 6:
+                        if (ausenciaComDataConsulta.OitoMeia == ausenciaBancoModel.OitoMeia) flag = true;
+                        break;
+                    case 7:
+                        if (ausenciaComDataConsulta.Nove == ausenciaBancoModel.Nove) flag = true;
+                        break;
+                    case 8:
+                        if (ausenciaComDataConsulta.NoveMeia == ausenciaBancoModel.NoveMeia) flag = true;
+                        break;
+                    case 9:
+                        if (ausenciaComDataConsulta.Dez == ausenciaBancoModel.Dez) flag = true;
+                        break;
+                    case 10:
+                        if (ausenciaComDataConsulta.DezMeia == ausenciaBancoModel.DezMeia) flag = true;
+                        break;
+                    case 11:
+                        if (ausenciaComDataConsulta.Onze == ausenciaBancoModel.Onze) flag = true;
+                        break;
+                    case 12:
+                        if (ausenciaComDataConsulta.OnzeMeia == ausenciaBancoModel.OnzeMeia) flag = true;
+                        break;
+                    case 13:
+                        if (ausenciaComDataConsulta.Doze == ausenciaBancoModel.Doze) flag = true;
+                        break;
+                    case 14:
+                        if (ausenciaComDataConsulta.DozeMeia == ausenciaBancoModel.DozeMeia) flag = true;
+                        break;
+                    case 15:
+                        if (ausenciaComDataConsulta.Treze == ausenciaBancoModel.Treze) flag = true;
+                        break;
+                    case 16:
+                        if (ausenciaComDataConsulta.TrezeMeia == ausenciaBancoModel.TrezeMeia) flag = true;
+                        break;
+                    case 17:
+                        if (ausenciaComDataConsulta.Quatorze == ausenciaBancoModel.Quatorze) flag = true;
+                        break;
+                    case 18:
+                        if (ausenciaComDataConsulta.QuatorzeMeia == ausenciaBancoModel.QuatorzeMeia) flag = true;
+                        break;
+                    case 19:
+                        if (ausenciaComDataConsulta.Quinze == ausenciaBancoModel.Quinze) flag = true;
+                        break;
+                    case 20:
+                        if (ausenciaComDataConsulta.QuinzeMeia == ausenciaBancoModel.QuinzeMeia) flag = true;
+                        break;
+                    case 21:
+                        if (ausenciaComDataConsulta.Dezesseis == ausenciaBancoModel.Dezesseis) flag = true;
+                        break;
+                    case 22:
+                        if (ausenciaComDataConsulta.DezesseisMeia == ausenciaBancoModel.DezesseisMeia) flag = true;
+                        break;
+                    case 23:
+                        if (ausenciaComDataConsulta.Dezessete == ausenciaBancoModel.Dezessete) flag = true;
+                        break;
+                    case 24:
+                        if (ausenciaComDataConsulta.DezesseteMeia == ausenciaBancoModel.DezesseteMeia) flag = true;
+                        break;
+                    case 25:
+                        if (ausenciaComDataConsulta.Dezoito == ausenciaBancoModel.Dezoito) flag = true;
+                        break;
+                    case 26:
+                        if (ausenciaComDataConsulta.DezoitoMeia == ausenciaBancoModel.DezoitoMeia) flag = true;
+                        break;
+
+                }
+                if (flag) return 8;
             }
 
             return consultaDAL.CadastrarConsulta(model);

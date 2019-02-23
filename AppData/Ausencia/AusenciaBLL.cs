@@ -129,9 +129,7 @@ namespace SGCM.AppData.Ausencia {
         }
 
         public int EditarAusencia(EditarAusenciaViewModel model) {
-            try
-            {
-
+            try {
                 DateTime dataInicio = new DateTime(model.DataInicio.Year, model.DataInicio.Month, model.DataInicio.Day, UtilMetodo.DescobrirHora(model.HoraInicio)[0], UtilMetodo.DescobrirHora(model.HoraInicio)[1], 0);
                 DateTime dataFinal = new DateTime(model.DataFinal.Year, model.DataFinal.Month, model.DataFinal.Day, UtilMetodo.DescobrirHora(model.HoraFinal)[0], UtilMetodo.DescobrirHora(model.HoraFinal)[1], 0);
                 DateTime dataAgora = DateTime.Now;

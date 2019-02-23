@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using System;
 using SGCM.Models.Consulta.ConsultarConsultaModel;
 using SGCM.Models.Ausencia.CadastrarAusenciaModel;
 using SGCM.Models.Ausencia.EditarAusenciaModel;
@@ -1627,6 +1628,134 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
             editarAusenciaBanco.Dezoito = listAusencia[24];
             editarAusenciaBanco.DezoitoMeia = listAusencia[25];
             return editarAusenciaBanco;
+        }
+
+        public static CadastrarAusenciaBancoModel ConvertandoHoraViewParaObjeto(DateTime dataView) {
+            int hora = Convert.ToInt32(dataView.ToShortTimeString().Split(':')[0]);
+            int minuto = Convert.ToInt32(dataView.ToShortTimeString().Split(':')[1]);
+
+            CadastrarAusenciaBancoModel ausenciaBancoModel = new CadastrarAusenciaBancoModel();
+
+            switch (hora) {
+                case 6:
+                    if (minuto == 30) {
+                        ausenciaBancoModel.SeisMeia = 1;
+                        ausenciaBancoModel.retorno = 2;
+                    } else {
+                        ausenciaBancoModel.Seis = 1;
+                        ausenciaBancoModel.retorno = 1;
+                    }
+                    break;
+                case 7:
+                    if (minuto == 30) {
+                        ausenciaBancoModel.SeteMeia = 1;
+                        ausenciaBancoModel.retorno = 4;
+                    } else {
+                        ausenciaBancoModel.Sete = 1;
+                        ausenciaBancoModel.retorno = 3;
+                    }
+                    break;
+                case 8:
+                    if (minuto == 30) {
+                        ausenciaBancoModel.OitoMeia = 1;
+                        ausenciaBancoModel.retorno = 6;
+                    } else {
+                        ausenciaBancoModel.Oito = 1;
+                        ausenciaBancoModel.retorno = 5;
+                    }
+                    break;
+                case 9:
+                    if (minuto == 30) {
+                        ausenciaBancoModel.NoveMeia = 1;
+                        ausenciaBancoModel.retorno = 8;
+                    } else {
+                        ausenciaBancoModel.Nove = 1;
+                        ausenciaBancoModel.retorno = 7;
+                    }
+                    break;
+                case 10:
+                    if (minuto == 30) {
+                        ausenciaBancoModel.DezMeia = 1;
+                        ausenciaBancoModel.retorno = 10;
+                    } else {
+                        ausenciaBancoModel.Dez = 1;
+                        ausenciaBancoModel.retorno = 9;
+                    }
+                    break;
+                case 11:
+                    if (minuto == 30) {
+                        ausenciaBancoModel.OnzeMeia = 1;
+                        ausenciaBancoModel.retorno = 12;
+                    } else {
+                        ausenciaBancoModel.Onze = 1;
+                        ausenciaBancoModel.retorno = 11;
+                    }
+                    break;
+                case 12:
+                    if (minuto == 30) {
+                        ausenciaBancoModel.DozeMeia = 1;
+                        ausenciaBancoModel.retorno = 14;
+                    } else {
+                        ausenciaBancoModel.Doze = 1;
+                        ausenciaBancoModel.retorno = 13;
+                    }
+                    break;
+                case 13:
+                    if (minuto == 30) {
+                        ausenciaBancoModel.TrezeMeia = 1;
+                        ausenciaBancoModel.retorno = 16;
+                    } else {
+                        ausenciaBancoModel.Treze = 1;
+                        ausenciaBancoModel.retorno = 15;
+                    }
+                    break;
+                case 14:
+                    if (minuto == 30) {
+                        ausenciaBancoModel.QuatorzeMeia = 1;
+                        ausenciaBancoModel.retorno = 18;
+                    } else {
+                        ausenciaBancoModel.Quatorze = 1;
+                        ausenciaBancoModel.retorno = 17;
+                    }
+                    break;
+                case 15:
+                    if (minuto == 30) {
+                        ausenciaBancoModel.QuinzeMeia = 1;
+                        ausenciaBancoModel.retorno = 20;
+                    } else {
+                        ausenciaBancoModel.Quinze = 1;
+                        ausenciaBancoModel.retorno = 19;
+                    }
+                    break;
+                case 16:
+                    if (minuto == 30) {
+                        ausenciaBancoModel.DezesseisMeia = 1;
+                        ausenciaBancoModel.retorno = 22;
+                    } else {
+                        ausenciaBancoModel.Dezesseis = 1;
+                        ausenciaBancoModel.retorno = 21;
+                    }
+                    break;
+                case 17:
+                    if (minuto == 30) {
+                        ausenciaBancoModel.DezesseteMeia = 1;
+                        ausenciaBancoModel.retorno = 24;
+                    } else {
+                        ausenciaBancoModel.Dezessete = 1;
+                        ausenciaBancoModel.retorno = 23;
+                    }
+                    break;
+                case 18:
+                    if (minuto == 30) {
+                        ausenciaBancoModel.DezoitoMeia = 1;
+                        ausenciaBancoModel.retorno = 26;
+                    } else {
+                        ausenciaBancoModel.Dezoito = 1;
+                        ausenciaBancoModel.retorno = 25;
+                    }
+                    break;
+            }
+            return ausenciaBancoModel;
         }
     }
 }

@@ -30,35 +30,45 @@ namespace SGCM.AppData.Login {
             command.AppendLine("       Pes.telefoneCelular,");
             command.AppendLine("       Pes.email,");
 
-            command.AppendLine("       Per.FlUsuarioI,");
-            command.AppendLine("       Per.FlUsuarioC,");
-            command.AppendLine("       Per.FlUsuarioA,");
-            command.AppendLine("       Per.FlUsuarioE,");
+            command.AppendLine("       Per.flUsuarioI,");
+            command.AppendLine("       Per.flUsuarioC,");
+            command.AppendLine("       Per.flUsuarioA,");
+            command.AppendLine("       Per.flUsuarioE,");
 
-            command.AppendLine("       Per.FlPacienteI,");
-            command.AppendLine("       Per.FlPacienteC,");
-            command.AppendLine("       Per.FlPacienteA,");
-            command.AppendLine("       Per.FlPacienteE,");
-
-            command.AppendLine("       Per.FlConsultaI,");
-            command.AppendLine("       Per.FlConsultaC,");
-            command.AppendLine("       Per.FlConsultaA,");
-            command.AppendLine("       Per.FlConsultaE,");
-
-            command.AppendLine("       Per.FlAusenciaI,");
-            command.AppendLine("       Per.FlAusenciaC,");
-            command.AppendLine("       Per.FlAusenciaA,");
-            command.AppendLine("       Per.FlAusenciaE,");
-
-            command.AppendLine("       Per.FlMedicamentoI,");
-            command.AppendLine("       Per.FlMedicamentoC,");
-            command.AppendLine("       Per.FlMedicamentoA,");
-            command.AppendLine("       Per.FlMedicamentoE,");
-
-            command.AppendLine("       Per.FlExamesI,");
-            command.AppendLine("       Per.FlExamesC,");
-            command.AppendLine("       Per.FlExamesA,");
+            command.AppendLine("       Per.flPacienteI,");
+            command.AppendLine("       Per.flPacienteC,");
+            command.AppendLine("       Per.flPacienteA,");
+            command.AppendLine("       Per.flPacienteE,");
+                                           
+            command.AppendLine("       Per.flConsultaI,");
+            command.AppendLine("       Per.flConsultaC,");
+            command.AppendLine("       Per.flConsultaA,");
+            command.AppendLine("       Per.flConsultaE,");
+                                           
+            command.AppendLine("       Per.flAusenciaI,");
+            command.AppendLine("       Per.flAusenciaC,");
+            command.AppendLine("       Per.flAusenciaA,");
+            command.AppendLine("       Per.flAusenciaE,");
+                                           
+            command.AppendLine("       Per.flMedicamentoI,");
+            command.AppendLine("       Per.flMedicamentoC,");
+            command.AppendLine("       Per.flMedicamentoA,");
+            command.AppendLine("       Per.flMedicamentoE,");
+                                           
+            command.AppendLine("       Per.flExamesI,");
+            command.AppendLine("       Per.flExamesC,");
+            command.AppendLine("       Per.flExamesA,");
             command.AppendLine("       Per.flExamesE,");
+
+            command.AppendLine("       Per.flConsultaAnteriorI,");
+            command.AppendLine("       Per.flConsultaAnteriorC,");
+            command.AppendLine("       Per.flConsultaAnteriorA,");
+            command.AppendLine("       Per.flConsultaAnteriorE,");
+
+            command.AppendLine("       Per.flHistoriaMolestiaAtualI,");
+            command.AppendLine("       Per.flHistoriaMolestiaAtualC,");
+            command.AppendLine("       Per.flHistoriaMolestiaAtualA,");
+            command.AppendLine("       Per.flHistoriaMolestiaAtualE,");
             command.AppendLine("       Usr.dataDesativacao");
                  
             command.AppendLine("From Usuario Usr INNER JOIN Pessoa Pes ON Usr.idPessoaUsuario = Pes.idPessoa");
