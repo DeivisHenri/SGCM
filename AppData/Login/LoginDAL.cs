@@ -33,7 +33,7 @@ namespace SGCM.AppData.Login {
                 if (dr.HasRows) {
                     while (dr.Read())
                     {
-                        if (dr.IsDBNull(52)) {
+                        if (dr.IsDBNull(56)) {
                             loginCompletoTO.usuarioTO.idUsuario = dr.GetInt32(0);
                             loginCompletoTO.usuarioTO.Usuario = dr.GetString(1);
                             
@@ -96,6 +96,11 @@ namespace SGCM.AppData.Login {
                             loginCompletoTO.permissoesTO.flHipoteseDiagnosticaC = dr.GetInt32(49);
                             loginCompletoTO.permissoesTO.flHipoteseDiagnosticaA = dr.GetInt32(50);
                             loginCompletoTO.permissoesTO.flHipoteseDiagnosticaE = dr.GetInt32(51);
+
+                            loginCompletoTO.permissoesTO.flCondutaI = dr.GetInt32(52);
+                            loginCompletoTO.permissoesTO.flCondutaC = dr.GetInt32(53);
+                            loginCompletoTO.permissoesTO.flCondutaA = dr.GetInt32(54);
+                            loginCompletoTO.permissoesTO.flCondutaE = dr.GetInt32(55);
                         } else {
                             loginCompletoTO.IdRetorno = 1;
                             return loginCompletoTO;

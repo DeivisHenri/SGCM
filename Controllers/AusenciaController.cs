@@ -334,6 +334,11 @@ namespace SGCM.Controllers
             ViewData.Add("flHipoteseDiagnosticaC", HttpContext.Session.GetInt32("flHipoteseDiagnosticaC"));
             ViewData.Add("flHipoteseDiagnosticaA", HttpContext.Session.GetInt32("flHipoteseDiagnosticaA"));
             ViewData.Add("flHipoteseDiagnosticaE", HttpContext.Session.GetInt32("flHipoteseDiagnosticaE"));
+
+            ViewData.Add("flCondutaI", HttpContext.Session.GetInt32("flCondutaI"));
+            ViewData.Add("flCondutaC", HttpContext.Session.GetInt32("flCondutaC"));
+            ViewData.Add("flCondutaA", HttpContext.Session.GetInt32("flCondutaA"));
+            ViewData.Add("flCondutaE", HttpContext.Session.GetInt32("flCondutaE"));
         }
     }
 }

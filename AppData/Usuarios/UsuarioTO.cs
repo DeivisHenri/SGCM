@@ -84,5 +84,9 @@ namespace SGCM.AppData.Usuario
         public int flHipoteseDiagnosticaC { get; set; }
         public int flHipoteseDiagnosticaA { get; set; }
         public int flHipoteseDiagnosticaE { get; set; }
+        public int flCondutaI { get; set; }
+        public int flCondutaC { get; set; }
+        public int flCondutaA { get; set; }
+        public int flCondutaE { get; set; }
     }
 }

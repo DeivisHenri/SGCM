@@ -74,6 +74,11 @@ namespace SGCM.AppData.Login {
             command.AppendLine("       Per.flHipoteseDiagnosticaC,");
             command.AppendLine("       Per.flHipoteseDiagnosticaA,");
             command.AppendLine("       Per.flHipoteseDiagnosticaE,");
+
+            command.AppendLine("       Per.flCondutaI,");
+            command.AppendLine("       Per.flCondutaC,");
+            command.AppendLine("       Per.flCondutaA,");
+            command.AppendLine("       Per.flCondutaE,");
             command.AppendLine("       Usr.dataDesativacao");
                  
             command.AppendLine("From Usuario Usr INNER JOIN Pessoa Pes ON Usr.idPessoaUsuario = Pes.idPessoa");
