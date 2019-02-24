@@ -72,13 +72,17 @@ namespace SGCM.AppData.Usuario
         public int flExamesC { get; set; }
         public int flExamesA { get; set; }
         public int flExamesE { get; set; }
-        public int flHistoriaPatologicaPregressaI { get; set; }
-        public int flHistoriaPatologicaPregressaC { get; set; }
-        public int flHistoriaPatologicaPregressaA { get; set; }
-        public int flHistoriaPatologicaPregressaE { get; set; }
         public int flHistoriaMolestiaAtualI { get; set; }
         public int flHistoriaMolestiaAtualC { get; set; }
         public int flHistoriaMolestiaAtualA { get; set; }
         public int flHistoriaMolestiaAtualE { get; set; }
+        public int flHistoriaPatologicaPregressaI { get; set; }
+        public int flHistoriaPatologicaPregressaC { get; set; }
+        public int flHistoriaPatologicaPregressaA { get; set; }
+        public int flHistoriaPatologicaPregressaE { get; set; }
+        public int flHipoteseDiagnosticaI { get; set; }
+        public int flHipoteseDiagnosticaC { get; set; }
+        public int flHipoteseDiagnosticaA { get; set; }
+        public int flHipoteseDiagnosticaE { get; set; }
     }
 }

@@ -60,15 +60,20 @@ namespace SGCM.AppData.Login {
             command.AppendLine("       Per.flExamesA,");
             command.AppendLine("       Per.flExamesE,");
 
+            command.AppendLine("       Per.flHistoriaMolestiaAtualI,");
+            command.AppendLine("       Per.flHistoriaMolestiaAtualC,");
+            command.AppendLine("       Per.flHistoriaMolestiaAtualA,");
+            command.AppendLine("       Per.flHistoriaMolestiaAtualE,");
+
             command.AppendLine("       Per.flHistoriaPatologicaPregressaI,");
             command.AppendLine("       Per.flHistoriaPatologicaPregressaC,");
             command.AppendLine("       Per.flHistoriaPatologicaPregressaA,");
             command.AppendLine("       Per.flHistoriaPatologicaPregressaE,");
 
-            command.AppendLine("       Per.flHistoriaMolestiaAtualI,");
-            command.AppendLine("       Per.flHistoriaMolestiaAtualC,");
-            command.AppendLine("       Per.flHistoriaMolestiaAtualA,");
-            command.AppendLine("       Per.flHistoriaMolestiaAtualE,");
+            command.AppendLine("       Per.flHipoteseDiagnosticaI,");
+            command.AppendLine("       Per.flHipoteseDiagnosticaC,");
+            command.AppendLine("       Per.flHipoteseDiagnosticaA,");
+            command.AppendLine("       Per.flHipoteseDiagnosticaE,");
             command.AppendLine("       Usr.dataDesativacao");
                  
             command.AppendLine("From Usuario Usr INNER JOIN Pessoa Pes ON Usr.idPessoaUsuario = Pes.idPessoa");

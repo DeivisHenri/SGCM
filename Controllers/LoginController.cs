@@ -158,15 +158,20 @@ namespace SGCM.Controllers {
             HttpContext.Session.SetInt32("flExamesA", usuarioCompletoTO.permissoesTO.flExamesA);
             HttpContext.Session.SetInt32("flExamesE", usuarioCompletoTO.permissoesTO.flExamesE);
 
+            HttpContext.Session.SetInt32("flHistoriaMolestiaAtualI", usuarioCompletoTO.permissoesTO.flHistoriaMolestiaAtualI);
+            HttpContext.Session.SetInt32("flHistoriaMolestiaAtualC", usuarioCompletoTO.permissoesTO.flHistoriaMolestiaAtualC);
+            HttpContext.Session.SetInt32("flHistoriaMolestiaAtualA", usuarioCompletoTO.permissoesTO.flHistoriaMolestiaAtualA);
+            HttpContext.Session.SetInt32("flHistoriaMolestiaAtualE", usuarioCompletoTO.permissoesTO.flHistoriaMolestiaAtualE);
+
             HttpContext.Session.SetInt32("flHistoriaPatologicaPregressaI", usuarioCompletoTO.permissoesTO.flHistoriaPatologicaPregressaI);
             HttpContext.Session.SetInt32("flHistoriaPatologicaPregressaC", usuarioCompletoTO.permissoesTO.flHistoriaPatologicaPregressaC);
             HttpContext.Session.SetInt32("flHistoriaPatologicaPregressaA", usuarioCompletoTO.permissoesTO.flHistoriaPatologicaPregressaA);
             HttpContext.Session.SetInt32("flHistoriaPatologicaPregressaE", usuarioCompletoTO.permissoesTO.flHistoriaPatologicaPregressaE);
 
-            HttpContext.Session.SetInt32("flHistoriaMolestiaAtualI", usuarioCompletoTO.permissoesTO.flHistoriaMolestiaAtualI);
-            HttpContext.Session.SetInt32("flHistoriaMolestiaAtualC", usuarioCompletoTO.permissoesTO.flHistoriaMolestiaAtualC);
-            HttpContext.Session.SetInt32("flHistoriaMolestiaAtualA", usuarioCompletoTO.permissoesTO.flHistoriaMolestiaAtualA);
-            HttpContext.Session.SetInt32("flHistoriaMolestiaAtualE", usuarioCompletoTO.permissoesTO.flHistoriaMolestiaAtualE);
+            HttpContext.Session.SetInt32("flHipoteseDiagnosticaI", usuarioCompletoTO.permissoesTO.flHipoteseDiagnosticaI);
+            HttpContext.Session.SetInt32("flHipoteseDiagnosticaC", usuarioCompletoTO.permissoesTO.flHipoteseDiagnosticaC);
+            HttpContext.Session.SetInt32("flHipoteseDiagnosticaA", usuarioCompletoTO.permissoesTO.flHipoteseDiagnosticaA);
+            HttpContext.Session.SetInt32("flHipoteseDiagnosticaE", usuarioCompletoTO.permissoesTO.flHipoteseDiagnosticaE);
         }
 
         private void CarregarDadosUsuarioParaTela()
@@ -219,15 +224,20 @@ namespace SGCM.Controllers {
             ViewData.Add("flExamesA", HttpContext.Session.GetInt32("flExamesA"));
             ViewData.Add("flExamesE", HttpContext.Session.GetInt32("flExamesE"));
 
+            ViewData.Add("flHistoriaMolestiaAtualI", HttpContext.Session.GetInt32("flHistoriaMolestiaAtualI"));
+            ViewData.Add("flHistoriaMolestiaAtualC", HttpContext.Session.GetInt32("flHistoriaMolestiaAtualC"));
+            ViewData.Add("flHistoriaMolestiaAtualA", HttpContext.Session.GetInt32("flHistoriaMolestiaAtualA"));
+            ViewData.Add("flHistoriaMolestiaAtualE", HttpContext.Session.GetInt32("flHistoriaMolestiaAtualE"));
+
             ViewData.Add("flHistoriaPatologicaPregressaI", HttpContext.Session.GetInt32("flHistoriaPatologicaPregressaI"));
             ViewData.Add("flHistoriaPatologicaPregressaC", HttpContext.Session.GetInt32("flHistoriaPatologicaPregressaC"));
             ViewData.Add("flHistoriaPatologicaPregressaA", HttpContext.Session.GetInt32("flHistoriaPatologicaPregressaA"));
             ViewData.Add("flHistoriaPatologicaPregressaE", HttpContext.Session.GetInt32("flHistoriaPatologicaPregressaE"));
 
-            ViewData.Add("flHistoriaMolestiaAtualI", HttpContext.Session.GetInt32("flHistoriaMolestiaAtualI"));
-            ViewData.Add("flHistoriaMolestiaAtualC", HttpContext.Session.GetInt32("flHistoriaMolestiaAtualC"));
-            ViewData.Add("flHistoriaMolestiaAtualA", HttpContext.Session.GetInt32("flHistoriaMolestiaAtualA"));
-            ViewData.Add("flHistoriaMolestiaAtualE", HttpContext.Session.GetInt32("flHistoriaMolestiaAtualE"));
+            ViewData.Add("flHipoteseDiagnosticaI", HttpContext.Session.GetInt32("flHipoteseDiagnosticaI"));
+            ViewData.Add("flHipoteseDiagnosticaC", HttpContext.Session.GetInt32("flHipoteseDiagnosticaC"));
+            ViewData.Add("flHipoteseDiagnosticaA", HttpContext.Session.GetInt32("flHipoteseDiagnosticaA"));
+            ViewData.Add("flHipoteseDiagnosticaE", HttpContext.Session.GetInt32("flHipoteseDiagnosticaE"));
         }
 
         //[HttpPost]
