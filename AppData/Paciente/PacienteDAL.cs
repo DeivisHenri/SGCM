@@ -154,36 +154,63 @@ namespace SGCM.AppData.Paciente
                 MySqlConnection connection = new MySqlConnection(getStringConnection());
                 connection.Open();
 
+                //----- Consulta OS DADOS PESSOAS DO PACIENTE -----
+
                 var DALSQL = new PacienteDALSQL();
-                MySqlCommand cmdUsuario = new MySqlCommand(DALSQL.ConsultarPacienteID(), connection);
-                cmdUsuario.Parameters.Add("@IDPACIENTE", MySqlDbType.Int32).Value = idPaciente;
-                MySqlDataReader reader = cmdUsuario.ExecuteReader();
+                MySqlCommand cmdPaciente = new MySqlCommand(DALSQL.ConsultarPacienteID(), connection);
+                cmdPaciente.Parameters.AddWithValue("@IDPACIENTE", idPaciente);
+                MySqlDataReader readerPaciente = cmdPaciente.ExecuteReader();
 
                 EditarPacienteModel pacienteCompleto = new EditarPacienteModel();
                 pacienteCompleto.pessoa = new Models.Paciente.EditarPacienteModel.DadosPessoais();
 
-                if (reader.HasRows) {
-                    while (reader.Read()) {
-                        pacienteCompleto.pessoa.IdPessoa = reader.GetInt32(0);
-                        pacienteCompleto.pessoa.Nome = reader.GetString(1);
-                        pacienteCompleto.pessoa.CPF = reader.GetString(2);
-                        pacienteCompleto.pessoa.RG = reader.GetString(3);
-                        pacienteCompleto.pessoa.Sexo = reader.GetString(4);
-                        pacienteCompleto.pessoa.DataNascimento = reader.GetDateTime(5);
-                        pacienteCompleto.pessoa.Logradouro = reader.GetString(6);
-                        pacienteCompleto.pessoa.Numero = reader.GetInt32(7);
-                        pacienteCompleto.pessoa.Bairro = reader.GetString(8);
-                        pacienteCompleto.pessoa.Cidade = reader.GetString(9);
-                        pacienteCompleto.pessoa.Uf = reader.GetString(10);
-                        pacienteCompleto.pessoa.TelefoneCelular = reader.GetString(11);
-                        pacienteCompleto.pessoa.Email = reader.GetString(12);
+                if (readerPaciente.HasRows) {
+                    while (readerPaciente.Read()) {
+                        pacienteCompleto.pessoa.IdPessoa = readerPaciente.GetInt32(0);
+                        pacienteCompleto.pessoa.Nome = readerPaciente.GetString(1);
+                        pacienteCompleto.pessoa.CPF = readerPaciente.GetString(2);
+                        pacienteCompleto.pessoa.RG = readerPaciente.GetString(3);
+                        pacienteCompleto.pessoa.Sexo = readerPaciente.GetString(4);
+                        pacienteCompleto.pessoa.DataNascimento = readerPaciente.GetDateTime(5);
+                        pacienteCompleto.pessoa.Logradouro = readerPaciente.GetString(6);
+                        pacienteCompleto.pessoa.Numero = readerPaciente.GetInt32(7);
+                        pacienteCompleto.pessoa.Bairro = readerPaciente.GetString(8);
+                        pacienteCompleto.pessoa.Cidade = readerPaciente.GetString(9);
+                        pacienteCompleto.pessoa.Uf = readerPaciente.GetString(10);
+                        pacienteCompleto.pessoa.TelefoneCelular = readerPaciente.GetString(11);
+                        pacienteCompleto.pessoa.Email = readerPaciente.GetString(12);
                     }
                 }
-                reader.Close();
+                readerPaciente.Close();
+
+                //----- -----
+
+                //----- CONSULTA OS DADOS DA CONSULTA DO PACIENTE -----
+
+                MySqlCommand cmdConsultaPaciente = new MySqlCommand(DALSQL.ConsultarPacienteConsulta(), connection);
+                cmdConsultaPaciente.Parameters.AddWithValue("@IDPACIENTECONSULTA", idPaciente);
+                MySqlDataReader readerConsultaPaciente = cmdConsultaPaciente.ExecuteReader();
+
+                pacienteCompleto.consulta = new List<DadosConsulta>();
+
+                if (readerConsultaPaciente.HasRows) {
+                    while (readerConsultaPaciente.Read()) {
+                        DadosConsulta consulta = new DadosConsulta();
+
+                        consulta.idConsulta = readerConsultaPaciente.GetInt32(0);
+                        consulta.idPacienteConsulta = readerConsultaPaciente.GetInt32(1);
+                        consulta.dataConsulta = readerConsultaPaciente.GetDateTime(2);
+                        consulta.finalizada = readerConsultaPaciente.GetInt32(3);
+
+                        pacienteCompleto.consulta.Add(consulta);
+                    }
+                    readerConsultaPaciente.NextResult();
+                }
+                readerConsultaPaciente.Close();
+                //----- -----
+
                 connection.Close();
-
                 return pacienteCompleto;
-
             } catch (Exception ex) {
                 throw ex;
             }

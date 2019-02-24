@@ -158,10 +158,10 @@ namespace SGCM.Controllers {
             HttpContext.Session.SetInt32("flExamesA", usuarioCompletoTO.permissoesTO.flExamesA);
             HttpContext.Session.SetInt32("flExamesE", usuarioCompletoTO.permissoesTO.flExamesE);
 
-            HttpContext.Session.SetInt32("flConsultaAnteriorI", usuarioCompletoTO.permissoesTO.flConsultaAnteriorI);
-            HttpContext.Session.SetInt32("flConsultaAnteriorC", usuarioCompletoTO.permissoesTO.flConsultaAnteriorC);
-            HttpContext.Session.SetInt32("flConsultaAnteriorA", usuarioCompletoTO.permissoesTO.flConsultaAnteriorA);
-            HttpContext.Session.SetInt32("flConsultaAnteriorE", usuarioCompletoTO.permissoesTO.flConsultaAnteriorE);
+            HttpContext.Session.SetInt32("flHistoriaPatologicaPregressaI", usuarioCompletoTO.permissoesTO.flHistoriaPatologicaPregressaI);
+            HttpContext.Session.SetInt32("flHistoriaPatologicaPregressaC", usuarioCompletoTO.permissoesTO.flHistoriaPatologicaPregressaC);
+            HttpContext.Session.SetInt32("flHistoriaPatologicaPregressaA", usuarioCompletoTO.permissoesTO.flHistoriaPatologicaPregressaA);
+            HttpContext.Session.SetInt32("flHistoriaPatologicaPregressaE", usuarioCompletoTO.permissoesTO.flHistoriaPatologicaPregressaE);
 
             HttpContext.Session.SetInt32("flHistoriaMolestiaAtualI", usuarioCompletoTO.permissoesTO.flHistoriaMolestiaAtualI);
             HttpContext.Session.SetInt32("flHistoriaMolestiaAtualC", usuarioCompletoTO.permissoesTO.flHistoriaMolestiaAtualC);
@@ -219,10 +219,10 @@ namespace SGCM.Controllers {
             ViewData.Add("flExamesA", HttpContext.Session.GetInt32("flExamesA"));
             ViewData.Add("flExamesE", HttpContext.Session.GetInt32("flExamesE"));
 
-            ViewData.Add("flConsultaAnteriorI", HttpContext.Session.GetInt32("flConsultaAnteriorI"));
-            ViewData.Add("flConsultaAnteriorC", HttpContext.Session.GetInt32("flConsultaAnteriorC"));
-            ViewData.Add("flConsultaAnteriorA", HttpContext.Session.GetInt32("flConsultaAnteriorA"));
-            ViewData.Add("flConsultaAnteriorE", HttpContext.Session.GetInt32("flConsultaAnteriorE"));
+            ViewData.Add("flHistoriaPatologicaPregressaI", HttpContext.Session.GetInt32("flHistoriaPatologicaPregressaI"));
+            ViewData.Add("flHistoriaPatologicaPregressaC", HttpContext.Session.GetInt32("flHistoriaPatologicaPregressaC"));
+            ViewData.Add("flHistoriaPatologicaPregressaA", HttpContext.Session.GetInt32("flHistoriaPatologicaPregressaA"));
+            ViewData.Add("flHistoriaPatologicaPregressaE", HttpContext.Session.GetInt32("flHistoriaPatologicaPregressaE"));
 
             ViewData.Add("flHistoriaMolestiaAtualI", HttpContext.Session.GetInt32("flHistoriaMolestiaAtualI"));
             ViewData.Add("flHistoriaMolestiaAtualC", HttpContext.Session.GetInt32("flHistoriaMolestiaAtualC"));

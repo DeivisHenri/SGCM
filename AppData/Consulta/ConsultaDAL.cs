@@ -200,7 +200,10 @@ namespace SGCM.AppData.Consulta
                 Int32 retorno = cmdEditarConsulta.ExecuteNonQuery();
 
                 connection.Close();
-                return retorno;
+
+                if (retorno > 0) return -1;
+                else return 3;
+
             } catch (Exception ex) {
                 throw ex;
             }

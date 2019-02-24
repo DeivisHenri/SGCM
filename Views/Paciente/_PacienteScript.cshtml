@@ -29,7 +29,29 @@
             console.log("4");
             $("#tipoUsuarioMedico").prop("checked", false);
         }
-    }); 
+    });
+
+    // SCRIPT BOTÕES
+
+    $('#moveProximoDadosPessoais').click(function () {
+        var target = $(".nav-tabs li.active");
+        var sibbling = target.next();
+        sibbling.children("a").tab("show");
+    });
+
+    $('#moveProximoDadosConsulta').click(function () {
+        var target = $(".nav-tabs li.active");
+        var sibbling = target.next();
+        sibbling.children("a").tab("show");
+    });
+
+    $('#moveAnteriorDadosConsulta').click(function () {
+        var target = $(".nav-tabs li.active");
+        var sibbling = target.prev();
+        sibbling.children("a").tab("show");
+    });
+
+    //----- -----
 
     $('#btnSelecionarTodos').click(function () {
         $("input[type='checkbox']").prop("checked", true);

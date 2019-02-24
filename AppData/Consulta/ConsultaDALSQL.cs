@@ -35,10 +35,10 @@ namespace SGCM.AppData.Consulta {
         public string CadastrarConsulta(CadastroConsultaModel model) {
             StringBuilder command = new StringBuilder();
 
-            command.AppendLine("INSERT INTO consulta(idPacienteConsulta, dataConsulta)");
+            command.AppendLine("INSERT INTO consulta(idPacienteConsulta, dataConsulta, consultaFinalizada)");
 
-            if (model.consulta.flagPM) command.AppendLine("VALUES(@IDPACIENTECONSULTA, STR_TO_DATE(@DATACONSULTA @FLAGPM, '%d/%m/%Y %h:%i:%s %p'))");
-            else command.AppendLine("VALUES(@IDPACIENTECONSULTA, STR_TO_DATE(@DATACONSULTA, '%d/%m/%Y %h:%i:%s'))");
+            if (model.consulta.flagPM) command.AppendLine("VALUES(@IDPACIENTECONSULTA, STR_TO_DATE(@DATACONSULTA @FLAGPM, '%d/%m/%Y %h:%i:%s %p'), 0)");
+            else command.AppendLine("VALUES(@IDPACIENTECONSULTA, STR_TO_DATE(@DATACONSULTA, '%d/%m/%Y %h:%i:%s'), 0)");
 
             return command.ToString();
         }

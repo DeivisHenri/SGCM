@@ -276,6 +276,113 @@
             <td>@ViewData["flExamesE"]</td>
         }
     </tr>
+    @* Historia Patologica Pregressa *@
+    <tr>
+        <td>Inserir Historia Patologica Pregressa</td>
+        @if ((int)ViewData["flHistoriaPatologicaPregressaI"] == 1)
+        {
+            <td>@ViewData["flHistoriaPatologicaPregressaI"]</td>
+            <td>0</td>
+        }
+        else
+        {
+            <td>0</td>
+            <td>@ViewData["flHistoriaPatologicaPregressaI"]</td>
+        }
+    </tr>
+    <tr>
+        <td>Consultar Historia Patologica Pregressa</td>
+        @if ((int)ViewData["flHistoriaPatologicaPregressaC"] == 1)
+        {
+            <td>@ViewData["flHistoriaPatologicaPregressaC"]</td>
+            <td>0</td>
+        }
+        else
+        {
+            <td>0</td>
+            <td>@ViewData["flHistoriaPatologicaPregressaC"]</td>
+        }
+    </tr>
+    <tr>
+        <td>Alterar Historia Patologica Pregressa</td>
+        @if ((int)ViewData["flHistoriaPatologicaPregressaA"] == 1)
+        {
+            <td>@ViewData["flHistoriaPatologicaPregressaA"]</td>
+            <td>0</td>
+        }
+        else
+        {
+            <td>0</td>
+            <td>@ViewData["flHistoriaPatologicaPregressaA"]</td>
+        }
+    </tr>
+    <tr>
+        <td>Excluir Historia Patologica Pregressa</td>
+        @if ((int)ViewData["flHistoriaPatologicaPregressaE"] == 1)
+        {
+            <td>@ViewData["flHistoriaPatologicaPregressaE"]</td>
+            <td>0</td>
+        }
+        else
+        {
+            <td>0</td>
+            <td>@ViewData["flHistoriaPatologicaPregressaE"]</td>
+        }
+    </tr>
+
+    @* Historia Molestia Atual *@
+    <tr>
+        <td>Inserir História da moléstia atual</td>
+        @if ((int)ViewData["flHistoriaMolestiaAtualI"] == 1)
+        {
+            <td>@ViewData["flHistoriaMolestiaAtualI"]</td>
+            <td>0</td>
+        }
+        else
+        {
+            <td>0</td>
+            <td>@ViewData["flHistoriaMolestiaAtualI"]</td>
+        }
+    </tr>
+    <tr>
+        <td>Consultar História da moléstia atual</td>
+        @if ((int)ViewData["flHistoriaMolestiaAtualC"] == 1)
+        {
+            <td>@ViewData["flHistoriaMolestiaAtualC"]</td>
+            <td>0</td>
+        }
+        else
+        {
+            <td>0</td>
+            <td>@ViewData["flHistoriaMolestiaAtualC"]</td>
+        }
+    </tr>
+    <tr>
+        <td>Alterar História da moléstia atual</td>
+        @if ((int)ViewData["flHistoriaMolestiaAtualA"] == 1)
+        {
+            <td>@ViewData["flHistoriaMolestiaAtualA"]</td>
+            <td>0</td>
+        }
+        else
+        {
+            <td>0</td>
+            <td>@ViewData["flHistoriaMolestiaAtualA"]</td>
+        }
+    </tr>
+    <tr>
+        <td>Excluir História da moléstia atual</td>
+        @if ((int)ViewData["flHistoriaMolestiaAtualE"] == 1)
+        {
+            <td>@ViewData["flHistoriaMolestiaAtualE"]</td>
+            <td>0</td>
+        }
+        else
+        {
+            <td>0</td>
+            <td>@ViewData["flHistoriaMolestiaAtualE"]</td>
+        }
+    </tr>
 </table>
 
 

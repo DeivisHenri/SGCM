@@ -12,44 +12,78 @@
     <form asp-controller="Paciente" asp-action="EditarPaciente" method="post" class="form-horizontal max-min-width">
         @Html.AntiForgeryToken()
         <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#dadosPessoais">Dados Pessoais Paciente</a></li>
+            <li class="active">
+                <a data-toggle="tab" href="#dadosPessoais">Dados Pessoais Paciente</a>
+            </li>
             @{
                 if (ViewData["flConsultaC"].ToString() == "1")
                 {
-                    <partial name="/Views/Paciente/Partials/ConsultaAnterior/_DadoConsulta.cshtml" model="@Model" />
-                    <li><a data-toggle="tab" href="#dadoConsulta">Dado Consulta</a></li>
+                    <li>
+                        <a data-toggle="tab" href="#dadosConsulta">Dados Consulta</a>
+                    </li>
                 }
-            }
-
-            @{
-                if (ViewData["flHistoriaPatologicaPregressaC"].ToString() == "1")
+                else
                 {
-                    <partial name="/Views/Paciente/Partials/HistoriaMolestiaAtual/_DadoMolestiaAtual.cshtml" model="@Model" />
-                    <li><a data-toggle="tab" href="#dadoMolestiaAtual">História Patológica Pregressa</a></li>
+                    <li class="disabled">
+                        <a style="cursor:no-drop" href="#dadosConsulta">Dados Consulta</a>
+                    </li>
                 }
             }
 
             @{
                 if (ViewData["flHistoriaMolestiaAtualC"].ToString() == "1")
                 {
-                    <partial name="/Views/Paciente/Partials/HistoriaMolestiaAtual/_DadoMolestiaAtual.cshtml" model="@Model" />
-                    <li><a data-toggle="tab" href="#dadoMolestiaAtual">História da moléstia atual</a></li>
+                    <li>
+                        <a data-toggle="tab" href="#dadosMolestiaAtual">História da Moléstia Atual</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="disabled">
+                        <a style="cursor:no-drop" href="#dadosMolestiaAtual">História da Moléstia Atual</a>
+                    </li>
+                }
+            }
+
+            @{
+                if (ViewData["flHistoriaPatologicaPregressaC"].ToString() == "1")
+                {
+                    <li>
+                        <a data-toggle="tab" href="#dadosHistoriaPatologicaPregressa">História Patológica Pregressa</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="disabled">
+                        <a style="cursor:no-drop" href="#dadosHistoriaPatologicaPregressa">História Patológica Pregressa</a>
+                    </li>
                 }
             }
 
             @{
                 if (ViewData["flExamesC"].ToString() == "1")
                 {
-                    <partial name="/Views/Paciente/Partials/Exame/_DadoExame.cshtml" model="@Model" />
-                    <li><a data-toggle="tab" href="#dadosPessoais">Dados Paciente</a></li>
+                    <li>
+                        <a data-toggle="tab" href="#dadosExame">Dados Exames</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="disabled">
+                        <a style="cursor:no-drop" href="#dadosExame">Dados Exames</a>
+                    </li>
                 }
             }
 
             @{
-                if (ViewData["flMedicamentoC"].ToString() == "1")
-                {
-                    <partial name="/Views/Paciente/Partials/Medicamento/_DadoMedicamento.cshtml" model="@Model" />
-                    <li><a data-toggle="tab" href="#dadosPessoais">Dados Paciente</a></li>
+                if (ViewData["flHipoteseDiagnosticaC"].ToString() == "1") {
+                    <li>
+                        <a data-toggle="tab" href="#dadosMedicamento">Hipótese Diagnóstica</a>
+                    </li>
+                } else {
+                    <li class="disabled">
+                        <a style="cursor:no-drop" href="#dadosMedicamento">Hipótese Diagnóstica</a>
+                    </li>
                 }
             }
         </ul>
@@ -59,38 +93,37 @@
                 <h3>Paciente</h3>
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <partial name="/Views/Paciente/Partials/Editar/_DadosPessoais.cshtml" model="@Model" />
-                @{
-                    if (ViewData["flConsultaAnteriorC"].ToString() == "1")
-                    {
-                        <partial name="/Views/Paciente/Partials/ConsultaAnterior/_DadoConsulta.cshtml" model="@Model" />
-                    }
-                }
-
-                @{
-                    if (ViewData["flHistoriaMolestiaAtualC"].ToString() == "1")
-                    {
-                        <partial name="/Views/Paciente/Partials/HistoriaMolestiaAtual/_DadoMolestiaAtual.cshtml" model="@Model" />
-                    }
-                }
-
-                @{
-                    if (ViewData["flExamesC"].ToString() == "1")
-                    {
-                        <partial name="/Views/Paciente/Partials/Exame/_DadoExame.cshtml" model="@Model" />
-                    }
-                }
-
-                @{
-                    if (ViewData["flMedicamentoC"].ToString() == "1")
-                    {
-                        <partial name="/Views/Paciente/Partials/Medicamento/_DadoMedicamento.cshtml" model="@Model" />
-                    }
-                }
             </div>
-        </div>
 
-        <div class="form-group padding-top-20px">
-            <button type="submit" class="btn btn-success btn-brand btn-brand-big">&nbsp;Salvar&nbsp;</button>
+            <div id="dadosConsulta" class="tab-pane fade">
+                <h3>Consulta</h3>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <partial name="/Views/Paciente/Partials/Consulta/_DadosConsulta.cshtml" model="@Model" />
+            </div>
+
+            <div id="dadosHistoriaPatologicaPregressa" class="tab-pane fade">
+                <h3>Historia Patológica Pregressa</h3>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <partial name="/Views/Paciente/Partials/HistoriaPatologicaPregressa/_DadosHistoriaPatologicaPregressa.cshtml" model="@Model" />
+            </div>
+
+            <div id="dadosMolestiaAtual" class="tab-pane fade">
+                <h3>História da Moléstia Atual</h3>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <partial name="/Views/Paciente/Partials/HistoriaMolestiaAtual/_DadosMolestiaAtual.cshtml" model="@Model" />
+            </div>
+
+            <div id="dadosExame" class="tab-pane fade">
+                <h3>Exame</h3>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <partial name="/Views/Paciente/Partials/Exame/_DadosExame.cshtml" model="@Model" />
+            </div>
+
+            <div id="dadosMedicamento" class="tab-pane fade">
+                <h3>Medicamento</h3>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <partial name="/Views/Paciente/Partials/Medicamento/_DadosMedicamento.cshtml" model="@Model" />
+            </div>
         </div>
     </form>
 </div>

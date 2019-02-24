@@ -437,13 +437,21 @@ namespace SGCM.Controllers {
                         var retornoEditarConsulta = objConsultaBLL.EditarConsulta(model);
 
                         if (retornoEditarConsulta == 1) {
-                            ViewBag.MensagemTitle = "Sucesso";
-                            ViewBag.MensagemBody = "O consulta para o paciente: " + model.paciente.Nome + " foi alterada com sucesso!";
-                            return RedirectToAction("ConsultarConsulta", "Consulta");
-                        } else {
-                            ViewBag.MensagemTitle = "Erro";
-                            ViewBag.MensagemBody = "Ocorreu um erro na tentiva de editar a consulta da paciente: " + model.paciente.Nome;
+                            ViewBag.MensagemTitle = "Erro ao Cadastrar a Consulta";
+                            ViewBag.MensagemBody = "Não é possivel salvar uma consulta com a data inferior que a data atual!";
                             return View();
+                        } else if (retornoEditarConsulta == 2) {
+                            ViewBag.MensagemTitle = "Erro ao Cadastrar a Consulta";
+                            ViewBag.MensagemBody = "Não é possivel salvar uma consulta com a hora inferior que a hora atual!";
+                            return View();
+                        } else if (retornoEditarConsulta == 3) {
+                            ViewBag.MensagemTitle = "Erro ao Cadastrar a Consulta";
+                            ViewBag.MensagemBody = "Ocorreu um erro quando o sistema estava tentando alterar uma consulta!";
+                            return View();
+                        } else {
+                            ViewBag.MensagemTitle = "Sucesso no Cadastro da Consulta";
+                            ViewBag.MensagemBody = "Consulta do paciente " + model.paciente.Nome + " cadastrada com sucesso!";
+                            return RedirectToAction("ConsultarConsulta", "Consulta");
                         }
                     } else {
                         HttpContext.Session.SetString("MensagemTitle", "Erro");
@@ -460,6 +468,19 @@ namespace SGCM.Controllers {
                 ViewBag.MensagemBodyAction = "Action: CadastrarConsulta";
                 ViewBag.MensagemBody = "Exceção: " + ex.Message;
                 return View();
+            }
+        }
+
+        [HttpGet]
+        public ActionResult FinalizarConsulta(int id) {
+            try {
+                //if (TempData("FinalizarConsulta") != null) TempData.Add("FinalizarConsulta", "Finalizar");
+                return RedirectToAction("EditarPaciente", "Paciente", new { id = id });
+            }
+            catch (Exception ex) {
+                HttpContext.Session.SetString("MensagemTitle", "Erro");
+                HttpContext.Session.SetString("MensagemBody", "Erro ao tentar finalizar a consulta: " + ex.Message);
+                return RedirectToAction("Index", "Home");
             }
         }
 
@@ -548,10 +569,10 @@ namespace SGCM.Controllers {
             ViewData.Add("flExamesA", HttpContext.Session.GetInt32("flExamesA"));
             ViewData.Add("flExamesE", HttpContext.Session.GetInt32("flExamesE"));
 
-            ViewData.Add("flConsultaAnteriorI", HttpContext.Session.GetInt32("flConsultaAnteriorI"));
-            ViewData.Add("flConsultaAnteriorC", HttpContext.Session.GetInt32("flConsultaAnteriorC"));
-            ViewData.Add("flConsultaAnteriorA", HttpContext.Session.GetInt32("flConsultaAnteriorA"));
-            ViewData.Add("flConsultaAnteriorE", HttpContext.Session.GetInt32("flConsultaAnteriorE"));
+            ViewData.Add("flHistoriaPatologicaPregressaI", HttpContext.Session.GetInt32("flHistoriaPatologicaPregressaI"));
+            ViewData.Add("flHistoriaPatologicaPregressaC", HttpContext.Session.GetInt32("flHistoriaPatologicaPregressaC"));
+            ViewData.Add("flHistoriaPatologicaPregressaA", HttpContext.Session.GetInt32("flHistoriaPatologicaPregressaA"));
+            ViewData.Add("flHistoriaPatologicaPregressaE", HttpContext.Session.GetInt32("flHistoriaPatologicaPregressaE"));
 
             ViewData.Add("flHistoriaMolestiaAtualI", HttpContext.Session.GetInt32("flHistoriaMolestiaAtualI"));
             ViewData.Add("flHistoriaMolestiaAtualC", HttpContext.Session.GetInt32("flHistoriaMolestiaAtualC"));

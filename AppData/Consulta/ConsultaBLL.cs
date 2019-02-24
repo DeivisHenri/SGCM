@@ -504,6 +504,20 @@ namespace SGCM.AppData.Consulta
             try {
                 consulta.paciente.CPF = UtilMetodo.RemovendoCaracteresEspeciais(consulta.paciente.CPF);
 
+                DateTime dataInformada = consulta.consulta.DataConsulta;
+                DateTime dataAgora = DateTime.Now;
+
+                var resultadoComparacao = dataInformada.Date.CompareTo(dataAgora.Date);
+
+                if (resultadoComparacao < 0) {
+                    // Data informada é menor que a data atual.
+                    return 1;
+                } else if (resultadoComparacao == 0) {
+                    var resultadoComparacaoComHora = dataInformada.CompareTo(dataAgora);
+                    if (resultadoComparacaoComHora < 0) {
+                        return 2;
+                    }
+                }
                 ConsultaDAL consultaDAL = new ConsultaDAL();
                 return consultaDAL.EditarConsulta(consulta);
             } catch (Exception ex) {

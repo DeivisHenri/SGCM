@@ -51,6 +51,9 @@ namespace SGCM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CadastrarAusencia(CadastrarAusenciaModel model) {
             try {
+                if (!ModelState.IsValid) {
+                    //do whatever you want here
+                }
                 ViewBag.MensagemBodyController = "";
                 ViewBag.MensagemBodyAction = "";
                 ViewBag.MensagemBody = "";
@@ -317,10 +320,10 @@ namespace SGCM.Controllers
             ViewData.Add("flExamesA", HttpContext.Session.GetInt32("flExamesA"));
             ViewData.Add("flExamesE", HttpContext.Session.GetInt32("flExamesE"));
 
-            ViewData.Add("flConsultaAnteriorI", HttpContext.Session.GetInt32("flConsultaAnteriorI"));
-            ViewData.Add("flConsultaAnteriorC", HttpContext.Session.GetInt32("flConsultaAnteriorC"));
-            ViewData.Add("flConsultaAnteriorA", HttpContext.Session.GetInt32("flConsultaAnteriorA"));
-            ViewData.Add("flConsultaAnteriorE", HttpContext.Session.GetInt32("flConsultaAnteriorE"));
+            ViewData.Add("flHistoriaPatologicaPregressaI", HttpContext.Session.GetInt32("flHistoriaPatologicaPregressaI"));
+            ViewData.Add("flHistoriaPatologicaPregressaC", HttpContext.Session.GetInt32("flHistoriaPatologicaPregressaC"));
+            ViewData.Add("flHistoriaPatologicaPregressaA", HttpContext.Session.GetInt32("flHistoriaPatologicaPregressaA"));
+            ViewData.Add("flHistoriaPatologicaPregressaE", HttpContext.Session.GetInt32("flHistoriaPatologicaPregressaE"));
 
             ViewData.Add("flHistoriaMolestiaAtualI", HttpContext.Session.GetInt32("flHistoriaMolestiaAtualI"));
             ViewData.Add("flHistoriaMolestiaAtualC", HttpContext.Session.GetInt32("flHistoriaMolestiaAtualC"));

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using static SGCM.AppData.Infraestrutura.CustomMetadataProvider;
 
@@ -7,10 +8,11 @@ namespace SGCM.Models.Paciente.EditarPacienteModel
     public class EditarPacienteModel
     {
         public DadosPessoais pessoa { get; set; }
+
+        public List<DadosConsulta> consulta { get; set; }
     }
 
-    public class DadosPessoais
-    {
+    public class DadosPessoais {
         [StringLength(50, ErrorMessage = "O campo Nome deve ter no máximo 50 caracteres.")]
         [Display(Name = "Nome")]
         public string Nome { get; set; }
@@ -58,6 +60,13 @@ namespace SGCM.Models.Paciente.EditarPacienteModel
         public string Email { get; set; }
 
         public int IdPessoa { get; set; }
+    }
+
+    public class DadosConsulta {
+        public int idConsulta { get; set; }
+        public int idPacienteConsulta { get; set; }
+        public DateTime dataConsulta { get; set; }
+        public int finalizada { get; set; }
     }
 
 }

@@ -6,6 +6,7 @@ using System;
 using SGCM.Models.Paciente.ConsultarPacienteModel;
 using System.Collections.Generic;
 using SGCM.Models.Paciente.EditarPacienteModel;
+using SGCM.AppData.Consulta;
 
 namespace SGCM.Controllers
 {
@@ -143,6 +144,7 @@ namespace SGCM.Controllers
                     if ((int)ViewData["flPacienteA"] != 0) {
                         var objPacienteBLL = new PacienteBLL();
                         EditarPacienteModel viewModel = objPacienteBLL.ConsultarPacienteID(id);
+                        TempData.Clear();
 
                         return View(viewModel);
                     } else {
@@ -209,6 +211,48 @@ namespace SGCM.Controllers
             }
         }
 
+        //[HttpGet]
+        //public ActionResult GetPacienteConsulta() {
+        //    try {
+        //        CarregarDadosUsuarioParaTela();
+        //        if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
+        //            if ((int)ViewData["flPacienteC"] != 0) {
+        //                var objConsultaPacienteBLL = new ConsultaBLL();
+        //                var retorno = objConsultaPacienteBLL.GetPacienteConsulta(id);
+
+        //                if (retorno == 1)
+        //                {
+        //                    HttpContext.Session.SetString("MensagemTitle", "Sucesso");
+        //                    HttpContext.Session.SetString("MensagemBody", "O paciente " + pacienteModel.pessoa.Nome + " foi atualizado com sucesso!");
+        //                    return RedirectToAction("ConsultarPaciente", "Paciente");
+        //                }
+        //                else
+        //                {
+        //                    ViewBag.MensagemTitle = "Erro";
+        //                    ViewBag.MensagemBody = "Ocorreu um erro na tentiva de editar o paciente: " + pacienteModel.pessoa.Nome;
+        //                    return View();
+        //                }
+        //            }
+        //            else
+        //            {
+        //                HttpContext.Session.SetString("MensagemTitle", "Erro");
+        //                HttpContext.Session.SetString("MensagemBody", "O usuário " + ViewData["nome"] + " não tem permissão para alterar pacientes!");
+        //                return RedirectToAction("Index", "Home");
+        //            }
+        //        }
+        //        else
+        //        {
+        //            HttpContext.Session.SetString("MensagemTitle", "Erro");
+        //            HttpContext.Session.SetString("MensagemBody", "O usuário " + ViewData["nome"] + " não tem acesso a página: 'Paciente/EditarPaciente'");
+        //            return RedirectToAction("Index", "Home");
+        //        }
+        //    } catch (Exception) {
+        //        HttpContext.Session.SetString("MensagemTitle", "Erro");
+        //        HttpContext.Session.SetString("MensagemBody", "Ocorreu um erro na tentativa de consultar as consultas marcadas do cliente!");
+        //        return RedirectToAction("Index", "Home");
+        //    }
+        //}
+
         private void CarregarDadosUsuarioParaTela()
         {
             ViewData.Add("idUsuario", HttpContext.Session.GetInt32("idUsuario"));
@@ -259,10 +303,10 @@ namespace SGCM.Controllers
             ViewData.Add("flExamesA", HttpContext.Session.GetInt32("flExamesA"));
             ViewData.Add("flExamesE", HttpContext.Session.GetInt32("flExamesE"));
 
-            ViewData.Add("flConsultaAnteriorI", HttpContext.Session.GetInt32("flConsultaAnteriorI"));
-            ViewData.Add("flConsultaAnteriorC", HttpContext.Session.GetInt32("flConsultaAnteriorC"));
-            ViewData.Add("flConsultaAnteriorA", HttpContext.Session.GetInt32("flConsultaAnteriorA"));
-            ViewData.Add("flConsultaAnteriorE", HttpContext.Session.GetInt32("flConsultaAnteriorE"));
+            ViewData.Add("flHistoriaPatologicaPregressaI", HttpContext.Session.GetInt32("flHistoriaPatologicaPregressaI"));
+            ViewData.Add("flHistoriaPatologicaPregressaC", HttpContext.Session.GetInt32("flHistoriaPatologicaPregressaC"));
+            ViewData.Add("flHistoriaPatologicaPregressaA", HttpContext.Session.GetInt32("flHistoriaPatologicaPregressaA"));
+            ViewData.Add("flHistoriaPatologicaPregressaE", HttpContext.Session.GetInt32("flHistoriaPatologicaPregressaE"));
 
             ViewData.Add("flHistoriaMolestiaAtualI", HttpContext.Session.GetInt32("flHistoriaMolestiaAtualI"));
             ViewData.Add("flHistoriaMolestiaAtualC", HttpContext.Session.GetInt32("flHistoriaMolestiaAtualC"));

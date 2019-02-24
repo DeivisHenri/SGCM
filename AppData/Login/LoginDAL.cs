@@ -81,11 +81,11 @@ namespace SGCM.AppData.Login {
                             loginCompletoTO.permissoesTO.flExamesC = dr.GetInt32(37);
                             loginCompletoTO.permissoesTO.flExamesA = dr.GetInt32(38);
                             loginCompletoTO.permissoesTO.flExamesE = dr.GetInt32(39);
-
-                            loginCompletoTO.permissoesTO.flConsultaAnteriorI = dr.GetInt32(40);
-                            loginCompletoTO.permissoesTO.flConsultaAnteriorC = dr.GetInt32(41);
-                            loginCompletoTO.permissoesTO.flConsultaAnteriorA = dr.GetInt32(42);
-                            loginCompletoTO.permissoesTO.flConsultaAnteriorE = dr.GetInt32(43);
+                            
+                            loginCompletoTO.permissoesTO.flHistoriaPatologicaPregressaI = dr.GetInt32(40);
+                            loginCompletoTO.permissoesTO.flHistoriaPatologicaPregressaC = dr.GetInt32(41);
+                            loginCompletoTO.permissoesTO.flHistoriaPatologicaPregressaA = dr.GetInt32(42);
+                            loginCompletoTO.permissoesTO.flHistoriaPatologicaPregressaE = dr.GetInt32(43);
 
                             loginCompletoTO.permissoesTO.flHistoriaMolestiaAtualI = dr.GetInt32(44);
                             loginCompletoTO.permissoesTO.flHistoriaMolestiaAtualC = dr.GetInt32(45);

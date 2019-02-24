@@ -57,7 +57,7 @@
                                     if (Model.quadroSegundaSeis.seis != null)
                                     {
                                         <div>
-                                            <label class="floatLeft">Nome: <a asp-controller="Paciente" asp-action="EditarPaciente" asp-route-id="@Model.quadroSegundaSeis.idPacienteConsulta">@Model.quadroSegundaSeis.seis</a></label>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSegundaSeis.idPacienteConsulta">@Model.quadroSegundaSeis.seis</a></label>
                                         </div>
                                         <input id="@Model.quadroSegundaSeis.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSegundaSeis.idPacienteConsulta" class="displayNone" />
@@ -78,7 +78,9 @@
                                 {
                                     if (Model.quadroTercaSeis.seis != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroTercaSeis.seis</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroTercaSeis.idPacienteConsulta">@Model.quadroTercaSeis.seis</a></label>
+                                        </div>
                                         <input id="@Model.quadroTercaSeis.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroTercaSeis.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -98,7 +100,9 @@
                                 {
                                     if (Model.quadroQuartaSeis.seis != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuartaSeis.seis</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuartaSeis.idPacienteConsulta">@Model.quadroQuartaSeis.seis</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuartaSeis.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuartaSeis.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -118,7 +122,9 @@
                                 {
                                     if (Model.quadroQuintaSeis.seis != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuintaSeis.seis</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuintaSeis.idPacienteConsulta">@Model.quadroQuintaSeis.seis</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuintaSeis.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuintaSeis.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -138,7 +144,9 @@
                                 {
                                     if (Model.quadroSextaSeis.seis != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSextaSeis.seis</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSextaSeis.idPacienteConsulta">@Model.quadroSextaSeis.seis</a></label>
+                                        </div>
                                         <input id="@Model.quadroSextaSeis.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSextaSeis.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -161,7 +169,9 @@
                                 {
                                     if (Model.quadroSegundaSeisMeia.seisMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSegundaSeisMeia.seisMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSegundaSeisMeia.idPacienteConsulta">@Model.quadroSegundaSeisMeia.seisMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroSegundaSeisMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSegundaSeisMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -180,7 +190,9 @@
                                 {
                                     if (Model.quadroTercaSeisMeia.seisMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroTercaSeisMeia.seisMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroTercaSeisMeia.idPacienteConsulta">@Model.quadroTercaSeisMeia.seisMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroTercaSeisMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroTercaSeisMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -197,7 +209,9 @@
                                 {
                                     if (Model.quadroQuartaSeisMeia.seisMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuartaSeisMeia.seisMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuartaSeisMeia.idPacienteConsulta">@Model.quadroQuartaSeisMeia.seisMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuartaSeisMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuartaSeisMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -214,7 +228,9 @@
                                 {
                                     if (Model.quadroQuintaSeisMeia.seisMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuintaSeisMeia.seisMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuintaSeisMeia.idPacienteConsulta">@Model.quadroQuintaSeisMeia.seisMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuintaSeisMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuintaSeisMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -231,7 +247,9 @@
                                 {
                                     if (Model.quadroSextaSeisMeia.seisMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSextaSeisMeia.seisMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSextaSeisMeia.idPacienteConsulta">@Model.quadroSextaSeisMeia.seisMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroSextaSeisMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSextaSeisMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -252,7 +270,9 @@
                                 {
                                     if (Model.quadroSegundaSete.sete != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSegundaSete.sete</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSegundaSete.idPacienteConsulta">@Model.quadroSegundaSete.sete</a></label>
+                                        </div>
                                         <input id="@Model.quadroSegundaSete.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSegundaSete.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -269,7 +289,9 @@
                                 {
                                     if (Model.quadroTercaSete.sete != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroTercaSete.sete</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroTercaSete.idPacienteConsulta">@Model.quadroTercaSete.sete</a></label>
+                                        </div>
                                         <input id="@Model.quadroTercaSete.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroTercaSete.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -286,7 +308,9 @@
                                 {
                                     if (Model.quadroQuartaSete.sete != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuartaSete.sete</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuartaSete.idPacienteConsulta">@Model.quadroQuartaSete.sete</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuartaSete.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuartaSete.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -303,7 +327,9 @@
                                 {
                                     if (Model.quadroQuintaSete.sete != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuintaSete.sete</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuintaSete.idPacienteConsulta">@Model.quadroQuintaSete.sete</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuintaSete.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuintaSete.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -320,7 +346,9 @@
                                 {
                                     if (Model.quadroSextaSete.sete != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSextaSete.sete</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSextaSete.idPacienteConsulta">@Model.quadroSextaSete.sete</a></label>
+                                        </div>
                                         <input id="@Model.quadroSextaSete.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSextaSete.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -341,14 +369,18 @@
                                 {
                                     if (Model.quadroSegundaSeteMeia.seteMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSegundaSeteMeia.seteMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSegundaSeteMeia.idPacienteConsulta">@Model.quadroSegundaSeteMeia.seteMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroSegundaSeteMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSegundaSeteMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
                                             <a asp-controller="Consulta" asp-action="EditarConsulta" asp-route-id="@Model.quadroSegundaSeteMeia.idConsulta">Editar</a>
                                         </div>
                                     }
-                                } else {
+                                }
+                                else
+                                {
                                     <span style="color: red;">Médico Ausente</span>
                                 }
                             }
@@ -358,7 +390,9 @@
                                 {
                                     if (Model.quadroTercaSeteMeia.seteMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroTercaSeteMeia.seteMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroTercaSeteMeia.idPacienteConsulta">@Model.quadroTercaSeteMeia.seteMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroTercaSeteMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroTercaSeteMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -375,7 +409,9 @@
                                 {
                                     if (Model.quadroQuartaSeteMeia.seteMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuartaSeteMeia.seteMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuartaSeteMeia.idPacienteConsulta">@Model.quadroQuartaSeteMeia.seteMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuartaSeteMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuartaSeteMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -392,7 +428,9 @@
                                 {
                                     if (Model.quadroQuintaSeteMeia.seteMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuintaSeteMeia.seteMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuintaSeteMeia.idPacienteConsulta">@Model.quadroQuintaSeteMeia.seteMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuintaSeteMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuintaSeteMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -409,7 +447,9 @@
                                 {
                                     if (Model.quadroSextaSeteMeia.seteMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSextaSeteMeia.seteMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSextaSeteMeia.idPacienteConsulta">@Model.quadroSextaSeteMeia.seteMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroSextaSeteMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSextaSeteMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -430,7 +470,9 @@
                                 {
                                     if (Model.quadroSegundaOito.oito != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSegundaOito.oito</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSegundaOito.idPacienteConsulta">@Model.quadroSegundaOito.oito</a></label>
+                                        </div>
                                         <input id="@Model.quadroSegundaOito.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSegundaOito.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -447,7 +489,9 @@
                                 {
                                     if (Model.quadroTercaOito.oito != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroTercaOito.oito</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroTercaOito.idPacienteConsulta">@Model.quadroTercaOito.oito</a></label>
+                                        </div>
                                         <input id="@Model.quadroTercaOito.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroTercaOito.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -464,7 +508,9 @@
                                 {
                                     if (Model.quadroQuartaOito.oito != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuartaOito.oito</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuartaOito.idPacienteConsulta">@Model.quadroQuartaOito.oito</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuartaOito.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuartaOito.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -481,7 +527,9 @@
                                 {
                                     if (Model.quadroQuintaOito.oito != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuintaOito.oito</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuintaOito.idPacienteConsulta">@Model.quadroQuintaOito.oito</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuintaOito.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuintaOito.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -498,7 +546,9 @@
                                 {
                                     if (Model.quadroSextaOito.oito != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSextaOito.oito</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSextaOito.idPacienteConsulta">@Model.quadroSextaOito.oito</a></label>
+                                        </div>
                                         <input id="@Model.quadroSextaOito.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSextaOito.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -519,7 +569,9 @@
                                 {
                                     if (Model.quadroSegundaOitoMeia.oitoMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSegundaOitoMeia.oitoMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSegundaOitoMeia.idPacienteConsulta">@Model.quadroSegundaOitoMeia.oitoMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroSegundaOitoMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSegundaOitoMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -537,7 +589,9 @@
                                 {
                                     if (Model.quadroTercaOitoMeia.oitoMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroTercaOitoMeia.oitoMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroTercaOitoMeia.idPacienteConsulta">@Model.quadroTercaOitoMeia.oitoMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroTercaOitoMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroTercaOitoMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -555,7 +609,9 @@
                                 {
                                     if (Model.quadroQuartaOitoMeia.oitoMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuartaOitoMeia.oitoMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuartaOitoMeia.idPacienteConsulta">@Model.quadroQuartaOitoMeia.oitoMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuartaOitoMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuartaOitoMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -573,7 +629,9 @@
                                 {
                                     if (Model.quadroQuintaOitoMeia.oitoMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuintaOitoMeia.oitoMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuintaOitoMeia.idPacienteConsulta">@Model.quadroQuintaOitoMeia.oitoMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuintaOitoMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuintaOitoMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -591,7 +649,9 @@
                                 {
                                     if (Model.quadroSextaOitoMeia.oitoMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSextaOitoMeia.oitoMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSextaOitoMeia.idPacienteConsulta">@Model.quadroSextaOitoMeia.oitoMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroSextaOitoMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSextaOitoMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -612,7 +672,9 @@
                                 {
                                     if (Model.quadroSegundaNove.nove != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSegundaNove.nove</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSegundaNove.idPacienteConsulta">@Model.quadroSegundaNove.nove</a></label>
+                                        </div>
                                         <input id="@Model.quadroSegundaNove.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSegundaNove.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -629,7 +691,9 @@
                                 {
                                     if (Model.quadroTercaNove.nove != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroTercaNove.nove</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroTercaNove.idPacienteConsulta">@Model.quadroTercaNove.nove</a></label>
+                                        </div>
                                         <input id="@Model.quadroTercaNove.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroTercaNove.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -646,7 +710,9 @@
                                 {
                                     if (Model.quadroQuartaNove.nove != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuartaNove.nove</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuartaNove.idPacienteConsulta">@Model.quadroQuartaNove.nove</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuartaNove.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuartaNove.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -663,7 +729,9 @@
                                 {
                                     if (Model.quadroQuintaNove.nove != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuintaNove.nove</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuintaNove.idPacienteConsulta">@Model.quadroQuintaNove.nove</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuintaNove.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuintaNove.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -680,7 +748,9 @@
                                 {
                                     if (Model.quadroSextaNove.nove != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSextaNove.nove</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSextaNove.idPacienteConsulta">@Model.quadroSextaNove.nove</a></label>
+                                        </div>
                                         <input id="@Model.quadroSextaNove.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSextaNove.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -701,7 +771,9 @@
                                 {
                                     if (Model.quadroSegundaNoveMeia.noveMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSegundaNoveMeia.noveMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSegundaNoveMeia.idPacienteConsulta">@Model.quadroSegundaNoveMeia.noveMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroSegundaNoveMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSegundaNoveMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -718,7 +790,9 @@
                                 {
                                     if (Model.quadroTercaNoveMeia.noveMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroTercaNoveMeia.noveMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroTercaNoveMeia.idPacienteConsulta">@Model.quadroTercaNoveMeia.noveMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroTercaNoveMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroTercaNoveMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -735,7 +809,9 @@
                                 {
                                     if (Model.quadroQuartaNoveMeia.noveMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuartaNoveMeia.noveMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuartaNoveMeia.idPacienteConsulta">@Model.quadroQuartaNoveMeia.noveMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuartaNoveMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuartaNoveMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -752,7 +828,9 @@
                                 {
                                     if (Model.quadroQuintaNoveMeia.noveMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuintaNoveMeia.noveMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuintaNoveMeia.idPacienteConsulta">@Model.quadroQuintaNoveMeia.noveMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuintaNoveMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuintaNoveMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -769,7 +847,9 @@
                                 {
                                     if (Model.quadroSextaNoveMeia.noveMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSextaNoveMeia.noveMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSextaNoveMeia.idPacienteConsulta">@Model.quadroSextaNoveMeia.noveMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroSextaNoveMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSextaNoveMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -790,7 +870,9 @@
                                 {
                                     if (Model.quadroSegundaDez.dez != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSegundaDez.dez</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSegundaDez.idPacienteConsulta">@Model.quadroSegundaDez.dez</a></label>
+                                        </div>
                                         <input id="@Model.quadroSegundaDez.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSegundaDez.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -807,7 +889,9 @@
                                 {
                                     if (Model.quadroTercaDez.dez != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroTercaDez.dez</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroTercaDez.idPacienteConsulta">@Model.quadroTercaDez.dez</a></label>
+                                        </div>
                                         <input id="@Model.quadroTercaDez.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroTercaDez.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -824,7 +908,9 @@
                                 {
                                     if (Model.quadroQuartaDez.dez != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuartaDez.dez</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuartaDez.idPacienteConsulta">@Model.quadroQuartaDez.dez</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuartaDez.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuartaDez.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -841,7 +927,9 @@
                                 {
                                     if (Model.quadroQuintaDez.dez != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuintaDez.dez</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuintaDez.idPacienteConsulta">@Model.quadroQuintaDez.dez</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuintaDez.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuintaDez.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -858,7 +946,9 @@
                                 {
                                     if (Model.quadroSextaDez.dez != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSextaDez.dez</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSextaDez.idPacienteConsulta">@Model.quadroSextaDez.dez</a></label>
+                                        </div>
                                         <input id="@Model.quadroSextaDez.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSextaDez.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -878,7 +968,9 @@
                                 {
                                     if (Model.quadroSegundaDezMeia.dezMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSegundaDezMeia.dezMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSegundaDezMeia.idPacienteConsulta">@Model.quadroSegundaDezMeia.dezMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroSegundaDezMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSegundaDezMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -895,7 +987,9 @@
                                 {
                                     if (Model.quadroTercaDezMeia.dezMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroTercaDezMeia.dezMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroTercaDezMeia.idPacienteConsulta">@Model.quadroTercaDezMeia.dezMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroTercaDezMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroTercaDezMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -912,7 +1006,9 @@
                                 {
                                     if (Model.quadroQuartaDezMeia.dezMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuartaDezMeia.dezMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuartaDezMeia.idPacienteConsulta">@Model.quadroQuartaDezMeia.dezMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuartaDezMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuartaDezMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -929,7 +1025,9 @@
                                 {
                                     if (Model.quadroQuintaDezMeia.dezMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuintaDezMeia.dezMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuintaDezMeia.idPacienteConsulta">@Model.quadroQuintaDezMeia.dezMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuintaDezMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuintaDezMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -946,7 +1044,9 @@
                                 {
                                     if (Model.quadroSextaDezMeia.dezMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSextaDezMeia.dezMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSextaDezMeia.idPacienteConsulta">@Model.quadroSextaDezMeia.dezMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroSextaDezMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSextaDezMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -966,7 +1066,9 @@
                                 {
                                     if (Model.quadroSegundaOnze.onze != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSegundaOnze.onze</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSegundaOnze.idPacienteConsulta">@Model.quadroSegundaOnze.onze</a></label>
+                                        </div>
                                         <input id="@Model.quadroSegundaOnze.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSegundaOnze.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -983,7 +1085,9 @@
                                 {
                                     if (Model.quadroTercaOnze.onze != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroTercaOnze.onze</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroTercaOnze.idPacienteConsulta">@Model.quadroTercaOnze.onze</a></label>
+                                        </div>
                                         <input id="@Model.quadroTercaOnze.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroTercaOnze.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1000,7 +1104,9 @@
                                 {
                                     if (Model.quadroQuartaOnze.onze != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuartaOnze.onze</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuartaOnze.idPacienteConsulta">@Model.quadroQuartaOnze.onze</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuartaOnze.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuartaOnze.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1017,7 +1123,9 @@
                                 {
                                     if (Model.quadroQuintaOnze.onze != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuintaOnze.onze</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuintaOnze.idPacienteConsulta">@Model.quadroQuintaOnze.onze</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuintaOnze.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuintaOnze.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1034,7 +1142,9 @@
                                 {
                                     if (Model.quadroSextaOnze.onze != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSextaOnze.onze</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSextaOnze.idPacienteConsulta">@Model.quadroSextaOnze.onze</a></label>
+                                        </div>
                                         <input id="@Model.quadroSextaOnze.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSextaOnze.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1054,7 +1164,9 @@
                                 {
                                     if (Model.quadroSegundaOnzeMeia.onzeMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSegundaOnzeMeia.onzeMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSegundaOnzeMeia.idPacienteConsulta">@Model.quadroSegundaOnzeMeia.onzeMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroSegundaOnzeMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSegundaOnzeMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1071,7 +1183,9 @@
                                 {
                                     if (Model.quadroTercaOnzeMeia.onzeMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroTercaOnzeMeia.onzeMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroTercaOnzeMeia.idPacienteConsulta">@Model.quadroTercaOnzeMeia.onzeMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroTercaOnzeMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroTercaOnzeMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1088,7 +1202,9 @@
                                 {
                                     if (Model.quadroQuartaOnzeMeia.onzeMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuartaOnzeMeia.onzeMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuartaOnzeMeia.idPacienteConsulta">@Model.quadroQuartaOnzeMeia.onzeMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuartaOnzeMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuartaOnzeMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1105,7 +1221,9 @@
                                 {
                                     if (Model.quadroQuintaOnzeMeia.onzeMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuintaOnzeMeia.onzeMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuintaOnzeMeia.idPacienteConsulta">@Model.quadroQuintaOnzeMeia.onzeMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuintaOnzeMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuintaOnzeMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1123,7 +1241,9 @@
                                 {
                                     if (Model.quadroSextaOnzeMeia.onzeMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSextaOnzeMeia.onzeMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSextaOnzeMeia.idPacienteConsulta">@Model.quadroSextaOnzeMeia.onzeMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroSextaOnzeMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSextaOnzeMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1143,7 +1263,9 @@
                                 {
                                     if (Model.quadroSegundaDoze.doze != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSegundaDoze.doze</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSegundaDoze.idPacienteConsulta">@Model.quadroSegundaDoze.doze</a></label>
+                                        </div>
                                         <input id="@Model.quadroSegundaDoze.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSegundaDoze.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1160,7 +1282,9 @@
                                 {
                                     if (Model.quadroTercaDoze.doze != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroTercaDoze.doze</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroTercaDoze.idPacienteConsulta">@Model.quadroTercaDoze.doze</a></label>
+                                        </div>
                                         <input id="@Model.quadroTercaDoze.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroTercaDoze.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1177,7 +1301,9 @@
                                 {
                                     if (Model.quadroQuartaDoze.doze != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuartaDoze.doze</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuartaDoze.idPacienteConsulta">@Model.quadroQuartaDoze.doze</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuartaDoze.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuartaDoze.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1194,7 +1320,9 @@
                                 {
                                     if (Model.quadroQuintaDoze.doze != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuintaDoze.doze</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuintaDoze.idPacienteConsulta">@Model.quadroQuintaDoze.doze</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuintaDoze.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuintaDoze.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1211,7 +1339,9 @@
                                 {
                                     if (Model.quadroSextaDoze.doze != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSextaDoze.doze</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSextaDoze.idPacienteConsulta">@Model.quadroSextaDoze.doze</a></label>
+                                        </div>
                                         <input id="@Model.quadroSextaDoze.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSextaDoze.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1231,7 +1361,9 @@
                                 {
                                     if (Model.quadroSegundaDozeMeia.dozeMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSegundaDozeMeia.dozeMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSegundaDozeMeia.idPacienteConsulta">@Model.quadroSegundaDozeMeia.dozeMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroSegundaDozeMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSegundaDozeMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1248,7 +1380,9 @@
                                 {
                                     if (Model.quadroTercaDozeMeia.dozeMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroTercaDozeMeia.dozeMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroTercaDozeMeia.idPacienteConsulta">@Model.quadroTercaDozeMeia.dozeMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroTercaDozeMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroTercaDozeMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1265,7 +1399,9 @@
                                 {
                                     if (Model.quadroQuartaDozeMeia.dozeMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuartaDozeMeia.dozeMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuartaDozeMeia.idPacienteConsulta">@Model.quadroQuartaDozeMeia.dozeMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuartaDozeMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuartaDozeMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1282,7 +1418,9 @@
                                 {
                                     if (Model.quadroQuintaDozeMeia.dozeMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuintaDozeMeia.dozeMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuintaDozeMeia.idPacienteConsulta">@Model.quadroQuintaDozeMeia.dozeMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuintaDozeMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuintaDozeMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1299,7 +1437,9 @@
                                 {
                                     if (Model.quadroSextaDozeMeia.dozeMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSextaDozeMeia.dozeMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSextaDozeMeia.idPacienteConsulta">@Model.quadroSextaDozeMeia.dozeMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroSextaDozeMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSextaDozeMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1319,7 +1459,9 @@
                                 {
                                     if (Model.quadroSegundaTreze.treze != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSegundaTreze.treze</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSegundaTreze.idPacienteConsulta">@Model.quadroSegundaTreze.treze</a></label>
+                                        </div>
                                         <input id="@Model.quadroSegundaTreze.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSegundaTreze.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1336,7 +1478,9 @@
                                 {
                                     if (Model.quadroTercaTreze.treze != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroTercaTreze.treze</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroTercaTreze.idPacienteConsulta">@Model.quadroTercaTreze.treze</a></label>
+                                        </div>
                                         <input id="@Model.quadroTercaTreze.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroTercaTreze.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1353,7 +1497,9 @@
                                 {
                                     if (Model.quadroQuartaTreze.treze != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuartaTreze.treze</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuartaTreze.idPacienteConsulta">@Model.quadroQuartaTreze.treze</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuartaTreze.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuartaTreze.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1370,7 +1516,9 @@
                                 {
                                     if (Model.quadroQuintaTreze.treze != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuintaTreze.treze</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuintaTreze.idPacienteConsulta">@Model.quadroQuintaTreze.treze</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuintaTreze.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuintaTreze.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1387,7 +1535,9 @@
                                 {
                                     if (Model.quadroSextaTreze.treze != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSextaTreze.treze</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSextaTreze.idPacienteConsulta">@Model.quadroSextaTreze.treze</a></label>
+                                        </div>
                                         <input id="@Model.quadroSextaTreze.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSextaTreze.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1407,7 +1557,9 @@
                                 {
                                     if (Model.quadroSegundaTrezeMeia.trezeMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSegundaTrezeMeia.trezeMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSegundaTrezeMeia.idPacienteConsulta">@Model.quadroSegundaTrezeMeia.trezeMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroSegundaTrezeMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSegundaTrezeMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1424,7 +1576,9 @@
                                 {
                                     if (Model.quadroTercaTrezeMeia.trezeMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroTercaTrezeMeia.trezeMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroTercaTrezeMeia.idPacienteConsulta">@Model.quadroTercaTrezeMeia.trezeMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroTercaTrezeMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroTercaTrezeMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1441,7 +1595,9 @@
                                 {
                                     if (Model.quadroQuartaTrezeMeia.trezeMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuartaTrezeMeia.trezeMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuartaTrezeMeia.idPacienteConsulta">@Model.quadroQuartaTrezeMeia.trezeMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuartaTrezeMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuartaTrezeMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1458,7 +1614,9 @@
                                 {
                                     if (Model.quadroQuintaTrezeMeia.trezeMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuintaTrezeMeia.trezeMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuintaTrezeMeia.idPacienteConsulta">@Model.quadroQuintaTrezeMeia.trezeMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuintaTrezeMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuintaTrezeMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1475,7 +1633,9 @@
                                 {
                                     if (Model.quadroSextaTrezeMeia.trezeMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSextaTrezeMeia.trezeMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSextaTrezeMeia.idPacienteConsulta">@Model.quadroSextaTrezeMeia.trezeMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroSextaTrezeMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSextaTrezeMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1495,7 +1655,9 @@
                                 {
                                     if (Model.quadroSegundaQuatorze.quatorze != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSegundaQuatorze.quatorze</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSegundaQuatorze.idPacienteConsulta">@Model.quadroSegundaQuatorze.quatorze</a></label>
+                                        </div>
                                         <input id="@Model.quadroSegundaQuatorze.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSegundaQuatorze.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1512,7 +1674,9 @@
                                 {
                                     if (Model.quadroTercaQuatorze.quatorze != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroTercaQuatorze.quatorze</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroTercaQuatorze.idPacienteConsulta">@Model.quadroTercaQuatorze.quatorze</a></label>
+                                        </div>
                                         <input id="@Model.quadroTercaQuatorze.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroTercaQuatorze.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1529,7 +1693,9 @@
                                 {
                                     if (Model.quadroQuartaQuatorze.quatorze != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuartaQuatorze.quatorze</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuartaQuatorze.idPacienteConsulta">@Model.quadroQuartaQuatorze.quatorze</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuartaQuatorze.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuartaQuatorze.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1546,7 +1712,9 @@
                                 {
                                     if (Model.quadroQuintaQuatorze.quatorze != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuintaQuatorze.quatorze</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuintaQuatorze.idPacienteConsulta">@Model.quadroQuintaQuatorze.quatorze</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuintaQuatorze.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuintaQuatorze.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1563,7 +1731,9 @@
                                 {
                                     if (Model.quadroSextaQuatorze.quatorze != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSextaQuatorze.quatorze</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSextaQuatorze.idPacienteConsulta">@Model.quadroSextaQuatorze.quatorze</a></label>
+                                        </div>
                                         <input id="@Model.quadroSextaQuatorze.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSextaQuatorze.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1583,7 +1753,9 @@
                                 {
                                     if (Model.quadroSegundaQuatorzeMeia.quatorzeMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSegundaQuatorzeMeia.quatorzeMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSegundaQuatorzeMeia.idPacienteConsulta">@Model.quadroSegundaQuatorzeMeia.quatorzeMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroSegundaQuatorzeMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSegundaQuatorzeMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1600,11 +1772,13 @@
                                 {
                                     if (Model.quadroTercaQuatorzeMeia.quatorzeMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroTercaQuatorzeMeia.quatorzeMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroTercaQuatorzeMeia.idPacienteConsulta">@Model.quadroTercaQuatorzeMeia.quatorzeMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroTercaQuatorzeMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroTercaQuatorzeMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
-                                            <a asp-controller="Consulta" asp-action="EditarConsulta" asp-route-id="@Model.quadroTercaDozeMeia.idConsulta">Editar</a>
+                                            <a asp-controller="Consulta" asp-action="EditarConsulta" asp-route-id="@Model.quadroTercaQuatorzeMeia.idConsulta">Editar</a>
                                         </div>
                                     }
                                 }
@@ -1615,13 +1789,15 @@
                         <td class="tdQuartaClick">
                             @{ if (Model.dataQuartaAusenciaBancoModel.QuatorzeMeia == 0)
                                 {
-                                    if (Model.quadroQuartaDozeMeia.dozeMeia != null)
+                                    if (Model.quadroQuartaQuatorzeMeia.quatorzeMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuartaDozeMeia.dozeMeia</label>
-                                        <input id="@Model.quadroQuartaDozeMeia.idPaciente" class="displayNone" />
-                                        <input id="@Model.quadroQuartaDozeMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
-                                            <a asp-controller="Consulta" asp-action="EditarConsulta" asp-route-id="@Model.quadroQuartaDozeMeia.idConsulta">Editar</a>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuartaQuatorzeMeia.idPacienteConsulta">@Model.quadroQuartaQuatorzeMeia.quatorzeMeia</a></label>
+                                        </div>
+                                        <input id="@Model.quadroQuartaQuatorzeMeia.idPaciente" class="displayNone" />
+                                        <input id="@Model.quadroQuartaQuatorzeMeia.idPacienteConsulta" class="displayNone" />
+                                        <div>
+                                            <a asp-controller="Consulta" asp-action="EditarConsulta" asp-route-id="@Model.quadroQuartaQuatorzeMeia.idConsulta">Editar</a>
                                         </div>
                                     }
                                 }
@@ -1634,7 +1810,9 @@
                                 {
                                     if (Model.quadroQuintaQuatorzeMeia.quatorzeMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuintaQuatorzeMeia.quatorzeMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuintaQuatorzeMeia.idPacienteConsulta">@Model.quadroQuintaQuatorzeMeia.quatorzeMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuintaQuatorzeMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuintaQuatorzeMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1651,7 +1829,9 @@
                                 {
                                     if (Model.quadroSextaQuatorzeMeia.quatorzeMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSextaQuatorzeMeia.quatorzeMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSextaQuatorzeMeia.idPacienteConsulta">@Model.quadroSextaQuatorzeMeia.quatorzeMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroSextaQuatorzeMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSextaQuatorzeMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1671,7 +1851,9 @@
                                 {
                                     if (Model.quadroSegundaQuinze.quinze != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSegundaQuinze.quinze</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSegundaQuinze.idPacienteConsulta">@Model.quadroSegundaQuinze.quinze</a></label>
+                                        </div>
                                         <input id="@Model.quadroSegundaQuinze.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSegundaQuinze.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1688,7 +1870,9 @@
                                 {
                                     if (Model.quadroTercaQuinze.quinze != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroTercaQuinze.quinze</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroTercaQuinze.idPacienteConsulta">@Model.quadroTercaQuinze.quinze</a></label>
+                                        </div>
                                         <input id="@Model.quadroTercaQuinze.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroTercaQuinze.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1705,7 +1889,9 @@
                                 {
                                     if (Model.quadroQuartaQuinze.quinze != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuartaQuinze.quinze</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuartaQuinze.idPacienteConsulta">@Model.quadroQuartaQuinze.quinze</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuartaQuinze.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuartaQuinze.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1722,7 +1908,9 @@
                                 {
                                     if (Model.quadroQuintaQuinze.quinze != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuintaQuinze.quinze</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuintaQuinze.idPacienteConsulta">@Model.quadroQuintaQuinze.quinze</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuintaQuinze.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuintaQuinze.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1739,7 +1927,9 @@
                                 {
                                     if (Model.quadroSextaQuinze.quinze != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSextaQuinze.quinze</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSextaQuinze.idPacienteConsulta">@Model.quadroSextaQuinze.quinze</a></label>
+                                        </div>
                                         <input id="@Model.quadroSextaQuinze.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSextaQuinze.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1759,7 +1949,9 @@
                                 {
                                     if (Model.quadroSegundaQuinzeMeia.quinzeMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSegundaQuinzeMeia.quinzeMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSegundaQuinzeMeia.idPacienteConsulta">@Model.quadroSegundaQuinzeMeia.quinzeMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroSegundaQuinzeMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSegundaQuinzeMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1776,7 +1968,9 @@
                                 {
                                     if (Model.quadroTercaQuinzeMeia.quinzeMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroTercaQuinzeMeia.quinzeMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroTercaQuinzeMeia.idPacienteConsulta">@Model.quadroTercaQuinzeMeia.quinzeMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroTercaQuinzeMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroTercaQuinzeMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1793,7 +1987,9 @@
                                 {
                                     if (Model.quadroQuartaQuinzeMeia.quinzeMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuartaQuinzeMeia.quinzeMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuartaQuinzeMeia.idPacienteConsulta">@Model.quadroQuartaQuinzeMeia.quinzeMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuartaQuinzeMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuartaQuinzeMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1810,7 +2006,9 @@
                                 {
                                     if (Model.quadroQuintaQuinzeMeia.quinzeMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuintaQuinzeMeia.quinzeMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuintaQuinzeMeia.idPacienteConsulta">@Model.quadroQuintaQuinzeMeia.quinzeMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuintaQuinzeMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuintaQuinzeMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1827,7 +2025,9 @@
                                 {
                                     if (Model.quadroSextaQuinzeMeia.quinzeMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSextaQuinzeMeia.quinzeMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSextaQuinzeMeia.idPacienteConsulta">@Model.quadroSextaQuinzeMeia.quinzeMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroSextaQuinzeMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSextaQuinzeMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1847,7 +2047,9 @@
                                 {
                                     if (Model.quadroSegundaDezesseis.dezesseis != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSegundaDezesseis.dezesseis</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSegundaDezesseis.idPacienteConsulta">@Model.quadroSegundaDezesseis.dezesseis</a></label>
+                                        </div>
                                         <input id="@Model.quadroSegundaDezesseis.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSegundaDezesseis.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1864,7 +2066,9 @@
                                 {
                                     if (Model.quadroTercaDezesseis.dezesseis != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroTercaDezesseis.dezesseis</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroTercaDezesseis.idPacienteConsulta">@Model.quadroTercaDezesseis.dezesseis</a></label>
+                                        </div>
                                         <input id="@Model.quadroTercaDezesseis.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroTercaDezesseis.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1881,7 +2085,9 @@
                                 {
                                     if (Model.quadroQuartaDezesseis.dezesseis != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuartaDezesseis.dezesseis</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuartaDezesseis.idPacienteConsulta">@Model.quadroQuartaDezesseis.dezesseis</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuartaDezesseis.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuartaDezesseis.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1898,7 +2104,9 @@
                                 {
                                     if (Model.quadroQuintaDezesseis.dezesseis != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuintaDezesseis.dezesseis</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuintaDezesseis.idPacienteConsulta">@Model.quadroQuintaDezesseis.dezesseis</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuintaDezesseis.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuintaDezesseis.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1915,7 +2123,9 @@
                                 {
                                     if (Model.quadroSextaDezesseis.dezesseis != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSextaDezesseis.dezesseis</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSextaDezesseis.idPacienteConsulta">@Model.quadroSextaDezesseis.dezesseis</a></label>
+                                        </div>
                                         <input id="@Model.quadroSextaDezesseis.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSextaDezesseis.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1935,7 +2145,9 @@
                                 {
                                     if (Model.quadroSegundaDezesseisMeia.dezesseisMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSegundaDezesseisMeia.dezesseisMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSegundaDezesseisMeia.idPacienteConsulta">@Model.quadroSegundaDezesseisMeia.dezesseisMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroSegundaDezesseisMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSegundaDezesseisMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1952,7 +2164,9 @@
                                 {
                                     if (Model.quadroTercaDezesseisMeia.dezesseisMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroTercaDezesseisMeia.dezesseisMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroTercaDezesseisMeia.idPacienteConsulta">@Model.quadroTercaDezesseisMeia.dezesseisMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroTercaDezesseisMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroTercaDezesseisMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1969,7 +2183,9 @@
                                 {
                                     if (Model.quadroQuartaDezesseisMeia.dezesseisMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuartaDezesseisMeia.dezesseisMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuartaDezesseisMeia.idPacienteConsulta">@Model.quadroQuartaDezesseisMeia.dezesseisMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuartaDezesseisMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuartaDezesseisMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -1986,7 +2202,9 @@
                                 {
                                     if (Model.quadroQuintaDezesseisMeia.dezesseisMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuintaDezesseisMeia.dezesseisMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuintaDezesseisMeia.idPacienteConsulta">@Model.quadroQuintaDezesseisMeia.dezesseisMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuintaDezesseisMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuintaDezesseisMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -2003,7 +2221,9 @@
                                 {
                                     if (Model.quadroSextaDezesseisMeia.dezesseisMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSextaDezesseisMeia.dezesseisMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSextaDezesseisMeia.idPacienteConsulta">@Model.quadroSextaDezesseisMeia.dezesseisMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroSextaDezesseisMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSextaDezesseisMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -2023,7 +2243,9 @@
                                 {
                                     if (Model.quadroSegundaDezessete.dezessete != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSegundaDezessete.dezessete</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSegundaDezessete.idPacienteConsulta">@Model.quadroSegundaDezessete.dezessete</a></label>
+                                        </div>
                                         <input id="@Model.quadroSegundaDezessete.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSegundaDezessete.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -2040,7 +2262,9 @@
                                 {
                                     if (Model.quadroTercaDezessete.dezessete != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroTercaDezessete.dezessete</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroTercaDezessete.idPacienteConsulta">@Model.quadroTercaDezessete.dezessete</a></label>
+                                        </div>
                                         <input id="@Model.quadroTercaDezessete.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroTercaDezessete.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -2057,7 +2281,9 @@
                                 {
                                     if (Model.quadroQuartaDezessete.dezessete != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuartaDezessete.dezessete</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuartaDezessete.idPacienteConsulta">@Model.quadroQuartaDezessete.dezessete</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuartaDezessete.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuartaDezessete.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -2074,7 +2300,9 @@
                                 {
                                     if (Model.quadroQuintaDezessete.dezessete != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuintaDezessete.dezessete</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuintaDezessete.idPacienteConsulta">@Model.quadroQuintaDezessete.dezessete</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuintaDezessete.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuintaDezessete.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -2091,7 +2319,9 @@
                                 {
                                     if (Model.quadroSextaDezessete.dezessete != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSextaDezessete.dezessete</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSextaDezessete.idPacienteConsulta">@Model.quadroSextaDezessete.dezessete</a></label>
+                                        </div>
                                         <input id="@Model.quadroSextaDezessete.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSextaDezessete.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -2111,7 +2341,9 @@
                                 {
                                     if (Model.quadroSegundaDezesseteMeia.dezesseteMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSegundaDezesseteMeia.dezesseteMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSegundaDezesseteMeia.idPacienteConsulta">@Model.quadroSegundaDezesseteMeia.dezesseteMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroSegundaDezesseteMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSegundaDezesseteMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -2128,7 +2360,9 @@
                                 {
                                     if (Model.quadroTercaDezesseteMeia.dezesseteMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroTercaDezesseteMeia.dezesseteMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroTercaDezesseteMeia.idPacienteConsulta">@Model.quadroTercaDezesseteMeia.dezesseteMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroTercaDezesseteMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroTercaDezesseteMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -2145,7 +2379,9 @@
                                 {
                                     if (Model.quadroQuartaDezesseteMeia.dezesseteMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuartaDezesseteMeia.dezesseteMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuartaDezesseteMeia.idPacienteConsulta">@Model.quadroQuartaDezesseteMeia.dezesseteMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuartaDezesseteMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuartaDezesseteMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -2162,7 +2398,9 @@
                                 {
                                     if (Model.quadroQuintaDezesseteMeia.dezesseteMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuintaDezesseteMeia.dezesseteMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuintaDezesseteMeia.idPacienteConsulta">@Model.quadroQuintaDezesseteMeia.dezesseteMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuintaDezesseteMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuintaDezesseteMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -2179,7 +2417,9 @@
                                 {
                                     if (Model.quadroSextaDezesseteMeia.dezesseteMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSextaDezesseteMeia.dezesseteMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSextaDezesseteMeia.idPacienteConsulta">@Model.quadroSextaDezesseteMeia.dezesseteMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroSextaDezesseteMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSextaDezesseteMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -2199,7 +2439,9 @@
                                 {
                                     if (Model.quadroSegundaDezoito.dezoito != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSegundaDezoito.dezoito</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSegundaDezoito.idPacienteConsulta">@Model.quadroSegundaDezoito.dezoito</a></label>
+                                        </div>
                                         <input id="@Model.quadroSegundaDezoito.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSegundaDezoito.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -2216,7 +2458,9 @@
                                 {
                                     if (Model.quadroTercaDezoito.dezoito != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroTercaDezoito.dezoito</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroTercaDezoito.idPacienteConsulta">@Model.quadroTercaDezoito.dezoito</a></label>
+                                        </div>
                                         <input id="@Model.quadroTercaDezoito.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroTercaDezoito.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -2233,7 +2477,9 @@
                                 {
                                     if (Model.quadroQuartaDezoito.dezoito != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuartaDezoito.dezoito</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuartaDezoito.idPacienteConsulta">@Model.quadroQuartaDezoito.dezoito</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuartaDezoito.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuartaDezoito.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -2250,7 +2496,9 @@
                                 {
                                     if (Model.quadroQuintaDezoito.dezoito != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuintaDezoito.dezoito</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuintaDezoito.idPacienteConsulta">@Model.quadroQuintaDezoito.dezoito</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuintaDezoito.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuintaDezoito.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -2267,7 +2515,9 @@
                                 {
                                     if (Model.quadroSextaDezoito.dezoito != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSextaDezoito.dezoito</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSextaDezoito.idPacienteConsulta">@Model.quadroSextaDezoito.dezoito</a></label>
+                                        </div>
                                         <input id="@Model.quadroSextaDezoito.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSextaDezoito.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -2287,7 +2537,9 @@
                                 {
                                     if (Model.quadroSegundaDezoitoMeia.dezoitoMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSegundaDezoitoMeia.dezoitoMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSegundaDezoitoMeia.idPacienteConsulta">@Model.quadroSegundaDezoitoMeia.dezoitoMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroSegundaDezoitoMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSegundaDezoitoMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -2304,7 +2556,9 @@
                                 {
                                     if (Model.quadroTercaDezoitoMeia.dezoitoMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroTercaDezoitoMeia.dezoitoMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroTercaDezoitoMeia.idPacienteConsulta">@Model.quadroTercaDezoitoMeia.dezoitoMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroTercaDezoitoMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroTercaDezoitoMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -2321,7 +2575,9 @@
                                 {
                                     if (Model.quadroQuartaDezoitoMeia.dezoitoMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuartaDezoitoMeia.dezoitoMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuartaDezoitoMeia.idPacienteConsulta">@Model.quadroQuartaDezoitoMeia.dezoitoMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuartaDezoitoMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuartaDezoitoMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -2338,7 +2594,9 @@
                                 {
                                     if (Model.quadroQuintaDezoitoMeia.dezoitoMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroQuintaDezoitoMeia.dezoitoMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroQuintaDezoitoMeia.idPacienteConsulta">@Model.quadroQuintaDezoitoMeia.dezoitoMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroQuintaDezoitoMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroQuintaDezoitoMeia.idPacienteConsulta" class="displayNone" />
                                         <div>
@@ -2355,7 +2613,9 @@
                                 {
                                     if (Model.quadroSextaDezoitoMeia.dezoitoMeia != null)
                                     {
-                                        <label class="floatLeft">Nome: @Model.quadroSextaDezoitoMeia.dezoitoMeia</label>
+                                        <div>
+                                            <label class="floatLeft">Nome: <a asp-controller="Consulta" asp-action="FinalizarConsulta" asp-route-id="@Model.quadroSextaDezoitoMeia.idPacienteConsulta">@Model.quadroSextaDezoitoMeia.dezoitoMeia</a></label>
+                                        </div>
                                         <input id="@Model.quadroSextaDezoitoMeia.idPaciente" class="displayNone" />
                                         <input id="@Model.quadroSextaDezoitoMeia.idPacienteConsulta" class="displayNone" />
                                         <div>

@@ -115,6 +115,20 @@ namespace SGCM.AppData.Paciente
             return command.ToString();
         }
 
+        public string ConsultarPacienteConsulta() {
+            StringBuilder command = new StringBuilder();
+
+            command.AppendLine("Select idConsulta,");
+            command.AppendLine("       idPacienteConsulta,");
+            command.AppendLine("       dataConsulta,");
+            command.AppendLine("       consultaFinalizada");
+            command.AppendLine("From consulta");
+            command.AppendLine("Where idPacienteConsulta = @IDPACIENTECONSULTA");
+            command.AppendLine("Order By dataConsulta DESC");
+
+            return command.ToString();
+        }
+
         public string EditarPessoa(EditarPacienteModel paciente) {
             Boolean flagSet = false;
             StringBuilder command = new StringBuilder();
