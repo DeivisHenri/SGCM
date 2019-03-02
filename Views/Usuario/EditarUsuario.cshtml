@@ -22,17 +22,20 @@
         <div class="tab-content">
             <div id="dadosPessoais" class="tab-pane fade in active">
                 <h3>Pessoais</h3>
+                <hr width="100%">
                 @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
                 <partial name="/Views/Usuario/Partials/Editar/_DadosPessoais.cshtml" model="@Model" />
 
             </div>
             <div id="dadosLogin" class="tab-pane fade">
                 <h3>Login</h3>
+                <hr width="100%">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <partial name="/Views/Usuario/Partials/Editar/_DadosLogin.cshtml" />
             </div>
             <div id="dadosPermissoes" class="tab-pane fade">
                 <h3>Permissões</h3>
+                <hr width="100%">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <partial name="/Views/Usuario/Partials/Editar/_DadosPermissoes.cshtml" />
             </div>

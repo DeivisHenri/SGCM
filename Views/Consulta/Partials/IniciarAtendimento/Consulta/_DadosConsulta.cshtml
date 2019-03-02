@@ -1,0 +1,87 @@
+﻿@using SGCM.Models.Consulta.IniciarAtendimento;
+@model IniciarAtendimentoModel
+
+@*<div class="center-form-container">*@
+<div class="consulta-usuario-container">
+    <table title="Tabela das Consultas" class="table table-striped table-bordered text-center" border="1">
+        <thead>
+            <tr>
+                <th style="text-align: center; width: 25%">Data</th>
+                <th style="text-align: center; width: 25%">Status</th>
+                <th style="text-align: center; width: 25%">Editar</th>
+                <th style="text-align: center; width: 25%">Cancelar</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (Model != null)
+            {
+                @for (int i = 0; i < Model.ConsultaLista.Count; i++)
+                {
+                    <tr>
+                        <td>@Model.ConsultaLista[i].dataConsulta</td>
+                        @if (Model.ConsultaLista[i].finalizada == 1)
+                        {
+                            <td>Finalizada</td>
+                        }
+                        else
+                        {
+                            <td>Em aberto</td>
+                        }
+                        <td>
+                            <div>
+                                <a asp-controller="Consulta" asp-action="EditarConsulta" asp-route-id="@Model.ConsultaLista[i].idConsulta">Edit</a>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <a asp-controller="Consulta" asp-action="CancelarConsulta" asp-route-id="@Model.ConsultaLista[i].idConsulta">Cancelar</a>
+                            </div>
+                            <div class="displayNone">
+                                <input name="@Model.ConsultaLista[i].idConsulta" asp-for="@Model.ConsultaLista[i].idConsulta" id="@Model.ConsultaLista[i].idConsulta" />
+                                <input name="@Model.ConsultaLista[i].idPacienteConsulta" asp-for="@Model.ConsultaLista[i].idPacienteConsulta" id="@Model.ConsultaLista[i].idPacienteConsulta" />
+                                <input name="@Model.ConsultaLista[i].dataConsulta" asp-for="@Model.ConsultaLista[i].dataConsulta" id="@Model.ConsultaLista[i].dataConsulta" />
+                                <input name="@Model.ConsultaLista[i].finalizada" asp-for="@Model.ConsultaLista[i].finalizada" id="@Model.ConsultaLista[i].finalizada" />
+                            </div>
+                        </td>
+                    </tr>
+                }
+                @*@foreach (var consulta in Model.ConsultaLista)
+            {
+                <tr>
+                    <td>@consulta.dataConsulta</td>
+                    @if (consulta.finalizada == 1)
+                    {
+                        <td>Finalizada</td>
+                    }
+                    else
+                    {
+                        <td>Em aberto</td>
+                    }
+                    <td>
+                        <div>
+                            <a asp-controller="Consulta" asp-action="EditarConsulta" asp-route-id="@consulta.idConsulta">Edit</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <a asp-controller="Consulta" asp-action="CancelarConsulta" asp-route-id="@consulta.idConsulta">Cancelar</a>
+                        </div>
+                        <div class="displayNone">
+                            <input name="@consulta.idConsulta" asp-for="@consulta.idConsulta" id="@consulta.idConsulta" />
+                            <input name="@consulta.idPacienteConsulta"  asp-for="@consulta.idPacienteConsulta" id="@consulta.idPacienteConsulta" />
+                            <input name="@consulta.dataConsulta"  asp-for="@consulta.dataConsulta" id="@consulta.dataConsulta" />
+                            <input name="@consulta.finalizada"  asp-for="@consulta.finalizada" id="@consulta.finalizada" />
+                        </div>
+                    </td>
+                </tr>
+            }*@
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="form-group padding-top-15px">
+    <button id="moveAnteriorDadosConsulta" type="button" class="btn btn-info btn-brand btn-brand-big margin-right-15-px">&nbsp;Anterior&nbsp;</button>
+    <button id="moveProximoDadosConsulta" type="button" class="btn btn-primary btn-brand btn-brand-big">&nbsp;Próximo&nbsp;</button>
+</div>

@@ -1,0 +1,199 @@
+﻿@using SGCM.Models.Consulta.IniciarAtendimento;
+@model IniciarAtendimentoModel
+
+@{
+    ViewData["Title"] = "Iniciar Atendimento";
+}
+
+@* Folha De Estilo *@
+<partial name="/Views/Consulta/Partials/_ConsultaStyle.cshtml" />
+
+<div class="center-form-container">
+    <form asp-controller="Consulta" asp-action="IniciarAtendimento" method="post" class="form-horizontal max-min-width">
+        @Html.AntiForgeryToken()
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a data-toggle="tab" href="#dadosPessoais">Dados Pessoais</a>
+            </li>
+            @{
+                if (ViewData["flConsultaC"].ToString() == "1")
+                {
+                    <li>
+                        <a data-toggle="tab" href="#dadosConsulta">Dados Consulta</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="disabled">
+                        <a style="cursor:no-drop" href="#dadosConsulta">Dados Consulta</a>
+                    </li>
+                }
+            }
+
+            @{
+                if (ViewData["flHistoriaMolestiaAtualC"].ToString() == "1")
+                {
+                    <li>
+                        <a data-toggle="tab" href="#dadosMolestiaAtual">História da Moléstia Atual</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="disabled">
+                        <a style="cursor:no-drop" href="#dadosMolestiaAtual">História da Moléstia Atual</a>
+                    </li>
+                }
+            }
+
+            @{
+                if (ViewData["flHistoriaPatologicaPregressaC"].ToString() == "1")
+                {
+                    <li>
+                        <a data-toggle="tab" href="#dadosHistoriaPatologicaPregressa">História Patológica Pregressa</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="disabled">
+                        <a style="cursor:no-drop" href="#dadosHistoriaPatologicaPregressa">História Patológica Pregressa</a>
+                    </li>
+                }
+            }
+
+            @{
+                if (ViewData["flExamesC"].ToString() == "1")
+                {
+                    <li>
+                        <a data-toggle="tab" href="#dadosExame">Exames</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="disabled">
+                        <a style="cursor:no-drop" href="#dadosExame">Exames</a>
+                    </li>
+                }
+            }
+
+            @{
+                if (ViewData["flHipoteseDiagnosticaC"].ToString() == "1")
+                {
+                    <li>
+                        <a data-toggle="tab" href="#dadosHipoteseDiagnostica">Hipótese Diagnóstica</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="disabled">
+                        <a style="cursor:no-drop" href="#dadosHipoteseDiagnostica">Hipótese Diagnóstica</a>
+                    </li>
+                }
+            }
+
+            @{
+                if (ViewData["flCondutaC"].ToString() == "1")
+                {
+                    <li>
+                        <a data-toggle="tab" href="#dadosConduta">Conduta</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="disabled">
+                        <a style="cursor:no-drop" href="#dadosConduta">Conduta</a>
+                    </li>
+                }
+            }
+        </ul>
+
+        <div class="tab-content">
+            <div id="dadosPessoais" class="tab-pane fade in active">
+                <h3>Paciente</h3>
+                <hr width="100%">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <partial name="/Views/Consulta/Partials/IniciarAtendimento/Pessoais/_DadosPessoais.cshtml" model="@Model" />
+            </div>
+
+            <div id="dadosConsulta" class="tab-pane fade">
+                <h3>Consulta</h3>
+                <hr width="100%">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <partial name="/Views/Consulta/Partials/IniciarAtendimento/Consulta/_DadosConsulta.cshtml" model="@Model" />
+            </div>
+
+            <div id="dadosMolestiaAtual" class="tab-pane fade">
+                <h3>História da Moléstia Atual</h3>
+                <hr width="100%">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <partial name="/Views/Consulta/Partials/IniciarAtendimento/HistoriaMolestiaAtual/_DadosMolestiaAtual.cshtml" model="@Model" />
+            </div>
+
+            <div id="dadosHistoriaPatologicaPregressa" class="tab-pane fade">
+                <h3>Historia Patológica Pregressa</h3>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <partial name="/Views/Consulta/Partials/IniciarAtendimento/HistoriaPatologicaPregressa/_DadosHistoriaPatologicaPregressa.cshtml" model="@Model" />
+            </div>
+
+            <div id="dadosExame" class="tab-pane fade">
+                <h3>Exame</h3>
+                <hr width="100%">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <partial name="/Views/Consulta/Partials/IniciarAtendimento/Exame/_DadosExame.cshtml" model="@Model" />
+            </div>
+
+            <div id="dadosHipoteseDiagnostica" class="tab-pane fade">
+                <h3>Hipótese Diagnóstica</h3>
+                <hr width="100%">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <partial name="/Views/Consulta/Partials/IniciarAtendimento/HipoteseDiagnostica/_DadosHipoteseDiagnostica.cshtml" model="@Model" />
+            </div>
+
+            <div id="dadosConduta" class="tab-pane fade">
+                <h3>Conduta</h3>
+                <hr width="100%">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <partial name="/Views/Consulta/Partials/IniciarAtendimento/Conduta/_DadosConduta.cshtml" model="@Model" />
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+
+    <partial name="/Views/Consulta/Partials/_ConsultaScript.cshtml" />
+}
+
+<button type="button" id="btnModalIniciarAtendimento" class="btn btn-primary displayNone" data-toggle="modal" data-target="#iniciarAtendimentoModal"> </button>
+
+<div class="modal fade" id="iniciarAtendimentoModal" tabindex="-1" role="dialog" aria-labelledby="iniciarAtendimentoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header displayFlex">
+                <h4 class="modal-title width100" id="iniciarAtendimentoModalLabel">@ViewBag.MensagemTitle</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @if (ViewBag.MensagemBodyController.ToString() != "")
+                {<h5>@ViewBag.MensagemBodyController</h5>}
+                @if (ViewBag.MensagemBodyAction.ToString() != "")
+                {<h5>@ViewBag.MensagemBodyAction</h5>}
+                <h5 id="mensagemBody">@ViewBag.MensagemBody</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (ViewBag.MensagemBody.ToString() != "")
+{
+    <script>
+        $(document).ready(function () {
+            $('#btnModalIniciarAtendimento').click();
+        });
+    </script>
+}

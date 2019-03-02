@@ -10,22 +10,126 @@
     <form asp-controller="Consulta" asp-action="EditarConsulta" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal max-min-width">
         @Html.AntiForgeryToken()
         <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#dadosPessoais">Dados Editar</a></li>
+            <li class="active"><a data-toggle="tab" href="#dadosPessoais">Dados Consulta</a></li>
+            @{
+                if (ViewData["flHistoriaMolestiaAtualC"].ToString() == "1")
+                {
+                    <li>
+                        <a data-toggle="tab" href="#dadosMolestiaAtual">História da Moléstia Atual</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="disabled">
+                        <a style="cursor:no-drop" href="#dadosMolestiaAtual">História da Moléstia Atual</a>
+                    </li>
+                }
+            }
+
+            @{
+                if (ViewData["flHistoriaPatologicaPregressaC"].ToString() == "1")
+                {
+                    <li>
+                        <a data-toggle="tab" href="#dadosHistoriaPatologicaPregressa">História Patológica Pregressa</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="disabled">
+                        <a style="cursor:no-drop" href="#dadosHistoriaPatologicaPregressa">História Patológica Pregressa</a>
+                    </li>
+                }
+            }
+
+            @{
+                if (ViewData["flExamesC"].ToString() == "1")
+                {
+                    <li>
+                        <a data-toggle="tab" href="#dadosExame">Exames</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="disabled">
+                        <a style="cursor:no-drop" href="#dadosExame">Exames</a>
+                    </li>
+                }
+            }
+
+            @{
+                if (ViewData["flHipoteseDiagnosticaC"].ToString() == "1")
+                {
+                    <li>
+                        <a data-toggle="tab" href="#dadosHipoteseDiagnostica">Hipótese Diagnóstica</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="disabled">
+                        <a style="cursor:no-drop" href="#dadosHipoteseDiagnostica">Hipótese Diagnóstica</a>
+                    </li>
+                }
+            }
+
+            @{
+                if (ViewData["flCondutaC"].ToString() == "1")
+                {
+                    <li>
+                        <a data-toggle="tab" href="#dadosConduta">Conduta</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="disabled">
+                        <a style="cursor:no-drop" href="#dadosConduta">Conduta</a>
+                    </li>
+                }
+            }
         </ul>
 
         <div class="tab-content">
-            <div id="dadosEditar" class="tab-pane fade in active">
-                <h3>Pessoais</h3>
+            <div id="dadosPessoais" class="tab-pane fade in active">
+                <h3>Paciente</h3>
+                <hr width="100%">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <partial name="/Views/Consulta/Partials/Editar/_DadosConsulta.cshtml" model="@Model" />
+                <partial name="/Views/Consulta/Partials/Editar/Pessoais/_DadosPessoais.cshtml" model="@Model" />
+            </div>
+
+            <div id="dadosMolestiaAtual" class="tab-pane fade">
+                <h3>História da Moléstia Atual</h3>
+                <hr width="100%">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <partial name="/Views/Consulta/Partials/Editar/HistoriaMolestiaAtual/_DadosMolestiaAtual.cshtml" model="@Model" />
+            </div>
+
+            <div id="dadosHistoriaPatologicaPregressa" class="tab-pane fade">
+                <h3>Historia Patológica Pregressa</h3>
+                <hr width="100%">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <partial name="/Views/Consulta/Partials/Editar/HistoriaPatologicaPregressa/_DadosHistoriaPatologicaPregressa.cshtml" model="@Model" />
+            </div>
+
+            <div id="dadosExame" class="tab-pane fade">
+                <h3>Exame</h3>
+                <hr width="100%">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <partial name="/Views/Consulta/Partials/Editar/Exame/_DadosExame.cshtml" model="@Model" />
+            </div>
+
+            <div id="dadosHipoteseDiagnostica" class="tab-pane fade">
+                <h3>Hipótese Diagnóstica</h3>
+                <hr width="100%">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <partial name="/Views/Consulta/Partials/Editar/HipoteseDiagnostica/_DadosHipoteseDiagnostica.cshtml" model="@Model" />
+            </div>
+
+            <div id="dadosConduta" class="tab-pane fade">
+                <h3>Conduta</h3>
+                <hr width="100%">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <partial name="/Views/Consulta/Partials/Editar/Conduta/_DadosConduta.cshtml" model="@Model" />
             </div>
         </div>
-
-        <div class="form-group padding-top-20px">
-            <input id="btnVoltar" type="button" class="btn btn-warning btn-brand btn-brand-big" value="Voltar" onclick="location.href='@Url.Action("ConsultarConsulta", "Consulta")'" />
-            <button id="btnSalvarEdicao" type="submit" class="btn btn-success btn-brand btn-brand-big">&nbsp;Salvar&nbsp;</button>
-        </div>
-        <span id="spanMensagem" class="displayNone" style="color: red;">Não pode alterar consultas antigas</span>
     </form>
 </div>
 
@@ -70,7 +174,6 @@
 
 <script>
     $(document).ready(function () {
-
         var inputNome = $('#paciente_Nome');
         var inputCPF = $('#paciente_CPF');
         var inputDataConsulta = $('#dataConsulta');
@@ -80,21 +183,43 @@
         var dataConsulta = $('#dataConsulta').val();
         var dataAtual = new Date($.now()).toLocaleString();
 
-        if ( (new Date(dataConsulta)) <= (new Date(dataAtual)) ) {
-            inputNome.prop('disabled', true);
-            inputCPF.prop('disabled', true);
-            inputDataConsulta.prop('disabled', true);
-            btnSlavar.prop('disabled', true);
-            btnPesquisaPaciente.prop('disabled', true);
+        var dataConsultaDateTime = new Date(dataConsulta.split(' ')[0].split('/')[2], dataConsulta.split(' ')[0].split('/')[1], dataConsulta.split(' ')[0].split('/')[0], dataConsulta.split(' ')[1].split(':')[0], dataConsulta.split(' ')[1].split(':')[1], 0);
+        var dataAtualDateTime = new Date(dataAtual.split(' ')[0].split('/')[2], dataAtual.split(' ')[0].split('/')[1], dataAtual.split(' ')[0].split('/')[0], dataAtual.split(' ')[1].split(':')[0], dataAtual.split(' ')[1].split(':')[1], 0);
+
+        if ( (dataConsultaDateTime) <= (dataAtualDateTime) ) {
+            inputNome.prop('readOnly', true);
+            inputCPF.prop('readOnly', true);
+            inputDataConsulta.prop('readOnly', true);
+            btnSlavar.prop('readOnly', true);
+            btnPesquisaPaciente.prop('readOnly', true);
             $('#spanMensagem').removeClass("displayNone");
         } else {
-            inputNome.prop('disabled', false);
-            inputCPF.prop('disabled', false);
-            inputDataConsulta.prop('disabled', false);
-            btnSlavar.prop('disabled', false);
-            btnPesquisaPaciente.prop('disabled', false);
+            inputNome.prop('readOnly', false);
+            inputCPF.prop('readOnly', false);
+            inputDataConsulta.prop('readOnly', false);
+            btnSlavar.prop('readOnly', false);
+            btnPesquisaPaciente.prop('readOnly', false);
             $('#spanMensagem').addClass("displayNone");
         }
+
+
+        debugger
+        var statusAtendimentoConsulta = @Model.Consulta.status;
+        if (statusAtendimentoConsulta == 0) {
+            $('#btnCancelar').removeClass("displayNone");
+
+        } else {
+            $('#btnCancelar').addClass("displayNone");
+        }
+        //debugger
+        
+
+        //if ($('#ExamePedido').val() !== "undefined") {
+        //    var idExamePedido = $('#ExamePedido').val();
+        //    var listIdExamePedido = idExamePedido.split(',');
+        //}
+
+
     });
 </script>
 

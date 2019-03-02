@@ -75,6 +75,8 @@ namespace SGCM.Models.Paciente.ConsultarPacienteModel
     public class DadosPaciente
     {
         public Int32 idPaciente { get; set; }
+
+        public string Status { get; set; }
     }
 
 }

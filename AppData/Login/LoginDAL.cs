@@ -33,7 +33,7 @@ namespace SGCM.AppData.Login {
                 if (dr.HasRows) {
                     while (dr.Read())
                     {
-                        if (dr.IsDBNull(56)) {
+                        if (dr.GetInt32(57) == 1) {
                             loginCompletoTO.usuarioTO.idUsuario = dr.GetInt32(0);
                             loginCompletoTO.usuarioTO.Usuario = dr.GetString(1);
                             
@@ -101,6 +101,10 @@ namespace SGCM.AppData.Login {
                             loginCompletoTO.permissoesTO.flCondutaC = dr.GetInt32(53);
                             loginCompletoTO.permissoesTO.flCondutaA = dr.GetInt32(54);
                             loginCompletoTO.permissoesTO.flCondutaE = dr.GetInt32(55);
+
+                            loginCompletoTO.permissoesTO.flIniciarAtendimento = dr.GetInt32(56);
+
+                            loginCompletoTO.usuarioTO.statusDesativado = dr.GetInt32(57).ToString();
                         } else {
                             loginCompletoTO.IdRetorno = 1;
                             return loginCompletoTO;
@@ -178,6 +182,7 @@ namespace SGCM.AppData.Login {
                         loginCompletoTO.permissoesTO.flExamesC = dr.GetInt32(33);
                         loginCompletoTO.permissoesTO.flExamesA = dr.GetInt32(34);
                         loginCompletoTO.permissoesTO.flExamesE = dr.GetInt32(35);
+                        loginCompletoTO.usuarioTO.statusDesativado = dr.GetInt32(36).ToString();
                     }
                 }
                 else

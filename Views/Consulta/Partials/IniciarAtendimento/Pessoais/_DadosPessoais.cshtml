@@ -1,0 +1,157 @@
+﻿@using SGCM.Models.Consulta.IniciarAtendimento;
+@model IniciarAtendimentoModel
+
+<div class="row margin-row">
+
+    @* NOME *@
+    <div class="col-lg-4 margin-right-15-px">
+        <div class="form-group">
+            <label asp-for="@Model.Pessoa.Nome" class="control-label form-label"></label>
+            <input asp-for="@Model.Pessoa.Nome" class="form-control form-input form-input-center" />
+            <span asp-validation-for="@Model.Pessoa.Nome" class="text-danger"></span>
+        </div>
+    </div>
+
+    @* Sexo *@
+    <div class="col-lg-3 margin-right-15-px">
+        <div class="form-group display-inline-block">
+            <label asp-for="@Model.Pessoa.Sexo" class="control-label form-label"></label>
+            <div class="" style="display: flex;">
+                <div class="radio margin-left-right-15-px">
+                    <label asp-for="@Model.Pessoa.Sexo" class="radio-inline">
+                        <input id="sexoFeminino" asp-for="@Model.Pessoa.Sexo" type="radio" value="1">Feminino
+                    </label>
+                </div>
+                <div class="radio margin-left-right-15-px">
+                    <label asp-for="@Model.Pessoa.Sexo" class="radio-inline">
+                        <input id="sexoMasculino" asp-for="@Model.Pessoa.Sexo" type="radio" value="2">Masculino
+                    </label>
+                </div>
+            </div>
+            <span asp-validation-for="@Model.Pessoa.Sexo" class="text-danger"></span>
+        </div>
+    </div>
+
+</div>
+
+<div class="row margin-row">
+
+    @* CPF *@
+    <div class="col-lg-2 margin-right-15-px">
+        <div class="form-group">
+            <label asp-for="@Model.Pessoa.CPF" class="control-label form-label"></label>
+            <input asp-for="@Model.Pessoa.CPF" class="form-control form-input form-input-center maskCPF" />
+            <span asp-validation-for="@Model.Pessoa.CPF" class="text-danger"></span>
+        </div>
+    </div>
+
+    @* RG *@
+    <div class="col-lg-2 margin-right-15-px">
+        <div class="form-group">
+            <label asp-for="@Model.Pessoa.RG" class="control-label form-label"></label>
+            <input asp-for="@Model.Pessoa.RG" class="form-control form-input form-input-center maskRG" />
+            <span asp-validation-for="@Model.Pessoa.RG" class="text-danger"></span>
+        </div>
+    </div>
+
+    @* DATA DE NASCIMENTO *@
+    <div class="col-lg-2 margin-right-15-px">
+        <div class="form-group">
+            <label asp-for="@Model.Pessoa.DataNascimento" class="control-label form-label"></label>
+            <input asp-for="@Model.Pessoa.DataNascimento" type="date" textmode="DateTimeLocal" class="form-control form-input form-input-center" id="dataNascimento" />
+            <span asp-validation-for="@Model.Pessoa.DataNascimento" class="text-danger"></span>
+        </div>
+    </div>
+
+</div>
+
+<div class="row margin-row">
+
+    @* LOGRADOURO *@
+    <div class="col-lg-3 margin-right-15-px">
+        <div class="form-group">
+            <label asp-for="@Model.Pessoa.Logradouro" class="control-label form-label"></label>
+            <input asp-for="@Model.Pessoa.Logradouro" class="form-control form-input form-input-center" />
+            <span asp-validation-for="@Model.Pessoa.Logradouro" class="text-danger"></span>
+        </div>
+    </div>
+
+    @* NÚMERO *@
+    <div class="col-lg-1 margin-right-15-px">
+        <div class="form-group">
+            <label asp-for="@Model.Pessoa.Numero" class="control-label form-label"></label>
+            <input asp-for="@Model.Pessoa.Numero" class="form-control form-input form-input-center" type="number" min="1" />
+            <span asp-validation-for="@Model.Pessoa.Numero" class="text-danger"></span>
+        </div>
+    </div>
+
+    @* BAIRRO *@
+    <div class="col-lg-3 margin-right-15-px">
+        <div class="form-group">
+            <label asp-for="@Model.Pessoa.Bairro" class="control-label form-label"></label>
+            <input asp-for="@Model.Pessoa.Bairro" class="form-control form-input form-input-center" />
+            <span asp-validation-for="@Model.Pessoa.Bairro" class="text-danger"></span>
+        </div>
+    </div>
+
+</div>
+
+<div class="row margin-row">
+
+    @* CIDADE *@
+    <div class="col-lg-3 margin-right-15-px">
+        <div class="form-group">
+            <label asp-for="@Model.Pessoa.Cidade" class="control-label form-label"></label>
+            <input asp-for="@Model.Pessoa.Cidade" class="form-control form-input form-input-center" />
+            <span asp-validation-for="@Model.Pessoa.Cidade" class="text-danger"></span>
+        </div>
+    </div>
+
+    @* UF *@
+    <div class="col-lg-1 margin-right-15-px">
+        <div class="form-group">
+            <label asp-for="@Model.Pessoa.Uf" class="control-label form-label"></label>
+            <input asp-for="@Model.Pessoa.Uf" class="form-control form-input form-input-center" maxlength="2" minlength="2" type="text" id="pessoaUF" onblur="VerificaUF()" />
+            <span asp-validation-for="@Model.Pessoa.Uf" class="text-danger"></span>
+        </div>
+    </div>
+
+</div>
+
+<div class="row margin-row">
+
+    @* TELEFONE CELULAR *@
+    <div class="col-lg-2 margin-right-15-px">
+        <div class="form-group">
+            <label asp-for="@Model.Pessoa.TelefoneCelular" class="control-label form-label"></label>
+            <input asp-for="@Model.Pessoa.TelefoneCelular" class="form-control form-input form-input-center maskTelefone" />
+            <span asp-validation-for="@Model.Pessoa.TelefoneCelular" class="text-danger"></span>
+        </div>
+    </div>
+
+    @* EMAIL *@
+    <div class="col-lg-3 margin-right-15-px">
+        <div class="form-group">
+            <label asp-for="@Model.Pessoa.Email" class="control-label form-label"></label>
+            <input asp-for="@Model.Pessoa.Email" class="form-control form-input form-input-center" />
+            <span asp-validation-for="@Model.Pessoa.Email" class="text-danger"></span>
+        </div>
+    </div>
+
+</div>
+
+<div class="form-group padding-top-15px">
+    <button id="moveProximoDadosPessoais" type="button" class="btn btn-primary btn-brand btn-brand-big">&nbsp;Próximo&nbsp;</button>
+</div>
+
+
+<div class="displayNone">
+    <input asp-for="@Model.Pessoa.IdPessoa" />
+
+    <input asp-for="@Model.Paciente.idPaciente" />
+
+    <input asp-for="@Model.Consulta.idConsulta" />
+    <input asp-for="@Model.Consulta.idPacienteConsulta" />
+    <input asp-for="@Model.Consulta.dataConsulta" />
+    <input asp-for="@Model.Consulta.finalizada" />
+</div>

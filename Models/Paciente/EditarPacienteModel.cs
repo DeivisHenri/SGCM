@@ -7,9 +7,19 @@ namespace SGCM.Models.Paciente.EditarPacienteModel
 {
     public class EditarPacienteModel
     {
-        public DadosPessoais pessoa { get; set; }
+        public DadosPessoais Pessoa { get; set; }
 
-        public List<DadosConsulta> consulta { get; set; }
+        public List<DadosConsulta> Consulta { get; set; }
+
+        public DadosMolestiaAtual MolestiaAtual { get; set; }
+
+        public DadosPatologicaPregressa PatologicaPregressa { get; set; }
+
+        public DadosExameFisico ExameFisico { get; set; }
+
+        public DadosHipoteseDiagnostica HipoteseDiagnostica { get; set; }
+
+        public DadosConduta Conduta { get; set; }
     }
 
     public class DadosPessoais {
@@ -59,6 +69,8 @@ namespace SGCM.Models.Paciente.EditarPacienteModel
         [Display(Name = "E-mail")]
         public string Email { get; set; }
 
+        public string Status { get; set; }
+
         public int IdPessoa { get; set; }
     }
 
@@ -69,4 +81,51 @@ namespace SGCM.Models.Paciente.EditarPacienteModel
         public int finalizada { get; set; }
     }
 
+    public class DadosMolestiaAtual {
+        public int idMolestiaAtual { get; set; }
+        public int idConsultaMolestiaAtual { get; set; }
+
+        [Required]
+        [StringLength(1000, ErrorMessage = "O campo História da Moléstia Atual deve conter no máximo 1000 caracteres.")]
+        [Display(Name = "História da Moléstia Atual")]
+        public string molestiaAtual { get; set; }
+    }
+
+    public class DadosPatologicaPregressa {
+        public int idPatologicaPregressa { get; set; }
+        public int idConsultaPatologicaPregressa { get; set; }
+        [StringLength(1000, ErrorMessage = "O campo História Patológica Pregressa deve conter no máximo 1000 caracteres.")]
+        [Display(Name = "História Patológica Pregressa")]
+        public string patologicaPregressa { get; set; }
+    }
+
+    public class DadosExameFisico {
+        public int idExameFisico { get; set; }
+        public int idConsultaExameFisico { get; set; }
+
+        [Required]
+        [StringLength(500, ErrorMessage = "O campo Exame Físico deve conter no máximo 500 caracteres.")]
+        [Display(Name = "Exame Físico")]
+        public string exameFisico { get; set; }
+        
+    }
+
+    public class DadosHipoteseDiagnostica {
+        public int idHipoteseDiagnostica { get; set; }
+        public int idConsultaHipoteseDiagnostica { get; set; }
+        [StringLength(500, ErrorMessage = "O campo Conduta deve conter no máximo 500 caracteres.")]
+        [Display(Name = "Conduta")]
+        public string hipoteseDiagnostica { get; set; }
+
+    }
+
+    public class DadosConduta {
+        public int idConduta { get; set; }
+        public int idConsultaConduta { get; set; }
+
+        [Required]
+        [StringLength(500, ErrorMessage = "O campo Conduta deve conter no máximo 500 caracteres.")]
+        [Display(Name = "Conduta")]
+        public string conduta { get; set; }
+    }
 }

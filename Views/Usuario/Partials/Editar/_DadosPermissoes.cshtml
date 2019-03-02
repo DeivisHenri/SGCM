@@ -29,6 +29,7 @@
 
 </div>
 
+@* PERMISSOES USUARIO *@
 <div class="row row-margin-top-bottom-3px">
 
     <div class="col-lg-2 align-a-esquerda">
@@ -37,30 +38,31 @@
 
     <div class="col-lg-2">
         <div class="form-check form-check-inline">
-            <input asp-for="@Model.permissoes.FlUsuarioI" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+            <input asp-for="@Model.permissoes.flUsuarioI" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
         </div>
     </div>
 
     <div class="col-lg-2">
         <div class="form-check form-check-inline">
-            <input asp-for="@Model.permissoes.FlUsuarioC" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+            <input asp-for="@Model.permissoes.flUsuarioC" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
         </div>
     </div>
 
     <div class="col-lg-2">
         <div class="form-check form-check-inline">
-            <input asp-for="@Model.permissoes.FlUsuarioA" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+            <input asp-for="@Model.permissoes.flUsuarioA" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
         </div>
     </div>
 
     <div class="col-lg-2">
         <div class="form-check form-check-inline">
-            <input asp-for="@Model.permissoes.FlUsuarioE" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+            <input asp-for="@Model.permissoes.flUsuarioE" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
         </div>
     </div>
 
 </div>
 
+@* PERMISSOES PACIENTE *@
 <div class="row row-margin-top-bottom-3px">
 
     <div class="col-lg-2 align-a-esquerda">
@@ -69,30 +71,31 @@
 
     <div class="col-lg-2">
         <div class="form-check form-check-inline">
-            <input asp-for="@Model.permissoes.FlPacienteI" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+            <input asp-for="@Model.permissoes.flPacienteI" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
         </div>
     </div>
 
     <div class="col-lg-2">
         <div class="form-check form-check-inline">
-            <input asp-for="@Model.permissoes.FlPacienteC" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+            <input asp-for="@Model.permissoes.flPacienteC" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
         </div>
     </div>
 
     <div class="col-lg-2">
         <div class="form-check form-check-inline">
-            <input asp-for="@Model.permissoes.FlPacienteA" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+            <input asp-for="@Model.permissoes.flPacienteA" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
         </div>
     </div>
 
     <div class="col-lg-2">
         <div class="form-check form-check-inline">
-            <input asp-for="@Model.permissoes.FlPacienteE" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+            <input asp-for="@Model.permissoes.flPacienteE" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
         </div>
     </div>
 
 </div>
 
+@* PERMISSOES CONSULTA *@
 <div class="row row-margin-top-bottom-3px">
 
     <div class="col-lg-2 align-a-esquerda">
@@ -101,30 +104,64 @@
 
     <div class="col-lg-2">
         <div class="form-check form-check-inline">
-            <input asp-for="@Model.permissoes.FlConsultaI" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+            <input asp-for="@Model.permissoes.flConsultaI" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
         </div>
     </div>
 
     <div class="col-lg-2">
         <div class="form-check form-check-inline">
-            <input asp-for="@Model.permissoes.FlConsultaC" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+            <input asp-for="@Model.permissoes.flConsultaC" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
         </div>
     </div>
 
     <div class="col-lg-2">
         <div class="form-check form-check-inline">
-            <input asp-for="@Model.permissoes.FlConsultaA" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+            <input asp-for="@Model.permissoes.flConsultaA" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
         </div>
     </div>
 
     <div class="col-lg-2">
         <div class="form-check form-check-inline">
-            <input asp-for="@Model.permissoes.FlConsultaE" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+            <input asp-for="@Model.permissoes.flConsultaE" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
         </div>
     </div>
 
 </div>
 
+@* PERMISSOES AUSENCIA *@
+<div class="row row-margin-top-bottom-3px">
+
+    <div class="col-lg-2 align-a-esquerda">
+        <label class="padding-top-5px">Ausência</label>
+    </div>
+
+    <div class="col-lg-2">
+        <div class="form-check form-check-inline">
+            <input asp-for="@Model.permissoes.flAusenciaI" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+        </div>
+    </div>
+
+    <div class="col-lg-2">
+        <div class="form-check form-check-inline">
+            <input asp-for="@Model.permissoes.flAusenciaC" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+        </div>
+    </div>
+
+    <div class="col-lg-2">
+        <div class="form-check form-check-inline">
+            <input asp-for="@Model.permissoes.flAusenciaA" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+        </div>
+    </div>
+
+    <div class="col-lg-2">
+        <div class="form-check form-check-inline">
+            <input asp-for="@Model.permissoes.flAusenciaE" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+        </div>
+    </div>
+
+</div>
+
+@* PERMISSOES MEDICAMENTO *@
 <div class="row row-margin-top-bottom-3px">
 
     <div class="col-lg-2 align-a-esquerda">
@@ -133,30 +170,31 @@
 
     <div class="col-lg-2">
         <div class="form-check form-check-inline">
-            <input asp-for="@Model.permissoes.FlMedicamentoI" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+            <input asp-for="@Model.permissoes.flMedicamentoI" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
         </div>
     </div>
 
     <div class="col-lg-2">
         <div class="form-check form-check-inline">
-            <input asp-for="@Model.permissoes.FlMedicamentoC" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+            <input asp-for="@Model.permissoes.flMedicamentoC" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
         </div>
     </div>
 
     <div class="col-lg-2">
         <div class="form-check form-check-inline">
-            <input asp-for="@Model.permissoes.FlMedicamentoA" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+            <input asp-for="@Model.permissoes.flMedicamentoA" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
         </div>
     </div>
 
     <div class="col-lg-2">
         <div class="form-check form-check-inline">
-            <input asp-for="@Model.permissoes.FlMedicamentoE" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+            <input asp-for="@Model.permissoes.flMedicamentoE" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
         </div>
     </div>
 
 </div>
 
+@* PERMISSOES EXAME *@
 <div class="row row-margin-top-bottom-3px">
 
     <div class="col-lg-2 align-a-esquerda">
@@ -165,25 +203,157 @@
 
     <div class="col-lg-2">
         <div class="form-check form-check-inline">
-            <input asp-for="@Model.permissoes.FlExamesI" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+            <input asp-for="@Model.permissoes.flExamesI" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
         </div>
     </div>
 
     <div class="col-lg-2">
         <div class="form-check form-check-inline">
-            <input asp-for="@Model.permissoes.FlExamesC" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+            <input asp-for="@Model.permissoes.flExamesC" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
         </div>
     </div>
 
     <div class="col-lg-2">
         <div class="form-check form-check-inline">
-            <input asp-for="@Model.permissoes.FlExamesA" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+            <input asp-for="@Model.permissoes.flExamesA" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
         </div>
     </div>
 
     <div class="col-lg-2">
         <div class="form-check form-check-inline">
-            <input asp-for="@Model.permissoes.FlExamesE" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+            <input asp-for="@Model.permissoes.flExamesE" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+        </div>
+    </div>
+
+</div>
+
+@* PERMISSOES MOLESTIA ATUAL *@
+<div class="row row-margin-top-bottom-3px">
+
+    <div class="col-lg-2 align-a-esquerda">
+        <label class="padding-top-5px">Molestia Atual</label>
+    </div>
+
+    <div class="col-lg-2">
+        <div class="form-check form-check-inline">
+            <input asp-for="@Model.permissoes.flHistoriaMolestiaAtualI" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+        </div>
+    </div>
+
+    <div class="col-lg-2">
+        <div class="form-check form-check-inline">
+            <input asp-for="@Model.permissoes.flHistoriaMolestiaAtualC" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+        </div>
+    </div>
+
+    <div class="col-lg-2">
+        <div class="form-check form-check-inline">
+            <input asp-for="@Model.permissoes.flHistoriaMolestiaAtualA" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+        </div>
+    </div>
+
+    <div class="col-lg-2">
+        <div class="form-check form-check-inline">
+            <input asp-for="@Model.permissoes.flHistoriaMolestiaAtualE" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+        </div>
+    </div>
+
+</div>
+
+@* PERMISSOES PATOLOGICA PREGRESSA *@
+<div class="row row-margin-top-bottom-3px">
+
+    <div class="col-lg-2 align-a-esquerda">
+        <label class="padding-top-5px">Patológica Pregressa</label>
+    </div>
+
+    <div class="col-lg-2">
+        <div class="form-check form-check-inline">
+            <input asp-for="@Model.permissoes.flHistoriaPatologicaPregressaI" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+        </div>
+    </div>
+
+    <div class="col-lg-2">
+        <div class="form-check form-check-inline">
+            <input asp-for="@Model.permissoes.flHistoriaPatologicaPregressaC" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+        </div>
+    </div>
+
+    <div class="col-lg-2">
+        <div class="form-check form-check-inline">
+            <input asp-for="@Model.permissoes.flHistoriaPatologicaPregressaA" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+        </div>
+    </div>
+
+    <div class="col-lg-2">
+        <div class="form-check form-check-inline">
+            <input asp-for="@Model.permissoes.flHistoriaPatologicaPregressaE" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+        </div>
+    </div>
+
+</div>
+
+@* PERMISSOES HIPOTESE DIAGNOSTICA *@
+<div class="row row-margin-top-bottom-3px">
+
+    <div class="col-lg-2 align-a-esquerda">
+        <label class="padding-top-5px">Patológica Pregressa</label>
+    </div>
+
+    <div class="col-lg-2">
+        <div class="form-check form-check-inline">
+            <input asp-for="@Model.permissoes.flHipoteseDiagnosticaI" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+        </div>
+    </div>
+
+    <div class="col-lg-2">
+        <div class="form-check form-check-inline">
+            <input asp-for="@Model.permissoes.flHipoteseDiagnosticaC" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+        </div>
+    </div>
+
+    <div class="col-lg-2">
+        <div class="form-check form-check-inline">
+            <input asp-for="@Model.permissoes.flHipoteseDiagnosticaA" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+        </div>
+    </div>
+
+    <div class="col-lg-2">
+        <div class="form-check form-check-inline">
+            <input asp-for="@Model.permissoes.flHipoteseDiagnosticaE" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+        </div>
+    </div>
+
+</div>
+
+@* PERMISSOES CONDUTA *@
+<div class="row row-margin-top-bottom-3px">
+
+    <div class="col-lg-2 align-a-esquerda">
+        <label class="padding-top-5px">Conduta</label>
+    </div>
+
+    <div class="col-lg-2">
+        <div class="form-check form-check-inline">
+            <input asp-for="@Model.permissoes.flCondutaI" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+        </div>
+    </div>
+
+    <div class="col-lg-2">
+        <div class="form-check form-check-inline">
+            <input asp-for="@Model.permissoes.flCondutaC" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+        </div>
+    </div>
+
+    <div class="col-lg-2">
+        <div class="form-check form-check-inline">
+            <input asp-for="@Model.permissoes.flCondutaA" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+        </div>
+    </div>
+
+    <div class="col-lg-2">
+        <div class="form-check form-check-inline">
+            <input asp-for="@Model.permissoes.flCondutaE" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
         </div>
     </div>
 

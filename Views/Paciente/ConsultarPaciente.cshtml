@@ -20,6 +20,7 @@
                 <td>CPF</td>
                 <td>Telefone Celular</td>
                 <td>Editar</td>
+                <td>Status</td>
             </tr>
         </thead>
 
@@ -35,6 +36,15 @@
                             <div>
                                 <a asp-controller="Paciente" asp-action="EditarPaciente" asp-route-id="@paciente.paciente.idPaciente">Edit</a>
                             </div>
+                        </td>
+                        <td>
+                            @{
+                                if (Convert.ToInt32(paciente.paciente.Status) == 1) {
+                                    <span>Ativado</span>
+                                } else {
+                                    <span>Desativado</span>
+                                }
+                            }
                         </td>
                     </tr>
                 }

@@ -16,125 +16,257 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
             int valorTrue = 1;
             int valorFalse = 0;
 
-            if ((dadosPermissoes.FlUsuarioI == "true") || (dadosPermissoes.FlUsuarioI == "True")) {
-                dadosPermissoes.FlUsuarioI = valorTrue.ToString();
+            /* USUARIO */
+            if ((dadosPermissoes.flUsuarioI == "true") || (dadosPermissoes.flUsuarioI == "True")) {
+                dadosPermissoes.flUsuarioI = valorTrue.ToString();
             } else {
-                dadosPermissoes.FlUsuarioI = valorFalse.ToString();
+                dadosPermissoes.flUsuarioI = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlUsuarioC == "true") || (dadosPermissoes.FlUsuarioC == "True")) {
-                dadosPermissoes.FlUsuarioC = valorTrue.ToString();
+            if ((dadosPermissoes.flUsuarioC == "true") || (dadosPermissoes.flUsuarioC == "True")) {
+                dadosPermissoes.flUsuarioC = valorTrue.ToString();
             } else {
-                dadosPermissoes.FlUsuarioC = valorFalse.ToString();
+                dadosPermissoes.flUsuarioC = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlUsuarioA == "true") || (dadosPermissoes.FlUsuarioA == "True")) {
-                dadosPermissoes.FlUsuarioA = valorTrue.ToString();
+            if ((dadosPermissoes.flUsuarioA == "true") || (dadosPermissoes.flUsuarioA == "True")) {
+                dadosPermissoes.flUsuarioA = valorTrue.ToString();
             } else {
-                dadosPermissoes.FlUsuarioA = valorFalse.ToString();
+                dadosPermissoes.flUsuarioA = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlUsuarioE == "true") || (dadosPermissoes.FlUsuarioE == "True")) {
-                dadosPermissoes.FlUsuarioE = valorTrue.ToString();
+            if ((dadosPermissoes.flUsuarioE == "true") || (dadosPermissoes.flUsuarioE == "True")) {
+                dadosPermissoes.flUsuarioE = valorTrue.ToString();
             } else {
-                dadosPermissoes.FlUsuarioE = valorFalse.ToString();
+                dadosPermissoes.flUsuarioE = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlPacienteI == "true") || (dadosPermissoes.FlPacienteI == "True")) {
-                dadosPermissoes.FlPacienteI = valorTrue.ToString();
+            /* PACIENTE */
+            if ((dadosPermissoes.flPacienteI == "true") || (dadosPermissoes.flPacienteI == "True")) {
+                dadosPermissoes.flPacienteI = valorTrue.ToString();
             } else {
-                dadosPermissoes.FlPacienteI = valorFalse.ToString();
+                dadosPermissoes.flPacienteI = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlPacienteC == "true") || (dadosPermissoes.FlPacienteC == "True")) {
-                dadosPermissoes.FlPacienteC = valorTrue.ToString();
+            if ((dadosPermissoes.flPacienteC == "true") || (dadosPermissoes.flPacienteC == "True")) {
+                dadosPermissoes.flPacienteC = valorTrue.ToString();
             } else {
-                dadosPermissoes.FlPacienteC = valorFalse.ToString();
+                dadosPermissoes.flPacienteC = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlPacienteA == "true") || (dadosPermissoes.FlPacienteA == "True")) {
-                dadosPermissoes.FlPacienteA = valorTrue.ToString();
+            if ((dadosPermissoes.flPacienteA == "true") || (dadosPermissoes.flPacienteA == "True")) {
+                dadosPermissoes.flPacienteA = valorTrue.ToString();
             } else {
-                dadosPermissoes.FlPacienteA = valorFalse.ToString();
+                dadosPermissoes.flPacienteA = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlPacienteE == "true") || (dadosPermissoes.FlPacienteE == "True")) {
-                dadosPermissoes.FlPacienteE = valorTrue.ToString();
+            if ((dadosPermissoes.flPacienteE == "true") || (dadosPermissoes.flPacienteE == "True")) {
+                dadosPermissoes.flPacienteE = valorTrue.ToString();
             } else {
-                dadosPermissoes.FlPacienteE = valorFalse.ToString();
+                dadosPermissoes.flPacienteE = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlConsultaI == "true") || (dadosPermissoes.FlConsultaI == "True")) {
-                dadosPermissoes.FlConsultaI = valorTrue.ToString();
+            /* CONSULTA */
+            if ((dadosPermissoes.flConsultaI == "true") || (dadosPermissoes.flConsultaI == "True")) {
+                dadosPermissoes.flConsultaI = valorTrue.ToString();
             } else {
-                dadosPermissoes.FlConsultaI = valorFalse.ToString();
+                dadosPermissoes.flConsultaI = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlConsultaC == "true") || (dadosPermissoes.FlConsultaC == "True")) {
-                dadosPermissoes.FlConsultaC = valorTrue.ToString();
+            if ((dadosPermissoes.flConsultaC == "true") || (dadosPermissoes.flConsultaC == "True")) {
+                dadosPermissoes.flConsultaC = valorTrue.ToString();
             } else {
-                dadosPermissoes.FlConsultaC = valorFalse.ToString();
+                dadosPermissoes.flConsultaC = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlConsultaA == "true") || (dadosPermissoes.FlConsultaA == "True")) {
-                dadosPermissoes.FlConsultaA = valorTrue.ToString();
+            if ((dadosPermissoes.flConsultaA == "true") || (dadosPermissoes.flConsultaA == "True")) {
+                dadosPermissoes.flConsultaA = valorTrue.ToString();
             } else {
-                dadosPermissoes.FlConsultaA = valorFalse.ToString();
+                dadosPermissoes.flConsultaA = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlConsultaE == "true") || (dadosPermissoes.FlConsultaE == "True")) {
-                dadosPermissoes.FlConsultaE = valorTrue.ToString();
+            if ((dadosPermissoes.flConsultaE == "true") || (dadosPermissoes.flConsultaE == "True")) {
+                dadosPermissoes.flConsultaE = valorTrue.ToString();
             } else {
-                dadosPermissoes.FlConsultaE = valorFalse.ToString();
+                dadosPermissoes.flConsultaE = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlMedicamentoI == "true") || (dadosPermissoes.FlMedicamentoI == "True")) {
-                dadosPermissoes.FlMedicamentoI = valorTrue.ToString();
+            /* AUSENCIA */
+            if ((dadosPermissoes.flAusenciaI == "true") || (dadosPermissoes.flAusenciaI == "True")) {
+                dadosPermissoes.flAusenciaI = valorTrue.ToString();
             } else {
-                dadosPermissoes.FlMedicamentoI = valorFalse.ToString();
+                dadosPermissoes.flAusenciaI = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlMedicamentoC == "true") || (dadosPermissoes.FlMedicamentoC == "True")) {
-                dadosPermissoes.FlMedicamentoC = valorTrue.ToString();
+            if ((dadosPermissoes.flAusenciaC == "true") || (dadosPermissoes.flAusenciaC == "True")) {
+                dadosPermissoes.flAusenciaC = valorTrue.ToString();
             } else {
-                dadosPermissoes.FlMedicamentoC = valorFalse.ToString();
+                dadosPermissoes.flAusenciaC = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlMedicamentoA == "true") || (dadosPermissoes.FlMedicamentoA == "True")) {
-                dadosPermissoes.FlMedicamentoA = valorTrue.ToString();
+            if ((dadosPermissoes.flAusenciaA == "true") || (dadosPermissoes.flAusenciaA == "True")) {
+                dadosPermissoes.flAusenciaA = valorTrue.ToString();
             } else {
-                dadosPermissoes.FlMedicamentoA = valorFalse.ToString();
+                dadosPermissoes.flAusenciaA = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlMedicamentoE == "true") || (dadosPermissoes.FlMedicamentoE == "True")) {
-                dadosPermissoes.FlMedicamentoE = valorTrue.ToString();
+            if ((dadosPermissoes.flAusenciaE == "true") || (dadosPermissoes.flAusenciaE == "True")) {
+                dadosPermissoes.flAusenciaE = valorTrue.ToString();
             } else {
-                dadosPermissoes.FlMedicamentoE = valorFalse.ToString();
+                dadosPermissoes.flAusenciaE = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlExamesI == "true") || (dadosPermissoes.FlExamesI == "True")) {
-                dadosPermissoes.FlExamesI = valorTrue.ToString();
+            /* MEDICAMENTO */
+            if ((dadosPermissoes.flMedicamentoI == "true") || (dadosPermissoes.flMedicamentoI == "True")) {
+                dadosPermissoes.flMedicamentoI = valorTrue.ToString();
             } else {
-                dadosPermissoes.FlExamesI = valorFalse.ToString();
+                dadosPermissoes.flMedicamentoI = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlExamesC == "true") || (dadosPermissoes.FlExamesC == "True")) {
-                dadosPermissoes.FlExamesC = valorTrue.ToString();
+            if ((dadosPermissoes.flMedicamentoC == "true") || (dadosPermissoes.flMedicamentoC == "True")) {
+                dadosPermissoes.flMedicamentoC = valorTrue.ToString();
             } else {
-                dadosPermissoes.FlExamesC = valorFalse.ToString();
+                dadosPermissoes.flMedicamentoC = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlExamesA == "true") || (dadosPermissoes.FlExamesA == "True")) {
-                dadosPermissoes.FlExamesA = valorTrue.ToString();
+            if ((dadosPermissoes.flMedicamentoA == "true") || (dadosPermissoes.flMedicamentoA == "True")) {
+                dadosPermissoes.flMedicamentoA = valorTrue.ToString();
             } else {
-                dadosPermissoes.FlExamesA = valorFalse.ToString();
+                dadosPermissoes.flMedicamentoA = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlExamesE == "true") || (dadosPermissoes.FlExamesE == "True")) {
-                dadosPermissoes.FlExamesE = valorTrue.ToString();
+            if ((dadosPermissoes.flMedicamentoE == "true") || (dadosPermissoes.flMedicamentoE == "True")) {
+                dadosPermissoes.flMedicamentoE = valorTrue.ToString();
             } else {
-                dadosPermissoes.FlExamesE = valorFalse.ToString();
+                dadosPermissoes.flMedicamentoE = valorFalse.ToString();
             }
+
+            /* EXAME */
+            if ((dadosPermissoes.flExamesI == "true") || (dadosPermissoes.flExamesI == "True")) {
+                dadosPermissoes.flExamesI = valorTrue.ToString();
+            } else {
+                dadosPermissoes.flExamesI = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.flExamesC == "true") || (dadosPermissoes.flExamesC == "True")) {
+                dadosPermissoes.flExamesC = valorTrue.ToString();
+            } else {
+                dadosPermissoes.flExamesC = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.flExamesA == "true") || (dadosPermissoes.flExamesA == "True")) {
+                dadosPermissoes.flExamesA = valorTrue.ToString();
+            } else {
+                dadosPermissoes.flExamesA = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.flExamesE == "true") || (dadosPermissoes.flExamesE == "True")) {
+                dadosPermissoes.flExamesE = valorTrue.ToString();
+            } else {
+                dadosPermissoes.flExamesE = valorFalse.ToString();
+            }
+
+            /* MOLESTIA ATUAL */
+            if ((dadosPermissoes.flHistoriaMolestiaAtualI == "true") || (dadosPermissoes.flHistoriaMolestiaAtualI == "True")) {
+                dadosPermissoes.flHistoriaMolestiaAtualI = valorTrue.ToString();
+            } else {
+                dadosPermissoes.flHistoriaMolestiaAtualI = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.flHistoriaMolestiaAtualC == "true") || (dadosPermissoes.flHistoriaMolestiaAtualC == "True")) {
+                dadosPermissoes.flHistoriaMolestiaAtualC = valorTrue.ToString();
+            } else {
+                dadosPermissoes.flHistoriaMolestiaAtualC = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.flHistoriaMolestiaAtualA == "true") || (dadosPermissoes.flHistoriaMolestiaAtualA == "True")) {
+                dadosPermissoes.flHistoriaMolestiaAtualA = valorTrue.ToString();
+            } else {
+                dadosPermissoes.flHistoriaMolestiaAtualA = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.flHistoriaMolestiaAtualE == "true") || (dadosPermissoes.flHistoriaMolestiaAtualE == "True")) {
+                dadosPermissoes.flHistoriaMolestiaAtualE = valorTrue.ToString();
+            } else {
+                dadosPermissoes.flHistoriaMolestiaAtualE = valorFalse.ToString();
+            }
+
+            /* PATOLOGICA PREGRESSA */
+            if ((dadosPermissoes.flHistoriaPatologicaPregressaI == "true") || (dadosPermissoes.flHistoriaPatologicaPregressaI == "True")) {
+                dadosPermissoes.flHistoriaPatologicaPregressaI = valorTrue.ToString();
+            } else {
+                dadosPermissoes.flHistoriaPatologicaPregressaI = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.flHistoriaPatologicaPregressaC == "true") || (dadosPermissoes.flHistoriaPatologicaPregressaC == "True")) {
+                dadosPermissoes.flHistoriaPatologicaPregressaC = valorTrue.ToString();
+            } else             {
+                dadosPermissoes.flHistoriaPatologicaPregressaC = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.flHistoriaPatologicaPregressaA == "true") || (dadosPermissoes.flHistoriaPatologicaPregressaA == "True")) {
+                dadosPermissoes.flHistoriaPatologicaPregressaA = valorTrue.ToString();
+            } else             {
+                dadosPermissoes.flHistoriaPatologicaPregressaA = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.flHistoriaPatologicaPregressaE == "true") || (dadosPermissoes.flHistoriaPatologicaPregressaE == "True")) {
+                dadosPermissoes.flHistoriaPatologicaPregressaE = valorTrue.ToString();
+            } else {
+                dadosPermissoes.flHistoriaPatologicaPregressaE = valorFalse.ToString();
+            }
+
+            /* HIPOTESE DIAGNOSTICA */
+            if ((dadosPermissoes.flHipoteseDiagnosticaI == "true") || (dadosPermissoes.flHipoteseDiagnosticaI == "True")) {
+                dadosPermissoes.flHipoteseDiagnosticaI = valorTrue.ToString();
+            } else {
+                dadosPermissoes.flHipoteseDiagnosticaI = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.flHipoteseDiagnosticaC == "true") || (dadosPermissoes.flHipoteseDiagnosticaC == "True")) {
+                dadosPermissoes.flHipoteseDiagnosticaC = valorTrue.ToString();
+            } else {
+                dadosPermissoes.flHipoteseDiagnosticaC = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.flHipoteseDiagnosticaA == "true") || (dadosPermissoes.flHipoteseDiagnosticaA == "True")) {
+                dadosPermissoes.flHipoteseDiagnosticaA = valorTrue.ToString();
+            } else {
+                dadosPermissoes.flHipoteseDiagnosticaA = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.flHipoteseDiagnosticaE == "true") || (dadosPermissoes.flHipoteseDiagnosticaE == "True")) {
+                dadosPermissoes.flHipoteseDiagnosticaE = valorTrue.ToString();
+            } else {
+                dadosPermissoes.flHipoteseDiagnosticaE = valorFalse.ToString();
+            }
+
+            /* CONDUTA */
+            if ((dadosPermissoes.flCondutaI == "true") || (dadosPermissoes.flCondutaI == "True")) {
+                dadosPermissoes.flCondutaI = valorTrue.ToString();
+            } else {
+                dadosPermissoes.flCondutaI = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.flCondutaC == "true") || (dadosPermissoes.flCondutaC == "True")) {
+                dadosPermissoes.flCondutaC = valorTrue.ToString();
+            } else {
+                dadosPermissoes.flCondutaC = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.flCondutaA == "true") || (dadosPermissoes.flCondutaA == "True")) {
+                dadosPermissoes.flCondutaA = valorTrue.ToString();
+            } else {
+                dadosPermissoes.flCondutaA = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.flCondutaE == "true") || (dadosPermissoes.flCondutaE == "True")) {
+                dadosPermissoes.flCondutaE = valorTrue.ToString();
+            } else {
+                dadosPermissoes.flCondutaE = valorFalse.ToString();
+            }
+
+            /* INICIAR ATENDIMENTO */
 
             return dadosPermissoes;
         }
@@ -143,185 +275,374 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
             int valorTrue = 1;
             int valorFalse = 0;
 
-            if ((dadosPermissoes.FlUsuarioI == "true") || (dadosPermissoes.FlUsuarioI == "True"))
-            {
-                dadosPermissoes.FlUsuarioI = valorTrue.ToString();
-            }
-            else
-            {
-                dadosPermissoes.FlUsuarioI = valorFalse.ToString();
+            /* USUARIO */
+            if ((dadosPermissoes.flUsuarioI == "true") || (dadosPermissoes.flUsuarioI == "True")) {
+                dadosPermissoes.flUsuarioI = valorTrue.ToString();
+            } else {
+                dadosPermissoes.flUsuarioI = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlUsuarioC == "true") || (dadosPermissoes.FlUsuarioC == "True"))
+            if ((dadosPermissoes.flUsuarioC == "true") || (dadosPermissoes.flUsuarioC == "True"))
             {
-                dadosPermissoes.FlUsuarioC = valorTrue.ToString();
+                dadosPermissoes.flUsuarioC = valorTrue.ToString();
             }
             else
             {
-                dadosPermissoes.FlUsuarioC = valorFalse.ToString();
+                dadosPermissoes.flUsuarioC = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlUsuarioA == "true") || (dadosPermissoes.FlUsuarioA == "True"))
+            if ((dadosPermissoes.flUsuarioA == "true") || (dadosPermissoes.flUsuarioA == "True"))
             {
-                dadosPermissoes.FlUsuarioA = valorTrue.ToString();
+                dadosPermissoes.flUsuarioA = valorTrue.ToString();
             }
             else
             {
-                dadosPermissoes.FlUsuarioA = valorFalse.ToString();
+                dadosPermissoes.flUsuarioA = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlUsuarioE == "true") || (dadosPermissoes.FlUsuarioE == "True"))
+            if ((dadosPermissoes.flUsuarioE == "true") || (dadosPermissoes.flUsuarioE == "True"))
             {
-                dadosPermissoes.FlUsuarioE = valorTrue.ToString();
+                dadosPermissoes.flUsuarioE = valorTrue.ToString();
             }
             else
             {
-                dadosPermissoes.FlUsuarioE = valorFalse.ToString();
+                dadosPermissoes.flUsuarioE = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlPacienteI == "true") || (dadosPermissoes.FlPacienteI == "True"))
+            /* PACIENTE */
+            if ((dadosPermissoes.flPacienteI == "true") || (dadosPermissoes.flPacienteI == "True"))
             {
-                dadosPermissoes.FlPacienteI = valorTrue.ToString();
+                dadosPermissoes.flPacienteI = valorTrue.ToString();
             }
             else
             {
-                dadosPermissoes.FlPacienteI = valorFalse.ToString();
+                dadosPermissoes.flPacienteI = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlPacienteC == "true") || (dadosPermissoes.FlPacienteC == "True"))
+            if ((dadosPermissoes.flPacienteC == "true") || (dadosPermissoes.flPacienteC == "True"))
             {
-                dadosPermissoes.FlPacienteC = valorTrue.ToString();
+                dadosPermissoes.flPacienteC = valorTrue.ToString();
             }
             else
             {
-                dadosPermissoes.FlPacienteC = valorFalse.ToString();
+                dadosPermissoes.flPacienteC = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlPacienteA == "true") || (dadosPermissoes.FlPacienteA == "True"))
+            if ((dadosPermissoes.flPacienteA == "true") || (dadosPermissoes.flPacienteA == "True"))
             {
-                dadosPermissoes.FlPacienteA = valorTrue.ToString();
+                dadosPermissoes.flPacienteA = valorTrue.ToString();
             }
             else
             {
-                dadosPermissoes.FlPacienteA = valorFalse.ToString();
+                dadosPermissoes.flPacienteA = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlPacienteE == "true") || (dadosPermissoes.FlPacienteE == "True"))
+            if ((dadosPermissoes.flPacienteE == "true") || (dadosPermissoes.flPacienteE == "True"))
             {
-                dadosPermissoes.FlPacienteE = valorTrue.ToString();
+                dadosPermissoes.flPacienteE = valorTrue.ToString();
             }
             else
             {
-                dadosPermissoes.FlPacienteE = valorFalse.ToString();
+                dadosPermissoes.flPacienteE = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlConsultaI == "true") || (dadosPermissoes.FlConsultaI == "True"))
+            /* CONSULTA */
+            if ((dadosPermissoes.flConsultaI == "true") || (dadosPermissoes.flConsultaI == "True"))
             {
-                dadosPermissoes.FlConsultaI = valorTrue.ToString();
+                dadosPermissoes.flConsultaI = valorTrue.ToString();
             }
             else
             {
-                dadosPermissoes.FlConsultaI = valorFalse.ToString();
+                dadosPermissoes.flConsultaI = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlConsultaC == "true") || (dadosPermissoes.FlConsultaC == "True"))
+            if ((dadosPermissoes.flConsultaC == "true") || (dadosPermissoes.flConsultaC == "True"))
             {
-                dadosPermissoes.FlConsultaC = valorTrue.ToString();
+                dadosPermissoes.flConsultaC = valorTrue.ToString();
             }
             else
             {
-                dadosPermissoes.FlConsultaC = valorFalse.ToString();
+                dadosPermissoes.flConsultaC = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlConsultaA == "true") || (dadosPermissoes.FlConsultaA == "True"))
+            if ((dadosPermissoes.flConsultaA == "true") || (dadosPermissoes.flConsultaA == "True"))
             {
-                dadosPermissoes.FlConsultaA = valorTrue.ToString();
+                dadosPermissoes.flConsultaA = valorTrue.ToString();
             }
             else
             {
-                dadosPermissoes.FlConsultaA = valorFalse.ToString();
+                dadosPermissoes.flConsultaA = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlConsultaE == "true") || (dadosPermissoes.FlConsultaE == "True"))
+            if ((dadosPermissoes.flConsultaE == "true") || (dadosPermissoes.flConsultaE == "True"))
             {
-                dadosPermissoes.FlConsultaE = valorTrue.ToString();
+                dadosPermissoes.flConsultaE = valorTrue.ToString();
             }
             else
             {
-                dadosPermissoes.FlConsultaE = valorFalse.ToString();
+                dadosPermissoes.flConsultaE = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlMedicamentoI == "true") || (dadosPermissoes.FlMedicamentoI == "True"))
+            /* AUSENCIA */
+            if ((dadosPermissoes.flAusenciaI == "true") || (dadosPermissoes.flAusenciaI == "True"))
             {
-                dadosPermissoes.FlMedicamentoI = valorTrue.ToString();
+                dadosPermissoes.flAusenciaI = valorTrue.ToString();
             }
             else
             {
-                dadosPermissoes.FlMedicamentoI = valorFalse.ToString();
+                dadosPermissoes.flAusenciaI = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlMedicamentoC == "true") || (dadosPermissoes.FlMedicamentoC == "True"))
+            if ((dadosPermissoes.flAusenciaC == "true") || (dadosPermissoes.flAusenciaC == "True"))
             {
-                dadosPermissoes.FlMedicamentoC = valorTrue.ToString();
+                dadosPermissoes.flAusenciaC = valorTrue.ToString();
             }
             else
             {
-                dadosPermissoes.FlMedicamentoC = valorFalse.ToString();
+                dadosPermissoes.flAusenciaC = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlMedicamentoA == "true") || (dadosPermissoes.FlMedicamentoA == "True"))
+            if ((dadosPermissoes.flAusenciaA == "true") || (dadosPermissoes.flAusenciaA == "True"))
             {
-                dadosPermissoes.FlMedicamentoA = valorTrue.ToString();
+                dadosPermissoes.flAusenciaA = valorTrue.ToString();
             }
             else
             {
-                dadosPermissoes.FlMedicamentoA = valorFalse.ToString();
+                dadosPermissoes.flAusenciaA = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlMedicamentoE == "true") || (dadosPermissoes.FlMedicamentoE == "True"))
+            if ((dadosPermissoes.flAusenciaE == "true") || (dadosPermissoes.flAusenciaE == "True"))
             {
-                dadosPermissoes.FlMedicamentoE = valorTrue.ToString();
+                dadosPermissoes.flAusenciaE = valorTrue.ToString();
             }
             else
             {
-                dadosPermissoes.FlMedicamentoE = valorFalse.ToString();
+                dadosPermissoes.flAusenciaE = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlExamesI == "true") || (dadosPermissoes.FlExamesI == "True"))
+            /* MEDICAMENTO */
+            if ((dadosPermissoes.flMedicamentoI == "true") || (dadosPermissoes.flMedicamentoI == "True"))
             {
-                dadosPermissoes.FlExamesI = valorTrue.ToString();
+                dadosPermissoes.flMedicamentoI = valorTrue.ToString();
             }
             else
             {
-                dadosPermissoes.FlExamesI = valorFalse.ToString();
+                dadosPermissoes.flMedicamentoI = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlExamesC == "true") || (dadosPermissoes.FlExamesC == "True"))
+            if ((dadosPermissoes.flMedicamentoC == "true") || (dadosPermissoes.flMedicamentoC == "True"))
             {
-                dadosPermissoes.FlExamesC = valorTrue.ToString();
+                dadosPermissoes.flMedicamentoC = valorTrue.ToString();
             }
             else
             {
-                dadosPermissoes.FlExamesC = valorFalse.ToString();
+                dadosPermissoes.flMedicamentoC = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlExamesA == "true") || (dadosPermissoes.FlExamesA == "True"))
+            if ((dadosPermissoes.flMedicamentoA == "true") || (dadosPermissoes.flMedicamentoA == "True"))
             {
-                dadosPermissoes.FlExamesA = valorTrue.ToString();
+                dadosPermissoes.flMedicamentoA = valorTrue.ToString();
             }
             else
             {
-                dadosPermissoes.FlExamesA = valorFalse.ToString();
+                dadosPermissoes.flMedicamentoA = valorFalse.ToString();
             }
 
-            if ((dadosPermissoes.FlExamesE == "true") || (dadosPermissoes.FlExamesE == "True"))
+            if ((dadosPermissoes.flMedicamentoE == "true") || (dadosPermissoes.flMedicamentoE == "True"))
             {
-                dadosPermissoes.FlExamesE = valorTrue.ToString();
+                dadosPermissoes.flMedicamentoE = valorTrue.ToString();
             }
             else
             {
-                dadosPermissoes.FlExamesE = valorFalse.ToString();
+                dadosPermissoes.flMedicamentoE = valorFalse.ToString();
             }
+
+            /* EXAME */
+            if ((dadosPermissoes.flExamesI == "true") || (dadosPermissoes.flExamesI == "True"))
+            {
+                dadosPermissoes.flExamesI = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.flExamesI = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.flExamesC == "true") || (dadosPermissoes.flExamesC == "True"))
+            {
+                dadosPermissoes.flExamesC = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.flExamesC = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.flExamesA == "true") || (dadosPermissoes.flExamesA == "True"))
+            {
+                dadosPermissoes.flExamesA = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.flExamesA = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.flExamesE == "true") || (dadosPermissoes.flExamesE == "True"))
+            {
+                dadosPermissoes.flExamesE = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.flExamesE = valorFalse.ToString();
+            }
+
+            /* MOLESTIA ATUAL */
+            if ((dadosPermissoes.flHistoriaMolestiaAtualI == "true") || (dadosPermissoes.flHistoriaMolestiaAtualI == "True"))
+            {
+                dadosPermissoes.flHistoriaMolestiaAtualI = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.flHistoriaMolestiaAtualI = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.flHistoriaMolestiaAtualC == "true") || (dadosPermissoes.flHistoriaMolestiaAtualC == "True"))
+            {
+                dadosPermissoes.flHistoriaMolestiaAtualC = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.flHistoriaMolestiaAtualC = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.flHistoriaMolestiaAtualA == "true") || (dadosPermissoes.flHistoriaMolestiaAtualA == "True"))
+            {
+                dadosPermissoes.flHistoriaMolestiaAtualA = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.flHistoriaMolestiaAtualA = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.flHistoriaMolestiaAtualE == "true") || (dadosPermissoes.flHistoriaMolestiaAtualE == "True"))
+            {
+                dadosPermissoes.flHistoriaMolestiaAtualE = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.flHistoriaMolestiaAtualE = valorFalse.ToString();
+            }
+
+            /* PATOLOGICA PREGRESSA */
+            if ((dadosPermissoes.flHistoriaPatologicaPregressaI == "true") || (dadosPermissoes.flHistoriaPatologicaPregressaI == "True"))
+            {
+                dadosPermissoes.flHistoriaPatologicaPregressaI = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.flHistoriaPatologicaPregressaI = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.flHistoriaPatologicaPregressaC == "true") || (dadosPermissoes.flHistoriaPatologicaPregressaC == "True"))
+            {
+                dadosPermissoes.flHistoriaPatologicaPregressaC = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.flHistoriaPatologicaPregressaC = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.flHistoriaPatologicaPregressaA == "true") || (dadosPermissoes.flHistoriaPatologicaPregressaA == "True"))
+            {
+                dadosPermissoes.flHistoriaPatologicaPregressaA = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.flHistoriaPatologicaPregressaA = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.flHistoriaPatologicaPregressaE == "true") || (dadosPermissoes.flHistoriaPatologicaPregressaE == "True"))
+            {
+                dadosPermissoes.flHistoriaPatologicaPregressaE = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.flHistoriaPatologicaPregressaE = valorFalse.ToString();
+            }
+
+            /* HIPOTESE DIAGNOSTICA */
+            if ((dadosPermissoes.flHipoteseDiagnosticaI == "true") || (dadosPermissoes.flHipoteseDiagnosticaI == "True"))
+            {
+                dadosPermissoes.flHipoteseDiagnosticaI = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.flHipoteseDiagnosticaI = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.flHipoteseDiagnosticaC == "true") || (dadosPermissoes.flHipoteseDiagnosticaC == "True"))
+            {
+                dadosPermissoes.flHipoteseDiagnosticaC = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.flHipoteseDiagnosticaC = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.flHipoteseDiagnosticaA == "true") || (dadosPermissoes.flHipoteseDiagnosticaA == "True"))
+            {
+                dadosPermissoes.flHipoteseDiagnosticaA = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.flHipoteseDiagnosticaA = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.flHipoteseDiagnosticaE == "true") || (dadosPermissoes.flHipoteseDiagnosticaE == "True"))
+            {
+                dadosPermissoes.flHipoteseDiagnosticaE = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.flHipoteseDiagnosticaE = valorFalse.ToString();
+            }
+
+            /* CONDUTA */
+            if ((dadosPermissoes.flCondutaI == "true") || (dadosPermissoes.flCondutaI == "True"))
+            {
+                dadosPermissoes.flCondutaI = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.flCondutaI = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.flCondutaC == "true") || (dadosPermissoes.flCondutaC == "True"))
+            {
+                dadosPermissoes.flCondutaC = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.flCondutaC = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.flCondutaA == "true") || (dadosPermissoes.flCondutaA == "True"))
+            {
+                dadosPermissoes.flCondutaA = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.flCondutaA = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.flCondutaE == "true") || (dadosPermissoes.flCondutaE == "True"))
+            {
+                dadosPermissoes.flCondutaE = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.flCondutaE = valorFalse.ToString();
+            }
+
+            /* INICIAR ATENDIMENTO */
 
             return dadosPermissoes;
         }
@@ -389,6 +710,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSegundaSeis.idConsulta = consultaDia.idConsulta;
                         model.quadroSegundaSeis.idPaciente = consultaDia.idPaciente;
                         model.quadroSegundaSeis.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSegundaSeis.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -396,6 +718,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSegundaSeisMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroSegundaSeisMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroSegundaSeisMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSegundaSeisMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "07":
@@ -405,6 +728,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSegundaSete.idConsulta = consultaDia.idConsulta;
                         model.quadroSegundaSete.idPaciente = consultaDia.idPaciente;
                         model.quadroSegundaSete.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSegundaSete.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -412,6 +736,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSegundaSeteMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroSegundaSeteMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroSegundaSeteMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSegundaSeteMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "08":
@@ -421,6 +746,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSegundaOito.idConsulta = consultaDia.idConsulta;
                         model.quadroSegundaOito.idPaciente = consultaDia.idPaciente;
                         model.quadroSegundaOito.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSegundaOito.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -428,6 +754,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSegundaOitoMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroSegundaOitoMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroSegundaOitoMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSegundaOitoMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "09":
@@ -437,6 +764,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSegundaNove.idConsulta = consultaDia.idConsulta;
                         model.quadroSegundaNove.idPaciente = consultaDia.idPaciente;
                         model.quadroSegundaNove.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSegundaNove.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -444,6 +772,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSegundaNoveMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroSegundaNoveMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroSegundaNoveMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSegundaNoveMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "10":
@@ -453,6 +782,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSegundaDez.idConsulta = consultaDia.idConsulta;
                         model.quadroSegundaDez.idPaciente = consultaDia.idPaciente;
                         model.quadroSegundaDez.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSegundaDez.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -460,6 +790,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSegundaDezMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroSegundaDezMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroSegundaDezMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSegundaDezMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "11":
@@ -469,6 +800,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSegundaOnze.idConsulta = consultaDia.idConsulta;
                         model.quadroSegundaOnze.idPaciente = consultaDia.idPaciente;
                         model.quadroSegundaOnze.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSegundaOnze.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -476,6 +808,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSegundaOnzeMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroSegundaOnzeMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroSegundaOnzeMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSegundaOnzeMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "12":
@@ -485,6 +818,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSegundaDoze.idConsulta = consultaDia.idConsulta;
                         model.quadroSegundaDoze.idPaciente = consultaDia.idPaciente;
                         model.quadroSegundaDoze.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSegundaDoze.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -492,6 +826,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSegundaDozeMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroSegundaDozeMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroSegundaDozeMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSegundaDozeMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "13":
@@ -501,6 +836,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSegundaTreze.idConsulta = consultaDia.idConsulta;
                         model.quadroSegundaTreze.idPaciente = consultaDia.idPaciente;
                         model.quadroSegundaTreze.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSegundaTreze.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -508,6 +844,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSegundaTrezeMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroSegundaTrezeMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroSegundaTrezeMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSegundaTrezeMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "14":
@@ -517,6 +854,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSegundaQuatorze.idConsulta = consultaDia.idConsulta;
                         model.quadroSegundaQuatorze.idPaciente = consultaDia.idPaciente;
                         model.quadroSegundaQuatorze.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSegundaQuatorze.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -524,6 +862,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSegundaQuatorzeMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroSegundaQuatorzeMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroSegundaQuatorzeMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSegundaQuatorzeMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "15":
@@ -533,6 +872,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSegundaQuinze.idConsulta = consultaDia.idConsulta;
                         model.quadroSegundaQuinze.idPaciente = consultaDia.idPaciente;
                         model.quadroSegundaQuinze.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSegundaQuinze.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -540,6 +880,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSegundaQuinzeMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroSegundaQuinzeMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroSegundaQuinzeMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSegundaQuinzeMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "16":
@@ -549,6 +890,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSegundaDezesseis.idConsulta = consultaDia.idConsulta;
                         model.quadroSegundaDezesseis.idPaciente = consultaDia.idPaciente;
                         model.quadroSegundaDezesseis.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSegundaDezesseis.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -556,6 +898,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSegundaDezesseisMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroSegundaDezesseisMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroSegundaDezesseisMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSegundaDezesseisMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "17":
@@ -565,6 +908,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSegundaDezessete.idConsulta = consultaDia.idConsulta;
                         model.quadroSegundaDezessete.idPaciente = consultaDia.idPaciente;
                         model.quadroSegundaDezessete.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSegundaDezessete.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -572,6 +916,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSegundaDezesseteMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroSegundaDezesseteMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroSegundaDezesseteMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSegundaDezesseteMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "18":
@@ -581,6 +926,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSegundaDezoito.idConsulta = consultaDia.idConsulta;
                         model.quadroSegundaDezoito.idPaciente = consultaDia.idPaciente;
                         model.quadroSegundaDezoito.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSegundaDezoito.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -588,6 +934,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSegundaDezoitoMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroSegundaDezoitoMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroSegundaDezoitoMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSegundaDezoitoMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
             }
@@ -605,6 +952,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroTercaSeis.idConsulta = consultaDia.idConsulta;
                         model.quadroTercaSeis.idPaciente = consultaDia.idPaciente;
                         model.quadroTercaSeis.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroTercaSeis.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -612,6 +960,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroTercaSeisMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroTercaSeisMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroTercaSeisMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroTercaSeisMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "07":
@@ -621,6 +970,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroTercaSete.idConsulta = consultaDia.idConsulta;
                         model.quadroTercaSete.idPaciente = consultaDia.idPaciente;
                         model.quadroTercaSete.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroTercaSete.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -628,6 +978,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroTercaSeteMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroTercaSeteMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroTercaSeteMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroTercaSeteMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "08":
@@ -637,6 +988,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroTercaOito.idConsulta = consultaDia.idConsulta;
                         model.quadroTercaOito.idPaciente = consultaDia.idPaciente;
                         model.quadroTercaOito.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroTercaOito.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -644,6 +996,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroTercaOitoMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroTercaOitoMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroTercaOitoMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroTercaOitoMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "09":
@@ -653,6 +1006,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroTercaNove.idConsulta = consultaDia.idConsulta;
                         model.quadroTercaNove.idPaciente = consultaDia.idPaciente;
                         model.quadroTercaNove.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroTercaNove.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -660,6 +1014,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroTercaNoveMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroTercaNoveMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroTercaNoveMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroTercaNoveMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "10":
@@ -669,6 +1024,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroTercaDez.idConsulta = consultaDia.idConsulta;
                         model.quadroTercaDez.idPaciente = consultaDia.idPaciente;
                         model.quadroTercaDez.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroTercaDez.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -676,6 +1032,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroTercaDezMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroTercaDezMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroTercaDezMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroTercaDezMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "11":
@@ -685,6 +1042,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroTercaOnze.idConsulta = consultaDia.idConsulta;
                         model.quadroTercaOnze.idPaciente = consultaDia.idPaciente;
                         model.quadroTercaOnze.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroTercaOnze.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -692,6 +1050,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroTercaOnzeMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroTercaOnzeMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroTercaOnzeMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroTercaOnzeMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "12":
@@ -701,6 +1060,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroTercaDoze.idConsulta = consultaDia.idConsulta;
                         model.quadroTercaDoze.idPaciente = consultaDia.idPaciente;
                         model.quadroTercaDoze.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroTercaDoze.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -708,6 +1068,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroTercaDozeMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroTercaDozeMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroTercaDozeMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroTercaDozeMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "13":
@@ -717,6 +1078,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroTercaTreze.idConsulta = consultaDia.idConsulta;
                         model.quadroTercaTreze.idPaciente = consultaDia.idPaciente;
                         model.quadroTercaTreze.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroTercaTreze.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -724,6 +1086,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroTercaTrezeMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroTercaTrezeMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroTercaTrezeMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroTercaTrezeMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "14":
@@ -733,6 +1096,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroTercaQuatorze.idConsulta = consultaDia.idConsulta;
                         model.quadroTercaQuatorze.idPaciente = consultaDia.idPaciente;
                         model.quadroTercaQuatorze.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroTercaQuatorze.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -749,6 +1113,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroTercaQuinze.idConsulta = consultaDia.idConsulta;
                         model.quadroTercaQuinze.idPaciente = consultaDia.idPaciente;
                         model.quadroTercaQuinze.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroTercaQuinze.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -756,6 +1121,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroTercaQuinzeMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroTercaQuinzeMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroTercaQuinzeMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroTercaQuinzeMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "16":
@@ -765,6 +1131,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroTercaDezesseis.idConsulta = consultaDia.idConsulta;
                         model.quadroTercaDezesseis.idPaciente = consultaDia.idPaciente;
                         model.quadroTercaDezesseis.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroTercaDezesseis.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -772,6 +1139,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroTercaDezesseisMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroTercaDezesseisMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroTercaDezesseisMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroTercaDezesseisMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "17":
@@ -781,6 +1149,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroTercaDezessete.idConsulta = consultaDia.idConsulta;
                         model.quadroTercaDezessete.idPaciente = consultaDia.idPaciente;
                         model.quadroTercaDezessete.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroTercaDezessete.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -788,6 +1157,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroTercaDezesseteMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroTercaDezesseteMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroTercaDezesseteMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroTercaDezesseteMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "18":
@@ -797,6 +1167,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroTercaDezoito.idConsulta = consultaDia.idConsulta;
                         model.quadroTercaDezoito.idPaciente = consultaDia.idPaciente;
                         model.quadroTercaDezoito.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroTercaDezoito.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -804,6 +1175,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroTercaDezoitoMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroTercaDezoitoMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroTercaDezoitoMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroTercaDezoitoMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
             }
@@ -821,6 +1193,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuartaSeis.idConsulta = consultaDia.idConsulta;
                         model.quadroQuartaSeis.idPaciente = consultaDia.idPaciente;
                         model.quadroQuartaSeis.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuartaSeis.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -828,6 +1201,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuartaSeisMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroQuartaSeisMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroQuartaSeisMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuartaSeisMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "07":
@@ -837,6 +1211,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuartaSete.idConsulta = consultaDia.idConsulta;
                         model.quadroQuartaSete.idPaciente = consultaDia.idPaciente;
                         model.quadroQuartaSete.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuartaSete.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -844,6 +1219,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuartaSeteMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroQuartaSeteMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroQuartaSeteMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuartaSeteMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "08":
@@ -853,6 +1229,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuartaOito.idConsulta = consultaDia.idConsulta;
                         model.quadroQuartaOito.idPaciente = consultaDia.idPaciente;
                         model.quadroQuartaOito.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuartaOito.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -860,6 +1237,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuartaOitoMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroQuartaOitoMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroQuartaOitoMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuartaOitoMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "09":
@@ -869,6 +1247,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuartaNove.idConsulta = consultaDia.idConsulta;
                         model.quadroQuartaNove.idPaciente = consultaDia.idPaciente;
                         model.quadroQuartaNove.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuartaNove.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -876,6 +1255,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuartaNoveMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroQuartaNoveMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroQuartaNoveMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuartaNoveMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "10":
@@ -885,6 +1265,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuartaDez.idConsulta = consultaDia.idConsulta;
                         model.quadroQuartaDez.idPaciente = consultaDia.idPaciente;
                         model.quadroQuartaDez.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuartaDez.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -892,6 +1273,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuartaDezMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroQuartaDezMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroQuartaDezMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuartaDezMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "11":
@@ -901,6 +1283,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuartaOnze.idConsulta = consultaDia.idConsulta;
                         model.quadroQuartaOnze.idPaciente = consultaDia.idPaciente;
                         model.quadroQuartaOnze.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuartaOnze.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -908,6 +1291,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuartaOnzeMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroQuartaOnzeMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroQuartaOnzeMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuartaOnzeMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "12":
@@ -917,6 +1301,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuartaDoze.idConsulta = consultaDia.idConsulta;
                         model.quadroQuartaDoze.idPaciente = consultaDia.idPaciente;
                         model.quadroQuartaDoze.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuartaDoze.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -924,6 +1309,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuartaDozeMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroQuartaDozeMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroQuartaDozeMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuartaDozeMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "13":
@@ -933,6 +1319,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuartaTreze.idConsulta = consultaDia.idConsulta;
                         model.quadroQuartaTreze.idPaciente = consultaDia.idPaciente;
                         model.quadroQuartaTreze.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuartaTreze.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -940,6 +1327,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuartaTrezeMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroQuartaTrezeMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroQuartaTrezeMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuartaTrezeMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "14":
@@ -949,6 +1337,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuartaQuatorze.idConsulta = consultaDia.idConsulta;
                         model.quadroQuartaQuatorze.idPaciente = consultaDia.idPaciente;
                         model.quadroQuartaQuatorze.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuartaQuatorze.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -956,6 +1345,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuartaQuatorzeMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroQuartaQuatorzeMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroQuartaQuatorzeMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuartaQuatorzeMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "15":
@@ -965,6 +1355,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuartaQuinze.idConsulta = consultaDia.idConsulta;
                         model.quadroQuartaQuinze.idPaciente = consultaDia.idPaciente;
                         model.quadroQuartaQuinze.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuartaQuinze.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -972,6 +1363,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuartaQuinzeMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroQuartaQuinzeMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroQuartaQuinzeMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuartaQuinzeMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "16":
@@ -981,6 +1373,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuartaDezesseis.idConsulta = consultaDia.idConsulta;
                         model.quadroQuartaDezesseis.idPaciente = consultaDia.idPaciente;
                         model.quadroQuartaDezesseis.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuartaDezesseis.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -988,6 +1381,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuartaDezesseisMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroQuartaDezesseisMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroQuartaDezesseisMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuartaDezesseisMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "17":
@@ -997,6 +1391,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuartaDezessete.idConsulta = consultaDia.idConsulta;
                         model.quadroQuartaDezessete.idPaciente = consultaDia.idPaciente;
                         model.quadroQuartaDezessete.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuartaDezessete.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -1004,6 +1399,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuartaDezesseteMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroQuartaDezesseteMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroQuartaDezesseteMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuartaDezesseteMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "18":
@@ -1013,6 +1409,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuartaDezoito.idConsulta = consultaDia.idConsulta;
                         model.quadroQuartaDezoito.idPaciente = consultaDia.idPaciente;
                         model.quadroQuartaDezoito.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuartaDezoito.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -1020,6 +1417,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuartaDezoitoMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroQuartaDezoitoMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroQuartaDezoitoMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuartaDezoitoMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
             }
@@ -1037,6 +1435,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuintaSeis.idConsulta = consultaDia.idConsulta;
                         model.quadroQuintaSeis.idPaciente = consultaDia.idPaciente;
                         model.quadroQuintaSeis.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuintaSeis.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -1044,6 +1443,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuintaSeisMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroQuintaSeisMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroQuintaSeisMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuintaSeisMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "07":
@@ -1053,6 +1453,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuintaSete.idConsulta = consultaDia.idConsulta;
                         model.quadroQuintaSete.idPaciente = consultaDia.idPaciente;
                         model.quadroQuintaSete.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuintaSete.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -1060,6 +1461,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuintaSeteMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroQuintaSeteMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroQuintaSeteMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuintaSeteMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "08":
@@ -1069,6 +1471,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuintaOito.idConsulta = consultaDia.idConsulta;
                         model.quadroQuintaOito.idPaciente = consultaDia.idPaciente;
                         model.quadroQuintaOito.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuintaOito.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -1076,6 +1479,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuintaOitoMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroQuintaOitoMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroQuintaOitoMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuintaOitoMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "09":
@@ -1085,6 +1489,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuintaNove.idConsulta = consultaDia.idConsulta;
                         model.quadroQuintaNove.idPaciente = consultaDia.idPaciente;
                         model.quadroQuintaNove.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuintaNove.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -1092,6 +1497,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuintaNoveMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroQuintaNoveMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroQuintaNoveMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuintaNoveMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "10":
@@ -1101,6 +1507,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuintaDez.idConsulta = consultaDia.idConsulta;
                         model.quadroQuintaDez.idPaciente = consultaDia.idPaciente;
                         model.quadroQuintaDez.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuintaDez.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -1108,6 +1515,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuintaDezMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroQuintaDezMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroQuintaDezMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuintaDezMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "11":
@@ -1117,6 +1525,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuintaOnze.idConsulta = consultaDia.idConsulta;
                         model.quadroQuintaOnze.idPaciente = consultaDia.idPaciente;
                         model.quadroQuintaOnze.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuintaOnze.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -1124,6 +1533,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuintaOnzeMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroQuintaOnzeMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroQuintaOnzeMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuintaOnzeMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "12":
@@ -1133,6 +1543,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuintaDoze.idConsulta = consultaDia.idConsulta;
                         model.quadroQuintaDoze.idPaciente = consultaDia.idPaciente;
                         model.quadroQuintaDoze.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuintaDoze.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -1140,6 +1551,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuintaDozeMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroQuintaDozeMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroQuintaDozeMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuintaDozeMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "13":
@@ -1149,6 +1561,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuintaTreze.idConsulta = consultaDia.idConsulta;
                         model.quadroQuintaTreze.idPaciente = consultaDia.idPaciente;
                         model.quadroQuintaTreze.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuintaTreze.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -1156,6 +1569,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuintaTrezeMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroQuintaTrezeMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroQuintaTrezeMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuintaTrezeMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "14":
@@ -1165,6 +1579,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuintaQuatorze.idConsulta = consultaDia.idConsulta;
                         model.quadroQuintaQuatorze.idPaciente = consultaDia.idPaciente;
                         model.quadroQuintaQuatorze.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuintaQuatorze.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -1172,6 +1587,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuintaQuatorzeMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroQuintaQuatorzeMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroQuintaQuatorzeMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuintaQuatorzeMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "15":
@@ -1181,6 +1597,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuintaQuinze.idConsulta = consultaDia.idConsulta;
                         model.quadroQuintaQuinze.idPaciente = consultaDia.idPaciente;
                         model.quadroQuintaQuinze.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuintaQuinze.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -1188,6 +1605,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuintaQuinzeMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroQuintaQuinzeMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroQuintaQuinzeMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuintaQuinzeMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "16":
@@ -1197,6 +1615,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuintaDezesseis.idConsulta = consultaDia.idConsulta;
                         model.quadroQuintaDezesseis.idPaciente = consultaDia.idPaciente;
                         model.quadroQuintaDezesseis.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuintaDezesseis.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -1204,6 +1623,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuintaDezesseisMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroQuintaDezesseisMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroQuintaDezesseisMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuintaDezesseisMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "17":
@@ -1213,6 +1633,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuintaDezessete.idConsulta = consultaDia.idConsulta;
                         model.quadroQuintaDezessete.idPaciente = consultaDia.idPaciente;
                         model.quadroQuintaDezessete.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuintaDezessete.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -1220,6 +1641,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuintaDezesseteMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroQuintaDezesseteMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroQuintaDezesseteMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuintaDezesseteMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "18":
@@ -1229,6 +1651,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuintaDezoito.idConsulta = consultaDia.idConsulta;
                         model.quadroQuintaDezoito.idPaciente = consultaDia.idPaciente;
                         model.quadroQuintaDezoito.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuintaDezoito.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -1236,6 +1659,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroQuintaDezoitoMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroQuintaDezoitoMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroQuintaDezoitoMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroQuintaDezoitoMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
             }
@@ -1252,6 +1676,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSextaSeis.idConsulta = consultaDia.idConsulta;
                         model.quadroSextaSeis.idPaciente = consultaDia.idPaciente;
                         model.quadroSextaSeis.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSextaSeis.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -1259,6 +1684,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSextaSeisMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroSextaSeisMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroSextaSeisMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSextaSeisMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "07":
@@ -1268,6 +1694,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSextaSete.idConsulta = consultaDia.idConsulta;
                         model.quadroSextaSete.idPaciente = consultaDia.idPaciente;
                         model.quadroSextaSete.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSextaSete.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -1275,6 +1702,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSextaSeteMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroSextaSeteMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroSextaSeteMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSextaSeteMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "08":
@@ -1284,6 +1712,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSextaOito.idConsulta = consultaDia.idConsulta;
                         model.quadroSextaOito.idPaciente = consultaDia.idPaciente;
                         model.quadroSextaOito.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSextaOito.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -1291,6 +1720,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSextaOitoMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroSextaOitoMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroSextaOitoMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSextaOitoMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "09":
@@ -1300,6 +1730,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSextaNove.idConsulta = consultaDia.idConsulta;
                         model.quadroSextaNove.idPaciente = consultaDia.idPaciente;
                         model.quadroSextaNove.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSextaNove.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -1307,6 +1738,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSextaNoveMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroSextaNoveMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroSextaNoveMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSextaNoveMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "10":
@@ -1316,6 +1748,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSextaDez.idConsulta = consultaDia.idConsulta;
                         model.quadroSextaDez.idPaciente = consultaDia.idPaciente;
                         model.quadroSextaDez.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSextaDez.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -1323,6 +1756,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSextaDezMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroSextaDezMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroSextaDezMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSextaDezMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "11":
@@ -1332,6 +1766,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSextaOnze.idConsulta = consultaDia.idConsulta;
                         model.quadroSextaOnze.idPaciente = consultaDia.idPaciente;
                         model.quadroSextaOnze.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSextaOnze.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -1339,6 +1774,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSextaOnzeMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroSextaOnzeMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroSextaOnzeMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSextaOnzeMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "12":
@@ -1348,6 +1784,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSextaDoze.idConsulta = consultaDia.idConsulta;
                         model.quadroSextaDoze.idPaciente = consultaDia.idPaciente;
                         model.quadroSextaDoze.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSextaDoze.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -1355,6 +1792,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSextaDozeMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroSextaDozeMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroSextaDozeMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSextaDozeMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "13":
@@ -1364,6 +1802,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSextaTreze.idConsulta = consultaDia.idConsulta;
                         model.quadroSextaTreze.idPaciente = consultaDia.idPaciente;
                         model.quadroSextaTreze.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSextaTreze.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -1371,6 +1810,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSextaTrezeMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroSextaTrezeMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroSextaTrezeMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSextaTrezeMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "14":
@@ -1380,6 +1820,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSextaQuatorze.idConsulta = consultaDia.idConsulta;
                         model.quadroSextaQuatorze.idPaciente = consultaDia.idPaciente;
                         model.quadroSextaQuatorze.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSextaQuatorze.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -1387,6 +1828,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSextaQuatorzeMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroSextaQuatorzeMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroSextaQuatorzeMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSextaQuatorzeMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "15":
@@ -1396,6 +1838,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSextaQuinze.idConsulta = consultaDia.idConsulta;
                         model.quadroSextaQuinze.idPaciente = consultaDia.idPaciente;
                         model.quadroSextaQuinze.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSextaQuinze.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -1403,6 +1846,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSextaQuinzeMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroSextaQuinzeMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroSextaQuinzeMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSextaQuinzeMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "16":
@@ -1412,6 +1856,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSextaDezesseis.idConsulta = consultaDia.idConsulta;
                         model.quadroSextaDezesseis.idPaciente = consultaDia.idPaciente;
                         model.quadroSextaDezesseis.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSextaDezesseis.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -1419,6 +1864,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSextaDezesseisMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroSextaDezesseisMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroSextaDezesseisMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSextaDezesseisMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "17":
@@ -1428,6 +1874,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSextaDezessete.idConsulta = consultaDia.idConsulta;
                         model.quadroSextaDezessete.idPaciente = consultaDia.idPaciente;
                         model.quadroSextaDezessete.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSextaDezessete.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -1435,6 +1882,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSextaDezesseteMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroSextaDezesseteMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroSextaDezesseteMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSextaDezesseteMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
                 case "18":
@@ -1444,6 +1892,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSextaDezoito.idConsulta = consultaDia.idConsulta;
                         model.quadroSextaDezoito.idPaciente = consultaDia.idPaciente;
                         model.quadroSextaDezoito.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSextaDezoito.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     else if (minuto.Equals("30"))
                     {
@@ -1451,6 +1900,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                         model.quadroSextaDezoitoMeia.idConsulta = consultaDia.idConsulta;
                         model.quadroSextaDezoitoMeia.idPaciente = consultaDia.idPaciente;
                         model.quadroSextaDezoitoMeia.idPacienteConsulta = consultaDia.idPacienteConsulta;
+                        model.quadroSextaDezoitoMeia.consultaFinalizada = consultaDia.consultaFinalizada;
                     }
                     break;
             }
@@ -1599,7 +2049,7 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
             return ausenciaBancoModel;
         }
 
-        public static EditarAusenciaBancoModel MarcarAusenciaEditarNoBancoModel(EditarAusenciaBancoModel editarAusenciaBanco, int[] listAusencia){
+        public static EditarAusenciaBancoModel MarcarAusenciaEditarNoBancoModel(EditarAusenciaBancoModel editarAusenciaBanco, int[] listAusencia) {
 
             editarAusenciaBanco.Seis = listAusencia[0];
             editarAusenciaBanco.SeisMeia = listAusencia[1];
@@ -1759,3 +2209,4 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
         }
     }
 }
+ 

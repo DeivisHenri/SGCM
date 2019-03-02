@@ -79,7 +79,8 @@ namespace SGCM.AppData.Login {
             command.AppendLine("       Per.flCondutaC,");
             command.AppendLine("       Per.flCondutaA,");
             command.AppendLine("       Per.flCondutaE,");
-            command.AppendLine("       Usr.dataDesativacao");
+            command.AppendLine("       Per.flIniciarAtendimento,");
+            command.AppendLine("       Usr.statusDesativacao");
                  
             command.AppendLine("From Usuario Usr INNER JOIN Pessoa Pes ON Usr.idPessoaUsuario = Pes.idPessoa");
             command.AppendLine("     INNER JOIN Permissoes Per ON Usr.idUsuario = Per.idUsuarioPermissoes");
@@ -129,11 +130,11 @@ namespace SGCM.AppData.Login {
             command.AppendLine("       Per.FlExamesC,");
             command.AppendLine("       Per.FlExamesA,");
             command.AppendLine("       Per.flExamesE,");
-            command.AppendLine("       Usu.dataDesativacao");
+            command.AppendLine("       Usu.statusDesativacao");
 
             command.AppendLine("From Usuario Usu INNER JOIN Pessoa Pes ON Usu.idPessoa = Pes.idPessoa");
             command.AppendLine("     INNER JOIN Permissoes Per ON Usu.idUsuario = Per.idUsuario");
-            command.AppendLine("Where Usu.usuario = @USUARIO AND Usu.dataDesativacao is null");
+            command.AppendLine("Where Usu.usuario = @USUARIO AND Usu.statusDesativacao != 2");
             return command.ToString();
         }
 

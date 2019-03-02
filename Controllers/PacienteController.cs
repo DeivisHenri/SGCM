@@ -52,6 +52,7 @@ namespace SGCM.Controllers
                 ViewBag.MensagemBodyController = "";
                 ViewBag.MensagemBodyAction = "";
                 ViewBag.MensagemBody = "";
+                CarregarDadosUsuarioParaTela();
                 if (!ModelState.IsValid) return View(model);
 
                 if ((int)ViewData["FlPacienteI"] != 0) {
@@ -144,8 +145,13 @@ namespace SGCM.Controllers
                     if ((int)ViewData["flPacienteA"] != 0) {
                         var objPacienteBLL = new PacienteBLL();
                         EditarPacienteModel viewModel = objPacienteBLL.ConsultarPacienteID(id);
-                        TempData.Clear();
-
+                        if (HttpContext.Session.GetString("MensagemTitle") != null && HttpContext.Session.GetString("MensagemBody") != null && HttpContext.Session.GetString("MensagemTitle") != "" && HttpContext.Session.GetString("MensagemBody") != "")
+                        {
+                            ViewBag.MensagemTitle = HttpContext.Session.GetString("MensagemTitle");
+                            ViewBag.MensagemBody = HttpContext.Session.GetString("MensagemBody");
+                            HttpContext.Session.SetString("MensagemTitle", "");
+                            HttpContext.Session.SetString("MensagemBody", "");
+                        }
                         return View(viewModel);
                     } else {
                         HttpContext.Session.SetString("MensagemTitle", "Informação");
@@ -181,13 +187,13 @@ namespace SGCM.Controllers
                         var objPacienteBLL = new PacienteBLL();
                         var retorno = objPacienteBLL.EditarPaciente(pacienteModel);
 
-                        if (retorno == 1) {
+                        if (retorno > 0) {
                             HttpContext.Session.SetString("MensagemTitle", "Sucesso");
-                            HttpContext.Session.SetString("MensagemBody", "O paciente " + pacienteModel.pessoa.Nome + " foi atualizado com sucesso!");
+                            HttpContext.Session.SetString("MensagemBody", "O paciente " + pacienteModel.Pessoa.Nome + " foi atualizado com sucesso!");
                             return RedirectToAction("ConsultarPaciente", "Paciente");
                         } else {
                             ViewBag.MensagemTitle = "Erro";
-                            ViewBag.MensagemBody = "Ocorreu um erro na tentiva de editar o paciente: " + pacienteModel.pessoa.Nome;
+                            ViewBag.MensagemBody = "Ocorreu um erro na tentiva de editar o paciente: " + pacienteModel.Pessoa.Nome;
                             return View();
                         }
                     } else {
@@ -206,6 +212,39 @@ namespace SGCM.Controllers
                 ViewBag.MensagemTitle = "Erro";
                 ViewBag.MensagemBodyController = "Controller: PacienteController";
                 ViewBag.MensagemBodyAction = "Action: EditarPaciente/{PACIENTE} - POST";
+                ViewBag.MensagemBody = "Exceção: " + ex.Message;
+                return View();
+            }
+        }
+
+        [HttpGet]
+        public ActionResult RealizarConsulta(int id) {
+            try {
+                ViewBag.MensagemBodyController = "";
+                ViewBag.MensagemBodyAction = "";
+                ViewBag.MensagemBody = "";
+                CarregarDadosUsuarioParaTela();
+                if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
+                    if ((int)ViewData["flPacienteA"] != 0) {
+                        var objPacienteBLL = new PacienteBLL();
+                        EditarPacienteModel viewModel = objPacienteBLL.ConsultarPacienteID(id);
+                        TempData.Clear();
+
+                        return View(viewModel);
+                    } else {
+                        HttpContext.Session.SetString("MensagemTitle", "Informação");
+                        HttpContext.Session.SetString("MensagemBody", "O usuário " + ViewData["nome"] + " não tem acesso a página: 'Paciente/EditarPaciente'");
+                        return RedirectToAction("Index", "Home");
+                    }
+                } else {
+                    HttpContext.Session.SetString("MensagemTitle", "Informação");
+                    HttpContext.Session.SetString("MensagemBody", "Você não está logado no sistema! Realize o Login antes de acessar essa página!");
+                    return RedirectToAction("Index", "Home");
+                }
+            } catch (Exception ex) {
+                ViewBag.MensagemTitle = "Erro";
+                ViewBag.MensagemBodyController = "Controller: PacienteController";
+                ViewBag.MensagemBodyAction = "Action: EditarPaciente/ID - GET";
                 ViewBag.MensagemBody = "Exceção: " + ex.Message;
                 return View();
             }
@@ -322,6 +361,8 @@ namespace SGCM.Controllers
             ViewData.Add("flCondutaC", HttpContext.Session.GetInt32("flCondutaC"));
             ViewData.Add("flCondutaA", HttpContext.Session.GetInt32("flCondutaA"));
             ViewData.Add("flCondutaE", HttpContext.Session.GetInt32("flCondutaE"));
+
+            ViewData.Add("flIniciarAtendimento", HttpContext.Session.GetInt32("flIniciarAtendimento"));
         }
     }    
 }

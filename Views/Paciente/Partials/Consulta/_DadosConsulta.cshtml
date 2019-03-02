@@ -1,6 +1,5 @@
 ﻿@using SGCM.Models.Paciente.EditarPacienteModel;
 @model EditarPacienteModel
-
 @*<div class="center-form-container">*@
 <div class="consulta-usuario-container">
     <table title="Tabela das Consultas" class="table table-striped table-bordered text-center" border="1">
@@ -16,13 +15,16 @@
         <tbody>
             @if (Model != null)
             {
-                @foreach (var consulta in Model.consulta)
+                @foreach (var consulta in Model.Consulta)
                 {
                     <tr>
                         <td>@consulta.dataConsulta</td>
-                        @if (consulta.finalizada == 1) {
+                        @if (consulta.finalizada == 1)
+                        {
                             <td>Finalizada</td>
-                        } else {
+                        }
+                        else
+                        {
                             <td>Em aberto</td>
                         }
                         <td>
@@ -31,9 +33,19 @@
                             </div>
                         </td>
                         <td>
-                            <div>
-                                <a asp-controller="Consulta" asp-action="CancelarConsulta" asp-route-id="@consulta.idConsulta">Cancelar</a>
-                            </div>
+                            @if (consulta.finalizada == 1)
+                            {
+                                <div>
+                                    <a class="isDisabled">Cancelar</a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div>
+                                    <a asp-controller="Consulta" asp-action="CancelarConsulta" asp-route-id="@consulta.idConsulta">Cancelar</a>
+                                </div>
+                            }
+
                         </td>
                     </tr>
                 }
@@ -44,5 +56,4 @@
 
 <div class="form-group padding-top-15px">
     <button id="moveAnteriorDadosConsulta" type="button" class="btn btn-info btn-brand btn-brand-big margin-right-15-px">&nbsp;Anterior&nbsp;</button>
-    <button id="moveProximoDadosConsulta" type="button" class="btn btn-primary btn-brand btn-brand-big">&nbsp;Próximo&nbsp;</button>
 </div>

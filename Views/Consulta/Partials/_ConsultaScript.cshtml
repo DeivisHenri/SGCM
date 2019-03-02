@@ -42,14 +42,16 @@
                     }
                 });
 
+                /* SELECIONA PACIENTE MODAL */
                 $('#btnSelecionarPacienteModal').click(function () {
+                    debugger
                     let nome = dataTableCadastrarConsulta.$('tr.active').children()[0].textContent;
                     let cpf = dataTableCadastrarConsulta.$('tr.active').children()[1].textContent;
                     let idPaciente = dataTableCadastrarConsulta.$('tr.active').children()[2].textContent;
 
-                    $('#paciente_Nome').val(nome);
-                    $('#paciente_CPF').val(cpf);
-                    $('#paciente_idPaciente').val(idPaciente);
+                    $('#Paciente_Nome').val(nome);
+                    $('#Paciente_CPF').val(cpf);
+                    $('#Paciente_idPaciente').val(idPaciente);
 
                     $('#paciente_CPF').focus();
                     $('#paciente_Nome').focus();
@@ -59,6 +61,7 @@
                     limparModalConsultaPaciente();
                     $('#btnFecharPacienteModal').click();
                 });
+
 
                 $('.maskTelefone').mask('(99) 99999-9999');
                 $('.maskCPF').mask('999.999.999-99');
@@ -117,6 +120,239 @@
                     $(this).parents(".btn-group").find('.selection').text($(this).text());
                     $(this).parents(".btn-group").find('.selection').val($(this).text());
                 });
+
+                // --------------------------- INICIAR ATENDIMENTO ---------------------------
+                var dataTableExamesFixo = $("#dataTableExamesFixo").DataTable({
+                    "language": {
+                        "lengthMenu": "Exibe _MENU_ Registros por página",
+                        "search": "Procurar",
+                        "paginate": { "previous": "Retorna", "next": "Avança" },
+                        "zeroRecords": "Nada foi encontrado",
+                        "info": "Exibindo página _PAGE_ de _PAGES_",
+                        "infoEmpty": "Sem registros",
+                        "infoFiltered": "(filtrado de _MAX_ regitros totais)"
+                    },
+                    //"processing": true, // mostrar a progress bar
+                    //"serverSide": true, // processamento no servidor
+                    "filter": true, // habilita o filtro(search box)
+                    "lengthMenu": [[3, 5, 10, 25, 50, -1], [3, 5, 10, 25, 50, "Todos"]],
+                    "pageLength": 3, // define o tamanho da página
+                    "ajax": {
+                        "url": "/Consulta/GetBaseNomeExame",
+                        "type": "GET",
+                        "dataType": "json",
+                        'contentType': 'application/json',
+                        "success": function (data) {
+                            $('#dataTableExamesFixo').DataTable().clear().rows.add(data).draw();
+                        }
+                    },
+                    "columns": [
+                        {
+                            "data": 'status', render: function (status, data, rowData) {
+                                return ' <div class="checkbox">\n' +
+                                    '<input class="check" id="' + rowData.idBaseNomeExame + rowData.baseNomeExame + '" type="checkbox">\n' +
+                                    '<label for="exampleCheckboxSwitch"></label>\n' +
+                                    '</div>';
+                            }
+                        },
+                        { "data": "idBaseNomeExame", "title": "idBaseNomeExame" },
+                        { "data": "baseNomeExame", "title": "Nome" }
+                    ],
+                    "select": {
+                        "style": 'multi',
+                        "selector": 'td:first-child'
+                    },
+                    "columnDefs": [{
+                        "targets": [1],
+                        "visible": false,
+                        "searchable": false
+                    }]
+                });
+
+                setTimeout(function () {
+                    var dataTable = $('#dataTableExamesFixo').DataTable().rows().data();
+                    var listIdExamePedido = $('#ExamePedido').val().split(',');
+
+                    dataTable.context[0]._iDisplayLength = 153;
+                    dataTable.draw();
+
+                    for (var i = 0; i < dataTable.length; i++) {
+                        for (var o = 0; o < listIdExamePedido.length; o++) {
+                            if (dataTable[i].idBaseNomeExame == listIdExamePedido[o]) {
+                                var id = dataTable[i].idBaseNomeExame + dataTable[i].baseNomeExame;
+                                var input = document.getElementById(id);
+                                $(input).attr("checked", "checked");
+                            }
+                        }
+                    }
+
+                    dataTable.context[0]._iDisplayLength = 3;
+                    dataTable.draw();
+
+                }, 1500);
+
+                $(document).on('change', '.checkbox', function () {
+                    var id = $(this).children()[0].id;
+                    var dataTable = $('#dataTableExamesFixo').DataTable().rows().data();
+                    for (var i = 0; i < dataTable.length; i++) {
+                        var idDataTable = dataTable[i].idBaseNomeExame + dataTable[i].baseNomeExame;
+                        if (idDataTable == id) {
+                            id = dataTable[i].idBaseNomeExame;
+                            break;
+                        }
+                    }
+
+                    var listExamePedido = $('#ExamePedido').val();
+                    if (listExamePedido !== "") {
+                        var tamanhoLista = listExamePedido.split(',');
+                        if (tamanhoLista.length === 1) {
+                            if (tamanhoLista[0] !== id) {
+                                $('#ExamePedido').val(tamanhoLista[0] + "," + id);
+                            } else {
+                                $('#ExamePedido').val("");
+                            }
+                        } else {
+                            var arrayFinal = "", flagRemover = false;
+
+                            for (var i = 0; i < tamanhoLista.length; i++) {
+                                if (parseInt(tamanhoLista[i]) === id) {
+                                    tamanhoLista[i] = "0";
+                                    flagRemover = true;
+                                    break;
+                                }
+                            }
+
+                            for (var o = 0; o < tamanhoLista.length; o++) {
+                                if (tamanhoLista[o] !== "0" && tamanhoLista[o] != "") {
+                                    if (o == 0) {
+                                        arrayFinal = tamanhoLista[o] + ",";
+                                    } else {
+                                        arrayFinal = arrayFinal + tamanhoLista[o] + ",";
+                                    }
+                                }
+                            }
+
+                            if (flagRemover === false) {
+                                arrayFinal = arrayFinal + id;
+                            }
+
+                            $('#ExamePedido').val(arrayFinal);
+                        }
+                    } else {
+                        $('#ExamePedido').val(id);
+                    }
+                });
+
+
+                $(".clickImagem").click(function () {
+                    // Get the modal
+                    var modal = document.getElementById('myModal');
+
+                    // Get the image and insert it inside the modal - use its "alt" text as a caption
+                    var img = this;
+                    var modalImg = document.getElementById("img01");
+                    var captionText = document.getElementById("caption");
+                    //img.onclick = function () {
+                     modal.style.display = "block";
+                     modalImg.src = this.src;
+                     captionText.innerHTML = this.alt;
+                    //};
+                    // Get the <span> element that closes the modal
+                    var span = document.getElementsByClassName("close")[0];
+
+                    // When the user clicks on <span> (x), close the modal
+                    span.onclick = function () {
+                        modal.style.display = "none";
+                    };
+
+                });
+
+                // SCRIPT BOTÕES
+
+                //----- PROXIMO DADOS PESSOAIS -----
+                $('#moveProximoDadosPessoais').click(function () {
+                    var target = $(".nav-tabs li.active");
+                    var sibbling = target.next();
+                    sibbling.children("a").tab("show");
+                });
+
+                //----- PROXIMO DADOS CONSULTA -----
+                $('#moveProximoDadosConsulta').click(function () {
+                    var target = $(".nav-tabs li.active");
+                    var sibbling = target.next();
+                    sibbling.children("a").tab("show");
+                });
+
+                //----- ANTERIOR DADOS CONSULTA -----
+                $('#moveAnteriorDadosConsulta').click(function () {
+                    var target = $(".nav-tabs li.active");
+                    var sibbling = target.prev();
+                    sibbling.children("a").tab("show");
+                });
+
+                //----- ANTERIOR DADOS MOLESTIA ATUAL -----
+                $('#moveAnteriorDadosMolestiaAtual').click(function () {
+                    var target = $(".nav-tabs li.active");
+                    var sibbling = target.prev();
+                    sibbling.children("a").tab("show");
+                });
+
+                //----- PROXIMO DADOS MOLESTIA ATUAL -----
+                $('#moveProximoDadosMolestiaAtual').click(function () {
+                    var target = $(".nav-tabs li.active");
+                    var sibbling = target.next();
+                    sibbling.children("a").tab("show");
+                });
+
+                //----- ANTERIOR DADOS PATOLOGICA PREGRESSA -----
+                $('#moveAnteriorDadosPatologicaPregressa').click(function () {
+                    var target = $(".nav-tabs li.active");
+                    var sibbling = target.prev();
+                    sibbling.children("a").tab("show");
+                });
+
+                //----- PROXIMO DADOS PATOLOGICA PREGRESSA -----
+                $('#moveProximoDadosPatologicaPregressa').click(function () {
+                    var target = $(".nav-tabs li.active");
+                    var sibbling = target.next();
+                    sibbling.children("a").tab("show");
+                });
+
+                //----- ANTERIOR DADOS EXAME FISICO -----
+                $('#moveAnteriorDadosExameFisico').click(function () {
+                    var target = $(".nav-tabs li.active");
+                    var sibbling = target.prev();
+                    sibbling.children("a").tab("show");
+                });
+
+                //----- PROXIMO DADOS EXAME FISICO -----
+                $('#moveProximoDadosExameFisico').click(function () {
+                    var target = $(".nav-tabs li.active");
+                    var sibbling = target.next();
+                    sibbling.children("a").tab("show");
+                });
+
+                //----- ANTERIOR DADOS HIPOTESE DIAGNOSTICA -----
+                $('#moveAnteriorDadosHipoteseDiagnostica').click(function () {
+                    var target = $(".nav-tabs li.active");
+                    var sibbling = target.prev();
+                    sibbling.children("a").tab("show");
+                });
+
+                //----- PROXIMO DADOS HIPOTESE DIAGNOSTICA -----
+                $('#moveProximoDadosHipoteseDiagnostica').click(function () {
+                    var target = $(".nav-tabs li.active");
+                    var sibbling = target.next();
+                    sibbling.children("a").tab("show");
+                });
+
+                //----- ANTERIOR DADOS CONDUTA -----
+                $('#moveAnteriorDadosConduta').click(function () {
+                    var target = $(".nav-tabs li.active");
+                    var sibbling = target.prev();
+                    sibbling.children("a").tab("show");
+                });
+    //----- -----
 
             });
         });

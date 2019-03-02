@@ -41,8 +41,8 @@ namespace SGCM.AppData.Paciente
         public string InserirPaciente() {
             StringBuilder command = new StringBuilder();
 
-            command.AppendLine("INSERT INTO Paciente(idPessoaPaciente, idMedicoPaciente, idConsulta, idExame, idMedicamento, idReceita) ");
-            command.AppendLine("              VALUES(@IDPESSOA, @IDMEDICO, @IDCONSULTA, @IDEXAME, @IDMEDICAMENTO, @IDRECEITA) ");
+            command.AppendLine("INSERT INTO Paciente(idPessoaPaciente, idMedicoPaciente, idConsulta, idExame, idMedicamento, idReceita, statusDesativado) ");
+            command.AppendLine("              VALUES(@IDPESSOA, @IDMEDICO, @IDCONSULTA, @IDEXAME, @IDMEDICAMENTO, @IDRECEITA, @STATUSDESATIVADO) ");
 
             return command.ToString();
         }
@@ -86,7 +86,12 @@ namespace SGCM.AppData.Paciente
         public string ConsultarPaciente() {
             StringBuilder command = new StringBuilder();
 
-            command.AppendLine("Select Pes.idPessoa, Pes.nome, Pes.cpf, Pes.telefoneCelular, Pac.idPaciente");
+            command.AppendLine("Select Pes.idPessoa,");
+            command.AppendLine("       Pes.nome,");
+            command.AppendLine("       Pes.cpf,");
+            command.AppendLine("       Pes.telefoneCelular,");
+            command.AppendLine("       Pac.idPaciente,");
+            command.AppendLine("       Pac.statusDesativado");
             command.AppendLine("From Pessoa Pes RIGHT JOIN Paciente Pac ON Pes.idPessoa = Pac.idPessoaPaciente ");
             command.AppendLine("Where Pes.idMedico = @IDMEDICO");
 
@@ -108,7 +113,8 @@ namespace SGCM.AppData.Paciente
             command.AppendLine("       Pes.cidade,");
             command.AppendLine("       Pes.uf,");
             command.AppendLine("       Pes.telefoneCelular,");
-            command.AppendLine("       Pes.email");
+            command.AppendLine("       Pes.email,");
+            command.AppendLine("       Pac.statusDesativado");
             command.AppendLine("From Pessoa Pes INNER JOIN Paciente Pac ON Pes.idPessoa = Pac.idPessoaPaciente");
             command.AppendLine("Where Pac.idPaciente = @IDPACIENTE");
 
@@ -135,12 +141,12 @@ namespace SGCM.AppData.Paciente
 
             command.AppendLine("Update Pessoa");
 
-            if (paciente.pessoa.Sexo != null) {
+            if (paciente.Pessoa.Sexo != null) {
                 command.AppendLine("Set    sexo = @SEXO,");
                 flagSet = true;
             }
 
-            if (paciente.pessoa.Nome != null) {
+            if (paciente.Pessoa.Nome != null) {
                 if (flagSet) {
                     command.AppendLine("       nome = @NOME,");
                 } else {
@@ -149,7 +155,7 @@ namespace SGCM.AppData.Paciente
                 }
             }
 
-            if (paciente.pessoa.CPF != null) {
+            if (paciente.Pessoa.CPF != null) {
                 if (flagSet)
                     command.AppendLine("       cpf = @CPF,");
                 else {
@@ -158,7 +164,7 @@ namespace SGCM.AppData.Paciente
                 }
             }
 
-            if (paciente.pessoa.RG != null) {
+            if (paciente.Pessoa.RG != null) {
                 if (flagSet)
                     command.AppendLine("       rg = @RG,");
                 else {
@@ -167,7 +173,7 @@ namespace SGCM.AppData.Paciente
                 }
             }
 
-            if (paciente.pessoa.DataNascimento != null && paciente.pessoa.DataNascimento != default(DateTime)) {
+            if (paciente.Pessoa.DataNascimento != null && paciente.Pessoa.DataNascimento != default(DateTime)) {
                 if (flagSet)
                     command.AppendLine("       dataNascimento = STR_TO_DATE(@DATANASCIMENTO, '%d/%m/%Y'),");
                 else {
@@ -176,7 +182,7 @@ namespace SGCM.AppData.Paciente
                 }
             }
 
-            if (paciente.pessoa.Logradouro != null) {
+            if (paciente.Pessoa.Logradouro != null) {
                 if (flagSet)
                     command.AppendLine("       logradouro = @LOGRADOURO,");
                 else {
@@ -185,7 +191,7 @@ namespace SGCM.AppData.Paciente
                 }
             }
 
-            if (paciente.pessoa.Numero != 0) {
+            if (paciente.Pessoa.Numero != 0) {
                 if (flagSet)
                     command.AppendLine("       numero = @NUMERO,");
                 else {
@@ -194,7 +200,7 @@ namespace SGCM.AppData.Paciente
                 }
             }
 
-            if (paciente.pessoa.Bairro != null) {
+            if (paciente.Pessoa.Bairro != null) {
                 if (flagSet)
                     command.AppendLine("       bairro = @BAIRRO,");
                 else {
@@ -203,7 +209,7 @@ namespace SGCM.AppData.Paciente
                 }
             }
 
-            if (paciente.pessoa.Cidade != null) {
+            if (paciente.Pessoa.Cidade != null) {
                 if (flagSet)
                     command.AppendLine("       cidade = @CIDADE,");
                 else {
@@ -212,7 +218,7 @@ namespace SGCM.AppData.Paciente
                 }
             }
 
-            if (paciente.pessoa.Uf != null) {
+            if (paciente.Pessoa.Uf != null) {
                 if (flagSet)
                     command.AppendLine("       uf = @UF,");
                 else {
@@ -221,7 +227,7 @@ namespace SGCM.AppData.Paciente
                 }
             }
 
-            if (paciente.pessoa.TelefoneCelular != null) {
+            if (paciente.Pessoa.TelefoneCelular != null) {
                 if (flagSet)
                     command.AppendLine("       telefoneCelular = @TELEFONECELULAR,");
                 else {
@@ -230,7 +236,7 @@ namespace SGCM.AppData.Paciente
                 }
             }
 
-            if (paciente.pessoa.Email != null) {
+            if (paciente.Pessoa.Email != null) {
                 if (flagSet)
                     command.AppendLine("       email = @EMAIL,");
                 else {
@@ -238,8 +244,19 @@ namespace SGCM.AppData.Paciente
                     flagSet = true;
                 }
             }
+
             command = new StringBuilder(command.ToString().Remove(command.Length - 3, 3));
             command.AppendLine(" Where idPessoa = @IDPESSOA");
+            return command.ToString();
+        }
+
+        public string EditarPaciente(EditarPacienteModel paciente) {
+            StringBuilder command = new StringBuilder();
+
+            command.AppendLine("Update paciente");
+            command.AppendLine("Set    statusDesativado = @STATUSDESATIVADO");
+            command.AppendLine("Where idPessoaPaciente = @IDPESSOAPACIENTE");
+
             return command.ToString();
         }
     }

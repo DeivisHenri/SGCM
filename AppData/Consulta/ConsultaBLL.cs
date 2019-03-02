@@ -6,12 +6,13 @@ using SGCM.AppData.Infraestrutura.UtilMetodo;
 using SGCM.Models.Consulta.ConsultarConsultaModel;
 using SGCM.Models.Consulta.EditarConsultaModel;
 using SGCM.Models.Ausencia.CadastrarAusenciaModel;
+using SGCM.Models.Consulta.IniciarAtendimento;
 
 namespace SGCM.AppData.Consulta
 {
     public class ConsultaBLL
     {
-        public List<ConsultaPacienteModel> ConsultarPaciente(string nome, string cpf, int? idPaciente) {
+        public ConsultaPacienteModelBanco ConsultarPaciente(string nome, string cpf, int? idPaciente) {
             if (cpf != null) cpf = UtilMetodo.RemovendoCaracteresEspeciais(cpf);
 
             ConsultaDAL consultaDAL = new ConsultaDAL();
@@ -19,7 +20,7 @@ namespace SGCM.AppData.Consulta
         }
 
         public int CadastrarConsulta(CadastroConsultaModel model) {
-            model.paciente.CPF = UtilMetodo.RemovendoCaracteresEspeciais(model.paciente.CPF);
+            model.Paciente.CPF = UtilMetodo.RemovendoCaracteresEspeciais(model.Paciente.CPF);
 
             DateTime dataInformada = model.consulta.DataConsulta;
             DateTime dataAgora = DateTime.Now;
@@ -48,16 +49,14 @@ namespace SGCM.AppData.Consulta
 
             string retornoDiaDaSemana = UtilMetodo.VerificaDiaDaSemana(Convert.ToInt32(model.consulta.DataConsulta.ToShortDateString().Split('/')[0]), Convert.ToInt32(model.consulta.DataConsulta.ToShortDateString().Split('/')[1]), Convert.ToInt32(model.consulta.DataConsulta.ToShortDateString().Split('/')[2]));
 
-            if (retornoDiaDaSemana.Equals("sábado")) return 5;
+            if (retornoDiaDaSemana.Equals("sabado")) return 5;
             else if ( retornoDiaDaSemana.Equals("domingo")) return 6;
 
             int minuto = Convert.ToInt32(model.consulta.DataConsulta.ToShortTimeString().Split(':')[1]);
             Boolean flagMinuto = false;
 
             if (minuto == 00) flagMinuto = true;
-            else if (minuto == 15) flagMinuto = true;
             else if (minuto == 30) flagMinuto = true;
-            else if (minuto == 45) flagMinuto = true;
 
             if (!flagMinuto) return 7;
 
@@ -491,10 +490,10 @@ namespace SGCM.AppData.Consulta
             }
         }
 
-        public EditarConsultaModel ConsultarConsulta(ConsultarConsulta consulta) {
+        public EditarConsultaModel ConsultarConsulta(int idConsulta) {
             try {
                 ConsultaDAL consultaDAL = new ConsultaDAL();
-                return consultaDAL.ConsultarConsulta(consulta);
+                return consultaDAL.ConsultarConsulta(idConsulta);
             } catch (Exception ex) {
                 throw ex;
             }
@@ -502,24 +501,107 @@ namespace SGCM.AppData.Consulta
 
         public int EditarConsulta(EditarConsultaModel consulta) {
             try {
-                consulta.paciente.CPF = UtilMetodo.RemovendoCaracteresEspeciais(consulta.paciente.CPF);
+                consulta.Paciente.CPF = UtilMetodo.RemovendoCaracteresEspeciais(consulta.Paciente.CPF);
 
-                DateTime dataInformada = consulta.consulta.DataConsulta;
-                DateTime dataAgora = DateTime.Now;
-
-                var resultadoComparacao = dataInformada.Date.CompareTo(dataAgora.Date);
-
-                if (resultadoComparacao < 0) {
-                    // Data informada é menor que a data atual.
-                    return 1;
-                } else if (resultadoComparacao == 0) {
-                    var resultadoComparacaoComHora = dataInformada.CompareTo(dataAgora);
-                    if (resultadoComparacaoComHora < 0) {
-                        return 2;
-                    }
+                if (consulta.Paciente.idPaciente != consulta.MolestiaAtual.idPacienteMolestiaAtual) {
+                    consulta.MolestiaAtual.idPacienteMolestiaAtual = consulta.Paciente.idPaciente;
                 }
+
+                if (consulta.Paciente.idPaciente != consulta.PatologicaPregressa.idPacientePatologicaPregressa) {
+                    consulta.PatologicaPregressa.idPacientePatologicaPregressa = consulta.Paciente.idPaciente;
+                }
+
+                if (consulta.Paciente.idPaciente != consulta.ExameFisico.idPacienteExameFisico) {
+                    consulta.ExameFisico.idPacienteExameFisico = consulta.Paciente.idPaciente;
+                }
+
+                if (consulta.Paciente.idPaciente != consulta.HipoteseDiagnostica.idPacienteHipoteseDiagnostica) {
+                    consulta.HipoteseDiagnostica.idPacienteHipoteseDiagnostica = consulta.Paciente.idPaciente;
+                }
+
+                if (consulta.Paciente.idPaciente != consulta.Conduta.idPacienteConduta) {
+                    consulta.Conduta.idPacienteConduta = consulta.Paciente.idPaciente;
+                }
+
                 ConsultaDAL consultaDAL = new ConsultaDAL();
                 return consultaDAL.EditarConsulta(consulta);
+            } catch (Exception ex) {
+                throw ex;
+            }
+        }
+
+        public IniciarAtendimentoModel CarregarDadosAtendimento(int idConsulta) {
+            try {
+                ConsultaDAL consultaDAL = new ConsultaDAL();
+                return consultaDAL.CarregarDadosAtendimento(idConsulta);
+            } catch (Exception ex) {
+                throw ex;
+            }
+        }
+
+        public List<Models.Consulta.IniciarAtendimento.DadosConsulta> ConsultaLista(int idPaciente) {
+            try {
+                ConsultaDAL consultaDAL = new ConsultaDAL();
+                return consultaDAL.ConsultaLista(idPaciente);
+            } catch (Exception ex) {
+                throw ex;
+            }
+        }
+
+        public List<Models.Consulta.IniciarAtendimento.DadosExameLaboratorial> ExameLaboratorialLista(int idPaciente) {
+            try {
+                ConsultaDAL consultaDAL = new ConsultaDAL();
+                return consultaDAL.ExameLaboratorialLista(idPaciente);
+            } catch (Exception ex) {
+                throw ex;
+            }
+        }
+
+        public List<Models.Consulta.EditarConsultaModel.DadosExameLaboratorial> EditarExameLaboratorialLista(int idPaciente) {
+            try {
+                ConsultaDAL consultaDAL = new ConsultaDAL();
+                return consultaDAL.EditarExameLaboratorialLista(idPaciente);
+            } catch (Exception ex) {
+                throw ex;
+            }
+        }
+
+        public int FinalizarAtendimento(IniciarAtendimentoModel model) {
+            try {
+                if (model.ExamePedido != null) { 
+                    var listaExamePedido = model.ExamePedido.Split(',');
+                    var listaExamePedidoFinal = "";
+                    for (var i = 0; i < listaExamePedido.Length; i++) {
+                        if (listaExamePedido[i] != "") { 
+                            if (listaExamePedidoFinal == "") {
+                                listaExamePedidoFinal = listaExamePedido[i];
+                            } else {
+                                listaExamePedidoFinal = listaExamePedidoFinal + "," + listaExamePedido[i];
+                            }
+                        }
+                    }
+                    model.ExamePedido = listaExamePedidoFinal;
+                }
+                ConsultaDAL consultaDAL = new ConsultaDAL();
+                return consultaDAL.FinalizarAtendimento(model);
+            } catch (Exception ex) {
+                throw ex;
+            }
+        }
+
+        public List<BaseNomeExame> GetBaseNomeExame() {
+            try {
+                ConsultaDAL consultaDAL = new ConsultaDAL();
+                return consultaDAL.GetBaseNomeExame();
+            } catch (Exception ex) {
+                throw ex;
+            }
+        }
+
+        public int CancelarConsulta(int idConsulta) {
+            try {
+                ConsultaDAL consultaDAL = new ConsultaDAL();
+                return consultaDAL.CancelarConsulta(idConsulta);
             } catch (Exception ex) {
                 throw ex;
             }

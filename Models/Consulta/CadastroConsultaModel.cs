@@ -7,7 +7,7 @@ namespace SGCM.Models.Consulta.CadastroConsultaModel {
 
     public class CadastroConsultaModel {
         public DadosConsulta consulta { get; set; }
-        public DadosPaciente paciente { get; set; }
+        public DadosPaciente Paciente { get; set; }
         public List<DadosPaciente> pacienteList { get; set; }
 
     }

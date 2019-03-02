@@ -7,18 +7,22 @@ using MySql.Data.MySqlClient;
 using SGCM.Models;
 
 namespace SGCM.AppData {
-
-
-
-    public class SGCMContext
-    {
-
+    public class SGCMContext {
+        /* CONEXÃO LOCALHOST */
         private static string Server = "localhost";
         private static string DataBase = "sgcm";
         private static string User = "root";
         private static string Password = "";
 
         private string ConnectionString = $"Server={Server};DataBase={DataBase};Uid={User};Pwd={Password};Sslmode=none;";
+
+        /* CONEXÃO AZURE */
+        //private static string Server = "sgcm.mysql.database.azure.com";
+        //private static string DataBase = "sgcm";
+        //private static string User = "deivis@sgcm";
+        //private static string Password = "Shaft123";
+
+        //private string ConnectionString = $"Server={Server};DataBase={DataBase};Uid={User};Pwd={Password};Sslmode=Required;";
 
 
         public string StringConnection { get; }

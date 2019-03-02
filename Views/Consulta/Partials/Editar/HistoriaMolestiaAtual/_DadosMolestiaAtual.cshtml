@@ -1,0 +1,40 @@
+﻿@using SGCM.Models.Consulta.EditarConsultaModel;
+@model EditarConsultaModel
+
+<div class="consulta-usuario-container">
+
+    <div class="row margin-row">
+        <div class="col-lg-2"></div>
+
+        @* MOLESTIA ATUAL *@
+        <div class="col-lg-8 margin-right-15-px">
+            <div class="form-group">
+                @*<label asp-for="@Model.MolestiaAtual.molestiaAtual" class="control-label form-label"></label>*@
+                <textarea asp-for="@Model.MolestiaAtual.molestiaAtual" style="height: 200px;" type="text" class="form-control form-input form-input-center"></textarea>
+                <span asp-validation-for="@Model.MolestiaAtual.molestiaAtual" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-lg-2"></div>
+    </div>
+</div>
+
+<div class="form-group padding-top-15px">
+    <button id="moveAnteriorDadosMolestiaAtual" type="button" class="btn btn-info btn-brand btn-brand-big margin-right-15-px">&nbsp;Anterior&nbsp;</button>
+    <button id="moveProximoDadosMolestiaAtual" type="button" class="btn btn-primary btn-brand btn-brand-big">&nbsp;Próximo&nbsp;</button>
+</div>
+
+@* IDs *@
+<div class="displayNone">
+    <div class="form-group">
+        <input asp-for="@Model.MolestiaAtual.idMolestiaAtual" />
+    </div>
+
+    <div class="form-group">
+        <input asp-for="@Model.MolestiaAtual.idPacienteMolestiaAtual" />
+    </div>
+
+    <div class="form-group">
+        <input asp-for="@Model.MolestiaAtual.idConsultaMolestiaAtual" />
+    </div>
+</div>

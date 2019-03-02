@@ -6,11 +6,11 @@
     @* Nome *@
     <div class="col-lg-4 margin-right-15-px">
         <div class="form-group">
-            <label asp-for="@Model.paciente.Nome" class="control-label form-label"></label>
+            <label asp-for="@Model.Paciente.Nome" class="control-label form-label"></label>
             @*<input asp-for="@Model.paciente.Nome" class="form-control form-input form-input-center" onblur="("location.href='"+ Url.Action("ConsultarNome","Consulta", new { nome = @Model.paciente.Nome} )+ "'")" />*@
             @*<input asp-for="@Model.paciente.Nome" class="form-control form-input form-input-center" onblur="ConsultarNome()" />*@
-            <input asp-for="@Model.paciente.Nome" class="form-control form-input form-input-center" />
-            <span asp-validation-for="@Model.paciente.Nome" class="text-danger"></span>
+            <input asp-for="@Model.Paciente.Nome" class="form-control form-input form-input-center" />
+            <span asp-validation-for="@Model.Paciente.Nome" class="text-danger"></span>
 
         </div>
     </div>
@@ -18,9 +18,9 @@
     @* CPF *@
     <div class="col-lg-2 margin-right-15-px">
         <div class="form-group">
-            <label asp-for="@Model.paciente.CPF" class="control-label form-label"></label>
-            <input asp-for="@Model.paciente.CPF" class="form-control form-input form-input-center maskCPF" />
-            <span asp-validation-for="@Model.paciente.CPF" class="text-danger"></span>
+            <label asp-for="@Model.Paciente.CPF" class="control-label form-label"></label>
+            <input asp-for="@Model.Paciente.CPF" class="form-control form-input form-input-center maskCPF" />
+            <span asp-validation-for="@Model.Paciente.CPF" class="text-danger"></span>
         </div>
     </div>
 
@@ -50,6 +50,6 @@
 @* idPaciente *@
 <div class="displayNone">
     <div class="form-group">
-        <input asp-for="@Model.paciente.idPaciente" />
+        <input asp-for="@Model.Paciente.idPaciente" />
     </div>
 </div>

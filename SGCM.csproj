@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <PackageReference Include="IT2media.Extensions.Logging.Abstractions" Version="2.0.0" />
+    <PackageReference Include="iTextSharp" Version="5.5.13" />
     <PackageReference Include="jQuery.MaskedInput" Version="1.4.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Cryptography.Internal" Version="2.1.1" />
@@ -56,10 +57,28 @@
     <Content Update="Views\Consulta\Partials\Cadastro\_DadosConsulta.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Views\Consulta\Partials\Editar\_DadosConsulta.cshtml">
+    <Content Update="Views\Consulta\Partials\Editar\Conduta\_DadosConduta.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Consulta\Partials\Editar\Exame\_DadosExame.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Consulta\Partials\Editar\HipoteseDiagnostica\_DadosHipoteseDiagnostica.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Consulta\Partials\Editar\HistoriaMolestiaAtual\_DadosMolestiaAtual.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Consulta\Partials\Editar\HistoriaPatologicaPregressa\_DadosHistoriaPatologicaPregressa.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Consulta\Partials\Editar\Pessoais\_DadosPessoais.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\Ausencia\Partials\Cadastrar\_DadosMarcacao.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Consulta\Partials\IniciarAtendimento\Pessoais\_DadosPessoais.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\Consulta\Partials\_ConsultaScript.cshtml">
@@ -78,6 +97,9 @@
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\Paciente\Partials\Cadastro\_DadosPessoais.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Paciente\Partials\Consulta\_DadosConsulta.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\Paciente\Partials\Editar\_DadosPessoais.cshtml">

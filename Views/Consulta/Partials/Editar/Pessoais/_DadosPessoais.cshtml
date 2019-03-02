@@ -1,0 +1,58 @@
+﻿@using SGCM.Models.Consulta.EditarConsultaModel;
+@model EditarConsultaModel
+
+<div class="row margin-row">
+
+    @* Nome *@
+    <div class="col-lg-4 margin-right-15-px">
+        <div class="form-group">
+            <label asp-for="@Model.Paciente.Nome" class="control-label form-label"></label>
+            <input asp-for="@Model.Paciente.Nome" class="form-control form-input form-input-center" />
+            <span asp-validation-for="@Model.Paciente.Nome" class="text-danger"></span>
+
+        </div>
+    </div>
+
+    @* CPF *@
+    <div class="col-lg-2 margin-right-15-px">
+        <div class="form-group">
+            <label asp-for="@Model.Paciente.CPF" class="control-label form-label"></label>
+            <input asp-for="@Model.Paciente.CPF" class="form-control form-input form-input-center maskCPF" />
+            <span asp-validation-for="@Model.Paciente.CPF" class="text-danger"></span>
+        </div>
+    </div>
+
+    @* BOTÃO PESQUISA *@
+    <div class="col-lg-1">
+        <div class="form-group">
+            <button type="button" id="btnPesquisaPaciente" class="btn btn-primary margin-top-25-px"> <span class="glyphicon glyphicon-search"></span> </button>
+        </div>
+    </div>
+
+</div>
+<div class="row margin-row">
+
+    @* DATA Consulta *@
+    <div class="col-lg-3 margin-right-15-px">
+        <div class="form-group">
+            <label asp-for="@Model.Consulta.DataConsulta" class="control-label form-label"></label>
+            <input asp-for="@Model.Consulta.DataConsulta" asp-format="{0:dd/MM/yyyy HH:mm}" type="datetime" textmode="DateTimeLocal" class="form-control form-input form-input-center maskDateTime" id="dataConsulta" />
+            <span asp-validation-for="@Model.Consulta.DataConsulta" class="text-danger"></span>
+        </div>
+    </div>
+
+</div>
+
+<div class="form-group padding-top-15px">
+    <input id="btnVoltar" type="button" class="btn btn-warning btn-brand btn-brand-big" value="Voltar" onclick="location.href='@Url.Action("ConsultarConsulta", "Consulta")'" />
+    <input id="btnCancelar" type="button" class="btn btn-danger btn-brand btn-brand-big" value="Cancelar" onclick="location.href='@Url.Action("CancelarConsulta", "Consulta", new { id = Model.Consulta.idConsulta, flagView = 1})'" />
+    <button id="moveProximoDadosPessoais" type="button" class="btn btn-primary btn-brand btn-brand-big">&nbsp;Próximo&nbsp;</button>
+</div>
+
+
+<div class="displayNone">
+    <input asp-for="@Model.Paciente.idPaciente" />
+
+    <input asp-for="@Model.Consulta.idConsulta" />
+    <input asp-for="@Model.Consulta.status" />
+</div>

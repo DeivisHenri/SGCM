@@ -177,6 +177,8 @@ namespace SGCM.Controllers {
             HttpContext.Session.SetInt32("flCondutaC", usuarioCompletoTO.permissoesTO.flCondutaC);
             HttpContext.Session.SetInt32("flCondutaA", usuarioCompletoTO.permissoesTO.flCondutaA);
             HttpContext.Session.SetInt32("flCondutaE", usuarioCompletoTO.permissoesTO.flCondutaE);
+
+            HttpContext.Session.SetInt32("flIniciarAtendimento", usuarioCompletoTO.permissoesTO.flIniciarAtendimento);
         }
 
         private void CarregarDadosUsuarioParaTela()
@@ -248,6 +250,8 @@ namespace SGCM.Controllers {
             ViewData.Add("flCondutaC", HttpContext.Session.GetInt32("flCondutaC"));
             ViewData.Add("flCondutaA", HttpContext.Session.GetInt32("flCondutaA"));
             ViewData.Add("flCondutaE", HttpContext.Session.GetInt32("flCondutaE"));
+
+            ViewData.Add("flIniciarAtendimento", HttpContext.Session.GetInt32("flIniciarAtendimento"));
         }
 
         //[HttpPost]

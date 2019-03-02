@@ -13,6 +13,8 @@ namespace SGCM.AppData.Usuario
             usuario.pessoa.CPF = UtilMetodo.RemovendoCaracteresEspeciais(usuario.pessoa.CPF);
             usuario.pessoa.Telefone_Celular = UtilMetodo.RemovendoCaracteresEspeciais(usuario.pessoa.Telefone_Celular);
 
+            usuario.permissoes.flIniciarAtendimento = usuario.usuario.TipoUsuario;
+
             UsuarioDAL usuariosDAL = new UsuarioDAL();
             return usuariosDAL.InserirUsuario(usuario);
         }
@@ -30,6 +32,7 @@ namespace SGCM.AppData.Usuario
         public int EditarUsuario(EditarUsuarioModel usuario) {
             usuario.pessoa.CPF = UtilMetodo.RemovendoCaracteresEspeciais(usuario.pessoa.CPF);
             usuario.pessoa.Telefone_Celular = UtilMetodo.RemovendoCaracteresEspeciais(usuario.pessoa.Telefone_Celular);
+            usuario.permissoes.flIniciarAtendimento = usuario.usuario.TipoUsuario;
 
             UsuarioDAL usuariosDAL = new UsuarioDAL();
             return usuariosDAL.EditarUsuario(usuario);

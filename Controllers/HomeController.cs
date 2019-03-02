@@ -180,6 +180,8 @@ namespace SGCM.Controllers {
             ViewData.Add("flCondutaC", HttpContext.Session.GetInt32("flCondutaC"));
             ViewData.Add("flCondutaA", HttpContext.Session.GetInt32("flCondutaA"));
             ViewData.Add("flCondutaE", HttpContext.Session.GetInt32("flCondutaE"));
+
+            ViewData.Add("flIniciarAtendimento", HttpContext.Session.GetInt32("flIniciarAtendimento"));
         }
 
         public string getCookie(string key) {

@@ -7,6 +7,7 @@ using SGCM.Models.Consulta.CadastroConsultaModel;
 using SGCM.Models.Consulta.ConsultarConsultaModel;
 using SGCM.Models.Consulta.ConsultaPacienteModel;
 using SGCM.Models.Consulta.EditarConsultaModel;
+using SGCM.Models.Consulta.IniciarAtendimento;
 
 namespace SGCM.Controllers {
 
@@ -23,7 +24,7 @@ namespace SGCM.Controllers {
                 if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
                     if ((int)ViewData["flConsultaI"] != 0) {
                         var viewModel = new CadastroConsultaModel();
-                        viewModel.paciente = new Models.Consulta.CadastroConsultaModel.DadosPaciente();
+                        viewModel.Paciente = new Models.Consulta.CadastroConsultaModel.DadosPaciente();
                         viewModel.pacienteList = new List<Models.Consulta.CadastroConsultaModel.DadosPaciente>();
                         viewModel.consulta = new Models.Consulta.CadastroConsultaModel.DadosConsulta();
 
@@ -62,13 +63,24 @@ namespace SGCM.Controllers {
                         var objConsultaBLL = new ConsultaBLL();
                         model.consulta.flagPM = false;
 
-                        if ( model.paciente.idPaciente == 0) {
-                            List<ConsultaPacienteModel> retornoPaciente = objConsultaBLL.ConsultarPaciente(model.paciente.Nome, model.paciente.CPF, null);
-                            if (retornoPaciente != null) model.paciente.idPaciente = retornoPaciente[0].idPaciente;
-                            else {
+                        if ( model.Paciente.idPaciente == 0) {
+                            ConsultaPacienteModelBanco retornoPaciente = objConsultaBLL.ConsultarPaciente(model.Paciente.Nome, model.Paciente.CPF, null);
+                            if (retornoPaciente.retorno == 1) {
                                 ViewBag.MensagemTitle = "Erro ao Cadastrar a Consulta";
-                                ViewBag.MensagemBody = "O paciente " + model.paciente.Nome + " não existe!";
+                                ViewBag.MensagemBody = "O paciente " + model.Paciente.Nome + " está desativado!";
                                 return View();
+                            } else if (retornoPaciente.retorno == 2){
+                                ViewBag.MensagemTitle = "Erro ao Cadastrar a Consulta";
+                                ViewBag.MensagemBody = "O paciente " + model.Paciente.Nome + " não existe!";
+                                return View();
+                            } else if (retornoPaciente.retorno == 3) {
+                                if(retornoPaciente.ListaConsultaPacienteModel.Count > 1) {
+                                    ViewBag.MensagemTitle = "Erro ao Cadastrar a Consulta";
+                                    ViewBag.MensagemBody = "O parametro utilizado nome: " + model.Paciente.Nome + " contém mais de um registro, favor espeficicar o nome do paciente!";
+                                    return View();
+                                } else {
+                                    model.Paciente.idPaciente = retornoPaciente.ListaConsultaPacienteModel[0].idPaciente;
+                                }
                             }
                         }                        
 
@@ -76,7 +88,7 @@ namespace SGCM.Controllers {
 
                         if (retorno == 1) {
                             ViewBag.MensagemTitle = "Sucesso no Cadastro da Consulta";
-                            ViewBag.MensagemBody = "Consulta do paciente " + model.paciente.Nome + " cadastrada com sucesso!";
+                            ViewBag.MensagemBody = "Consulta do paciente " + model.Paciente.Nome + " cadastrada com sucesso!";
                             ModelState.Clear();
                             return View();
                         } else if (retorno == 2) {
@@ -109,7 +121,7 @@ namespace SGCM.Controllers {
                             return View();
                         } else {
                             ViewBag.MensagemTitle = "Erro ao Cadastrar a Consulta";
-                            ViewBag.MensagemBody = "Cadastro da consulta do paciente " + model.paciente.Nome + " não realizado!";
+                            ViewBag.MensagemBody = "Cadastro da consulta do paciente " + model.Paciente.Nome + " não realizado!";
                             return View();
                         }
                     } else {
@@ -366,38 +378,14 @@ namespace SGCM.Controllers {
                     if ((int)ViewData["flConsultaA"] != 0) {
                         var objConsultaBLL = new ConsultaBLL();
 
-                        //var retornoPaciente = objConsultaBLL.ConsultarPaciente(null, null, Convert.ToInt32(idPaciente));
+                        EditarConsultaModel retornoConsulta = objConsultaBLL.ConsultarConsulta(id);
 
-                        //if (retornoPaciente.Count == 0) {
-                        //    ViewBag.MensagemTitle = "Erro";
-                        //    ViewBag.MensagemBody = "Paciente da consulta não cadastrado!";
-                        //    return View();
-                        //} else if (retornoPaciente.Count > 1) {
-                        //    ViewBag.MensagemTitle = "Erro";
-                        //    ViewBag.MensagemBody = "Existe mais de uma paciente com esses dados, verifique o paciente indicado!";
-                        //    return View();
-                        //}
-
-                        ConsultarConsulta consulta = new ConsultarConsulta() {idConsulta = Convert.ToInt32(id) };
-
-                        EditarConsultaModel retornoConsulta = objConsultaBLL.ConsultarConsulta(consulta);
-
-                        if (retornoConsulta.consulta.idConsulta == 0) {
+                        if (retornoConsulta.Consulta.idConsulta == 0) {
                             ViewBag.MensagemTitle = "Erro";
                             ViewBag.MensagemBody = "A consulta que você está tentando editar, não existe!";
                             return View();
                         } else {
-                            EditarConsultaModel model = new EditarConsultaModel();
-                            model.consulta = new Models.Consulta.EditarConsultaModel.DadosConsulta();
-                            model.paciente = new Models.Consulta.EditarConsultaModel.DadosPaciente();
-
-                            model.consulta.DataConsulta = retornoConsulta.consulta.DataConsulta;
-                            model.consulta.idConsulta = retornoConsulta.consulta.idConsulta;
-                            model.paciente.CPF = retornoConsulta.paciente.CPF;
-                            model.paciente.idPaciente = retornoConsulta.paciente.idPaciente;
-                            model.paciente.Nome = retornoConsulta.paciente.Nome;
-
-                            return View(model);
+                            return View(retornoConsulta);
                         }
                     } else {
                         HttpContext.Session.SetString("MensagemTitle", "Erro ao Cadastrar a Consulta");
@@ -436,26 +424,59 @@ namespace SGCM.Controllers {
                         var objConsultaBLL = new ConsultaBLL();
                         var retornoEditarConsulta = objConsultaBLL.EditarConsulta(model);
 
-                        if (retornoEditarConsulta == 1) {
-                            ViewBag.MensagemTitle = "Erro ao Cadastrar a Consulta";
-                            ViewBag.MensagemBody = "Não é possivel salvar uma consulta com a data inferior que a data atual!";
-                            return View();
-                        } else if (retornoEditarConsulta == 2) {
-                            ViewBag.MensagemTitle = "Erro ao Cadastrar a Consulta";
-                            ViewBag.MensagemBody = "Não é possivel salvar uma consulta com a hora inferior que a hora atual!";
-                            return View();
-                        } else if (retornoEditarConsulta == 3) {
+                        if (retornoEditarConsulta == 3) {
                             ViewBag.MensagemTitle = "Erro ao Cadastrar a Consulta";
                             ViewBag.MensagemBody = "Ocorreu um erro quando o sistema estava tentando alterar uma consulta!";
                             return View();
                         } else {
-                            ViewBag.MensagemTitle = "Sucesso no Cadastro da Consulta";
-                            ViewBag.MensagemBody = "Consulta do paciente " + model.paciente.Nome + " cadastrada com sucesso!";
+                            HttpContext.Session.SetString("MensagemTitle", "Sucesso no Cadastro da Consulta");
+                            HttpContext.Session.SetString("MensagemBody", "Consulta do paciente " + model.Paciente.Nome + " alterada com sucesso!");
                             return RedirectToAction("ConsultarConsulta", "Consulta");
                         }
                     } else {
                         HttpContext.Session.SetString("MensagemTitle", "Erro");
-                        HttpContext.Session.SetString("MensagemBody", "O usuário " + ViewData["nome"] + " não tem permissão para consultar Pacientes!");
+                        HttpContext.Session.SetString("MensagemBody", "O usuário " + ViewData["nome"] + " não tem permissão para consultar 'Consultas marcadas'!");
+                        return RedirectToAction("Index", "Home");
+                    }
+                } else {
+                    ViewData.Add("ReturnUrl", ((object[])this.ControllerContext.RouteData.Values.Values)[0] + "/" + ((object[])this.ControllerContext.RouteData.Values.Values)[1]);
+                    return RedirectToAction("Signin", "Login", new { ReturnUrl = ViewData["ReturnUrl"] });
+                }
+            } catch (Exception ex) {
+                ConsultaBLL objConsultaBLL = new ConsultaBLL();
+                model.ExameLaboratorialLista = objConsultaBLL.EditarExameLaboratorialLista(model.Paciente.idPaciente);
+
+                ViewBag.MensagemTitle = "Erro";
+                ViewBag.MensagemBodyController = "Controller: ConsultaController";
+                ViewBag.MensagemBodyAction = "Action: CadastrarConsulta";
+                ViewBag.MensagemBody = "Exceção: " + ex.Message;
+                return View(model);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult IniciarAtendimento(int id) {
+            try {
+                ViewBag.MensagemBodyController = "";
+                ViewBag.MensagemBodyAction = "";
+                ViewBag.MensagemBody = "";
+                CarregarDadosUsuarioParaTela();
+                if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
+                    if ((int)ViewData["flIniciarAtendimento"] != 0) {
+                        IniciarAtendimentoModel viewModel = new IniciarAtendimentoModel();
+
+                        if (id != 0) {
+                            ConsultaBLL consultaBLL = new ConsultaBLL();
+                            viewModel = consultaBLL.CarregarDadosAtendimento(id);
+                            return View(viewModel);
+                        } else {
+                            HttpContext.Session.SetString("MensagemTitle", "Erro");
+                            HttpContext.Session.SetString("MensagemBody", "Para Iniciar um Atendimento, é necessario selecionar o atendimento!");
+                            return RedirectToAction("Index", "Home");
+                        }
+                    } else {
+                        HttpContext.Session.SetString("MensagemTitle", "Erro");
+                        HttpContext.Session.SetString("MensagemBody", "O usuário " + ViewData["nome"] + " não tem acesso a página: 'Consulta/CadastrarConsulta'");
                         return RedirectToAction("Index", "Home");
                     }
                 } else {
@@ -465,21 +486,91 @@ namespace SGCM.Controllers {
             } catch (Exception ex) {
                 ViewBag.MensagemTitle = "Erro";
                 ViewBag.MensagemBodyController = "Controller: ConsultaController";
-                ViewBag.MensagemBodyAction = "Action: CadastrarConsulta";
+                ViewBag.MensagemBodyAction = "Action: IniciarAtendimento";
                 ViewBag.MensagemBody = "Exceção: " + ex.Message;
                 return View();
             }
         }
 
-        [HttpGet]
-        public ActionResult FinalizarConsulta(int id) {
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult IniciarAtendimento(IniciarAtendimentoModel model) {
             try {
-                //if (TempData("FinalizarConsulta") != null) TempData.Add("FinalizarConsulta", "Finalizar");
-                return RedirectToAction("EditarPaciente", "Paciente", new { id = id });
+                ViewBag.MensagemBodyController = "";
+                ViewBag.MensagemBodyAction = "";
+                ViewBag.MensagemBody = "";
+                CarregarDadosUsuarioParaTela();
+                if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
+                    if ((int)ViewData["flIniciarAtendimento"] != 0) {
+                        ConsultaBLL objConsultaBLL = new ConsultaBLL();
+                        if (!ModelState.IsValid) {
+                            model.ConsultaLista = objConsultaBLL.ConsultaLista(model.Paciente.idPaciente);
+                            model.ExameLaboratorialLista = objConsultaBLL.ExameLaboratorialLista(model.Paciente.idPaciente);
+
+                            return View(model);
+                        } else {
+                            var retornoFinalizarAtendimento = objConsultaBLL.FinalizarAtendimento(model);
+
+                            if (retornoFinalizarAtendimento > 0) {
+                                ViewBag.MensagemTitle = "Sucesso";
+                                ViewBag.MensagemBody = "A finalização do atendimento foi realizada com sucesso!";
+                                return RedirectToAction("ConsultarConsulta", "Consulta");
+                            } else {
+                                model.ConsultaLista = objConsultaBLL.ConsultaLista(model.Paciente.idPaciente);
+                                model.ExameLaboratorialLista = objConsultaBLL.ExameLaboratorialLista(model.Paciente.idPaciente);
+                                ViewBag.MensagemTitle = "Erro";
+                                ViewBag.MensagemBody = "Ocorreu um erro ao tentar finalizar o atendimento, favor procurar o suporte do sistema!";
+                                return View(model);
+                            }
+                        }
+                    } else {
+                        HttpContext.Session.SetString("MensagemTitle", "Erro");
+                        HttpContext.Session.SetString("MensagemBody", "O usuário " + ViewData["nome"] + " não tem acesso a página: 'Consulta/IniciarAtendimento'");
+                        return RedirectToAction("Index", "Home");
+                    }
+                } else {
+                    ViewData.Add("ReturnUrl", ((object[])this.ControllerContext.RouteData.Values.Values)[0] + "/" + ((object[])this.ControllerContext.RouteData.Values.Values)[1]);
+                    return RedirectToAction("Signin", "Login", new { ReturnUrl = ViewData["ReturnUrl"] });
+                }
+            } catch (Exception ex) {
+                ConsultaBLL objConsultaBLL = new ConsultaBLL();
+                model.ConsultaLista = objConsultaBLL.ConsultaLista(model.Paciente.idPaciente);
+                model.ExameLaboratorialLista = objConsultaBLL.ExameLaboratorialLista(model.Paciente.idPaciente);
+                model.ExamePedido = "";
+
+                ViewBag.MensagemTitle = "Erro";
+                ViewBag.MensagemBodyController = "Controller: ConsultaController";
+                ViewBag.MensagemBodyAction = "Action: IniciarAtendimento";
+                ViewBag.MensagemBody = "Exceção: " + ex.Message;
+                return View(model);
             }
-            catch (Exception ex) {
-                HttpContext.Session.SetString("MensagemTitle", "Erro");
-                HttpContext.Session.SetString("MensagemBody", "Erro ao tentar finalizar a consulta: " + ex.Message);
+        }
+
+        [HttpGet]
+        public ActionResult GetBaseNomeExame() {
+            try {
+                ViewBag.MensagemBodyController = "";
+                ViewBag.MensagemBodyAction = "";
+                ViewBag.MensagemBody = "";
+                CarregarDadosUsuarioParaTela();
+                if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
+                    ConsultaBLL objConsultaBLL = new ConsultaBLL();
+
+                    var retornoGetBaseNomeExame = objConsultaBLL.GetBaseNomeExame();
+                    return Json(retornoGetBaseNomeExame);
+                    //if (retornoGetBaseNomeExame != null && retornoGetBaseNomeExame.count > 0) 
+                    //else {
+                    //    new Exception("Não foi possivel carregar os nomes do exames, favor procurar o suporte do ssitema!");
+                    //}
+                } else {
+                    ViewData.Add("ReturnUrl", ((object[])this.ControllerContext.RouteData.Values.Values)[0] + "/" + ((object[])this.ControllerContext.RouteData.Values.Values)[1]);
+                    return RedirectToAction("Signin", "Login", new { ReturnUrl = ViewData["ReturnUrl"] });
+                }
+            } catch (Exception ex) {
+                ViewBag.MensagemTitle = "Erro";
+                ViewBag.MensagemBodyController = "Controller: ConsultaController";
+                ViewBag.MensagemBodyAction = "Action: GetBaseNomeExame";
+                ViewBag.MensagemBody = "Exceção: " + ex.Message;
                 return RedirectToAction("Index", "Home");
             }
         }
@@ -494,7 +585,7 @@ namespace SGCM.Controllers {
                 if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
                     if ((int)ViewData["flConsultaC"] != 0) {
                         var viewModel = new CadastroConsultaModel();
-                        viewModel.paciente = new Models.Consulta.CadastroConsultaModel.DadosPaciente();
+                        viewModel.Paciente = new Models.Consulta.CadastroConsultaModel.DadosPaciente();
                         viewModel.pacienteList = new List<Models.Consulta.CadastroConsultaModel.DadosPaciente>();
                         viewModel.consulta = new Models.Consulta.CadastroConsultaModel.DadosConsulta();
 
@@ -519,8 +610,56 @@ namespace SGCM.Controllers {
             }
         }
 
-        private void CarregarDadosUsuarioParaTela()
-        {
+        public ActionResult CancelarConsulta(int id, int flagView) {
+            try {
+                //Request.Headers.HeaderReferer.Items[0]
+                var headerReferer = ((Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpRequestHeaders)Request.Headers).HeaderReferer;
+                int idPaciente = Convert.ToInt32(headerReferer.ToString().Split('/')[5]);
+                ViewBag.MensagemBodyController = "";
+                ViewBag.MensagemBodyAction = "";
+                ViewBag.MensagemBody = "";
+                CarregarDadosUsuarioParaTela();
+                if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
+                    if((ViewData["flConsultaE"] != null) && ((int)ViewData["flConsultaE"] != 0)) {
+                        ConsultaBLL objConsultaBLL = new ConsultaBLL();
+
+                        var retornoCancelarConsulta = objConsultaBLL.CancelarConsulta(id);
+
+                        if (retornoCancelarConsulta == -1) {
+                            HttpContext.Session.SetString("MensagemTitle", "Erro");
+                            HttpContext.Session.SetString("MensagemBody", "Ocorreu um erro ao tentar cancelar uma 'consulta', favor entrar em contato com o suporte do sistema!");
+                        } else if (retornoCancelarConsulta == 1) {
+                            HttpContext.Session.SetString("MensagemTitle", "Sucesso");
+                            HttpContext.Session.SetString("MensagemBody", "A 'consulta' foi cancelada com sucesso!");
+                        }
+
+                        if (flagView == 1)
+                            return RedirectToAction("ConsultarConsulta", "Consulta");
+                        else
+                            return RedirectToAction("EditarPaciente", "Paciente", new { id = idPaciente });
+
+                    } else {
+                        HttpContext.Session.SetString("MensagemTitle", "Erro");
+                        HttpContext.Session.SetString("MensagemBody", "O usuario " + ViewData["usuario"] + " não tem permissão para cancelar consulta!");
+                        if (flagView == 1)
+                            return RedirectToAction("ConsultarConsulta", "Consulta");
+                        else
+                            return RedirectToAction("EditarPaciente", "Paciente", new { id = idPaciente });
+                    }
+                } else {
+                    ViewData.Add("ReturnUrl", ((object[])this.ControllerContext.RouteData.Values.Values)[0] + "/" + ((object[])this.ControllerContext.RouteData.Values.Values)[1]);
+                    return RedirectToAction("Signin", "Login", new { ReturnUrl = ViewData["ReturnUrl"] });
+                }
+            } catch (Exception ex) {
+                ViewBag.MensagemTitle = "Erro";
+                ViewBag.MensagemBodyController = "Controller: ConsultaController";
+                ViewBag.MensagemBodyAction = "Action: GetBaseNomeExame";
+                ViewBag.MensagemBody = "Exceção: " + ex.Message;
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        private void CarregarDadosUsuarioParaTela() {
             ViewData.Add("idUsuario", HttpContext.Session.GetInt32("idUsuario"));
             ViewData.Add("usuario", HttpContext.Session.GetString("usuario"));
 
@@ -588,6 +727,8 @@ namespace SGCM.Controllers {
             ViewData.Add("flCondutaC", HttpContext.Session.GetInt32("flCondutaC"));
             ViewData.Add("flCondutaA", HttpContext.Session.GetInt32("flCondutaA"));
             ViewData.Add("flCondutaE", HttpContext.Session.GetInt32("flCondutaE"));
+
+            ViewData.Add("flIniciarAtendimento", HttpContext.Session.GetInt32("flIniciarAtendimento"));
         }
     }
 }

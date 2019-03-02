@@ -80,12 +80,13 @@ namespace SGCM.AppData.Paciente
 
                         MySqlCommand cmdPaciente = new MySqlCommand(DALSQL.InserirPaciente(), connection);
 
-                        cmdPaciente.Parameters.Add("@IDPESSOA", MySqlDbType.Int32).Value = Convert.ToInt32(lastId.ToString());
-                        cmdPaciente.Parameters.Add("@IDMEDICO", MySqlDbType.Int32).Value = Convert.ToInt32(paciente.pessoa.IdMedico);
-                        cmdPaciente.Parameters.Add("@IDCONSULTA", MySqlDbType.Int32).Value = Convert.ToInt32(idConsulta.ToString());
-                        cmdPaciente.Parameters.Add("@IDEXAME", MySqlDbType.Int32).Value = Convert.ToInt32(IdExame.ToString());
-                        cmdPaciente.Parameters.Add("@IDMEDICAMENTO", MySqlDbType.Int32).Value = Convert.ToInt32(IdMedicamento.ToString());
-                        cmdPaciente.Parameters.Add("@IDRECEITA", MySqlDbType.Int32).Value = Convert.ToInt32(IdReceita.ToString());
+                        cmdPaciente.Parameters.AddWithValue("@IDPESSOA", Convert.ToInt32(lastId.ToString()));
+                        cmdPaciente.Parameters.AddWithValue("@IDMEDICO", Convert.ToInt32(paciente.pessoa.IdMedico));
+                        cmdPaciente.Parameters.AddWithValue("@IDCONSULTA", Convert.ToInt32(idConsulta.ToString()));
+                        cmdPaciente.Parameters.AddWithValue("@IDEXAME", Convert.ToInt32(IdExame.ToString()));
+                        cmdPaciente.Parameters.AddWithValue("@IDMEDICAMENTO", Convert.ToInt32(IdMedicamento.ToString()));
+                        cmdPaciente.Parameters.AddWithValue("@IDRECEITA", Convert.ToInt32(IdReceita.ToString()));
+                        cmdPaciente.Parameters.AddWithValue("@STATUSDESATIVADO", 1);
 
                         retorno = retorno + cmdPaciente.ExecuteNonQuery();
 
@@ -129,6 +130,7 @@ namespace SGCM.AppData.Paciente
                         pacienteListModel.pessoa.CPF = reader.GetString(2);
                         pacienteListModel.pessoa.TelefoneCelular = reader.GetString(3);
                         pacienteListModel.paciente.idPaciente = reader.GetInt32(4);
+                        pacienteListModel.paciente.Status = reader.GetInt32(5).ToString();
 
                         pacienteList.Add(pacienteListModel);
                     }
@@ -162,23 +164,24 @@ namespace SGCM.AppData.Paciente
                 MySqlDataReader readerPaciente = cmdPaciente.ExecuteReader();
 
                 EditarPacienteModel pacienteCompleto = new EditarPacienteModel();
-                pacienteCompleto.pessoa = new Models.Paciente.EditarPacienteModel.DadosPessoais();
+                pacienteCompleto.Pessoa = new Models.Paciente.EditarPacienteModel.DadosPessoais();
 
                 if (readerPaciente.HasRows) {
                     while (readerPaciente.Read()) {
-                        pacienteCompleto.pessoa.IdPessoa = readerPaciente.GetInt32(0);
-                        pacienteCompleto.pessoa.Nome = readerPaciente.GetString(1);
-                        pacienteCompleto.pessoa.CPF = readerPaciente.GetString(2);
-                        pacienteCompleto.pessoa.RG = readerPaciente.GetString(3);
-                        pacienteCompleto.pessoa.Sexo = readerPaciente.GetString(4);
-                        pacienteCompleto.pessoa.DataNascimento = readerPaciente.GetDateTime(5);
-                        pacienteCompleto.pessoa.Logradouro = readerPaciente.GetString(6);
-                        pacienteCompleto.pessoa.Numero = readerPaciente.GetInt32(7);
-                        pacienteCompleto.pessoa.Bairro = readerPaciente.GetString(8);
-                        pacienteCompleto.pessoa.Cidade = readerPaciente.GetString(9);
-                        pacienteCompleto.pessoa.Uf = readerPaciente.GetString(10);
-                        pacienteCompleto.pessoa.TelefoneCelular = readerPaciente.GetString(11);
-                        pacienteCompleto.pessoa.Email = readerPaciente.GetString(12);
+                        pacienteCompleto.Pessoa.IdPessoa = readerPaciente.GetInt32(0);
+                        pacienteCompleto.Pessoa.Nome = readerPaciente.GetString(1);
+                        pacienteCompleto.Pessoa.CPF = readerPaciente.GetString(2);
+                        pacienteCompleto.Pessoa.RG = readerPaciente.GetString(3);
+                        pacienteCompleto.Pessoa.Sexo = readerPaciente.GetString(4);
+                        pacienteCompleto.Pessoa.DataNascimento = readerPaciente.GetDateTime(5);
+                        pacienteCompleto.Pessoa.Logradouro = readerPaciente.GetString(6);
+                        pacienteCompleto.Pessoa.Numero = readerPaciente.GetInt32(7);
+                        pacienteCompleto.Pessoa.Bairro = readerPaciente.GetString(8);
+                        pacienteCompleto.Pessoa.Cidade = readerPaciente.GetString(9);
+                        pacienteCompleto.Pessoa.Uf = readerPaciente.GetString(10);
+                        pacienteCompleto.Pessoa.TelefoneCelular = readerPaciente.GetString(11);
+                        pacienteCompleto.Pessoa.Email = readerPaciente.GetString(12);
+                        pacienteCompleto.Pessoa.Status = readerPaciente.GetInt32(13).ToString();
                     }
                 }
                 readerPaciente.Close();
@@ -191,7 +194,7 @@ namespace SGCM.AppData.Paciente
                 cmdConsultaPaciente.Parameters.AddWithValue("@IDPACIENTECONSULTA", idPaciente);
                 MySqlDataReader readerConsultaPaciente = cmdConsultaPaciente.ExecuteReader();
 
-                pacienteCompleto.consulta = new List<DadosConsulta>();
+                pacienteCompleto.Consulta = new List<DadosConsulta>();
 
                 if (readerConsultaPaciente.HasRows) {
                     while (readerConsultaPaciente.Read()) {
@@ -202,7 +205,7 @@ namespace SGCM.AppData.Paciente
                         consulta.dataConsulta = readerConsultaPaciente.GetDateTime(2);
                         consulta.finalizada = readerConsultaPaciente.GetInt32(3);
 
-                        pacienteCompleto.consulta.Add(consulta);
+                        pacienteCompleto.Consulta.Add(consulta);
                     }
                     readerConsultaPaciente.NextResult();
                 }
@@ -227,23 +230,32 @@ namespace SGCM.AppData.Paciente
 
                         MySqlCommand cmdPessoa = new MySqlCommand(DALSQL.EditarPessoa(pacienteModel), connection);
 
-                        cmdPessoa.Parameters.Add("@IDPESSOA", MySqlDbType.Int32).Value = pacienteModel.pessoa.IdPessoa;
-                        cmdPessoa.Parameters.Add("@SEXO", MySqlDbType.Int32).Value = pacienteModel.pessoa.Sexo;
-                        cmdPessoa.Parameters.Add("@NOME", MySqlDbType.String).Value = pacienteModel.pessoa.Nome;
-                        cmdPessoa.Parameters.Add("@CPF", MySqlDbType.String).Value = pacienteModel.pessoa.CPF;
-                        cmdPessoa.Parameters.Add("@RG", MySqlDbType.String).Value = pacienteModel.pessoa.RG;
-                        cmdPessoa.Parameters.Add("@DATANASCIMENTO", MySqlDbType.String).Value = pacienteModel.pessoa.DataNascimento.ToShortDateString();
-                        cmdPessoa.Parameters.Add("@LOGRADOURO", MySqlDbType.String).Value = pacienteModel.pessoa.Logradouro;
-                        cmdPessoa.Parameters.Add("@NUMERO", MySqlDbType.Int32).Value = pacienteModel.pessoa.Numero;
-                        cmdPessoa.Parameters.Add("@BAIRRO", MySqlDbType.String).Value = pacienteModel.pessoa.Bairro;
-                        cmdPessoa.Parameters.Add("@CIDADE", MySqlDbType.String).Value = pacienteModel.pessoa.Cidade;
-                        cmdPessoa.Parameters.Add("@UF", MySqlDbType.String).Value = pacienteModel.pessoa.Uf;
-                        cmdPessoa.Parameters.Add("@TELEFONECELULAR", MySqlDbType.String).Value = pacienteModel.pessoa.TelefoneCelular;
-                        cmdPessoa.Parameters.Add("@EMAIL", MySqlDbType.String).Value = pacienteModel.pessoa.Email;
+                        cmdPessoa.Parameters.Add("@IDPESSOA", MySqlDbType.Int32).Value = pacienteModel.Pessoa.IdPessoa;
+                        cmdPessoa.Parameters.Add("@SEXO", MySqlDbType.Int32).Value = pacienteModel.Pessoa.Sexo;
+                        cmdPessoa.Parameters.Add("@NOME", MySqlDbType.String).Value = pacienteModel.Pessoa.Nome;
+                        cmdPessoa.Parameters.Add("@CPF", MySqlDbType.String).Value = pacienteModel.Pessoa.CPF;
+                        cmdPessoa.Parameters.Add("@RG", MySqlDbType.String).Value = pacienteModel.Pessoa.RG;
+                        cmdPessoa.Parameters.Add("@DATANASCIMENTO", MySqlDbType.String).Value = pacienteModel.Pessoa.DataNascimento.ToShortDateString();
+                        cmdPessoa.Parameters.Add("@LOGRADOURO", MySqlDbType.String).Value = pacienteModel.Pessoa.Logradouro;
+                        cmdPessoa.Parameters.Add("@NUMERO", MySqlDbType.Int32).Value = pacienteModel.Pessoa.Numero;
+                        cmdPessoa.Parameters.Add("@BAIRRO", MySqlDbType.String).Value = pacienteModel.Pessoa.Bairro;
+                        cmdPessoa.Parameters.Add("@CIDADE", MySqlDbType.String).Value = pacienteModel.Pessoa.Cidade;
+                        cmdPessoa.Parameters.Add("@UF", MySqlDbType.String).Value = pacienteModel.Pessoa.Uf;
+                        cmdPessoa.Parameters.Add("@TELEFONECELULAR", MySqlDbType.String).Value = pacienteModel.Pessoa.TelefoneCelular;
+                        cmdPessoa.Parameters.Add("@EMAIL", MySqlDbType.String).Value = pacienteModel.Pessoa.Email;
 
                         retorno = cmdPessoa.ExecuteNonQuery();
 
-                        if (retorno == 1) {
+                        MySqlCommand cmdPaciente = new MySqlCommand(DALSQL.EditarPaciente(pacienteModel), connection);
+                        cmdPaciente.Parameters.AddWithValue("@STATUSDESATIVADO", Convert.ToInt32(pacienteModel.Pessoa.Status));
+                        cmdPaciente.Parameters.AddWithValue("@IDPESSOAPACIENTE", pacienteModel.Pessoa.IdPessoa);
+
+                        var teste2 = getGeneratedSql(cmdPaciente);
+
+                        retorno = retorno + cmdPaciente.ExecuteNonQuery();
+                        
+
+                        if (retorno > 0) {
                             scope.Complete();
                             connection.Close();
                             return retorno;
@@ -257,6 +269,16 @@ namespace SGCM.AppData.Paciente
                     throw ex;
                 }
             }
+        }
+
+        private string getGeneratedSql(MySqlCommand cmd) {
+            string result = cmd.CommandText.ToString();
+            foreach (MySqlParameter p in cmd.Parameters)
+            {
+                string isQuted = (p.Value is string) ? "'" : "";
+                result = result.Replace(p.ParameterName.ToString(), isQuted + p.Value.ToString() + isQuted);
+            }
+            return result;
         }
     }
 }

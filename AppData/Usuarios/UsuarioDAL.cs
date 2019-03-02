@@ -105,27 +105,58 @@ namespace SGCM.AppData.Usuario {
 
                         MySqlCommand cmdPermissoes = new MySqlCommand(DALSQL.InserirPermissoes(), connection);
 
-                        cmdPermissoes.Parameters.Add("@IDUSUARIO", MySqlDbType.Int32).Value = lastId;
-                        cmdPermissoes.Parameters.Add("@FLUSUARIOI", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlUsuarioI);
-                        cmdPermissoes.Parameters.Add("@FLUSUARIOC", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlUsuarioC);
-                        cmdPermissoes.Parameters.Add("@FLUSUARIOA", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlUsuarioA);
-                        cmdPermissoes.Parameters.Add("@FLUSUARIOE", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlUsuarioE);
-                        cmdPermissoes.Parameters.Add("@FLPACIENTEI", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlPacienteI);
-                        cmdPermissoes.Parameters.Add("@FLPACIENTEC", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlPacienteC);
-                        cmdPermissoes.Parameters.Add("@FLPACIENTEA", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlPacienteA);
-                        cmdPermissoes.Parameters.Add("@FLPACIENTEE", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlPacienteE);
-                        cmdPermissoes.Parameters.Add("@FLCONSULTAI", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlConsultaI);
-                        cmdPermissoes.Parameters.Add("@FLCONSULTAC", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlConsultaC);
-                        cmdPermissoes.Parameters.Add("@FLCONSULTAA", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlConsultaA);
-                        cmdPermissoes.Parameters.Add("@FLCONSULTAE", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlConsultaE);
-                        cmdPermissoes.Parameters.Add("@FLMEDICAMENTOI", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlMedicamentoI);
-                        cmdPermissoes.Parameters.Add("@FLMEDICAMENTOC", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlMedicamentoC);
-                        cmdPermissoes.Parameters.Add("@FLMEDICAMENTOA", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlMedicamentoA);
-                        cmdPermissoes.Parameters.Add("@FLMEDICAMENTOE", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlMedicamentoE);
-                        cmdPermissoes.Parameters.Add("@FLEXAMESI", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlExamesI);
-                        cmdPermissoes.Parameters.Add("@FLEXAMESC", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlExamesC);
-                        cmdPermissoes.Parameters.Add("@FLEXAMESA", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlExamesA);
-                        cmdPermissoes.Parameters.Add("@FLEXAMESE", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.FlExamesE);
+                        cmdPermissoes.Parameters.AddWithValue("@IDUSUARIO", lastId);
+                        cmdPermissoes.Parameters.AddWithValue("@FLUSUARIOI", Int32.Parse(usuario.permissoes.flUsuarioI));
+                        cmdPermissoes.Parameters.AddWithValue("@FLUSUARIOC", Int32.Parse(usuario.permissoes.flUsuarioC));
+                        cmdPermissoes.Parameters.AddWithValue("@FLUSUARIOA", Int32.Parse(usuario.permissoes.flUsuarioA));
+                        cmdPermissoes.Parameters.AddWithValue("@FLUSUARIOE", Int32.Parse(usuario.permissoes.flUsuarioE));
+
+                        cmdPermissoes.Parameters.AddWithValue("@FLPACIENTEI", Int32.Parse(usuario.permissoes.flPacienteI));
+                        cmdPermissoes.Parameters.AddWithValue("@FLPACIENTEC", Int32.Parse(usuario.permissoes.flPacienteC));
+                        cmdPermissoes.Parameters.AddWithValue("@FLPACIENTEA", Int32.Parse(usuario.permissoes.flPacienteA));
+                        cmdPermissoes.Parameters.AddWithValue("@FLPACIENTEE", Int32.Parse(usuario.permissoes.flPacienteE));
+
+                        cmdPermissoes.Parameters.AddWithValue("@FLCONSULTAI", Int32.Parse(usuario.permissoes.flConsultaI));
+                        cmdPermissoes.Parameters.AddWithValue("@FLCONSULTAC", Int32.Parse(usuario.permissoes.flConsultaC));
+                        cmdPermissoes.Parameters.AddWithValue("@FLCONSULTAA", Int32.Parse(usuario.permissoes.flConsultaA));
+                        cmdPermissoes.Parameters.AddWithValue("@FLCONSULTAE", Int32.Parse(usuario.permissoes.flConsultaE));
+
+                        cmdPermissoes.Parameters.AddWithValue("@FLAUSENCIAI", Int32.Parse(usuario.permissoes.flAusenciaI));
+                        cmdPermissoes.Parameters.AddWithValue("@FLAUSENCIAC", Int32.Parse(usuario.permissoes.flAusenciaC));
+                        cmdPermissoes.Parameters.AddWithValue("@FLAUSENCIAA", Int32.Parse(usuario.permissoes.flAusenciaA));
+                        cmdPermissoes.Parameters.AddWithValue("@FLAUSENCIAE", Int32.Parse(usuario.permissoes.flAusenciaE));
+
+                        cmdPermissoes.Parameters.AddWithValue("@FLMEDICAMENTOI", Int32.Parse(usuario.permissoes.flMedicamentoI));
+                        cmdPermissoes.Parameters.AddWithValue("@FLMEDICAMENTOC", Int32.Parse(usuario.permissoes.flMedicamentoC));
+                        cmdPermissoes.Parameters.AddWithValue("@FLMEDICAMENTOA", Int32.Parse(usuario.permissoes.flMedicamentoA));
+                        cmdPermissoes.Parameters.AddWithValue("@FLMEDICAMENTOE", Int32.Parse(usuario.permissoes.flMedicamentoE));
+
+                        cmdPermissoes.Parameters.AddWithValue("@FLEXAMESI", Int32.Parse(usuario.permissoes.flExamesI));
+                        cmdPermissoes.Parameters.AddWithValue("@FLEXAMESC", Int32.Parse(usuario.permissoes.flExamesC));
+                        cmdPermissoes.Parameters.AddWithValue("@FLEXAMESA", Int32.Parse(usuario.permissoes.flExamesA));
+                        cmdPermissoes.Parameters.AddWithValue("@FLEXAMESE", Int32.Parse(usuario.permissoes.flExamesE));
+
+                        cmdPermissoes.Parameters.AddWithValue("@FLHISTORIAMOLESTIAATUALI", Int32.Parse(usuario.permissoes.flHistoriaMolestiaAtualI));
+                        cmdPermissoes.Parameters.AddWithValue("@FLHISTORIAMOLESTIAATUALC", Int32.Parse(usuario.permissoes.flHistoriaMolestiaAtualC));
+                        cmdPermissoes.Parameters.AddWithValue("@FLHISTORIAMOLESTIAATUALA", Int32.Parse(usuario.permissoes.flHistoriaMolestiaAtualA));
+                        cmdPermissoes.Parameters.AddWithValue("@FLHISTORIAMOLESTIAATUALE", Int32.Parse(usuario.permissoes.flHistoriaMolestiaAtualE));
+
+                        cmdPermissoes.Parameters.AddWithValue("@FLHISTORIAPATOLOGICAPREGRESSAI", Int32.Parse(usuario.permissoes.flHistoriaPatologicaPregressaI));
+                        cmdPermissoes.Parameters.AddWithValue("@FLHISTORIAPATOLOGICAPREGRESSAC", Int32.Parse(usuario.permissoes.flHistoriaPatologicaPregressaC));
+                        cmdPermissoes.Parameters.AddWithValue("@FLHISTORIAPATOLOGICAPREGRESSAA", Int32.Parse(usuario.permissoes.flHistoriaPatologicaPregressaA));
+                        cmdPermissoes.Parameters.AddWithValue("@FLHISTORIAPATOLOGICAPREGRESSAE", Int32.Parse(usuario.permissoes.flHistoriaPatologicaPregressaE));
+
+                        cmdPermissoes.Parameters.AddWithValue("@FLHIPOTESEDIAGNOSTICAI", Int32.Parse(usuario.permissoes.flHipoteseDiagnosticaI));
+                        cmdPermissoes.Parameters.AddWithValue("@FLHIPOTESEDIAGNOSTICAC", Int32.Parse(usuario.permissoes.flHipoteseDiagnosticaC));
+                        cmdPermissoes.Parameters.AddWithValue("@FLHIPOTESEDIAGNOSTICAA", Int32.Parse(usuario.permissoes.flHipoteseDiagnosticaA));
+                        cmdPermissoes.Parameters.AddWithValue("@FLHIPOTESEDIAGNOSTICAE", Int32.Parse(usuario.permissoes.flHipoteseDiagnosticaE));
+
+                        cmdPermissoes.Parameters.AddWithValue("@FLCONDUTAI", Int32.Parse(usuario.permissoes.flCondutaI));
+                        cmdPermissoes.Parameters.AddWithValue("@FLCONDUTAC", Int32.Parse(usuario.permissoes.flCondutaC));
+                        cmdPermissoes.Parameters.AddWithValue("@FLCONDUTAA", Int32.Parse(usuario.permissoes.flCondutaA));
+                        cmdPermissoes.Parameters.AddWithValue("@FLCONDUTAE", Int32.Parse(usuario.permissoes.flCondutaE));
+
+                        cmdPermissoes.Parameters.AddWithValue("@FLINICIARATENDIMENTO", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.flIniciarAtendimento);
 
                         linhaInserida = linhaInserida + cmdPermissoes.ExecuteNonQuery();
 
@@ -184,115 +215,223 @@ namespace SGCM.AppData.Usuario {
                         usuarioCompletoTO.usuario.Username = reader.GetString(15);
                         usuarioCompletoTO.usuario.TipoUsuario = reader.GetInt32(16).ToString();
                         usuarioCompletoTO.usuario.DataCadastro = Convert.ToDateTime(reader.GetString(17));
-                        if (!(reader.IsDBNull(18)))
-                            usuarioCompletoTO.usuario.DataDesativacao = Convert.ToDateTime(reader.GetString(18));
-                        else
-                            usuarioCompletoTO.usuario.DataDesativacao = new DateTime();
+                        usuarioCompletoTO.usuario.statusDesativado = Convert.ToInt32(reader.GetString(18));
 
                         usuarioCompletoTO.permissoes.IdPermissoes = reader.GetInt32(19);
                         if (reader.GetInt32(20) == 1) {
-                            usuarioCompletoTO.permissoes.FlUsuarioI = "True";
+                            usuarioCompletoTO.permissoes.flUsuarioI = "True";
                         } else {
-                            usuarioCompletoTO.permissoes.FlUsuarioI = "false";
+                            usuarioCompletoTO.permissoes.flUsuarioI = "false";
                         }
                         if (reader.GetInt32(21) == 1) {
-                            usuarioCompletoTO.permissoes.FlUsuarioC = "True";
+                            usuarioCompletoTO.permissoes.flUsuarioC = "True";
                         } else {
-                            usuarioCompletoTO.permissoes.FlUsuarioC = "false";
+                            usuarioCompletoTO.permissoes.flUsuarioC = "false";
                         }
                         if (reader.GetInt32(22) == 1) {
-                            usuarioCompletoTO.permissoes.FlUsuarioA = "True";
+                            usuarioCompletoTO.permissoes.flUsuarioA = "True";
                         } else {
-                            usuarioCompletoTO.permissoes.FlUsuarioA = "false";
+                            usuarioCompletoTO.permissoes.flUsuarioA = "false";
                         }
                         if (reader.GetInt32(23) == 1) {
-                            usuarioCompletoTO.permissoes.FlUsuarioE = "True";
+                            usuarioCompletoTO.permissoes.flUsuarioE = "True";
                         } else {
-                            usuarioCompletoTO.permissoes.FlUsuarioE = "false";
+                            usuarioCompletoTO.permissoes.flUsuarioE = "false";
                         }
 
                         if (reader.GetInt32(24) == 1) {
-                            usuarioCompletoTO.permissoes.FlPacienteI = "True";
+                            usuarioCompletoTO.permissoes.flPacienteI = "True";
                         } else {
-                            usuarioCompletoTO.permissoes.FlPacienteI = "false";
+                            usuarioCompletoTO.permissoes.flPacienteI = "false";
                         }
                         if (reader.GetInt32(25) == 1) {
-                            usuarioCompletoTO.permissoes.FlPacienteC = "True";
+                            usuarioCompletoTO.permissoes.flPacienteC = "True";
                         } else {
-                            usuarioCompletoTO.permissoes.FlPacienteC = "false";
+                            usuarioCompletoTO.permissoes.flPacienteC = "false";
                         }
                         if (reader.GetInt32(26) == 1) {
-                            usuarioCompletoTO.permissoes.FlPacienteA = "True";
+                            usuarioCompletoTO.permissoes.flPacienteA = "True";
                         } else {
-                            usuarioCompletoTO.permissoes.FlPacienteA = "false";
+                            usuarioCompletoTO.permissoes.flPacienteA = "false";
                         }
                         if (reader.GetInt32(27) == 1) {
-                            usuarioCompletoTO.permissoes.FlPacienteE = "True";
+                            usuarioCompletoTO.permissoes.flPacienteE = "True";
                         } else {
-                            usuarioCompletoTO.permissoes.FlPacienteE = "false";
+                            usuarioCompletoTO.permissoes.flPacienteE = "false";
                         }
 
                         if (reader.GetInt32(28) == 1) {
-                            usuarioCompletoTO.permissoes.FlConsultaI = "True";
+                            usuarioCompletoTO.permissoes.flConsultaI = "True";
                         } else {
-                            usuarioCompletoTO.permissoes.FlConsultaI = "false";
+                            usuarioCompletoTO.permissoes.flConsultaI = "false";
                         }
                         if (reader.GetInt32(29) == 1) {
-                            usuarioCompletoTO.permissoes.FlConsultaC = "True";
+                            usuarioCompletoTO.permissoes.flConsultaC = "True";
                         } else {
-                            usuarioCompletoTO.permissoes.FlConsultaC = "false";
+                            usuarioCompletoTO.permissoes.flConsultaC = "false";
                         }
                         if (reader.GetInt32(30) == 1) {
-                            usuarioCompletoTO.permissoes.FlConsultaA = "True";
+                            usuarioCompletoTO.permissoes.flConsultaA = "True";
                         } else {
-                            usuarioCompletoTO.permissoes.FlConsultaA = "false";
+                            usuarioCompletoTO.permissoes.flConsultaA = "false";
                         }
                         if (reader.GetInt32(31) == 1) {
-                            usuarioCompletoTO.permissoes.FlConsultaE = "True";
+                            usuarioCompletoTO.permissoes.flConsultaE = "True";
                         } else {
-                            usuarioCompletoTO.permissoes.FlConsultaE = "false";
+                            usuarioCompletoTO.permissoes.flConsultaE = "false";
                         }
 
                         if (reader.GetInt32(32) == 1) {
-                            usuarioCompletoTO.permissoes.FlMedicamentoI = "True";
+                            usuarioCompletoTO.permissoes.flAusenciaI = "True";
                         } else {
-                            usuarioCompletoTO.permissoes.FlMedicamentoI = "false";
+                            usuarioCompletoTO.permissoes.flAusenciaI = "false";
                         }
                         if (reader.GetInt32(33) == 1) {
-                            usuarioCompletoTO.permissoes.FlMedicamentoC = "True";
+                            usuarioCompletoTO.permissoes.flAusenciaC = "True";
                         } else {
-                            usuarioCompletoTO.permissoes.FlMedicamentoC = "false";
+                            usuarioCompletoTO.permissoes.flAusenciaC = "false";
                         }
                         if (reader.GetInt32(34) == 1) {
-                            usuarioCompletoTO.permissoes.FlMedicamentoA = "True";
+                            usuarioCompletoTO.permissoes.flAusenciaA = "True";
                         } else {
-                            usuarioCompletoTO.permissoes.FlMedicamentoA = "false";
+                            usuarioCompletoTO.permissoes.flAusenciaA = "false";
                         }
                         if (reader.GetInt32(35) == 1) {
-                            usuarioCompletoTO.permissoes.FlMedicamentoE = "True";
+                            usuarioCompletoTO.permissoes.flAusenciaE = "True";
                         } else {
-                            usuarioCompletoTO.permissoes.FlMedicamentoE = "false";
+                            usuarioCompletoTO.permissoes.flAusenciaE = "false";
                         }
 
                         if (reader.GetInt32(36) == 1) {
-                            usuarioCompletoTO.permissoes.FlExamesI = "True";
+                            usuarioCompletoTO.permissoes.flMedicamentoI = "True";
                         } else {
-                            usuarioCompletoTO.permissoes.FlExamesI = "false";
+                            usuarioCompletoTO.permissoes.flMedicamentoI = "false";
                         }
                         if (reader.GetInt32(37) == 1) {
-                            usuarioCompletoTO.permissoes.FlExamesC = "True";
+                            usuarioCompletoTO.permissoes.flMedicamentoC = "True";
                         } else {
-                            usuarioCompletoTO.permissoes.FlExamesC = "false";
+                            usuarioCompletoTO.permissoes.flMedicamentoC = "false";
                         }
                         if (reader.GetInt32(38) == 1) {
-                            usuarioCompletoTO.permissoes.FlExamesA = "True";
+                            usuarioCompletoTO.permissoes.flMedicamentoA = "True";
                         } else {
-                            usuarioCompletoTO.permissoes.FlExamesA = "false";
+                            usuarioCompletoTO.permissoes.flMedicamentoA = "false";
                         }
                         if (reader.GetInt32(39) == 1) {
-                            usuarioCompletoTO.permissoes.FlExamesE = "True";
+                            usuarioCompletoTO.permissoes.flMedicamentoE = "True";
                         } else {
-                            usuarioCompletoTO.permissoes.FlExamesE = "false";
+                            usuarioCompletoTO.permissoes.flMedicamentoE = "false";
+                        }
+
+                        if (reader.GetInt32(40) == 1) {
+                            usuarioCompletoTO.permissoes.flExamesI = "True";
+                        } else {
+                            usuarioCompletoTO.permissoes.flExamesI = "false";
+                        }
+                        if (reader.GetInt32(41) == 1) {
+                            usuarioCompletoTO.permissoes.flExamesC = "True";
+                        } else {
+                            usuarioCompletoTO.permissoes.flExamesC = "false";
+                        }
+                        if (reader.GetInt32(42) == 1) {
+                            usuarioCompletoTO.permissoes.flExamesA = "True";
+                        } else {
+                            usuarioCompletoTO.permissoes.flExamesA = "false";
+                        }
+                        if (reader.GetInt32(43) == 1) {
+                            usuarioCompletoTO.permissoes.flExamesE = "True";
+                        } else {
+                            usuarioCompletoTO.permissoes.flExamesE = "false";
+                        }
+
+                        if (reader.GetInt32(44) == 1) {
+                            usuarioCompletoTO.permissoes.flHistoriaMolestiaAtualI = "True";
+                        } else {
+                            usuarioCompletoTO.permissoes.flHistoriaMolestiaAtualI = "false";
+                        }
+                        if (reader.GetInt32(45) == 1) {
+                            usuarioCompletoTO.permissoes.flHistoriaMolestiaAtualC = "True";
+                        } else {
+                            usuarioCompletoTO.permissoes.flHistoriaMolestiaAtualC = "false";
+                        }
+                        if (reader.GetInt32(46) == 1) {
+                            usuarioCompletoTO.permissoes.flHistoriaMolestiaAtualA = "True";
+                        } else {
+                            usuarioCompletoTO.permissoes.flHistoriaMolestiaAtualA = "false";
+                        }
+                        if (reader.GetInt32(47) == 1) {
+                            usuarioCompletoTO.permissoes.flHistoriaMolestiaAtualE = "True";
+                        } else {
+                            usuarioCompletoTO.permissoes.flHistoriaMolestiaAtualE = "false";
+                        }
+
+                        if (reader.GetInt32(48) == 1) {
+                            usuarioCompletoTO.permissoes.flHistoriaPatologicaPregressaI = "True";
+                        } else {
+                            usuarioCompletoTO.permissoes.flHistoriaPatologicaPregressaI = "false";
+                        }
+                        if (reader.GetInt32(49) == 1) {
+                            usuarioCompletoTO.permissoes.flHistoriaPatologicaPregressaC = "True";
+                        } else {
+                            usuarioCompletoTO.permissoes.flHistoriaPatologicaPregressaC = "false";
+                        }
+                        if (reader.GetInt32(50) == 1) {
+                            usuarioCompletoTO.permissoes.flHistoriaPatologicaPregressaA = "True";
+                        } else {
+                            usuarioCompletoTO.permissoes.flHistoriaPatologicaPregressaA = "false";
+                        }
+                        if (reader.GetInt32(51) == 1) {
+                            usuarioCompletoTO.permissoes.flHistoriaPatologicaPregressaE = "True";
+                        } else {
+                            usuarioCompletoTO.permissoes.flHistoriaPatologicaPregressaE = "false";
+                        }
+
+                        if (reader.GetInt32(52) == 1) {
+                            usuarioCompletoTO.permissoes.flHipoteseDiagnosticaI = "True";
+                        } else {
+                            usuarioCompletoTO.permissoes.flHipoteseDiagnosticaI = "false";
+                        }
+                        if (reader.GetInt32(53) == 1) {
+                            usuarioCompletoTO.permissoes.flHipoteseDiagnosticaC = "True";
+                        } else {
+                            usuarioCompletoTO.permissoes.flHipoteseDiagnosticaC = "false";
+                        }
+                        if (reader.GetInt32(54) == 1) {
+                            usuarioCompletoTO.permissoes.flHipoteseDiagnosticaA = "True";
+                        } else {
+                            usuarioCompletoTO.permissoes.flHipoteseDiagnosticaA = "false";
+                        }
+                        if (reader.GetInt32(55) == 1) {
+                            usuarioCompletoTO.permissoes.flHipoteseDiagnosticaE = "True";
+                        } else {
+                            usuarioCompletoTO.permissoes.flHipoteseDiagnosticaE = "false";
+                        }
+
+                        if (reader.GetInt32(56) == 1) {
+                            usuarioCompletoTO.permissoes.flCondutaI = "True";
+                        } else {
+                            usuarioCompletoTO.permissoes.flCondutaI = "false";
+                        }
+                        if (reader.GetInt32(57) == 1) {
+                            usuarioCompletoTO.permissoes.flCondutaC = "True";
+                        } else {
+                            usuarioCompletoTO.permissoes.flCondutaC = "false";
+                        }
+                        if (reader.GetInt32(58) == 1) {
+                            usuarioCompletoTO.permissoes.flCondutaA = "True";
+                        } else {
+                            usuarioCompletoTO.permissoes.flCondutaA = "false";
+                        }
+                        if (reader.GetInt32(59) == 1) {
+                            usuarioCompletoTO.permissoes.flCondutaE = "True";
+                        } else {
+                            usuarioCompletoTO.permissoes.flCondutaE = "false";
+                        }
+
+                        if (reader.GetInt32(60) == 1) {
+                            usuarioCompletoTO.permissoes.flIniciarAtendimento = "True";
+                        } else {
+                            usuarioCompletoTO.permissoes.flIniciarAtendimento = "false";
                         }
                     }
                 }
@@ -342,7 +481,7 @@ namespace SGCM.AppData.Usuario {
                         cmdUsuario.Parameters.Add("@USUARIO", MySqlDbType.String).Value = usuarioModel.usuario.Username;
                         cmdUsuario.Parameters.Add("@SENHA", MySqlDbType.String).Value = usuarioModel.usuario.Password;
                         cmdUsuario.Parameters.Add("@TIPOUSUARIO", MySqlDbType.Int32).Value = Convert.ToInt32(usuarioModel.usuario.TipoUsuario);
-                        cmdUsuario.Parameters.Add("@DATADESATIVACAO", MySqlDbType.String).Value = usuarioModel.usuario.DataDesativacao;
+                        cmdUsuario.Parameters.Add("@STATUSDESATIVACAO", MySqlDbType.Int32).Value = Convert.ToInt32(usuarioModel.pessoa.Status);
 
                         retorno = retorno + cmdUsuario.ExecuteNonQuery();
 
@@ -353,26 +492,60 @@ namespace SGCM.AppData.Usuario {
 
                         cmdPermissoes.Parameters.Add("@IDUSUARIO", MySqlDbType.Int32).Value = usuarioModel.usuario.IdUsuario;
                         cmdPermissoes.Parameters.Add("@IDPERMISSOES", MySqlDbType.Int32).Value = usuarioModel.permissoes.IdPermissoes;
-                        cmdPermissoes.Parameters.Add("@FLUSUARIOI", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlUsuarioI);
-                        cmdPermissoes.Parameters.Add("@FLUSUARIOC", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlUsuarioC);
-                        cmdPermissoes.Parameters.Add("@FLUSUARIOA", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlUsuarioA);
-                        cmdPermissoes.Parameters.Add("@FLUSUARIOE", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlUsuarioE);
-                        cmdPermissoes.Parameters.Add("@FLPACIENTEI", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlPacienteI);
-                        cmdPermissoes.Parameters.Add("@FLPACIENTEC", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlPacienteC);
-                        cmdPermissoes.Parameters.Add("@FLPACIENTEA", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlPacienteA);
-                        cmdPermissoes.Parameters.Add("@FLPACIENTEE", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlPacienteE);
-                        cmdPermissoes.Parameters.Add("@FLCONSULTAI", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlConsultaI);
-                        cmdPermissoes.Parameters.Add("@FLCONSULTAC", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlConsultaC);
-                        cmdPermissoes.Parameters.Add("@FLCONSULTAA", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlConsultaA);
-                        cmdPermissoes.Parameters.Add("@FLCONSULTAE", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlConsultaE);
-                        cmdPermissoes.Parameters.Add("@FLMEDICAMENTOI", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlMedicamentoI);
-                        cmdPermissoes.Parameters.Add("@FLMEDICAMENTOC", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlMedicamentoC);
-                        cmdPermissoes.Parameters.Add("@FLMEDICAMENTOA", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlMedicamentoA);
-                        cmdPermissoes.Parameters.Add("@FLMEDICAMENTOE", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlMedicamentoE);
-                        cmdPermissoes.Parameters.Add("@FLEXAMESI", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlExamesI);
-                        cmdPermissoes.Parameters.Add("@FLEXAMESC", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlExamesC);
-                        cmdPermissoes.Parameters.Add("@FLEXAMESA", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlExamesA);
-                        cmdPermissoes.Parameters.Add("@FLEXAMESE", MySqlDbType.Int32).Value = Int32.Parse(usuarioModel.permissoes.FlExamesE);
+
+                        cmdPermissoes.Parameters.AddWithValue("@FLUSUARIOI", Int32.Parse(usuarioModel.permissoes.flUsuarioI));
+                        cmdPermissoes.Parameters.AddWithValue("@FLUSUARIOC", Int32.Parse(usuarioModel.permissoes.flUsuarioC));
+                        cmdPermissoes.Parameters.AddWithValue("@FLUSUARIOA", Int32.Parse(usuarioModel.permissoes.flUsuarioA));
+                        cmdPermissoes.Parameters.AddWithValue("@FLUSUARIOE", Int32.Parse(usuarioModel.permissoes.flUsuarioE));
+
+                        cmdPermissoes.Parameters.AddWithValue("@FLPACIENTEI", Int32.Parse(usuarioModel.permissoes.flPacienteI));
+                        cmdPermissoes.Parameters.AddWithValue("@FLPACIENTEC", Int32.Parse(usuarioModel.permissoes.flPacienteC));
+                        cmdPermissoes.Parameters.AddWithValue("@FLPACIENTEA", Int32.Parse(usuarioModel.permissoes.flPacienteA));
+                        cmdPermissoes.Parameters.AddWithValue("@FLPACIENTEE", Int32.Parse(usuarioModel.permissoes.flPacienteE));
+
+                        cmdPermissoes.Parameters.AddWithValue("@FLCONSULTAI", Int32.Parse(usuarioModel.permissoes.flConsultaI));
+                        cmdPermissoes.Parameters.AddWithValue("@FLCONSULTAC", Int32.Parse(usuarioModel.permissoes.flConsultaC));
+                        cmdPermissoes.Parameters.AddWithValue("@FLCONSULTAA", Int32.Parse(usuarioModel.permissoes.flConsultaA));
+                        cmdPermissoes.Parameters.AddWithValue("@FLCONSULTAE", Int32.Parse(usuarioModel.permissoes.flConsultaE));
+
+                        cmdPermissoes.Parameters.AddWithValue("@FLAUSENCIAI", Int32.Parse(usuarioModel.permissoes.flAusenciaI));
+                        cmdPermissoes.Parameters.AddWithValue("@FLAUSENCIAC", Int32.Parse(usuarioModel.permissoes.flAusenciaC));
+                        cmdPermissoes.Parameters.AddWithValue("@FLAUSENCIAA", Int32.Parse(usuarioModel.permissoes.flAusenciaA));
+                        cmdPermissoes.Parameters.AddWithValue("@FLAUSENCIAE", Int32.Parse(usuarioModel.permissoes.flAusenciaE));
+
+                        cmdPermissoes.Parameters.AddWithValue("@FLMEDICAMENTOI", Int32.Parse(usuarioModel.permissoes.flMedicamentoI));
+                        cmdPermissoes.Parameters.AddWithValue("@FLMEDICAMENTOC", Int32.Parse(usuarioModel.permissoes.flMedicamentoC));
+                        cmdPermissoes.Parameters.AddWithValue("@FLMEDICAMENTOA", Int32.Parse(usuarioModel.permissoes.flMedicamentoA));
+                        cmdPermissoes.Parameters.AddWithValue("@FLMEDICAMENTOE", Int32.Parse(usuarioModel.permissoes.flMedicamentoE));
+
+                        cmdPermissoes.Parameters.AddWithValue("@FLEXAMESI", Int32.Parse(usuarioModel.permissoes.flExamesI));
+                        cmdPermissoes.Parameters.AddWithValue("@FLEXAMESC", Int32.Parse(usuarioModel.permissoes.flExamesC));
+                        cmdPermissoes.Parameters.AddWithValue("@FLEXAMESA", Int32.Parse(usuarioModel.permissoes.flExamesA));
+                        cmdPermissoes.Parameters.AddWithValue("@FLEXAMESE", Int32.Parse(usuarioModel.permissoes.flExamesE));
+
+                        cmdPermissoes.Parameters.AddWithValue("@FLHISTORIAMOLESTIAATUALI", Int32.Parse(usuarioModel.permissoes.flHistoriaMolestiaAtualI));
+                        cmdPermissoes.Parameters.AddWithValue("@FLHISTORIAMOLESTIAATUALC", Int32.Parse(usuarioModel.permissoes.flHistoriaMolestiaAtualC));
+                        cmdPermissoes.Parameters.AddWithValue("@FLHISTORIAMOLESTIAATUALA", Int32.Parse(usuarioModel.permissoes.flHistoriaMolestiaAtualA));
+                        cmdPermissoes.Parameters.AddWithValue("@FLHISTORIAMOLESTIAATUALE", Int32.Parse(usuarioModel.permissoes.flHistoriaMolestiaAtualE));
+
+                        cmdPermissoes.Parameters.AddWithValue("@FLHISTORIAPATOLOGICAPREGRESSAI", Int32.Parse(usuarioModel.permissoes.flHistoriaPatologicaPregressaI));
+                        cmdPermissoes.Parameters.AddWithValue("@FLHISTORIAPATOLOGICAPREGRESSAC", Int32.Parse(usuarioModel.permissoes.flHistoriaPatologicaPregressaC));
+                        cmdPermissoes.Parameters.AddWithValue("@FLHISTORIAPATOLOGICAPREGRESSAA", Int32.Parse(usuarioModel.permissoes.flHistoriaPatologicaPregressaA));
+                        cmdPermissoes.Parameters.AddWithValue("@FLHISTORIAPATOLOGICAPREGRESSAE", Int32.Parse(usuarioModel.permissoes.flHistoriaPatologicaPregressaE));
+
+                        cmdPermissoes.Parameters.AddWithValue("@FLHIPOTESEDIAGNOSTICAI", Int32.Parse(usuarioModel.permissoes.flHipoteseDiagnosticaI));
+                        cmdPermissoes.Parameters.AddWithValue("@FLHIPOTESEDIAGNOSTICAC", Int32.Parse(usuarioModel.permissoes.flHipoteseDiagnosticaC));
+                        cmdPermissoes.Parameters.AddWithValue("@FLHIPOTESEDIAGNOSTICAA", Int32.Parse(usuarioModel.permissoes.flHipoteseDiagnosticaA));
+                        cmdPermissoes.Parameters.AddWithValue("@FLHIPOTESEDIAGNOSTICAE", Int32.Parse(usuarioModel.permissoes.flHipoteseDiagnosticaE));
+
+                        cmdPermissoes.Parameters.AddWithValue("@FLCONDUTAI", Int32.Parse(usuarioModel.permissoes.flCondutaI));
+                        cmdPermissoes.Parameters.AddWithValue("@FLCONDUTAC", Int32.Parse(usuarioModel.permissoes.flCondutaC));
+                        cmdPermissoes.Parameters.AddWithValue("@FLCONDUTAA", Int32.Parse(usuarioModel.permissoes.flCondutaA));
+                        cmdPermissoes.Parameters.AddWithValue("@FLCONDUTAE", Int32.Parse(usuarioModel.permissoes.flCondutaE));
+
+                        cmdPermissoes.Parameters.AddWithValue("@FLINICIARATENDIMENTO", Int32.Parse(usuarioModel.permissoes.flIniciarAtendimento));
+
+                        var teste = getGeneratedSql(cmdPermissoes);
 
                         retorno = retorno + cmdPermissoes.ExecuteNonQuery();
 
@@ -391,6 +564,16 @@ namespace SGCM.AppData.Usuario {
                     throw ex;
                 }
             }
+        }
+
+        private string getGeneratedSql(MySqlCommand cmd) {
+            string result = cmd.CommandText.ToString();
+            foreach (MySqlParameter p in cmd.Parameters)
+            {
+                string isQuted = (p.Value is string) ? "'" : "";
+                result = result.Replace(p.ParameterName.ToString(), isQuted + p.Value.ToString() + isQuted);
+            }
+            return result;
         }
     }
 }

@@ -1,0 +1,64 @@
+﻿@using SGCM.Models.Consulta.IniciarAtendimento;
+@model IniciarAtendimentoModel
+
+<div class="consulta-usuario-container">
+
+    <div class="row margin-row">
+        <div class="col-lg-2">
+            <label asp-for="@Model.ExameFisico.exameFisico" class="control-label form-label"></label>
+        </div>
+
+        @* EXAME FÍSICO *@
+        <div class="col-lg-8 margin-right-15-px">
+            <div class="form-group">
+                <textarea asp-for="@Model.ExameFisico.exameFisico" style="height: 150px;" type="text" class="form-control form-input form-input-center"></textarea>
+                <span asp-validation-for="@Model.ExameFisico.exameFisico" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+
+
+
+    <div class="row margin-row">
+        <div class="col-lg-2">
+            <label class="control-label form-label">Histórico de Exames</label>
+        </div>
+
+        <div class="col-lg-8">
+            @{
+                if (Model.ExameLaboratorialLista.Count != 0)
+                {
+                    foreach (var exameLaboratorial in @Model.ExameLaboratorialLista)
+                    {
+                        if (exameLaboratorial.exameLaboratorial != null)
+                        {
+                            var base64 = Convert.ToBase64String(exameLaboratorial.exameLaboratorial);
+                            var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                            <img class="clickImagem" src='@imgSrc' id="@exameLaboratorial.idExameLaboratorial" style="max-width: 150px; max-height: 150px; border: 1px solid; margin-bottom: 10px;" />
+                        }
+                    }
+                }
+                else
+                {
+                    <span style="color: red;">Essa consulta não contém nenhuma imagem de resultado de exame!</span>
+                }
+            }
+        </div>
+
+        <div class="col-lg-2"></div>
+    </div>
+
+</div>
+
+<div class="form-group padding-top-15px">
+    <button id="moveAnteriorDadosExameFisico" type="button" class="btn btn-info btn-brand btn-brand-big margin-right-15-px">&nbsp;Anterior&nbsp;</button>
+    <button id="moveProximoDadosExameFisico" type="button" class="btn btn-primary btn-brand btn-brand-big">&nbsp;Próximo&nbsp;</button>
+</div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="img01">
+    <div id="caption"></div>
+</div>

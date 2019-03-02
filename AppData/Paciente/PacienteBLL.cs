@@ -28,8 +28,8 @@ namespace SGCM.AppData.Paciente
         }
 
         public int EditarPaciente(EditarPacienteModel pacienteModel) {
-            pacienteModel.pessoa.CPF = UtilMetodo.RemovendoCaracteresEspeciais(pacienteModel.pessoa.CPF);
-            pacienteModel.pessoa.TelefoneCelular = UtilMetodo.RemovendoCaracteresEspeciais(pacienteModel.pessoa.TelefoneCelular);
+            pacienteModel.Pessoa.CPF = UtilMetodo.RemovendoCaracteresEspeciais(pacienteModel.Pessoa.CPF);
+            pacienteModel.Pessoa.TelefoneCelular = UtilMetodo.RemovendoCaracteresEspeciais(pacienteModel.Pessoa.TelefoneCelular);
 
             PacienteDAL pacienteDAL = new PacienteDAL();
             return pacienteDAL.EditarPaciente(pacienteModel);

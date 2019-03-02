@@ -25,6 +25,8 @@ namespace SGCM.AppData.Usuario
         public string Usuario { get; set; }
 
         public string Senha { get; set; }
+
+        public string statusDesativado { get; set; }
     }
 
     public class PessoaTO
@@ -88,5 +90,6 @@ namespace SGCM.AppData.Usuario
         public int flCondutaC { get; set; }
         public int flCondutaA { get; set; }
         public int flCondutaE { get; set; }
+        public int flIniciarAtendimento { get; set; }
     }
 }

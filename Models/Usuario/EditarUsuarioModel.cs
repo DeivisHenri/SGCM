@@ -92,31 +92,61 @@ namespace SGCM.Models.Usuario.EditarUsuarioModel
 
         public DateTime DataCadastro { get; set; }
 
-        public DateTime DataDesativacao { get; set; }
+        public int statusDesativado { get; set; }
     }
 
-    public class DadosPermissoes
-    {
-        public string FlUsuarioI { get; set; }
-        public string FlUsuarioC { get; set; }
-        public string FlUsuarioA { get; set; }
-        public string FlUsuarioE { get; set; }
-        public string FlPacienteI { get; set; }
-        public string FlPacienteC { get; set; }
-        public string FlPacienteA { get; set; }
-        public string FlPacienteE { get; set; }
-        public string FlConsultaI { get; set; }
-        public string FlConsultaC { get; set; }
-        public string FlConsultaA { get; set; }
-        public string FlConsultaE { get; set; }
-        public string FlMedicamentoI { get; set; }
-        public string FlMedicamentoC { get; set; }
-        public string FlMedicamentoA { get; set; }
-        public string FlMedicamentoE { get; set; }
-        public string FlExamesI { get; set; }
-        public string FlExamesC { get; set; }
-        public string FlExamesA { get; set; }
-        public string FlExamesE { get; set; }
+    public class DadosPermissoes {
+        public string flUsuarioI { get; set; }
+        public string flUsuarioC { get; set; }
+        public string flUsuarioA { get; set; }
+        public string flUsuarioE { get; set; }
+
+        public string flPacienteI { get; set; }
+        public string flPacienteC { get; set; }
+        public string flPacienteA { get; set; }
+        public string flPacienteE { get; set; }
+
+        public string flConsultaI { get; set; }
+        public string flConsultaC { get; set; }
+        public string flConsultaA { get; set; }
+        public string flConsultaE { get; set; }
+
+        public string flAusenciaI { get; set; }
+        public string flAusenciaC { get; set; }
+        public string flAusenciaA { get; set; }
+        public string flAusenciaE { get; set; }
+
+        public string flMedicamentoI { get; set; }
+        public string flMedicamentoC { get; set; }
+        public string flMedicamentoA { get; set; }
+        public string flMedicamentoE { get; set; }
+
+        public string flExamesI { get; set; }
+        public string flExamesC { get; set; }
+        public string flExamesA { get; set; }
+        public string flExamesE { get; set; }
+
+        public string flHistoriaMolestiaAtualI { get; set; }
+        public string flHistoriaMolestiaAtualC { get; set; }
+        public string flHistoriaMolestiaAtualA { get; set; }
+        public string flHistoriaMolestiaAtualE { get; set; }
+
+        public string flHistoriaPatologicaPregressaI { get; set; }
+        public string flHistoriaPatologicaPregressaC { get; set; }
+        public string flHistoriaPatologicaPregressaA { get; set; }
+        public string flHistoriaPatologicaPregressaE { get; set; }
+
+        public string flHipoteseDiagnosticaI { get; set; }
+        public string flHipoteseDiagnosticaC { get; set; }
+        public string flHipoteseDiagnosticaA { get; set; }
+        public string flHipoteseDiagnosticaE { get; set; }
+
+        public string flCondutaI { get; set; }
+        public string flCondutaC { get; set; }
+        public string flCondutaA { get; set; }
+        public string flCondutaE { get; set; }
+
+        public string flIniciarAtendimento { get; set; }
 
         public int IdPermissoes { get; set; }
 

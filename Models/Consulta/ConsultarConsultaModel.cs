@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using static SGCM.AppData.Infraestrutura.CustomMetadataProvider;
 
-namespace SGCM.Models.Consulta.ConsultarConsultaModel {
+namespace SGCM.Models.Consulta.ConsultarConsultaModel
+{
 
-    public class ConsultarConsultasModel {
+    public class ConsultarConsultasModel
+    {
 
         // -------- DATAS SEMANAIS --------
         public DateTime dataSegunda { get; set; }
@@ -42,7 +44,7 @@ namespace SGCM.Models.Consulta.ConsultarConsultaModel {
         public QuadroSegundaDezoito quadroSegundaDezoito { get; set; }
         public QuadroSegundaDezoitoMeia quadroSegundaDezoitoMeia { get; set; }
 
-         // -------- COMEÇO TERÇA --------
+        // -------- COMEÇO TERÇA --------
         public QuadroTercaSeis quadroTercaSeis { get; set; }
         public QuadroTercaSeisMeia quadroTercaSeisMeia { get; set; }
         public QuadroTercaSete quadroTercaSete { get; set; }
@@ -163,12 +165,13 @@ namespace SGCM.Models.Consulta.ConsultarConsultaModel {
     }
 
     // -------- COMEÇO SEGUNDA --------
-    public class QuadroSegundaSeis {
+    public class QuadroSegundaSeis
+    {
         public string seis { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
-
+        public int consultaFinalizada { get; set; }
     }
 
     public class QuadroSegundaSeisMeia
@@ -177,927 +180,1184 @@ namespace SGCM.Models.Consulta.ConsultarConsultaModel {
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
-
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSegundaSete {
+    public class QuadroSegundaSete
+    {
         public string sete { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSegundaSeteMeia {
+    public class QuadroSegundaSeteMeia
+    {
         public string seteMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSegundaOito {
+    public class QuadroSegundaOito
+    {
         public string oito { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSegundaOitoMeia {
+    public class QuadroSegundaOitoMeia
+    {
         public string oitoMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSegundaNove {
+    public class QuadroSegundaNove
+    {
         public string nove { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSegundaNoveMeia {
+    public class QuadroSegundaNoveMeia
+    {
         public string noveMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSegundaDez {
+    public class QuadroSegundaDez
+    {
         public string dez { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSegundaDezMeia {
+    public class QuadroSegundaDezMeia
+    {
         public string dezMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSegundaOnze {
+    public class QuadroSegundaOnze
+    {
         public string onze { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSegundaOnzeMeia {
+    public class QuadroSegundaOnzeMeia
+    {
         public string onzeMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSegundaDoze {
+    public class QuadroSegundaDoze
+    {
         public string doze { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSegundaDozeMeia {
+    public class QuadroSegundaDozeMeia
+    {
         public string dozeMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSegundaTreze {
+    public class QuadroSegundaTreze
+    {
         public string treze { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSegundaTrezeMeia {
+    public class QuadroSegundaTrezeMeia
+    {
         public string trezeMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSegundaQuatorze {
+    public class QuadroSegundaQuatorze
+    {
         public string quatorze { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSegundaQuatorzeMeia {
+    public class QuadroSegundaQuatorzeMeia
+    {
         public string quatorzeMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSegundaQuinze {
+    public class QuadroSegundaQuinze
+    {
         public string quinze { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSegundaQuinzeMeia {
+    public class QuadroSegundaQuinzeMeia
+    {
         public string quinzeMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSegundaDezesseis {
+    public class QuadroSegundaDezesseis
+    {
         public string dezesseis { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSegundaDezesseisMeia {
+    public class QuadroSegundaDezesseisMeia
+    {
         public string dezesseisMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSegundaDezessete {
+    public class QuadroSegundaDezessete
+    {
         public string dezessete { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSegundaDezesseteMeia {
+    public class QuadroSegundaDezesseteMeia
+    {
         public string dezesseteMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSegundaDezoito {
+    public class QuadroSegundaDezoito
+    {
         public string dezoito { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSegundaDezoitoMeia {
+    public class QuadroSegundaDezoitoMeia
+    {
         public string dezoitoMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
     // -------- COMEÇO TERÇA --------
-    public class QuadroTercaSeis {
+    public class QuadroTercaSeis
+    {
         public string seis { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
-
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroTercaSeisMeia {
+    public class QuadroTercaSeisMeia
+    {
         public string seisMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
-
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroTercaSete {
+    public class QuadroTercaSete
+    {
         public string sete { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroTercaSeteMeia {
+    public class QuadroTercaSeteMeia
+    {
         public string seteMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroTercaOito {
+    public class QuadroTercaOito
+    {
         public string oito { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroTercaOitoMeia {
+    public class QuadroTercaOitoMeia
+    {
         public string oitoMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroTercaNove {
+    public class QuadroTercaNove
+    {
         public string nove { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroTercaNoveMeia {
+    public class QuadroTercaNoveMeia
+    {
         public string noveMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroTercaDez {
+    public class QuadroTercaDez
+    {
         public string dez { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroTercaDezMeia {
+    public class QuadroTercaDezMeia
+    {
         public string dezMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroTercaOnze {
+    public class QuadroTercaOnze
+    {
         public string onze { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroTercaOnzeMeia {
+    public class QuadroTercaOnzeMeia
+    {
         public string onzeMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroTercaDoze {
+    public class QuadroTercaDoze
+    {
         public string doze { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroTercaDozeMeia {
+    public class QuadroTercaDozeMeia
+    {
         public string dozeMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroTercaTreze {
+    public class QuadroTercaTreze
+    {
         public string treze { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroTercaTrezeMeia {
+    public class QuadroTercaTrezeMeia
+    {
         public string trezeMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroTercaQuatorze {
+    public class QuadroTercaQuatorze
+    {
         public string quatorze { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroTercaQuatorzeMeia {
+    public class QuadroTercaQuatorzeMeia
+    {
         public string quatorzeMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroTercaQuinze {
+    public class QuadroTercaQuinze
+    {
         public string quinze { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroTercaQuinzeMeia {
+    public class QuadroTercaQuinzeMeia
+    {
         public string quinzeMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroTercaDezesseis {
+    public class QuadroTercaDezesseis
+    {
         public string dezesseis { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroTercaDezesseisMeia {
+    public class QuadroTercaDezesseisMeia
+    {
         public string dezesseisMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroTercaDezessete {
+    public class QuadroTercaDezessete
+    {
         public string dezessete { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroTercaDezesseteMeia {
+    public class QuadroTercaDezesseteMeia
+    {
         public string dezesseteMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroTercaDezoito {
+    public class QuadroTercaDezoito
+    {
         public string dezoito { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroTercaDezoitoMeia {
+    public class QuadroTercaDezoitoMeia
+    {
         public string dezoitoMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-
-    // -------- COMEÇO QUARTA --------
-    public class QuadroQuartaSeis {
+    // -------- COMEÇO Quarta --------
+    public class QuadroQuartaSeis
+    {
         public string seis { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuartaSeisMeia {
+    public class QuadroQuartaSeisMeia
+    {
         public string seisMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuartaSete {
+    public class QuadroQuartaSete
+    {
         public string sete { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuartaSeteMeia {
+    public class QuadroQuartaSeteMeia
+    {
         public string seteMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuartaOito {
+    public class QuadroQuartaOito
+    {
         public string oito { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuartaOitoMeia {
+    public class QuadroQuartaOitoMeia
+    {
         public string oitoMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuartaNove {
+    public class QuadroQuartaNove
+    {
         public string nove { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuartaNoveMeia {
+    public class QuadroQuartaNoveMeia
+    {
         public string noveMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuartaDez {
+    public class QuadroQuartaDez
+    {
         public string dez { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuartaDezMeia {
+    public class QuadroQuartaDezMeia
+    {
         public string dezMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuartaOnze {
+    public class QuadroQuartaOnze
+    {
         public string onze { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuartaOnzeMeia {
+    public class QuadroQuartaOnzeMeia
+    {
         public string onzeMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuartaDoze {
+    public class QuadroQuartaDoze
+    {
         public string doze { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuartaDozeMeia {
+    public class QuadroQuartaDozeMeia
+    {
         public string dozeMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuartaTreze {
+    public class QuadroQuartaTreze
+    {
         public string treze { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuartaTrezeMeia {
+    public class QuadroQuartaTrezeMeia
+    {
         public string trezeMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuartaQuatorze {
+    public class QuadroQuartaQuatorze
+    {
         public string quatorze { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuartaQuatorzeMeia {
+    public class QuadroQuartaQuatorzeMeia
+    {
         public string quatorzeMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuartaQuinze {
+    public class QuadroQuartaQuinze
+    {
         public string quinze { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuartaQuinzeMeia {
+    public class QuadroQuartaQuinzeMeia
+    {
         public string quinzeMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuartaDezesseis {
+    public class QuadroQuartaDezesseis
+    {
         public string dezesseis { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuartaDezesseisMeia {
+    public class QuadroQuartaDezesseisMeia
+    {
         public string dezesseisMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuartaDezessete {
+    public class QuadroQuartaDezessete
+    {
         public string dezessete { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuartaDezesseteMeia {
+    public class QuadroQuartaDezesseteMeia
+    {
         public string dezesseteMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuartaDezoito {
+    public class QuadroQuartaDezoito
+    {
         public string dezoito { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuartaDezoitoMeia {
+    public class QuadroQuartaDezoitoMeia
+    {
         public string dezoitoMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
     // -------- COMEÇO QUINTA --------
-    public class QuadroQuintaSeis {
+    public class QuadroQuintaSeis
+    {
         public string seis { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuintaSeisMeia {
+    public class QuadroQuintaSeisMeia
+    {
         public string seisMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuintaSete {
+    public class QuadroQuintaSete
+    {
         public string sete { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuintaSeteMeia {
+    public class QuadroQuintaSeteMeia
+    {
         public string seteMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuintaOito {
+    public class QuadroQuintaOito
+    {
         public string oito { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuintaOitoMeia {
+    public class QuadroQuintaOitoMeia
+    {
         public string oitoMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuintaNove {
+    public class QuadroQuintaNove
+    {
         public string nove { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuintaNoveMeia {
+    public class QuadroQuintaNoveMeia
+    {
         public string noveMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuintaDez {
+    public class QuadroQuintaDez
+    {
         public string dez { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuintaDezMeia {
+    public class QuadroQuintaDezMeia
+    {
         public string dezMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuintaOnze {
+    public class QuadroQuintaOnze
+    {
         public string onze { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuintaOnzeMeia {
+    public class QuadroQuintaOnzeMeia
+    {
         public string onzeMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuintaDoze {
+    public class QuadroQuintaDoze
+    {
         public string doze { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuintaDozeMeia {
+    public class QuadroQuintaDozeMeia
+    {
         public string dozeMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuintaTreze {
+    public class QuadroQuintaTreze
+    {
         public string treze { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuintaTrezeMeia {
+    public class QuadroQuintaTrezeMeia
+    {
         public string trezeMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuintaQuatorze {
+    public class QuadroQuintaQuatorze
+    {
         public string quatorze { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuintaQuatorzeMeia {
+    public class QuadroQuintaQuatorzeMeia
+    {
         public string quatorzeMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuintaQuinze {
+    public class QuadroQuintaQuinze
+    {
         public string quinze { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuintaQuinzeMeia {
+    public class QuadroQuintaQuinzeMeia
+    {
         public string quinzeMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuintaDezesseis {
+    public class QuadroQuintaDezesseis
+    {
         public string dezesseis { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuintaDezesseisMeia {
+    public class QuadroQuintaDezesseisMeia
+    {
         public string dezesseisMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuintaDezessete {
+    public class QuadroQuintaDezessete
+    {
         public string dezessete { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuintaDezesseteMeia {
+    public class QuadroQuintaDezesseteMeia
+    {
         public string dezesseteMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuintaDezoito {
+    public class QuadroQuintaDezoito
+    {
         public string dezoito { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroQuintaDezoitoMeia {
+    public class QuadroQuintaDezoitoMeia
+    {
         public string dezoitoMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
     // -------- COMEÇO SEXTA --------
-    public class QuadroSextaSeis {
+    public class QuadroSextaSeis
+    {
         public string seis { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSextaSeisMeia {
+    public class QuadroSextaSeisMeia
+    {
         public string seisMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSextaSete {
+    public class QuadroSextaSete
+    {
         public string sete { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSextaSeteMeia {
+    public class QuadroSextaSeteMeia
+    {
         public string seteMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSextaOito {
+    public class QuadroSextaOito
+    {
         public string oito { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSextaOitoMeia {
+    public class QuadroSextaOitoMeia
+    {
         public string oitoMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSextaNove {
+    public class QuadroSextaNove
+    {
         public string nove { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSextaNoveMeia {
+    public class QuadroSextaNoveMeia
+    {
         public string noveMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSextaDez {
+    public class QuadroSextaDez
+    {
         public string dez { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSextaDezMeia {
+    public class QuadroSextaDezMeia
+    {
         public string dezMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSextaOnze {
+    public class QuadroSextaOnze
+    {
         public string onze { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSextaOnzeMeia {
+    public class QuadroSextaOnzeMeia
+    {
         public string onzeMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSextaDoze {
+    public class QuadroSextaDoze
+    {
         public string doze { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSextaDozeMeia {
+    public class QuadroSextaDozeMeia
+    {
         public string dozeMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSextaTreze {
+    public class QuadroSextaTreze
+    {
         public string treze { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSextaTrezeMeia {
+    public class QuadroSextaTrezeMeia
+    {
         public string trezeMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSextaQuatorze {
+    public class QuadroSextaQuatorze
+    {
         public string quatorze { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSextaQuatorzeMeia {
+    public class QuadroSextaQuatorzeMeia
+    {
         public string quatorzeMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSextaQuinze {
+    public class QuadroSextaQuinze
+    {
         public string quinze { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSextaQuinzeMeia {
+    public class QuadroSextaQuinzeMeia
+    {
         public string quinzeMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSextaDezesseis {
+    public class QuadroSextaDezesseis
+    {
         public string dezesseis { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSextaDezesseisMeia {
+    public class QuadroSextaDezesseisMeia
+    {
         public string dezesseisMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSextaDezessete {
+    public class QuadroSextaDezessete
+    {
         public string dezessete { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSextaDezesseteMeia {
+    public class QuadroSextaDezesseteMeia
+    {
         public string dezesseteMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSextaDezoito {
+    public class QuadroSextaDezoito
+    {
         public string dezoito { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class QuadroSextaDezoitoMeia {
+    public class QuadroSextaDezoitoMeia
+    {
         public string dezoitoMeia { get; set; }
         public int idConsulta { get; set; }
         public int idPaciente { get; set; }
         public int idPacienteConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class ConsultasQuery {
+    public class ConsultasQuery
+    {
         public int idPaciente { get; set; }
         public string nome { get; set; }
         public int idConsulta { get; set; }
         public int idPacienteConsulta { get; set; }
         public DateTime dataConsulta { get; set; }
+        public int consultaFinalizada { get; set; }
     }
 
-    public class ConsultarConsulta {
+    public class ConsultarConsulta
+    {
         public int idConsulta { get; set; }
         public int idPacienteConsulta { get; set; }
         public DateTime dataConsulta { get; set; }
     }
 
-    public class MarcarDataAusenciaBancoModel {
+    public class MarcarDataAusenciaBancoModel
+    {
         public DateTime DataInicio { get; set; }
         public DateTime DataFinal { get; set; }
         public Int32 Seis { get; set; }
