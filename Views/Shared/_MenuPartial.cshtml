@@ -206,8 +206,8 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Medicamento<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a asp-area="" asp-controller="Medicamento" asp-action="CadastroMedicamento">Cadastro Medicamento</a></li>
-                        <li><a asp-area="" asp-controller="Medicamento" asp-action="PesquisaMedicamento">Pesquisar Medicamento</a></li>
+                        <li><a asp-area="" asp-controller="Medicamento" asp-action="CadastrarMedicamento">Cadastrar Medicamento</a></li>
+                        <li><a asp-area="" asp-controller="Medicamento" asp-action="ConsultarMedicamento">Consultar Medicamento</a></li>
                         <li><a asp-area="" asp-controller="Medicamento" asp-action="Relatorio">Relatório</a></li>
                     </ul>
                 </li>
@@ -229,7 +229,7 @@
                         @{
                             if (!(FlMedicamentoC == "0"))
                             {
-                                <li><a asp-area="" asp-controller="Medicamento" asp-action="PesquisaMedicamento">Pesquisar Medicamento</a></li>
+                                <li><a asp-area="" asp-controller="Medicamento" asp-action="ConsultarMedicamento">Consultar Medicamento</a></li>
                             }
                         }
                         <li><a asp-area="" asp-controller="Medicamento" asp-action="Relatorio">Relatório</a></li>

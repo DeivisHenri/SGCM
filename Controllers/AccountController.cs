@@ -179,6 +179,11 @@ namespace SGCM.Controllers {
             HttpContext.Session.SetInt32("flConsultaA", 0);
             HttpContext.Session.SetInt32("flConsultaE", 0);
 
+            HttpContext.Session.SetInt32("flAusenciaI", 0);
+            HttpContext.Session.SetInt32("flAusenciaC", 0);
+            HttpContext.Session.SetInt32("flAusenciaA", 0);
+            HttpContext.Session.SetInt32("flAusenciaE", 0);
+
             HttpContext.Session.SetInt32("flMedicamentoI", 0);
             HttpContext.Session.SetInt32("flMedicamentoC", 0);
             HttpContext.Session.SetInt32("flMedicamentoA", 0);
@@ -188,6 +193,40 @@ namespace SGCM.Controllers {
             HttpContext.Session.SetInt32("flExamesC", 0);
             HttpContext.Session.SetInt32("flExamesA", 0);
             HttpContext.Session.SetInt32("flExamesE", 0);
+
+            HttpContext.Session.SetInt32("flHistoriaMolestiaAtualI", 0);
+            HttpContext.Session.SetInt32("flHistoriaMolestiaAtualC", 0);
+            HttpContext.Session.SetInt32("flHistoriaMolestiaAtualA", 0);
+            HttpContext.Session.SetInt32("flHistoriaMolestiaAtualE", 0);
+
+            HttpContext.Session.SetInt32("flHistoriaPatologicaPregressaI", 0);
+            HttpContext.Session.SetInt32("flHistoriaPatologicaPregressaC", 0);
+            HttpContext.Session.SetInt32("flHistoriaPatologicaPregressaA", 0);
+            HttpContext.Session.SetInt32("flHistoriaPatologicaPregressaE", 0);
+
+            HttpContext.Session.SetInt32("flHipoteseDiagnosticaI", 0);
+            HttpContext.Session.SetInt32("flHipoteseDiagnosticaC", 0);
+            HttpContext.Session.SetInt32("flHipoteseDiagnosticaA", 0);
+            HttpContext.Session.SetInt32("flHipoteseDiagnosticaE", 0);
+
+            HttpContext.Session.SetInt32("flCondutaI", 0);
+            HttpContext.Session.SetInt32("flCondutaC", 0);
+            HttpContext.Session.SetInt32("flCondutaA", 0);
+            HttpContext.Session.SetInt32("flCondutaE", 0);
+
+            HttpContext.Session.SetInt32("flIniciarAtendimento", 0);
+
+            HttpContext.Session.SetString("MensagemTitle", "");
+            HttpContext.Session.SetString("MensagemBody", "");
+
+            HttpContext.Session.SetString("nomeGenerico", "");
+            HttpContext.Session.SetString("flagNomeGenerico", "");
+
+            HttpContext.Session.SetString("nomeFabrica", "");
+            HttpContext.Session.SetString("flagNomeFabrica", "");
+
+            HttpContext.Session.SetString("fabricante", "");
+            HttpContext.Session.SetString("flagFabricante", "");
         }
 
         private void CarregarDadosUsuarioParaSession(UsuarioCompletoTO usuarioCompletoTO)
@@ -243,17 +282,17 @@ namespace SGCM.Controllers {
             ViewData.Add("idPessoa", HttpContext.Session.GetInt32("idPessoa"));
             ViewData.Add("idMedico", HttpContext.Session.GetInt32("idMedico"));
             ViewData.Add("tipoUsuario", HttpContext.Session.GetInt32("tipoUsuario"));
-            ViewData.Add("nome", HttpContext.Session.GetInt32("nome"));
-            ViewData.Add("cpf", HttpContext.Session.GetInt32("cpf"));
-            ViewData.Add("rg", HttpContext.Session.GetInt32("rg"));
-            ViewData.Add("dataNascimento", HttpContext.Session.GetInt32("dataNascimento"));
-            ViewData.Add("logradouro", HttpContext.Session.GetInt32("logradouro"));
+            ViewData.Add("nome", HttpContext.Session.GetString("nome"));
+            ViewData.Add("cpf", HttpContext.Session.GetString("cpf"));
+            ViewData.Add("rg", HttpContext.Session.GetString("rg"));
+            ViewData.Add("dataNascimento", HttpContext.Session.GetString("dataNascimento"));
+            ViewData.Add("logradouro", HttpContext.Session.GetString("logradouro"));
             ViewData.Add("numero", HttpContext.Session.GetInt32("numero"));
-            ViewData.Add("bairro", HttpContext.Session.GetInt32("bairro"));
-            ViewData.Add("cidade", HttpContext.Session.GetInt32("cidade"));
-            ViewData.Add("uf", HttpContext.Session.GetInt32("uf"));
-            ViewData.Add("telefoneCelular", HttpContext.Session.GetInt32("telefoneCelular"));
-            ViewData.Add("email", HttpContext.Session.GetInt32("email"));
+            ViewData.Add("bairro", HttpContext.Session.GetString("bairro"));
+            ViewData.Add("cidade", HttpContext.Session.GetString("cidade"));
+            ViewData.Add("uf", HttpContext.Session.GetString("uf"));
+            ViewData.Add("telefoneCelular", HttpContext.Session.GetString("telefoneCelular"));
+            ViewData.Add("email", HttpContext.Session.GetString("email"));
 
             ViewData.Add("flUsuarioI", HttpContext.Session.GetInt32("flUsuarioI"));
             ViewData.Add("flUsuarioC", HttpContext.Session.GetInt32("flUsuarioC"));
@@ -284,6 +323,28 @@ namespace SGCM.Controllers {
             ViewData.Add("flExamesC", HttpContext.Session.GetInt32("flExamesC"));
             ViewData.Add("flExamesA", HttpContext.Session.GetInt32("flExamesA"));
             ViewData.Add("flExamesE", HttpContext.Session.GetInt32("flExamesE"));
+
+            ViewData.Add("flHistoriaMolestiaAtualI", HttpContext.Session.GetInt32("flHistoriaMolestiaAtualI"));
+            ViewData.Add("flHistoriaMolestiaAtualC", HttpContext.Session.GetInt32("flHistoriaMolestiaAtualC"));
+            ViewData.Add("flHistoriaMolestiaAtualA", HttpContext.Session.GetInt32("flHistoriaMolestiaAtualA"));
+            ViewData.Add("flHistoriaMolestiaAtualE", HttpContext.Session.GetInt32("flHistoriaMolestiaAtualE"));
+
+            ViewData.Add("flHistoriaPatologicaPregressaI", HttpContext.Session.GetInt32("flHistoriaPatologicaPregressaI"));
+            ViewData.Add("flHistoriaPatologicaPregressaC", HttpContext.Session.GetInt32("flHistoriaPatologicaPregressaC"));
+            ViewData.Add("flHistoriaPatologicaPregressaA", HttpContext.Session.GetInt32("flHistoriaPatologicaPregressaA"));
+            ViewData.Add("flHistoriaPatologicaPregressaE", HttpContext.Session.GetInt32("flHistoriaPatologicaPregressaE"));
+
+            ViewData.Add("flHipoteseDiagnosticaI", HttpContext.Session.GetInt32("flHipoteseDiagnosticaI"));
+            ViewData.Add("flHipoteseDiagnosticaC", HttpContext.Session.GetInt32("flHipoteseDiagnosticaC"));
+            ViewData.Add("flHipoteseDiagnosticaA", HttpContext.Session.GetInt32("flHipoteseDiagnosticaA"));
+            ViewData.Add("flHipoteseDiagnosticaE", HttpContext.Session.GetInt32("flHipoteseDiagnosticaE"));
+
+            ViewData.Add("flCondutaI", HttpContext.Session.GetInt32("flCondutaI"));
+            ViewData.Add("flCondutaC", HttpContext.Session.GetInt32("flCondutaC"));
+            ViewData.Add("flCondutaA", HttpContext.Session.GetInt32("flCondutaA"));
+            ViewData.Add("flCondutaE", HttpContext.Session.GetInt32("flCondutaE"));
+
+            ViewData.Add("flIniciarAtendimento", HttpContext.Session.GetInt32("flIniciarAtendimento"));
         }
     }
 }

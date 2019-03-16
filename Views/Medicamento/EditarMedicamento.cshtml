@@ -1,0 +1,75 @@
+﻿@using SGCM.Models.Medicamento;
+@model EditarMedicamentoModel;
+
+@{
+    ViewData["Title"] = "Editar Medicamento";
+}
+
+@* Folha De Estilo *@
+<partial name="/Views/Medicamento/Partials/_MedicamentoStyle.cshtml" />
+
+<div class="center-form-container">
+    <form id="login" asp-controller="Medicamento" asp-action="EditarMedicamento" method="post" class="form-horizontal max-min-width">
+        @Html.AntiForgeryToken()
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <ul class="nav nav-tabs">
+            <li id="liDadosMedicamento" class="active"><a data-toggle="tab" href="#dadosMedicamento">Dados Medicamento</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="dadosMedicamento" class="tab-pane fade in active">
+                <h3>Medicamento</h3>
+                <hr width="100%">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <partial name="/Views/Medicamento/Partials/Editar/_DadosMedicamento.cshtml" model="@Model" />
+
+            </div>
+        </div>
+
+        <div class="form-group padding-top-15px">
+            <input id="voltarConsultarMedicamento" type="button" class="btn btn-warning btn-brand btn-brand-big" value="Voltar" onclick="location.href='@Url.Action("ConsultarMedicamento", "Medicamento")'" />
+            <button type="submit" class="btn btn-success btn-brand btn-brand-big">&nbsp;Salvar&nbsp;</button>
+        </div>
+
+    </form>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+
+    <partial name="/Views/Medicamento/Partials/_MedicamentoScript.cshtml" />
+}
+
+<button type="button" id="btnModalEditarMedicamento" class="btn btn-primary displayNone" data-toggle="modal" data-target="#editarMedicamentoModal"> </button>
+
+<div class="modal fade" id="editarMedicamentoModal" tabindex="-1" role="dialog" aria-labelledby="editarMedicamentoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header displayFlex">
+                <h4 class="modal-title width100" id="editarMedicamentoModalLabel">@ViewBag.MensagemTitle</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @if (ViewBag.MensagemBodyController.ToString() != "")
+                {<h5>@ViewBag.MensagemBodyController</h5>}
+                @if (ViewBag.MensagemBodyAction.ToString() != "")
+                {<h5>@ViewBag.MensagemBodyAction</h5>}
+                <h5 id="mensagemBody">@ViewBag.MensagemBody</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (ViewBag.MensagemBody.ToString() != "")
+{
+    <script>
+        $(document).ready(function () {
+            $('#btnModalEditarMedicamento').click();
+        });
+    </script>
+}

@@ -1,0 +1,49 @@
+﻿@using SGCM.Models.Medicamento;
+@model CadastrarMedicamentoModel;
+
+<div class="row margin-row">
+    <div class="col-lg-3 margin-right-15-px">
+        <div class="form-group">
+            <label asp-for="@Model.nomeGenerico" class="control-label form-label"></label>
+            <input asp-for="@Model.nomeGenerico" class="form-control form-input form-input-center" id="nomeGenerico" />
+            <span asp-validation-for="@Model.nomeGenerico" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-lg-3 margin-right-15-px">
+        <div class="form-group">
+            <label asp-for="@Model.nomeFrabica" class="control-label form-label"></label>
+            <input asp-for="@Model.nomeFrabica" class="form-control form-input form-input-center" id="nomeFrabica" />
+            <span asp-validation-for="@Model.nomeFrabica" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-lg-3 margin-right-15-px">
+        <div class="form-group">
+            <label asp-for="@Model.fabricante" class="control-label form-label"></label>
+            <input asp-for="@Model.fabricante" class="form-control form-input form-input-center" id="fabricante" />
+            <span asp-validation-for="@Model.fabricante" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-lg-3"></div>
+</div>
+
+@*<div class="row margin-row">
+    <div class="col-lg-3">
+        <div class="form-group">
+            <label asp-for="@Model.nomeFrabica" class="control-label form-label"></label>
+            <input asp-for="@Model.nomeFrabica" class="form-control form-input form-input-center" id="nomeFrabica" />
+            <span asp-validation-for="@Model.nomeFrabica" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-lg-8"></div>
+</div>
+
+<div class="row margin-row">
+    <div class="col-lg-3">
+        <div class="form-group">
+            <label asp-for="@Model.fabricante" class="control-label form-label"></label>
+            <input asp-for="@Model.fabricante" class="form-control form-input form-input-center" id="fabricante" />
+            <span asp-validation-for="@Model.fabricante" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-lg-8"></div>
+</div>*@

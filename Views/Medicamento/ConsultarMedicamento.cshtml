@@ -1,0 +1,143 @@
+﻿@using SGCM.Models.Medicamento
+@model ConsultarMedicamentoModel
+
+@{
+    ViewData["Title"] = "Consulta Medicamento";
+}
+
+<partial name="/Views/Medicamento/Partials/_MedicamentoStyle.cshtml" />
+
+@*<div class="center-form-container">*@
+<div class="consulta-usuario-container">
+    <h3>
+        Consulta de Medicamentos
+    </h3>
+    <form asp-controller="Medicamento" asp-action="ConsultarMedicamento" method="get" class="form-horizontal max-min-width">
+        <div class="row margin-bottom-10px margin-left-1px">
+            <div class="col-lg-2 margin-right-15-px">
+                <div class="form-group">
+                    <label asp-for="@Model.psqNomeGenerico" class="control-label form-label"></label>
+                    <input asp-for="@Model.psqNomeGenerico" class="form-control form-input form-input-center" id="psqNomeGenerico" />
+                    <span asp-validation-for="@Model.psqNomeGenerico" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-lg-2 margin-right-15-px">
+                <div class="form-group">
+                    <label asp-for="@Model.psqNomeFabrica" class="control-label form-label"></label>
+                    <input asp-for="@Model.psqNomeFabrica" class="form-control form-input form-input-center" id="psqNomeFabrica" />
+                    <span asp-validation-for="@Model.psqNomeFabrica" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-lg-2 margin-right-15-px">
+                <div class="form-group">
+                    <label asp-for="@Model.psqFabricante" class="control-label form-label"></label>
+                    <input asp-for="@Model.psqFabricante" class="form-control form-input form-input-center" id="psqFabricante" />
+                    <span asp-validation-for="@Model.psqFabricante" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-lg-2" style="text-align: center; margin-top: 25px;">
+                <button type="submit" id="btnPesquisar" class="btn btn-success btn-brand btn-brand-big">&nbsp;Pesquisar&nbsp;</button>
+            </div>
+            <div class="col-lg-4"></div>
+        </div>
+    </form>
+
+    <partial name="~/Views/Medicamento/Partials/Consultar/_ConsultaTable.cshtml" for="@Model.ListaConsultaMedicamentoModel" />
+
+</div>
+
+
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+
+    <partial name="/Views/Medicamento/Partials/_MedicamentoScript.cshtml" />
+}
+
+<button type="button" id="btnModalConsultarMedicamento" class="btn btn-primary displayNone" data-toggle="modal" data-target="#consultarMedicamentoModal"> </button>
+
+<div class="modal fade" id="consultarMedicamentoModal" tabindex="-1" role="dialog" aria-labelledby="consultarMedicamentoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header displayFlex">
+                <h4 class="modal-title width100" id="consultarMedicamentoModalLabel">@ViewBag.MensagemTitle</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @if (ViewBag.MensagemBodyController.ToString() != "")
+                {<h5>@ViewBag.MensagemBodyController</h5>}
+                @if (ViewBag.MensagemBodyAction.ToString() != "")
+                {<h5>@ViewBag.MensagemBodyAction</h5>}
+                <h5 id="mensagemBody">@ViewBag.MensagemBody</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (ViewBag.MensagemBody.ToString() != "")
+{
+    <script>
+        $(document).ready(function () {
+            $('#btnModalConsultarMedicamento').click();
+        });
+    </script>
+}
+
+<script>
+    $(document).ready(function () {
+        $('.btnExcluir').click(function () {
+            var objThis = $(this);
+            var idMedicamento = objThis.attr("id");
+            var nome = objThis.attr("nome");
+            var retorno = confirm("Tem certeza que deseja excluir o medicamento '" + nome + "'?");
+
+            if (retorno === true) {
+                $.post('/Medicamento/ExcluirMedicamento', { __RequestVerificationToken: gettoken(), idMedicamento: idMedicamento }, function (data) {
+                    console.log("data: ", data);
+                    if (data === 1) {
+                        location.reload();
+                        //$.get('/Medicamento/ConsultarMedicamento');
+                    } else {
+                        location.reload();
+                        //$.get('/Medicamento/ConsultarMedicamento');
+                    }
+                });
+            }
+        });
+
+        //$('#btnPesquisar').click(function () {
+        //    $.ajax({
+        //        url: "/Medicamento/ConsultarMedicamentoPesquisa",
+        //        type: 'GET',
+        //        dataType: 'json',
+        //        data: {
+        //            psqNomeGenerico: $("#nomeGenerico").val(),
+        //            psqNomeFabrica: $("#nomeFabrica").val(),
+        //            psqFabricante: $("#fabricante").val()
+        //        },
+        //        success(data) {
+        //            //location.reload();
+        //            debugger
+        //            console.log("data: ", data);
+        //            $(".tabConsultaMedicamento").html(data);
+        //            $(".tabConsultaMedicamento").show();
+        //            //$("#theTable").load("/YourControllerName/TableData");
+        //        }
+        //    });
+
+        //});
+
+        function gettoken() {
+            var token = '@Html.AntiForgeryToken()';
+            token = $(token).val();
+            return token;
+        }
+    });
+</script>
