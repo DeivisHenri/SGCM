@@ -1,19 +1,19 @@
-﻿@using SGCM.Models.Paciente.ConsultarPacienteModel;
-@model ConsultarPacienteModel
+﻿@using SGCM.Models.Usuario.ConsultarUsuarioModel
+
+@model ConsultarUsuarioModel
 
 @{
-    ViewData["Title"] = "Consulta Paciente";
+    ViewData["Title"] = "Consulta Usuário";
 }
 
-@* Folha De Estilo *@
-<partial name="/Views/Paciente/_PacienteStyle.cshtml" />
+<partial name="/Views/Usuario/Partials/Consultar/_UsuarioStyle.cshtml" />
 
 <div>
     <div>
-        <h3>Pacientes cadastrados pelo Usuario: @ViewData["nome"]</h3>
+        <h3>Usuarios Cadastrador pelo Médico: @ViewData["nome"]</h3>
     </div>
 
-    <form asp-controller="Paciente" asp-action="ConsultarPaciente" method="get" class="form-horizontal max-min-width">
+    <form asp-controller="Usuario" asp-action="ConsultarUsuario" method="get" class="form-horizontal max-min-width">
         <div class="row margin-bottom-10px margin-left-1px">
             <div class="col-lg-2 margin-right-15px">
                 <div class="form-group">
@@ -45,22 +45,24 @@
         </div>
     </form>
 
-    <partial name="~/Views/Paciente/Partials/Consulta/_ConsultarPacienteTable.cshtml" for="@Model.ListaConsultarPacienteModel" />
+    <partial name="~/Views/Usuario/Partials/Consultar/_ConsultaUsuarioTable.cshtml" for="@Model.ListaConsultarUsuarioModel" />
 </div>
+
+
 
 @section Scripts {
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 
-    <partial name="/Views/Paciente/_PacienteScript.cshtml" />
+    <partial name="/Views/Usuario/Partials/Consultar/_UsuarioScript.cshtml" />
 }
 
-<button type="button" id="btnModalConsultarPaciente" class="btn btn-primary displayNone" data-toggle="modal" data-target="#consultarPacienteModal"> </button>
+<button type="button" id="btnModalConsultaUsuario" class="btn btn-primary displayNone" data-toggle="modal" data-target="#consultarUsuarioModal"> </button>
 
-<div class="modal fade" id="consultarPacienteModal" tabindex="-1" role="dialog" aria-labelledby="consultarPacienteModalLabel" aria-hidden="true">
+<div class="modal fade" id="consultarUsuarioModal" tabindex="-1" role="dialog" aria-labelledby="consultarUsuarioModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header displayFlex">
-                <h4 class="modal-title width100" id="consultarPacienteModalLabel">@ViewBag.MensagemTitle</h4>
+                <h4 class="modal-title width100" id="consultarUsuarioModalLabel">@ViewBag.MensagemTitle</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -83,7 +85,7 @@
 {
     <script>
         $(document).ready(function () {
-            $('#btnModalConsultarPaciente').click();
+            $('#btnModalConsultaUsuario').click();
         });
     </script>
 }

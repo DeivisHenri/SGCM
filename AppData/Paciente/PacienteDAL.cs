@@ -106,33 +106,34 @@ namespace SGCM.AppData.Paciente
             }
         }
 
-        public List<ConsultarPacienteModel> ConsultarPaciente(int IdMedico) {
+        public List<ListaConsultarPacienteModel> ConsultarPaciente(int IdMedico, int sortOrder, string psqNome, string psqCPF, string psqTelefoneCelular) {
             MySqlConnection connection = new MySqlConnection(getStringConnection());
 
             try {
-                List<ConsultarPacienteModel> pacienteList = new List<ConsultarPacienteModel>();                
+                List<ListaConsultarPacienteModel> pacienteList = new List<ListaConsultarPacienteModel>();                
                 connection.Open();
 
                 var DALSQL = new PacienteDALSQL();
-                MySqlCommand cmdConsultarPaciente = new MySqlCommand(DALSQL.ConsultarPaciente(), connection);
+                MySqlCommand cmdConsultarPaciente = new MySqlCommand(DALSQL.ConsultarPaciente(sortOrder, psqNome, psqCPF, psqTelefoneCelular), connection);
                 cmdConsultarPaciente.Parameters.Add("@IDMEDICO", MySqlDbType.Int32).Value = IdMedico;
+                cmdConsultarPaciente.Parameters.AddWithValue("@NOME", "%" + psqNome + "%");
+                cmdConsultarPaciente.Parameters.AddWithValue("@CPF", "%" + psqCPF + "%");
+                cmdConsultarPaciente.Parameters.AddWithValue("@TELEFONECELULAR", "%" + psqTelefoneCelular + "%");
 
                 MySqlDataReader reader = cmdConsultarPaciente.ExecuteReader();
 
                 if (reader.HasRows) {
                     while (reader.Read()) {
-                        ConsultarPacienteModel pacienteListModel = new ConsultarPacienteModel();
-                        pacienteListModel.pessoa = new Models.Paciente.ConsultarPacienteModel.DadosPessoais();
-                        pacienteListModel.paciente = new DadosPaciente();
+                        ListaConsultarPacienteModel pacienteModel = new ListaConsultarPacienteModel();
 
-                        pacienteListModel.pessoa.IdPessoa = reader.GetInt32(0);
-                        pacienteListModel.pessoa.Nome = reader.GetString(1);
-                        pacienteListModel.pessoa.CPF = reader.GetString(2);
-                        pacienteListModel.pessoa.TelefoneCelular = reader.GetString(3);
-                        pacienteListModel.paciente.idPaciente = reader.GetInt32(4);
-                        pacienteListModel.paciente.Status = reader.GetInt32(5).ToString();
+                        pacienteModel.idPessoa = reader.GetInt32(0);
+                        pacienteModel.Nome = reader.GetString(1);
+                        pacienteModel.CPF = reader.GetString(2);
+                        pacienteModel.TelefoneCelular = reader.GetString(3);
+                        pacienteModel.idPaciente = reader.GetInt32(4);
+                        pacienteModel.Status = reader.GetInt32(5).ToString();
 
-                        pacienteList.Add(pacienteListModel);
+                        pacienteList.Add(pacienteModel);
                     }
                     reader.NextResult();
                 } else {

@@ -7,6 +7,7 @@ using SGCM.Models.Paciente.ConsultarPacienteModel;
 using System.Collections.Generic;
 using SGCM.Models.Paciente.EditarPacienteModel;
 using SGCM.AppData.Consulta;
+using X.PagedList;
 
 namespace SGCM.Controllers
 {
@@ -88,7 +89,7 @@ namespace SGCM.Controllers
 
         //GET: /Paciente/ConsultaUsuario
         [HttpGet]
-        public ActionResult ConsultarPaciente() {
+        public ActionResult ConsultarPaciente(ConsultarPacienteModel model, string pagina) {
             try {
                 ViewBag.MensagemBodyController = "";
                 ViewBag.MensagemBodyAction = "";
@@ -97,19 +98,101 @@ namespace SGCM.Controllers
                 if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
                     if (ViewData["flPacienteC"] != null && (int)ViewData["flPacienteC"] != 0) {
                         var objPacienteBLL = new PacienteBLL();
-                        List<ConsultarPacienteModel> viewModel = objPacienteBLL.ConsultarPaciente((int)ViewData["idMedico"]);
+                        var viewModel = new ConsultarPacienteModel();
+                        var sort = 0;
 
-                        if (viewModel != null) {
+                        if (HttpContext.Session.GetString("flagNome") == null) {
+                            HttpContext.Session.SetString("flagNome", "default");
+                        }
+
+                        if (HttpContext.Session.GetString("flagCPF") == null) {
+                            HttpContext.Session.SetString("flagCPF", "default");
+                        }
+
+                        if (HttpContext.Session.GetString("flagTelefoneCelular") == null) {
+                            HttpContext.Session.SetString("flagTelefoneCelular", "default");
+                        }
+
+                        if (!String.IsNullOrEmpty(model.sortOrder)) {
+                            switch (model.sortOrder) {
+                                case "nome": {
+                                    if (HttpContext.Session.GetString("flagNome") == "default") {
+                                        HttpContext.Session.SetString("flagNome", "ASC");
+                                        sort = 1;
+                                    } else if (HttpContext.Session.GetString("flagNome") == "ASC") {
+                                        HttpContext.Session.SetString("flagNome", "DESC");
+                                        sort = 2;
+                                    } else if (HttpContext.Session.GetString("flagNome") == "DESC") {
+                                        HttpContext.Session.SetString("flagNome", "ASC");
+                                        sort = 1;
+                                    }
+                                    break;
+                                }
+                                case "cpf": {
+                                    if (HttpContext.Session.GetString("flagCPF") == "default") {
+                                        HttpContext.Session.SetString("flagCPF", "ASC");
+                                        sort = 3;
+                                    } else if (HttpContext.Session.GetString("flagCPF") == "ASC") {
+                                        HttpContext.Session.SetString("flagCPF", "DESC");
+                                        sort = 4;
+                                    } else if (HttpContext.Session.GetString("flagCPF") == "DESC") {
+                                        HttpContext.Session.SetString("flagCPF", "ASC");
+                                        sort = 3;
+                                    }
+                                    break;
+                                }
+                                case "telefoneCelular": {
+                                    if (HttpContext.Session.GetString("flagTelefoneCelular") == "default") {
+                                        HttpContext.Session.SetString("flagTelefoneCelular", "ASC");
+                                        sort = 5;
+                                    } else if (HttpContext.Session.GetString("flagTelefoneCelular") == "ASC") {
+                                        HttpContext.Session.SetString("flagTelefoneCelular", "DESC");
+                                        sort = 6;
+                                    } else if (HttpContext.Session.GetString("flagTelefoneCelular") == "DESC") {
+                                        HttpContext.Session.SetString("flagTelefoneCelular", "ASC");
+                                        sort = 5;
+                                    }
+                                    break;
+                                }
+                                default: {
+                                    sort = 0;
+                                    break;
+                                }
+                            }
+                        }
+
+                        var retornoListaPaciente = objPacienteBLL.ConsultarPaciente((int)ViewData["idMedico"], sort, model.psqNome, model.psqCPF, model.psqTelefoneCelular);
+
+
+                        if (retornoListaPaciente != null) {
                             if (HttpContext.Session.GetString("MensagemTitle") != null && HttpContext.Session.GetString("MensagemBody") != null && HttpContext.Session.GetString("MensagemTitle") != "" && HttpContext.Session.GetString("MensagemBody") != "") {
                                 ViewBag.MensagemTitle = HttpContext.Session.GetString("MensagemTitle");
                                 ViewBag.MensagemBody = HttpContext.Session.GetString("MensagemBody");
                                 HttpContext.Session.SetString("MensagemTitle", "");
                                 HttpContext.Session.SetString("MensagemBody", "");
                             }
+
+                            int pageNumber = 0;
+                            if (pagina != null) {
+                                pageNumber = Convert.ToInt32(pagina);
+                            } else {
+                                pageNumber = 1;
+                            }
+
+                            viewModel.ListaConsultarPacienteModel = retornoListaPaciente.ToPagedList(pageNumber, 10);
+
                             return View(viewModel);
                         } else {
+                            string mensagem = "";
+                            mensagem = "Nenhum paciente foi cadastrado pelo Usuário: " + ViewData["nome"];
+
+                            if (model.psqNome != null) mensagem = mensagem + " com o parâmetro 'Nome': " + model.psqNome;
+                            if (model.psqCPF != null) mensagem = mensagem + " com o parâmetro 'CPF': " + model.psqCPF;
+                            if (model.psqTelefoneCelular != null) mensagem = mensagem + " com o parâmetro 'Telefone Celualr': " + model.psqTelefoneCelular;
+
                             ViewBag.MensagemTitle = "Informação";
-                            ViewBag.MensagemBody = "Nenhum paciente foi cadastrado pelo Usuário: " + ViewData["nome"];
+                            ViewBag.MensagemBody = mensagem;
+
                             return View();
                         }
                     } else {
@@ -122,9 +205,7 @@ namespace SGCM.Controllers
                     ViewData.Add("ReturnUrl", ((object[])this.ControllerContext.RouteData.Values.Values)[0] + "/" + ((object[])this.ControllerContext.RouteData.Values.Values)[1]);
                     return RedirectToAction("Signin", "Login", new { ReturnUrl = ViewData["ReturnUrl"] });
                 }
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 ViewBag.MensagemTitle = "Erro";
                 ViewBag.MensagemBodyController = "Controller: PacienteController";
                 ViewBag.MensagemBodyAction = "Action: ConsultarPaciente - GET";

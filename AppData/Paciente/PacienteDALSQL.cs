@@ -83,7 +83,7 @@ namespace SGCM.AppData.Paciente
             return command.ToString();
         }
 
-        public string ConsultarPaciente() {
+        public string ConsultarPaciente(int sort, string psqNome, string psqCPF, string psqTelefoneCelular) {
             StringBuilder command = new StringBuilder();
 
             command.AppendLine("Select Pes.idPessoa,");
@@ -93,7 +93,40 @@ namespace SGCM.AppData.Paciente
             command.AppendLine("       Pac.idPaciente,");
             command.AppendLine("       Pac.statusDesativado");
             command.AppendLine("From Pessoa Pes RIGHT JOIN Paciente Pac ON Pes.idPessoa = Pac.idPessoaPaciente ");
-            command.AppendLine("Where Pes.idMedico = @IDMEDICO");
+            command.AppendLine("Where Pes.idMedico = @IDMEDICO ");
+
+            if (psqNome != null && psqNome != "") {
+                command.AppendLine("AND Pes.nome like @NOME ");
+            }
+
+            if (psqCPF != null && psqCPF != "") {
+                command.AppendLine("AND Pes.cpf like @CPF ");
+            }
+
+            if (psqTelefoneCelular != null && psqTelefoneCelular != "") {
+                command.AppendLine("AND Pes.telefoneCelular like @TELEFONECELULAR ");
+            }
+
+            switch (sort) {
+                case 1:
+                    command.AppendLine("Order By Pes.nome ASC");
+                    break;
+                case 2:
+                    command.AppendLine("Order By Pes.nome DESC");
+                    break;
+                case 3:
+                    command.AppendLine("Order By Pes.cpf ASC");
+                    break;
+                case 4:
+                    command.AppendLine("Order By Pes.cpf DESC");
+                    break;
+                case 5:
+                    command.AppendLine("Order By Pes.telefoneCelular ASC");
+                    break;
+                case 6:
+                    command.AppendLine("Order By Pes.telefoneCelular DESC");
+                    break;
+            }
 
             return command.ToString();
         }

@@ -2,15 +2,17 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using SGCM.AppData.Usuario;
-using System.Collections.Generic;
 using SGCM.Models.Usuario.CadastroUsuarioModel;
 using SGCM.Models.Usuario.EditarUsuarioModel;
+using SGCM.Models.Usuario.ConsultarUsuarioModel;
+
 using SGCM.AppData.Infraestrutura.PDFEstrutura;
 
 using System.IO;// A BIBLIOTECA DE ENTRADA E SAIDA DE ARQUIVOS
 using iTextSharp;//E A BIBLIOTECA ITEXTSHARP E SUAS EXTENÇÕES
 using iTextSharp.text;//ESTENSAO 1 (TEXT)
 using iTextSharp.text.pdf;//ESTENSAO 2 (PDF)
+using X.PagedList;
 
 namespace SGCM.Controllers {
 
@@ -92,7 +94,7 @@ namespace SGCM.Controllers {
 
         //GET: /Usuario/ConsultaUsuario
         [HttpGet]
-        public ActionResult ConsultaUsuario() {
+        public ActionResult ConsultarUsuario(ConsultarUsuarioModel model, string pagina) {
             try {
                 ViewBag.MensagemBodyController = "";
                 ViewBag.MensagemBodyAction = "";
@@ -100,19 +102,100 @@ namespace SGCM.Controllers {
                 CarregarDadosUsuarioParaTela();
                 if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
                     var objUsuariosBLL = new UsuarioBLL();
-                    List<CadastroUsuarioModel> viewModel = objUsuariosBLL.ConsultarUsuario((int)ViewData["idPessoa"]);
+                    var viewModel = new ConsultarUsuarioModel();
+                    var sort = 0;
 
-                    if (viewModel != null) {
+                    if (HttpContext.Session.GetString("flagNome") == null) {
+                        HttpContext.Session.SetString("flagNome", "default");
+                    }
+
+                    if (HttpContext.Session.GetString("flagCPF") == null) {
+                        HttpContext.Session.SetString("flagCPF", "default");
+                    }
+
+                    if (HttpContext.Session.GetString("flagTelefoneCelular") == null) {
+                        HttpContext.Session.SetString("flagTelefoneCelular", "default");
+                    }
+
+                    if (!String.IsNullOrEmpty(model.sortOrder)) {
+                        switch (model.sortOrder) {
+                            case "nome": {
+                                if (HttpContext.Session.GetString("flagNome") == "default") {
+                                    HttpContext.Session.SetString("flagNome", "ASC");
+                                    sort = 1;
+                                } else if (HttpContext.Session.GetString("flagNome") == "ASC") {
+                                    HttpContext.Session.SetString("flagNome", "DESC");
+                                    sort = 2;
+                                } else if (HttpContext.Session.GetString("flagNome") == "DESC") {
+                                    HttpContext.Session.SetString("flagNome", "ASC");
+                                    sort = 1;
+                                }
+                                break;
+                            }
+                            case "cpf": {
+                                if (HttpContext.Session.GetString("flagCPF") == "default") {
+                                    HttpContext.Session.SetString("flagCPF", "ASC");
+                                    sort = 3;
+                                } else if (HttpContext.Session.GetString("flagCPF") == "ASC") {
+                                    HttpContext.Session.SetString("flagCPF", "DESC");
+                                    sort = 4;
+                                } else if (HttpContext.Session.GetString("flagCPF") == "DESC") {
+                                    HttpContext.Session.SetString("flagCPF", "ASC");
+                                    sort = 3;
+                                }
+                                break;
+                            }
+                            case "telefoneCelular": {
+                                if (HttpContext.Session.GetString("flagTelefoneCelular") == "default") {
+                                    HttpContext.Session.SetString("flagTelefoneCelular", "ASC");
+                                    sort = 5;
+                                } else if (HttpContext.Session.GetString("flagTelefoneCelular") == "ASC") {
+                                    HttpContext.Session.SetString("flagTelefoneCelular", "DESC");
+                                    sort = 6;
+                                } else if (HttpContext.Session.GetString("flagTelefoneCelular") == "DESC") {
+                                    HttpContext.Session.SetString("flagTelefoneCelular", "ASC");
+                                    sort = 5;
+                                }
+                                break;
+                            }
+                            default: {
+                                sort = 0;
+                                break;
+                            }
+                        }
+                    }
+
+                    var retornoListaUsuario = objUsuariosBLL.ConsultarUsuario((int)ViewData["idPessoa"], sort, model.psqNome, model.psqCPF, model.psqTelefoneCelular);
+
+                    if (retornoListaUsuario != null) {
                         if (HttpContext.Session.GetString("MensagemTitle") != null && HttpContext.Session.GetString("MensagemBody") != null && HttpContext.Session.GetString("MensagemTitle") != "" && HttpContext.Session.GetString("MensagemBody") != "") {
                             ViewBag.MensagemTitle = HttpContext.Session.GetString("MensagemTitle");
                             ViewBag.MensagemBody = HttpContext.Session.GetString("MensagemBody");
                             HttpContext.Session.SetString("MensagemTitle", "");
                             HttpContext.Session.SetString("MensagemBody", "");
                         }
+
+                        int pageNumber = 0;
+                        if (pagina != null) {
+                            pageNumber = Convert.ToInt32(pagina);
+                        } else {
+                            pageNumber = 1;
+                        }
+
+                        viewModel.ListaConsultarUsuarioModel = retornoListaUsuario.ToPagedList(pageNumber, 10);
+
                         return View(viewModel);
                     } else {
+                        string mensagem = "";
+                        mensagem = "Não existe nenhum Usuário cadastrado pelo usuário: " + ViewData["nome"];
+
+                        if (model.psqNome != null) mensagem = mensagem + " com o parâmetro 'Nome': " + model.psqNome;
+                        if (model.psqCPF != null) mensagem = mensagem + " com o parâmetro 'CPF': " + model.psqCPF;
+                        if (model.psqTelefoneCelular != null) mensagem = mensagem + " com o parâmetro 'Telefone Celualr': " + model.psqTelefoneCelular;
+
                         ViewBag.MensagemTitle = "Informação";
-                        ViewBag.MensagemBody = "Não existe nenhum Usuário cadastrado pelo usuário: " + ViewData["nome"];
+                        ViewBag.MensagemBody = mensagem;
+
                         return View();
                     }
                 } else {

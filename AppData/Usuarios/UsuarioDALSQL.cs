@@ -5,16 +5,49 @@ using System.Text;
 namespace SGCM.AppData.Usuario {
     public class UsuarioDALSQL {
 
-        public string ConsultarUsuario() {
+        public string ConsultarUsuario(int sort, string psqNome, string psqCPF, string psqTelefoneCelular) {
             StringBuilder command = new StringBuilder();
+
             command.AppendLine("Select Pes.nome,");
             command.AppendLine("       Pes.cpf,");
             command.AppendLine("       Pes.telefoneCelular,");
             command.AppendLine("       Pes.idPessoa,");
-            command.AppendLine("       Usr.idUsuario,");
-            command.AppendLine("       Per.idPermissoes");
-            command.AppendLine("From Usuario Usr INNER JOIN Pessoa Pes ON Usr.idPessoaUsuario = Pes.idPessoa INNER JOIN Permissoes Per ON Usr.idUsuario = Per.idUsuarioPermissoes");
-            command.AppendLine("Where Pes.idMedico = @IDPESSOA");
+            command.AppendLine("       Usr.idUsuario");
+            command.AppendLine("From Usuario Usr INNER JOIN Pessoa Pes ON Usr.idPessoaUsuario = Pes.idPessoa");
+            command.AppendLine("Where Pes.idMedico = @IDPESSOA ");
+
+            if (psqNome != null && psqNome != "") {
+                command.AppendLine("AND Pes.nome like @NOME ");
+            }
+
+            if (psqCPF != null && psqCPF != "") {
+                command.AppendLine("AND Pes.cpf like @CPF ");
+            }
+
+            if (psqTelefoneCelular != null && psqTelefoneCelular != "") {
+                command.AppendLine("AND Pes.telefoneCelular like @TELEFONECELULAR ");
+            }
+
+            switch (sort) {
+                case 1:
+                    command.AppendLine("Order By Pes.nome ASC");
+                    break;
+                case 2:
+                    command.AppendLine("Order By Pes.nome DESC");
+                    break;
+                case 3:
+                    command.AppendLine("Order By Pes.cpf ASC");
+                    break;
+                case 4:
+                    command.AppendLine("Order By Pes.cpf DESC");
+                    break;
+                case 5:
+                    command.AppendLine("Order By Pes.telefoneCelular ASC");
+                    break;
+                case 6:
+                    command.AppendLine("Order By Pes.telefoneCelular DESC");
+                    break;
+            }
 
             return command.ToString();
         }

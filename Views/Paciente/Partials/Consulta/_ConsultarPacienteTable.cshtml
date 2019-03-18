@@ -1,0 +1,63 @@
+﻿@using SGCM.Models.Paciente.ConsultarPacienteModel;
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+
+@model IPagedList<ListaConsultarPacienteModel>;
+
+<table title="Tabela dos Usuários" class="table table-striped table-bordered text-center" border="1">
+    <thead>
+        <tr>
+            <td>
+                <div>
+                    Nome
+                    @Html.ActionLink(" ", "ConsultarPaciente", "Paciente", new { sortOrder = "nome" }, new { @class = "glyphicon glyphicon-sort" })
+                </div>
+            </td>
+            <td>
+                <div>
+                    CPF
+                    @Html.ActionLink(" ", "ConsultarPaciente", "Paciente", new { sortOrder = "cpf" }, new { @class = "glyphicon glyphicon-sort" })
+                </div>
+            </td>
+            <td>
+                <div>
+                    Telefone Celular
+                    @Html.ActionLink(" ", "ConsultarPaciente", "Paciente", new { sortOrder = "telefoneCelular" }, new { @class = "glyphicon glyphicon-sort" })
+                </div>
+            </td>
+
+            <td>Editar</td>
+            <td>Status</td>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            @foreach (var paciente in Model)
+            {
+                <tr>
+                    <td>@paciente.Nome</td>
+                    <td>@paciente.CPF</td>
+                    <td>@paciente.TelefoneCelular</td>
+                    <td>
+                        <div>
+                            <a asp-controller="Paciente" asp-action="EditarPaciente" asp-route-id="@paciente.idPaciente">Edit</a>
+                        </div>
+                    </td>
+                    <td>
+                        @{
+                            if (Convert.ToInt32(paciente.Status) == 1)
+                            {
+                                <span>Ativado</span>
+                            }
+                            else
+                            {
+                                <span>Desativado</span>
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

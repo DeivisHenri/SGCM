@@ -8,7 +8,7 @@
 <partial name="/Views/Medicamento/Partials/_MedicamentoStyle.cshtml" />
 
 @*<div class="center-form-container">*@
-<div class="consulta-usuario-container">
+<div>
     <h3>
         Consulta de Medicamentos
     </h3>
@@ -103,36 +103,12 @@
                     console.log("data: ", data);
                     if (data === 1) {
                         location.reload();
-                        //$.get('/Medicamento/ConsultarMedicamento');
                     } else {
                         location.reload();
-                        //$.get('/Medicamento/ConsultarMedicamento');
                     }
                 });
             }
         });
-
-        //$('#btnPesquisar').click(function () {
-        //    $.ajax({
-        //        url: "/Medicamento/ConsultarMedicamentoPesquisa",
-        //        type: 'GET',
-        //        dataType: 'json',
-        //        data: {
-        //            psqNomeGenerico: $("#nomeGenerico").val(),
-        //            psqNomeFabrica: $("#nomeFabrica").val(),
-        //            psqFabricante: $("#fabricante").val()
-        //        },
-        //        success(data) {
-        //            //location.reload();
-        //            debugger
-        //            console.log("data: ", data);
-        //            $(".tabConsultaMedicamento").html(data);
-        //            $(".tabConsultaMedicamento").show();
-        //            //$("#theTable").load("/YourControllerName/TableData");
-        //        }
-        //    });
-
-        //});
 
         function gettoken() {
             var token = '@Html.AntiForgeryToken()';

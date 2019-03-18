@@ -4,39 +4,37 @@ using System.Transactions;
 using SGCM.AppData.Infraestrutura.UtilMetodo;
 using SGCM.Models.Usuario.CadastroUsuarioModel;
 using SGCM.Models.Usuario.EditarUsuarioModel;
+using SGCM.Models.Usuario.ConsultarUsuarioModel;
 using MySql.Data.MySqlClient;
 
 namespace SGCM.AppData.Usuario {
     public class UsuarioDAL : SGCMContext {
 
-        public List<CadastroUsuarioModel> ConsultarUsuario(int IdPessoa)
+        public List<ListaConsultarUsuarioModel> ConsultarUsuario(int IdPessoa, int sort, string psqNome, string psqCPF, string psqTelefoneCelular)
         {
             try
             {
-                List<CadastroUsuarioModel> usuarioCompletoTOList = new List<CadastroUsuarioModel>();
+                List<ListaConsultarUsuarioModel> usuarioCompletoTOList = new List<ListaConsultarUsuarioModel>();
 
                 MySqlConnection connection = new MySqlConnection(getStringConnection());
                 connection.Open();
 
                 var DALSQL = new UsuarioDALSQL();
-                MySqlCommand cmdUsuario = new MySqlCommand(DALSQL.ConsultarUsuario(), connection);
-                cmdUsuario.Parameters.Add("@IDPESSOA", MySqlDbType.Int32).Value = IdPessoa;
+                MySqlCommand cmdConsultarUsuario = new MySqlCommand(DALSQL.ConsultarUsuario(sort, psqNome, psqCPF, psqTelefoneCelular), connection);
+                cmdConsultarUsuario.Parameters.Add("@IDPESSOA", MySqlDbType.Int32).Value = IdPessoa;
+                cmdConsultarUsuario.Parameters.AddWithValue("@NOME", "%" + psqNome + "%");
+                cmdConsultarUsuario.Parameters.AddWithValue("@CPF", "%" + psqCPF + "%");
+                cmdConsultarUsuario.Parameters.AddWithValue("@TELEFONECELULAR", "%" + psqTelefoneCelular + "%");
 
-                MySqlDataReader reader = cmdUsuario.ExecuteReader();
+                MySqlDataReader reader = cmdConsultarUsuario.ExecuteReader();
                 if (reader.HasRows) {
-                    while (reader.Read())
-                    {
-                        CadastroUsuarioModel usuarioCompletoTO = new CadastroUsuarioModel();
-                        usuarioCompletoTO.pessoa = new Models.Usuario.CadastroUsuarioModel.DadosPessoais();
-                        usuarioCompletoTO.usuario = new Models.Usuario.CadastroUsuarioModel.DadosLogin();
-                        usuarioCompletoTO.permissoes = new Models.Usuario.CadastroUsuarioModel.DadosPermissoes();
-
-                        usuarioCompletoTO.pessoa.Nome = reader.GetString(0);
-                        usuarioCompletoTO.pessoa.CPF = reader.GetString(1);
-                        usuarioCompletoTO.pessoa.Telefone_Celular = reader.GetString(2);
-                        usuarioCompletoTO.pessoa.IdPessoa = reader.GetInt32(3);
-                        usuarioCompletoTO.usuario.IdUsuario = reader.GetInt32(4);
-                        usuarioCompletoTO.permissoes.IdPermissoes = reader.GetInt32(5);
+                    while (reader.Read()) {
+                        ListaConsultarUsuarioModel usuarioCompletoTO = new ListaConsultarUsuarioModel();
+                        usuarioCompletoTO.Nome = reader.GetString(0);
+                        usuarioCompletoTO.CPF = reader.GetString(1);
+                        usuarioCompletoTO.TelefoneCelular = reader.GetString(2);
+                        usuarioCompletoTO.idPessoa = reader.GetInt32(3);
+                        usuarioCompletoTO.idUsuario = reader.GetInt32(4);
 
                         usuarioCompletoTOList.Add(usuarioCompletoTO);
                     }

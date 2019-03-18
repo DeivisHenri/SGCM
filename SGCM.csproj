@@ -109,7 +109,7 @@
     <Content Update="Views\Paciente\Partials\Cadastro\_DadosPessoais.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Views\Paciente\Partials\Consulta\_DadosConsulta.cshtml">
+    <Content Update="Views\Paciente\Partials\Consulta\_ConsultarPacienteTable.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\Paciente\Partials\Editar\_DadosPessoais.cshtml">
