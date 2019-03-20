@@ -1,10 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using X.PagedList;
 
 namespace SGCM.Models.Ausencia.ConsultarAusenciaModel {
-    public class ConsultarAusenciaBancoModel {
+
+    public class ConsultarAusenciaBancoModel
+    {
+        public string sortOrder { get; set; }
+
+        [Display(Name = "Data Ausência")]
+        public DateTime psqDataAusencia { get; set; }
+
+        public IPagedList<ListaConsultarAusenciaModel> ListaConsultarAusenciaModel { get; set; }
+
+        public int PageCount { get; set; }
+        public int PageNumber { get; set; }
+    }
+
+    public class ListaConsultarAusenciaModel
+    {
         public Int32 idAusencia { get; set; }
         public DateTime DataInicio { get; set; }
         public DateTime DataFinal { get; set; }
@@ -35,4 +49,7 @@ namespace SGCM.Models.Ausencia.ConsultarAusenciaModel {
         public Int32 Dezoito { get; set; }
         public Int32 DezoitoMeia { get; set; }
     }
+
+
+    
 }

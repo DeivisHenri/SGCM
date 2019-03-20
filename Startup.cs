@@ -38,6 +38,22 @@ namespace SGCM
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            //services.Configure<RequestLocalizationOptions>(options =>
+            //{
+            //    options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("pt-BR");
+            //    options.SupportedCultures = new List<CultureInfo> { new CultureInfo("pt-BR"), new CultureInfo("pt-BR") };
+            //});
+
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("pt-BR");
+                options.SupportedCultures = new List<CultureInfo> { new CultureInfo("pt-BR") };
+                options.RequestCultureProviders.Clear();
+            });
+
+
+            services.AddMvc();
+
             //services.AddDbContext<SGCMContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnection")));
 
             services.AddMemoryCache();
@@ -80,6 +96,7 @@ namespace SGCM
                     context.HttpContext.Response.StatusCode);
             });
 
+            app.UseRequestLocalization();
             app.UseSession();
             app.UseHttpsRedirection();
             app.UseStaticFiles();

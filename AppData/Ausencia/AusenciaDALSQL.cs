@@ -73,7 +73,7 @@ namespace SGCM.AppData.Ausencia
             return command.ToString();
         }
 
-        public string ConsultarAusencia() {
+        public string ConsultarAusencia(int sortOrder, DateTime psqDataAusencia) {
             StringBuilder command = new StringBuilder();
 
             command.AppendLine("Select idAusencia,");
@@ -106,7 +106,21 @@ namespace SGCM.AppData.Ausencia
             command.AppendLine("       dezoito,");
             command.AppendLine("       dezoitoMeia");
             command.AppendLine("From ausencia");
-            command.AppendLine("Where idUsuarioAusencia = @IDUSUARIOAUSENCIA");
+            command.AppendLine("Where idUsuarioAusencia = @IDUSUARIOAUSENCIA ");
+
+            if (psqDataAusencia != null && psqDataAusencia != default(DateTime)) {
+                command.AppendLine("AND dataInicial = STR_TO_DATE(@DATAINICIAL, '%d/%m/%Y')");
+            }
+
+            switch (sortOrder)
+            {
+                case 1:
+                    command.AppendLine("Order By dataInicial ASC");
+                    break;
+                case 2:
+                    command.AppendLine("Order By dataInicial DESC");
+                    break;
+            }
 
             return command.ToString();
         }

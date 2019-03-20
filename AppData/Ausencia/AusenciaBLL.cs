@@ -110,10 +110,10 @@ namespace SGCM.AppData.Ausencia {
             }
         }
 
-        public List<ConsultarAusenciaBancoModel> ConsultarAusencia(int idUsuario) {
+        public List<ListaConsultarAusenciaModel> ConsultarAusencia(int idUsuario, int sortOrder, DateTime psqDataAusencia) {
             try {
                 AusenciaDAL objAusenciaDAL = new AusenciaDAL();
-                return objAusenciaDAL.ConsultarAusencia(idUsuario);
+                return objAusenciaDAL.ConsultarAusencia(idUsuario, sortOrder, psqDataAusencia);
             } catch (Exception ex) {
                 throw ex;
             }

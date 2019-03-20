@@ -27,6 +27,7 @@ namespace SGCM.AppData.Consulta
 
                 MySqlDataReader reader = cmdPaciente.ExecuteReader();
                 ConsultaPacienteModelBanco paciente = new ConsultaPacienteModelBanco();
+                paciente.ListaConsultaPacienteModel = new List<ConsultaPacienteModel>();
 
                 if (reader.HasRows) {
                     while (reader.Read()) {

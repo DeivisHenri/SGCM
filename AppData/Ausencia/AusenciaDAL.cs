@@ -69,21 +69,28 @@ namespace SGCM.AppData.Ausencia {
             }
         }
         
-        public List<ConsultarAusenciaBancoModel> ConsultarAusencia(int idUsuario) {
+        public List<ListaConsultarAusenciaModel> ConsultarAusencia(int idUsuario, int sortOrder, DateTime psqDataAusencia) {
             try {
                 var DALSQL = new AusenciaDALSQL();
-                List<ConsultarAusenciaBancoModel> listAusenciaBancoModel = new List<ConsultarAusenciaBancoModel>();
+                List<ListaConsultarAusenciaModel> listAusenciaBancoModel = new List<ListaConsultarAusenciaModel>();
 
                 using (MySqlConnection connection = new MySqlConnection(getStringConnection())) {
                     connection.Open();
 
-                    MySqlCommand cmdConsultarAusencia = new MySqlCommand(DALSQL.ConsultarAusencia(), connection);
+                    MySqlCommand cmdConsultarAusencia = new MySqlCommand(DALSQL.ConsultarAusencia(sortOrder, psqDataAusencia), connection);
                     cmdConsultarAusencia.Parameters.AddWithValue("@IDUSUARIOAUSENCIA", idUsuario);
+
+                    var dataArray = psqDataAusencia.ToShortDateString().Split('/');
+
+                    cmdConsultarAusencia.Parameters.AddWithValue("@DATAINICIAL", psqDataAusencia.ToShortDateString());
+
+                    var teste = getGeneratedSql(cmdConsultarAusencia);
+
                     MySqlDataReader reader = cmdConsultarAusencia.ExecuteReader();
 
                     if (reader.HasRows) {
                         while (reader.Read()) {
-                            ConsultarAusenciaBancoModel ausenciaBanco = new ConsultarAusenciaBancoModel();
+                            ListaConsultarAusenciaModel ausenciaBanco = new ListaConsultarAusenciaModel();
                             ausenciaBanco.idAusencia = reader.GetInt32(0);
                             ausenciaBanco.DataInicio = reader.GetDateTime(1);
                             ausenciaBanco.DataFinal = reader.GetDateTime(2);
@@ -246,6 +253,15 @@ namespace SGCM.AppData.Ausencia {
                     throw ex;
                 }
             }
+        }
+
+        private string getGeneratedSql(MySqlCommand cmd) {
+            string result = cmd.CommandText.ToString();
+            foreach (MySqlParameter p in cmd.Parameters) {
+                string isQuted = (p.Value is string) ? "'" : "";
+                result = result.Replace(p.ParameterName.ToString(), isQuted + p.Value.ToString() + isQuted);
+            }
+            return result;
         }
     }
 }

@@ -1,0 +1,373 @@
+﻿@using SGCM.Models.Ausencia.ConsultarAusenciaModel;
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+
+@model IPagedList<ListaConsultarAusenciaModel>;
+
+<table title="Tabela das Ausências" class="table table-striped table-bordered text-center padding" border="1">
+    <thead>
+        <tr>
+            <td style="max-width: 130px !important; min-width: 130px !important;">
+                <div>
+                    Data da Ausência
+                    @Html.ActionLink(" ", "ConsultarAusencia", "Ausencia", new { sortOrder = "dataAusencia" }, new { @class = "glyphicon glyphicon-sort" })
+                </div>
+            </td>
+            <td>06:00</td>
+            <td>06:30</td>
+            <td>07:00</td>
+            <td>07:30</td>
+            <td>08:00</td>
+            <td>08:30</td>
+            <td>09:00</td>
+            <td>09:30</td>
+            <td>10:00</td>
+            <td>10:30</td>
+            <td>11:00</td>
+            <td>11:30</td>
+            <td>12:00</td>
+            <td>12:30</td>
+            <td>13:00</td>
+            <td>13:30</td>
+            <td>14:00</td>
+            <td>14:30</td>
+            <td>15:00</td>
+            <td>15:30</td>
+            <td>16:00</td>
+            <td>16:30</td>
+            <td>17:00</td>
+            <td>17:30</td>
+            <td>18:00</td>
+            <td>18:30</td>
+        </tr>
+    </thead>
+
+    <tbody>
+        @if (Model != null && Model.Count > 0)
+        {
+            @foreach (var ausencia in Model)
+            {
+                <tr>
+                    <td>@ausencia.DataInicio.ToShortDateString()</td>
+                    <td>
+                        @{
+                            if (ausencia.Seis == 1)
+                            {
+                                <span style="color: red; font-size: smaller">Ausênte</span>
+                            }
+                            else
+                            {
+                                <span style="color: red; font-size: smaller">Livre</span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{
+                            if (ausencia.SeisMeia == 1)
+                            {
+                                <span style="color: red; font-size: smaller">Ausênte</span>
+                            }
+                            else
+                            {
+                                <span style="color: red; font-size: smaller">Livre</span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{
+                            if (ausencia.Sete == 1)
+                            {
+                                <span style="color: red; font-size: smaller">Ausênte</span>
+                            }
+                            else
+                            {
+                                <span style="color: red; font-size: smaller">Livre</span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{
+                            if (ausencia.SeteMeia == 1)
+                            {
+                                <span style="color: red; font-size: smaller">Ausênte</span>
+                            }
+                            else
+                            {
+                                <span style="color: red; font-size: smaller">Livre</span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{
+                            if (ausencia.Oito == 1)
+                            {
+                                <span style="color: red; font-size: smaller">Ausênte</span>
+                            }
+                            else
+                            {
+                                <span style="color: red; font-size: smaller">Livre</span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{
+                            if (ausencia.OitoMeia == 1)
+                            {
+                                <span style="color: red; font-size: smaller">Ausênte</span>
+                            }
+                            else
+                            {
+                                <span style="color: red; font-size: smaller">Livre</span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{
+                            if (ausencia.Nove == 1)
+                            {
+                                <span style="color: red; font-size: smaller">Ausênte</span>
+                            }
+                            else
+                            {
+                                <span style="color: red; font-size: smaller">Livre</span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{
+                            if (ausencia.NoveMeia == 1)
+                            {
+                                <span style="color: red; font-size: smaller">Ausênte</span>
+                            }
+                            else
+                            {
+                                <span style="color: red; font-size: smaller">Livre</span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{
+                            if (ausencia.Dez == 1)
+                            {
+                                <span style="color: red; font-size: smaller">Ausênte</span>
+                            }
+                            else
+                            {
+                                <span style="color: red; font-size: smaller">Livre</span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{
+                            if (ausencia.DezMeia == 1)
+                            {
+                                <span style="color: red; font-size: smaller">Ausênte</span>
+                            }
+                            else
+                            {
+                                <span style="color: red; font-size: smaller">Livre</span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{
+                            if (ausencia.Onze == 1)
+                            {
+                                <span style="color: red; font-size: smaller">Ausênte</span>
+                            }
+                            else
+                            {
+                                <span style="color: red; font-size: smaller">Livre</span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{
+                            if (ausencia.OnzeMeia == 1)
+                            {
+                                <span style="color: red; font-size: smaller">Ausênte</span>
+                            }
+                            else
+                            {
+                                <span style="color: red; font-size: smaller">Livre</span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{
+                            if (ausencia.Doze == 1)
+                            {
+                                <span style="color: red; font-size: smaller">Ausênte</span>
+                            }
+                            else
+                            {
+                                <span style="color: red; font-size: smaller">Livre</span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{
+                            if (ausencia.DozeMeia == 1)
+                            {
+                                <span style="color: red; font-size: smaller">Ausênte</span>
+                            }
+                            else
+                            {
+                                <span style="color: red; font-size: smaller">Livre</span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{
+                            if (ausencia.Treze == 1)
+                            {
+                                <span style="color: red; font-size: smaller">Ausênte</span>
+                            }
+                            else
+                            {
+                                <span style="color: red; font-size: smaller">Livre</span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{
+                            if (ausencia.TrezeMeia == 1)
+                            {
+                                <span style="color: red; font-size: smaller">Ausênte</span>
+                            }
+                            else
+                            {
+                                <span style="color: red; font-size: smaller">Livre</span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{
+                            if (ausencia.Quatorze == 1)
+                            {
+                                <span style="color: red; font-size: smaller">Ausênte</span>
+                            }
+                            else
+                            {
+                                <span style="color: red; font-size: smaller">Livre</span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{
+                            if (ausencia.QuatorzeMeia == 1)
+                            {
+                                <span style="color: red; font-size: smaller">Ausênte</span>
+                            }
+                            else
+                            {
+                                <span style="color: red; font-size: smaller">Livre</span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{
+                            if (ausencia.Quinze == 1)
+                            {
+                                <span style="color: red; font-size: smaller">Ausênte</span>
+                            }
+                            else
+                            {
+                                <span style="color: red; font-size: smaller">Livre</span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{
+                            if (ausencia.QuinzeMeia == 1)
+                            {
+                                <span style="color: red; font-size: smaller">Ausênte</span>
+                            }
+                            else
+                            {
+                                <span style="color: red; font-size: smaller">Livre</span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{
+                            if (ausencia.Dezesseis == 1)
+                            {
+                                <span style="color: red; font-size: smaller">Ausênte</span>
+                            }
+                            else
+                            {
+                                <span style="color: red; font-size: smaller">Livre</span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{
+                            if (ausencia.DezesseisMeia == 1)
+                            {
+                                <span style="color: red; font-size: smaller">Ausênte</span>
+                            }
+                            else
+                            {
+                                <span style="color: red; font-size: smaller">Livre</span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{
+                            if (ausencia.Dezessete == 1)
+                            {
+                                <span style="color: red; font-size: smaller">Ausênte</span>
+                            }
+                            else
+                            {
+                                <span style="color: red; font-size: smaller">Livre</span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{
+                            if (ausencia.DezesseteMeia == 1)
+                            {
+                                <span style="color: red; font-size: smaller">Ausênte</span>
+                            }
+                            else
+                            {
+                                <span style="color: red; font-size: smaller">Livre</span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{
+                            if (ausencia.Dezoito == 1)
+                            {
+                                <span style="color: red; font-size: smaller">Ausênte</span>
+                            }
+                            else
+                            {
+                                <span style="color: red; font-size: smaller">Livre</span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{
+                            if (ausencia.DezoitoMeia == 1)
+                            {
+                                <span style="color: red; font-size: smaller">Ausênte</span>
+                            }
+                            else
+                            {
+                                <span style="color: red; font-size: smaller">Livre</span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        <div>
+                            <a asp-controller="Ausencia" asp-action="EditarAusencia" asp-route-id="@ausencia.idAusencia">Edit</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

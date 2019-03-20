@@ -7,6 +7,7 @@ using SGCM.Models.Ausencia.CadastrarAusenciaModel;
 using SGCM.Models.Ausencia.ConsultarAusenciaModel;
 using SGCM.Models.Ausencia.EditarAusenciaModel;
 using SGCM.AppData.Infraestrutura.UtilMetodo;
+using X.PagedList;
 
 namespace SGCM.Controllers
 {
@@ -105,7 +106,7 @@ namespace SGCM.Controllers
         }
 
         [HttpGet]
-        public ActionResult ConsultarAusencia() {
+        public ActionResult ConsultarAusencia(ConsultarAusenciaBancoModel model, string pagina, string psqDataAusencia) {
             try {
                 ViewBag.MensagemBodyController = "";
                 ViewBag.MensagemBodyAction = "";
@@ -113,18 +114,95 @@ namespace SGCM.Controllers
                 CarregarDadosUsuarioParaTela();
                 if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
                     if ((int)ViewData["flAusenciaC"] != 0) {
-                        List<ConsultarAusenciaBancoModel> viewModel = new List<ConsultarAusenciaBancoModel>();
-                        AusenciaBLL objAusenciaBLL = new AusenciaBLL();
-                        viewModel = objAusenciaBLL.ConsultarAusencia(Convert.ToInt32(ViewData["idUsuario"]));
 
-                        if (HttpContext.Session.GetString("MensagemTitle") != null && HttpContext.Session.GetString("MensagemBody") != null && HttpContext.Session.GetString("MensagemTitle") != "" && HttpContext.Session.GetString("MensagemBody") != "") {
-                            ViewBag.MensagemTitle = HttpContext.Session.GetString("MensagemTitle");
-                            ViewBag.MensagemBody = HttpContext.Session.GetString("MensagemBody");
-                            HttpContext.Session.SetString("MensagemTitle", "");
-                            HttpContext.Session.SetString("MensagemBody", "");
+                        //if (!ModelState.IsValid) return View();
+
+                        if (psqDataAusencia != null && psqDataAusencia != "") {
+                            DateTime resultado;
+                            if (DateTime.TryParse(psqDataAusencia, out resultado)) {
+                                model.psqDataAusencia = resultado;
+                            } else {
+                                ViewBag.MensagemTitle = "Erro";
+                                ViewBag.MensagemBody = "A data informada não está no formato correto! Por favor insira DD/MM/YYYY";
+                                return View();
+                            }
+
+                            //model.psqDataAusencia = new DateTime(Convert.ToInt32(psqDataAusencia.Split('/')[2]),
+                            //                                     Convert.ToInt32(psqDataAusencia.Split('/')[1]),
+                            //                                     Convert.ToInt32(psqDataAusencia.Split('/')[0]),
+                            //                                     0,
+                            //                                     0,
+                            //                                     0,
+                            //                                     0);
                         }
 
-                        return View(viewModel);
+                        AusenciaBLL objAusenciaBLL = new AusenciaBLL();
+                        var viewModel = new ConsultarAusenciaBancoModel();
+                        var sort = 0;
+
+                        if (HttpContext.Session.GetString("flagDataAusencia") == null) {
+                            HttpContext.Session.SetString("flagDataAusencia", "default");
+                        }
+
+                        if (!String.IsNullOrEmpty(model.sortOrder)) {
+                            switch (model.sortOrder) {
+                                case "dataAusencia":
+                                {
+                                    if (HttpContext.Session.GetString("flagDataAusencia") == "default") {
+                                        HttpContext.Session.SetString("flagDataAusencia", "ASC");
+                                        sort = 1;
+                                    } else if (HttpContext.Session.GetString("flagDataAusencia") == "ASC") {
+                                        HttpContext.Session.SetString("flagDataAusencia", "DESC");
+                                        sort = 2;
+                                    } else if (HttpContext.Session.GetString("flagDataAusencia") == "DESC") {
+                                        HttpContext.Session.SetString("flagDataAusencia", "ASC");
+                                        sort = 1;
+                                    }
+                                    break;
+                                }
+                                default:
+                                {
+                                    sort = 0;
+                                    break;
+                                }
+                            }
+                        }
+
+                        var retornoListaAusencia = objAusenciaBLL.ConsultarAusencia((int)ViewData["idUsuario"], sort, model.psqDataAusencia);
+
+                        if (retornoListaAusencia != null) {
+                            if (HttpContext.Session.GetString("MensagemTitle") != null && HttpContext.Session.GetString("MensagemBody") != null && HttpContext.Session.GetString("MensagemTitle") != "" && HttpContext.Session.GetString("MensagemBody") != "") {
+                                ViewBag.MensagemTitle = HttpContext.Session.GetString("MensagemTitle");
+                                ViewBag.MensagemBody = HttpContext.Session.GetString("MensagemBody");
+                                HttpContext.Session.SetString("MensagemTitle", "");
+                                HttpContext.Session.SetString("MensagemBody", "");
+                            }
+
+                            int pageNumber = 0;
+                            if (pagina != null) {
+                                pageNumber = Convert.ToInt32(pagina);
+                            } else {
+                                pageNumber = 1;
+                            }
+
+                            viewModel.ListaConsultarAusenciaModel = retornoListaAusencia.ToPagedList(pageNumber, 10);
+
+                            if (viewModel.psqDataAusencia == default(DateTime)) {
+                                viewModel.psqDataAusencia = DateTime.Now;
+                            }
+
+                            return View(viewModel);
+                        } else {
+                            string mensagem = "";
+                            mensagem = "Nenhum paciente foi cadastrado pelo Usuário: " + ViewData["nome"];
+
+                            if (model.psqDataAusencia != null) mensagem = mensagem + " com o parâmetro 'Data Ausência': " + model.psqDataAusencia;
+
+                            ViewBag.MensagemTitle = "Informação";
+                            ViewBag.MensagemBody = mensagem;
+
+                            return View();
+                        }
                     } else {
                         HttpContext.Session.SetString("MensagemTitle", "Erro");
                         HttpContext.Session.SetString("MensagemBody", "O usuário " + ViewData["nome"] + " não tem acesso a página: 'Consulta/MarcarDataAusencia', pois não tem permissão para inserir consulta");
