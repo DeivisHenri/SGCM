@@ -88,10 +88,10 @@ namespace SGCM.AppData.Consulta {
                 flag = true;
             }
 
-            if (consulta.Consulta.DataConsulta != default(DateTime) && flag == true) {
-                command.AppendLine("	dataConsulta = STR_TO_DATE(@DATACONSULTA, '%d/%m/%Y %h:%i:%s')");
-            } else if (consulta.Consulta.DataConsulta != null && flag == false) {
-                command.AppendLine("Set dataConsulta = @DATACONSULTA");
+            if (consulta.Consulta.DataConsulta != default(DateTime) && flag == true && consulta.Consulta.flagPM == true) {
+                command.AppendLine("dataConsulta = STR_TO_DATE(@DATACONSULTA @FLAGPM, '%d/%m/%Y %h:%i:%s %p')");
+            } else if (consulta.Consulta.DataConsulta != null && flag == false && consulta.Consulta.flagPM == false) {
+                command.AppendLine("Set dataConsulta STR_TO_DATE(@DATACONSULTA, '%d/%m/%Y %h:%i:%s'");
             }
 
             command.AppendLine("Where idConsulta = @IDCONSULTA");
@@ -128,12 +128,12 @@ namespace SGCM.AppData.Consulta {
             command.AppendLine("Update patologicapregressa");
 
             if (patologicaPregressa.idPacientePatologicaPregressa != 0) {
-                command.AppendLine("Set idPacientePatologicaPregressa = @IDPACIENTEPATOLOGICAPREGRESSA,");
+                command.AppendLine("Set idPacientePatologicaPregressa = @IDPACIENTEPATOLOGICAPREGRESSA ");
                 flag = true;
             }
 
             if (patologicaPregressa.patologicaPregressa != null && flag == true) {
-                command.AppendLine("	patologicaPregressa = @PATOLOGICAPREGRESSA");
+                command.AppendLine(", patologicaPregressa = @PATOLOGICAPREGRESSA");
             } else if (patologicaPregressa.patologicaPregressa != null && flag == false) {
                 command.AppendLine("Set patologicaPregressa = @PATOLOGICAPREGRESSA");
             }
@@ -172,12 +172,12 @@ namespace SGCM.AppData.Consulta {
             command.AppendLine("Update hipotesediagnostica");
 
             if (hipoteseDiagnostica.idPacienteHipoteseDiagnostica != 0) {
-                command.AppendLine("Set idPacienteHipoteseDiagnostica = @IDPACIENTEHIPOTESEDIAGNOSTICA,");
+                command.AppendLine("Set idPacienteHipoteseDiagnostica = @IDPACIENTEHIPOTESEDIAGNOSTICA ");
                 flag = true;
             }
 
             if (hipoteseDiagnostica.hipoteseDiagnostica != null && flag == true) {
-                command.AppendLine("	hipoteseDiagnostica = @HIPOTESEDIAGNOSTICA");
+                command.AppendLine("    , hipoteseDiagnostica = @HIPOTESEDIAGNOSTICA");
             } else if (hipoteseDiagnostica.hipoteseDiagnostica != null && flag == false) {
                 command.AppendLine("Set hipoteseDiagnostica = @HIPOTESEDIAGNOSTICA");
             }
@@ -370,6 +370,15 @@ namespace SGCM.AppData.Consulta {
             return command.ToString();
         }
 
+        public string GetMedicamento() {
+            StringBuilder command = new StringBuilder();
+
+            command.AppendLine("Select idMedicamento, nomeGenerico, nomeFabrica, fabricante");
+            command.AppendLine("From medicamento");
+
+            return command.ToString();
+        }
+
         public string InsertExamePedido() {
             StringBuilder command = new StringBuilder();
 
@@ -383,11 +392,33 @@ namespace SGCM.AppData.Consulta {
             return command.ToString();
         }
 
+        public string InsertMedicamentoConsulta()
+        {
+            StringBuilder command = new StringBuilder();
+
+            command.AppendLine("Insert Into consulta_medicamento(idConsultaConsulta_Medicamento,");
+            command.AppendLine("                                 idMedicamentoConsulta_Medicamento)");
+            command.AppendLine("VALUES(@IDCONSULTACONSULTA_MEDICAMENTO,");
+            command.AppendLine("       @IDMEDICAMENTOCONSULTA_MEDICAMENTO)");
+
+            return command.ToString();
+        }
+
         public string DeleteExamePedido() {
             StringBuilder command = new StringBuilder();
 
             command.AppendLine("Delete From examepedido");
             command.AppendLine("Where idBaseNomeExameExamePedido = @IDBASENOMEEXAMEEXAMEPEDIDO");
+
+            return command.ToString();
+        }
+
+        public string DeleteMedicamentoConsulta() {
+            StringBuilder command = new StringBuilder();
+
+            command.AppendLine("Delete From consulta_medicamento");
+            command.AppendLine("Where idConsultaConsulta_Medicamento = @IDCONSULTACONSULTA_MEDICAMENTO ");
+            command.AppendLine("      AND idMedicamentoConsulta_Medicamento = @IDMEDICAMENTOCONSULTA_MEDICAMENTO");
 
             return command.ToString();
         }
@@ -487,6 +518,17 @@ namespace SGCM.AppData.Consulta {
             command.AppendLine("SELECT idExamePedido, idBaseNomeExameExamePedido, idPacienteExamePedido, idConsultaExamePedido");
             command.AppendLine("FROM examepedido");
             command.AppendLine("Where idConsultaExamePedido = @IDCONSULTAEXAMEPEDIDO");
+
+            return command.ToString();
+        }
+
+        public string ConsultaMedicamentoPrescrito()
+        {
+            StringBuilder command = new StringBuilder();
+
+            command.AppendLine("Select idConsulta_Medicamento, idConsultaConsulta_Medicamento, idMedicamentoConsulta_Medicamento");
+            command.AppendLine("From consulta_medicamento");
+            command.AppendLine("Where idConsultaConsulta_Medicamento = @IDCONSULTA");
 
             return command.ToString();
         }

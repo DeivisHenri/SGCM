@@ -400,7 +400,7 @@ namespace SGCM.Controllers {
             } catch (Exception ex) {
                 ViewBag.MensagemTitle = "Erro";
                 ViewBag.MensagemBodyController = "Controller: ConsultaController";
-                ViewBag.MensagemBodyAction = "Action: CadastrarConsulta";
+                ViewBag.MensagemBodyAction = "Action: EditarConsulta/{ID}";
                 ViewBag.MensagemBody = "Exceção: " + ex.Message;
                 return View();
             }
@@ -422,6 +422,8 @@ namespace SGCM.Controllers {
                 if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
                     if ((int)ViewData["flConsultaA"] != 0) {
                         var objConsultaBLL = new ConsultaBLL();
+                        model.Consulta.flagPM = false;
+
                         var retornoEditarConsulta = objConsultaBLL.EditarConsulta(model);
 
                         if (retornoEditarConsulta == 3) {
@@ -448,7 +450,7 @@ namespace SGCM.Controllers {
 
                 ViewBag.MensagemTitle = "Erro";
                 ViewBag.MensagemBodyController = "Controller: ConsultaController";
-                ViewBag.MensagemBodyAction = "Action: CadastrarConsulta";
+                ViewBag.MensagemBodyAction = "Action: EditarConsulta/{MODEL}";
                 ViewBag.MensagemBody = "Exceção: " + ex.Message;
                 return View(model);
             }
@@ -507,6 +509,21 @@ namespace SGCM.Controllers {
                             model.ConsultaLista = objConsultaBLL.ConsultaLista(model.Paciente.idPaciente);
                             model.ExameLaboratorialLista = objConsultaBLL.ExameLaboratorialLista(model.Paciente.idPaciente);
 
+                            var validMolestia = ModelState.GetValidationState("MolestiaAtual.molestiaAtual");
+                            var validExameFisico = ModelState.GetValidationState("ExameFisico.exameFisico");
+                            var validConduta = ModelState.GetValidationState("Conduta.conduta");
+
+                            string mensagem = "Erro na validação:";
+
+                            if (validMolestia.ToString() == "Invalid") mensagem = mensagem + Environment.NewLine + "- Por favor preencha o campo Molestia Atual na aba História da Molestia Atual!";
+
+                            if (validExameFisico.ToString() == "Invalid") mensagem = mensagem + Environment.NewLine + "- Por favor preencha o campo Exame Fisíco na aba Exames!";
+
+                            if (validConduta.ToString() == "Invalid") mensagem = mensagem + Environment.NewLine + "- Por favor preencha o campo Conduta na aba Conduta!";
+
+                            ViewBag.MensagemTitle = "Erro";
+                            ViewBag.MensagemBody = mensagem;
+
                             return View(model);
                         } else {
                             var retornoFinalizarAtendimento = objConsultaBLL.FinalizarAtendimento(model);
@@ -562,6 +579,31 @@ namespace SGCM.Controllers {
                     //else {
                     //    new Exception("Não foi possivel carregar os nomes do exames, favor procurar o suporte do ssitema!");
                     //}
+                } else {
+                    ViewData.Add("ReturnUrl", ((object[])this.ControllerContext.RouteData.Values.Values)[0] + "/" + ((object[])this.ControllerContext.RouteData.Values.Values)[1]);
+                    return RedirectToAction("Signin", "Login", new { ReturnUrl = ViewData["ReturnUrl"] });
+                }
+            } catch (Exception ex) {
+                ViewBag.MensagemTitle = "Erro";
+                ViewBag.MensagemBodyController = "Controller: ConsultaController";
+                ViewBag.MensagemBodyAction = "Action: GetBaseNomeExame";
+                ViewBag.MensagemBody = "Exceção: " + ex.Message;
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult GetMedicamento() {
+            try {
+                ViewBag.MensagemBodyController = "";
+                ViewBag.MensagemBodyAction = "";
+                ViewBag.MensagemBody = "";
+                CarregarDadosUsuarioParaTela();
+                if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
+                    ConsultaBLL objConsultaBLL = new ConsultaBLL();
+
+                    var retornoGetMedicamento = objConsultaBLL.GetMedicamento();
+                    return Json(retornoGetMedicamento);
                 } else {
                     ViewData.Add("ReturnUrl", ((object[])this.ControllerContext.RouteData.Values.Values)[0] + "/" + ((object[])this.ControllerContext.RouteData.Values.Values)[1]);
                     return RedirectToAction("Signin", "Login", new { ReturnUrl = ViewData["ReturnUrl"] });

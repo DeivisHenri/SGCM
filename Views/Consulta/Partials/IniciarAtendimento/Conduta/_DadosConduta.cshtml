@@ -18,6 +18,8 @@
         <div class="col-lg-2"></div>
     </div>
 
+    <h4 style="margin-top: 25px;">Selecione os exames para o paciente fazer:</h4>
+
     <div class="row margin-row center margin-top-bottom">
         <div class="col-lg-12 margin-right-15-px">
             <table id="dataTableExamesFixo" class="tableExamePedido table table-bordered table-striped table-hover" title="Tabela dos Exames" border="1" style="width: 1075px !important;">
@@ -26,6 +28,24 @@
                         <th></th>
                         <th>ID</th>
                         <th>Nome</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+    <h4 style="margin-top: 25px;">Selecione os medicamentos para o paciente:</h4>
+
+    <div class="row margin-row center margin-top-bottom">
+        <div class="col-lg-12 margin-right-15-px">
+            <table id="dataTableMedicamento" class="tableExamePedido table table-bordered table-striped table-hover" title="Tabela dos Medicamentos" border="1" style="width: 1075px !important;">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>ID</th>
+                        <th>Nome Genêrico</th>
+                        <th>Nome Fabrica</th>
+                        <th>Fabricante</th>
                     </tr>
                 </thead>
             </table>
@@ -41,4 +61,5 @@
 
 <div class="displayNone">
     <input id="ExamePedido" asp-for="@Model.ExamePedido" data-id="@Model.ExamePedido" />
+    <input id="Medicamento" asp-for="@Model.Medicamento" data-id="@Model.Medicamento" />
 </div>

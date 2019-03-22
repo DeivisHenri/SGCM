@@ -25,6 +25,8 @@ namespace SGCM.Models.Consulta.EditarConsultaModel {
 
         public string ExamePedido { get; set; }
 
+        public string Medicamento { get; set; }
+
         public List<DadosExamePedido> ListaExamePedido;
     }
 
@@ -36,6 +38,8 @@ namespace SGCM.Models.Consulta.EditarConsultaModel {
         public int idConsulta { get; set; }
 
         public int status { get; set; }
+
+        public bool flagPM { get; set; }
     }
 
     public class DadosPaciente {
@@ -100,5 +104,11 @@ namespace SGCM.Models.Consulta.EditarConsultaModel {
         public int idBaseNomeExameExamePedido { get; set; }
         public int idPacienteExamePedido { get; set; }
         public int idConsultaExamePedido { get; set; }
+    }
+
+    public class DadosMedicamentoConsulta {
+        public int idConsulta_Medicamento { get; set; }
+        public int idConsultaConsulta_Medicamento { get; set; }
+        public int idMedicamentoConsulta_Medicamento { get; set; }
     }
 }

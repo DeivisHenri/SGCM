@@ -28,6 +28,8 @@ namespace SGCM.Models.Consulta.IniciarAtendimento
         public DadosConduta Conduta { get; set; }
 
         public string ExamePedido { get; set; }
+
+        public string Medicamento { get; set; }
     }
 
     public class DadosPessoais
@@ -153,5 +155,13 @@ namespace SGCM.Models.Consulta.IniciarAtendimento
     public class BaseNomeExame {
         public int idBaseNomeExame { get; set; }
         public string baseNomeExame { get; set; }
+    }
+
+    public class GetMedicamento
+    {
+        public int idMedicamento { get; set; }
+        public string nomeGenerico { get; set; }
+        public string nomeFabrica { get; set; }
+        public string fabricante { get; set; }
     }
 }

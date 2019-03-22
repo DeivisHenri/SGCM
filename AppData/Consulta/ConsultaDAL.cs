@@ -206,7 +206,7 @@ namespace SGCM.AppData.Consulta
                         retornoConsulta.MolestiaAtual.idMolestiaAtual = readerMolestiaAtual.GetInt32(0);
                         retornoConsulta.MolestiaAtual.idPacienteMolestiaAtual = readerMolestiaAtual.GetInt32(1);
                         retornoConsulta.MolestiaAtual.idConsultaMolestiaAtual = readerMolestiaAtual.GetInt32(2);
-                        retornoConsulta.MolestiaAtual.molestiaAtual = readerMolestiaAtual.GetString(3);
+                        retornoConsulta.MolestiaAtual.molestiaAtual = readerMolestiaAtual.IsDBNull(3) ? "" : readerMolestiaAtual.GetString(3);
                     }
                     readerMolestiaAtual.Close();
                 } else {
@@ -226,7 +226,7 @@ namespace SGCM.AppData.Consulta
                         retornoConsulta.PatologicaPregressa.idPatologicaPregressa = readerPatologicaPregressa.GetInt32(0);
                         retornoConsulta.PatologicaPregressa.idPacientePatologicaPregressa = readerPatologicaPregressa.GetInt32(1);
                         retornoConsulta.PatologicaPregressa.idConsultaPatologicaPregressa = readerPatologicaPregressa.GetInt32(2);
-                        retornoConsulta.PatologicaPregressa.patologicaPregressa = readerPatologicaPregressa.GetString(3);
+                        retornoConsulta.PatologicaPregressa.patologicaPregressa = readerPatologicaPregressa.IsDBNull(3) ? "" : readerPatologicaPregressa.GetString(3);
                     }
                     readerPatologicaPregressa.Close();
                 } else {
@@ -246,7 +246,7 @@ namespace SGCM.AppData.Consulta
                         retornoConsulta.ExameFisico.idExameFisico = readerExameFisico.GetInt32(0);
                         retornoConsulta.ExameFisico.idPacienteExameFisico = readerExameFisico.GetInt32(1);
                         retornoConsulta.ExameFisico.idConsultaExameFisico = readerExameFisico.GetInt32(2);
-                        retornoConsulta.ExameFisico.exameFisico = readerExameFisico.GetString(3);
+                        retornoConsulta.ExameFisico.exameFisico = readerExameFisico.IsDBNull(3) ? "" : readerExameFisico.GetString(3);
                     }
                     readerExameFisico.Close();
                 } else {
@@ -294,7 +294,7 @@ namespace SGCM.AppData.Consulta
                         retornoConsulta.HipoteseDiagnostica.idHipoteseDiagnostica = readerHipoteseDiagnostica.GetInt32(0);
                         retornoConsulta.HipoteseDiagnostica.idPacienteHipoteseDiagnostica = readerHipoteseDiagnostica.GetInt32(1);
                         retornoConsulta.HipoteseDiagnostica.idConsultaHipoteseDiagnostica = readerHipoteseDiagnostica.GetInt32(2);
-                        retornoConsulta.HipoteseDiagnostica.hipoteseDiagnostica = readerHipoteseDiagnostica.GetString(3);
+                        retornoConsulta.HipoteseDiagnostica.hipoteseDiagnostica = readerHipoteseDiagnostica.IsDBNull(3) ? "" : readerHipoteseDiagnostica.GetString(3);
                     }
                     readerHipoteseDiagnostica.Close();
                 } else {
@@ -314,7 +314,7 @@ namespace SGCM.AppData.Consulta
                         retornoConsulta.Conduta.idConduta = readerConduta.GetInt32(0);
                         retornoConsulta.Conduta.idPacienteConduta = readerConduta.GetInt32(1);
                         retornoConsulta.Conduta.idConsultaConduta = readerConduta.GetInt32(2);
-                        retornoConsulta.Conduta.conduta = readerConduta.GetString(3);
+                        retornoConsulta.Conduta.conduta = readerConduta.IsDBNull(3) ? "" : readerConduta.GetString(3);
                     }
                     readerConduta.Close();
                 } else {
@@ -344,6 +344,31 @@ namespace SGCM.AppData.Consulta
                     readerExamePedido.Close();
                 }
 
+                // ------ MEDICAMENTO PRESCRITO ------
+                MySqlCommand cmdMedicamento = new MySqlCommand(DALSQL.ConsultaMedicamentoPrescrito(), connection);
+                cmdMedicamento.Parameters.AddWithValue("@IDCONSULTA", idConsulta);
+
+                var teste = getGeneratedSql(cmdMedicamento);
+
+                MySqlDataReader readerMedicamento = cmdMedicamento.ExecuteReader();
+
+                retornoConsulta.Medicamento = "";
+                Boolean flagPrimeiroMedicamento = true;
+
+                if (readerMedicamento.HasRows) {
+                    while (readerMedicamento.Read()) {
+                        if (flagPrimeiroMedicamento == true) {
+                            retornoConsulta.Medicamento = readerMedicamento.GetString(2);
+                            flagPrimeiroMedicamento = false;
+                        } else {
+                            retornoConsulta.Medicamento = retornoConsulta.Medicamento + "," + readerMedicamento.GetString(2);
+                        }
+                    }
+                    readerMedicamento.Close();
+                } else {
+                    readerMedicamento.Close();
+                }
+
                 connection.Close();
                 return retornoConsulta;
             } catch (Exception ex) {
@@ -352,235 +377,286 @@ namespace SGCM.AppData.Consulta
         }
 
         public int EditarConsulta(EditarConsultaModel consulta) {
-            try {
-                MySqlConnection connection = new MySqlConnection(getStringConnection());
-                connection.Open();
-                var DALSQL = new ConsultaDALSQL();
-                Int32 retorno = 0;
+            using (TransactionScope scope = new TransactionScope()) {
+                try {
+                    MySqlConnection connection = new MySqlConnection(getStringConnection());
+                    connection.Open();
+                    var DALSQL = new ConsultaDALSQL();
+                    Int32 retorno = 0;
 
-                // ------ DADOS CONSULTA ------
-                MySqlCommand cmdEditarConsulta = new MySqlCommand(DALSQL.EditarConsulta(consulta), connection);
+                    // ------ DADOS CONSULTA ------
+                    MySqlCommand cmdEditarConsulta = new MySqlCommand(DALSQL.EditarConsulta(consulta), connection);
 
-                if (consulta.Paciente.idPaciente != 0) {
-                    cmdEditarConsulta.Parameters.AddWithValue("@IDPACIENTECONSULTA", consulta.Paciente.idPaciente);
-                }
-
-                if (consulta.Consulta.DataConsulta != default(DateTime)) {
-                    cmdEditarConsulta.Parameters.Add("@DATACONSULTA", MySqlDbType.String).Value = consulta.Consulta.DataConsulta.ToString();
-                }
-                cmdEditarConsulta.Parameters.AddWithValue("@IDCONSULTA", consulta.Consulta.idConsulta);
-
-                retorno = cmdEditarConsulta.ExecuteNonQuery();
-
-
-                // ------ DADOS HISTÓRIA DA MOLÉSTIA ATUAL ------
-                if (consulta.MolestiaAtual.idMolestiaAtual != 0) {
-                    MySqlCommand cmdEditarMolestiaAtual = new MySqlCommand(DALSQL.EditarMolestiaAtual(consulta.MolestiaAtual), connection);
-
-                    if (consulta.MolestiaAtual.idPacienteMolestiaAtual != 0) {
-                        cmdEditarMolestiaAtual.Parameters.AddWithValue("@IDPACIENTEMOLESTIAATUAL", consulta.MolestiaAtual.idPacienteMolestiaAtual);
+                    if (consulta.Paciente.idPaciente != 0) {
+                        cmdEditarConsulta.Parameters.AddWithValue("@IDPACIENTECONSULTA", consulta.Paciente.idPaciente);
                     }
 
-                    if (consulta.MolestiaAtual.molestiaAtual != null) {
-                        cmdEditarMolestiaAtual.Parameters.AddWithValue("@MOLESTIAATUAL", consulta.MolestiaAtual.molestiaAtual);
-                    }
-                    cmdEditarMolestiaAtual.Parameters.AddWithValue("@IDMOLESTIAATUAL", consulta.MolestiaAtual.idMolestiaAtual);
-                    retorno = retorno + cmdEditarMolestiaAtual.ExecuteNonQuery();
-                }
-                else
-                {
-                    MySqlCommand cmdHistoriaMolestiaAtual = new MySqlCommand(DALSQL.InsertHistoriaMolestiaAtual(), connection);
-                    cmdHistoriaMolestiaAtual.Parameters.AddWithValue("@IDPACIENTEMOLESTIAATUAL", consulta.Paciente.idPaciente);
-                    cmdHistoriaMolestiaAtual.Parameters.AddWithValue("@IDCONSULTAMOLESTIAATUAL", consulta.Consulta.idConsulta);
-                    cmdHistoriaMolestiaAtual.Parameters.AddWithValue("@MOLESTIAATUAL", consulta.MolestiaAtual.molestiaAtual);
-
-                    retorno = retorno + cmdHistoriaMolestiaAtual.ExecuteNonQuery();
-                }
-
-                // ------ DADOS PATOLOGICA PREGRESSA ------
-                if (consulta.PatologicaPregressa.idPatologicaPregressa != 0)
-                {
-                    MySqlCommand cmdEditarPatologicaPregressa = new MySqlCommand(DALSQL.EditarPatologicaPregressa(consulta.PatologicaPregressa), connection);
-
-                    if (consulta.PatologicaPregressa.idPacientePatologicaPregressa != 0)
-                    {
-                        cmdEditarPatologicaPregressa.Parameters.AddWithValue("@IDPACIENTEPATOLOGICAPREGRESSA", consulta.PatologicaPregressa.idPacientePatologicaPregressa);
+                    if (consulta.Consulta.DataConsulta != default(DateTime) && consulta.Consulta.flagPM == true) {
+                        cmdEditarConsulta.Parameters.AddWithValue("@DATACONSULTA", consulta.Consulta.DataConsulta.ToString());
+                        cmdEditarConsulta.Parameters.AddWithValue("@FLAGPM", "PM");
+                    } else if (consulta.Consulta.DataConsulta != default(DateTime) && consulta.Consulta.flagPM == false) {
+                        cmdEditarConsulta.Parameters.AddWithValue("@DATACONSULTA", consulta.Consulta.DataConsulta.ToString());
                     }
 
-                    if (consulta.PatologicaPregressa.patologicaPregressa != null)
-                    {
-                        cmdEditarPatologicaPregressa.Parameters.AddWithValue("@PATOLOGICAPREGRESSA", consulta.PatologicaPregressa.patologicaPregressa);
-                    }
-                    cmdEditarPatologicaPregressa.Parameters.AddWithValue("@IDPATOLOGICAPREGRESSA", consulta.PatologicaPregressa.idPatologicaPregressa);
-                    retorno = retorno + cmdEditarPatologicaPregressa.ExecuteNonQuery();
-                }
-                else
-                {
-                    MySqlCommand cmdPatologicaPregressa = new MySqlCommand(DALSQL.InsertPatologicaPregressa(), connection);
-                    cmdPatologicaPregressa.Parameters.AddWithValue("@IDPACIENTEPATOLOGICAPREGRESSA", consulta.Paciente.idPaciente);
-                    cmdPatologicaPregressa.Parameters.AddWithValue("@IDCONSULTAPATOLOGICAPREGRESSA", consulta.Consulta.idConsulta);
-                    cmdPatologicaPregressa.Parameters.AddWithValue("@PATOLOGICAPREGRESSA", consulta.PatologicaPregressa.patologicaPregressa);
+                    cmdEditarConsulta.Parameters.AddWithValue("@IDCONSULTA", consulta.Consulta.idConsulta);
 
-                    retorno = retorno + cmdPatologicaPregressa.ExecuteNonQuery();
-                }
+                    var teste = getGeneratedSql(cmdEditarConsulta);
 
-                // ------ DADOS EXAME FISICO ------
-                if (consulta.ExameFisico.idExameFisico != 0)
-                {
-                    MySqlCommand cmdEditarExameFisico = new MySqlCommand(DALSQL.EditarExameFisico(consulta.ExameFisico), connection);
 
-                    if (consulta.ExameFisico.idPacienteExameFisico != 0)
-                    {
-                        cmdEditarExameFisico.Parameters.AddWithValue("@IDPACIENTEEXAMEFISICO", consulta.ExameFisico.idPacienteExameFisico);
-                    }
+                    retorno = cmdEditarConsulta.ExecuteNonQuery();
 
-                    if (consulta.ExameFisico.exameFisico != null)
-                    {
-                        cmdEditarExameFisico.Parameters.AddWithValue("@EXAMEFISICO", consulta.ExameFisico.exameFisico);
-                    }
-                    cmdEditarExameFisico.Parameters.AddWithValue("@IDEXAMEFISICO", consulta.ExameFisico.idExameFisico);
-                    retorno = retorno + cmdEditarExameFisico.ExecuteNonQuery();
-                }
-                else
-                {
-                    MySqlCommand cmdExameFisico = new MySqlCommand(DALSQL.InsertExameFisico(), connection);
-                    cmdExameFisico.Parameters.AddWithValue("@IDPACIENTEEXAMEFISICO", consulta.Paciente.idPaciente);
-                    cmdExameFisico.Parameters.AddWithValue("@IDCONSULTAEXAMEFISICO", consulta.Consulta.idConsulta);
-                    cmdExameFisico.Parameters.AddWithValue("@EXAMEFISICO", consulta.ExameFisico.exameFisico);
 
-                    retorno = retorno + cmdExameFisico.ExecuteNonQuery();
-                }
+                    // ------ DADOS HISTÓRIA DA MOLÉSTIA ATUAL ------
+                    if (consulta.MolestiaAtual.idMolestiaAtual != 0) {
+                        MySqlCommand cmdEditarMolestiaAtual = new MySqlCommand(DALSQL.EditarMolestiaAtual(consulta.MolestiaAtual), connection);
 
-                // ------ DADOS HIPOTESE DIAGNOSTICA ------
-                if (consulta.HipoteseDiagnostica.idHipoteseDiagnostica != 0)
-                {
-                    MySqlCommand cmdEditarHipoteseDiagnostica = new MySqlCommand(DALSQL.EditarHipoteseDiagnostica(consulta.HipoteseDiagnostica), connection);
+                        if (consulta.MolestiaAtual.idPacienteMolestiaAtual != 0) {
+                            cmdEditarMolestiaAtual.Parameters.AddWithValue("@IDPACIENTEMOLESTIAATUAL", consulta.MolestiaAtual.idPacienteMolestiaAtual);
+                        }
 
-                    if (consulta.HipoteseDiagnostica.idPacienteHipoteseDiagnostica != 0)
-                    {
-                        cmdEditarHipoteseDiagnostica.Parameters.AddWithValue("@IDPACIENTEHIPOTESEDIAGNOSTICA", consulta.HipoteseDiagnostica.idPacienteHipoteseDiagnostica);
+                        if (consulta.MolestiaAtual.molestiaAtual != null) {
+                            cmdEditarMolestiaAtual.Parameters.AddWithValue("@MOLESTIAATUAL", consulta.MolestiaAtual.molestiaAtual);
+                        }
+                        cmdEditarMolestiaAtual.Parameters.AddWithValue("@IDMOLESTIAATUAL", consulta.MolestiaAtual.idMolestiaAtual);
+                        retorno = retorno + cmdEditarMolestiaAtual.ExecuteNonQuery();
+                    } else {
+                        MySqlCommand cmdHistoriaMolestiaAtual = new MySqlCommand(DALSQL.InsertHistoriaMolestiaAtual(), connection);
+                        cmdHistoriaMolestiaAtual.Parameters.AddWithValue("@IDPACIENTEMOLESTIAATUAL", consulta.Paciente.idPaciente);
+                        cmdHistoriaMolestiaAtual.Parameters.AddWithValue("@IDCONSULTAMOLESTIAATUAL", consulta.Consulta.idConsulta);
+                        cmdHistoriaMolestiaAtual.Parameters.AddWithValue("@MOLESTIAATUAL", consulta.MolestiaAtual.molestiaAtual);
+
+                        retorno = retorno + cmdHistoriaMolestiaAtual.ExecuteNonQuery();
                     }
 
-                    if (consulta.HipoteseDiagnostica.hipoteseDiagnostica != null)
-                    {
-                        cmdEditarHipoteseDiagnostica.Parameters.AddWithValue("@HIPOTESEDIAGNOSTICA", consulta.HipoteseDiagnostica.hipoteseDiagnostica);
-                    }
-                    cmdEditarHipoteseDiagnostica.Parameters.AddWithValue("@IDHIPOTESEDIAGNOSTICA", consulta.HipoteseDiagnostica.idHipoteseDiagnostica);
-                    retorno = retorno + cmdEditarHipoteseDiagnostica.ExecuteNonQuery();
-                }
-                else
-                {
-                    MySqlCommand cmdHipoteseDiagnostica = new MySqlCommand(DALSQL.InsertHipoteseDiagnostica(), connection);
-                    cmdHipoteseDiagnostica.Parameters.AddWithValue("@IDPACIENTEHIPOTESEDIAGNOSTICA", consulta.Paciente.idPaciente);
-                    cmdHipoteseDiagnostica.Parameters.AddWithValue("@IDCONSULTAHIPOTESEDIAGNOSTICA", consulta.Consulta.idConsulta);
-                    cmdHipoteseDiagnostica.Parameters.AddWithValue("@HIPOTESEDIAGNOSTICA", consulta.HipoteseDiagnostica.hipoteseDiagnostica);
+                    // ------ DADOS PATOLOGICA PREGRESSA ------
+                    if (consulta.PatologicaPregressa.idPatologicaPregressa != 0) {
+                        MySqlCommand cmdEditarPatologicaPregressa = new MySqlCommand(DALSQL.EditarPatologicaPregressa(consulta.PatologicaPregressa), connection);
 
-                    retorno = retorno + cmdHipoteseDiagnostica.ExecuteNonQuery();
-                }
+                        if (consulta.PatologicaPregressa.idPacientePatologicaPregressa != 0) {
+                            cmdEditarPatologicaPregressa.Parameters.AddWithValue("@IDPACIENTEPATOLOGICAPREGRESSA", consulta.PatologicaPregressa.idPacientePatologicaPregressa);
+                        }
 
-                // ------ DADOS CONDUTA ------
-                if (consulta.Conduta.idConduta != 0)
-                {
-                    MySqlCommand cmdEditarConduta = new MySqlCommand(DALSQL.EditarConduta(consulta.Conduta), connection);
+                        if (consulta.PatologicaPregressa.patologicaPregressa != null) {
+                            cmdEditarPatologicaPregressa.Parameters.AddWithValue("@PATOLOGICAPREGRESSA", consulta.PatologicaPregressa.patologicaPregressa);
+                        }
+                        cmdEditarPatologicaPregressa.Parameters.AddWithValue("@IDPATOLOGICAPREGRESSA", consulta.PatologicaPregressa.idPatologicaPregressa);
+                        retorno = retorno + cmdEditarPatologicaPregressa.ExecuteNonQuery();
+                    } else {
+                        MySqlCommand cmdPatologicaPregressa = new MySqlCommand(DALSQL.InsertPatologicaPregressa(), connection);
+                        cmdPatologicaPregressa.Parameters.AddWithValue("@IDPACIENTEPATOLOGICAPREGRESSA", consulta.Paciente.idPaciente);
+                        cmdPatologicaPregressa.Parameters.AddWithValue("@IDCONSULTAPATOLOGICAPREGRESSA", consulta.Consulta.idConsulta);
+                        cmdPatologicaPregressa.Parameters.AddWithValue("@PATOLOGICAPREGRESSA", consulta.PatologicaPregressa.patologicaPregressa);
 
-                    if (consulta.Conduta.idPacienteConduta != 0)
-                    {
-                        cmdEditarConduta.Parameters.AddWithValue("@IDPACIENTECONDUTA", consulta.Conduta.idPacienteConduta);
+                        retorno = retorno + cmdPatologicaPregressa.ExecuteNonQuery();
                     }
 
-                    if (consulta.Conduta.conduta != null)
-                    {
-                        cmdEditarConduta.Parameters.AddWithValue("@CONDUTA", consulta.Conduta.conduta);
+                    // ------ DADOS EXAME FISICO ------
+                    if (consulta.ExameFisico.idExameFisico != 0) {
+                        MySqlCommand cmdEditarExameFisico = new MySqlCommand(DALSQL.EditarExameFisico(consulta.ExameFisico), connection);
+
+                        if (consulta.ExameFisico.idPacienteExameFisico != 0) {
+                            cmdEditarExameFisico.Parameters.AddWithValue("@IDPACIENTEEXAMEFISICO", consulta.ExameFisico.idPacienteExameFisico);
+                        }
+
+                        if (consulta.ExameFisico.exameFisico != null) {
+                            cmdEditarExameFisico.Parameters.AddWithValue("@EXAMEFISICO", consulta.ExameFisico.exameFisico);
+                        }
+                        cmdEditarExameFisico.Parameters.AddWithValue("@IDEXAMEFISICO", consulta.ExameFisico.idExameFisico);
+                        retorno = retorno + cmdEditarExameFisico.ExecuteNonQuery();
+                    } else {
+                        MySqlCommand cmdExameFisico = new MySqlCommand(DALSQL.InsertExameFisico(), connection);
+                        cmdExameFisico.Parameters.AddWithValue("@IDPACIENTEEXAMEFISICO", consulta.Paciente.idPaciente);
+                        cmdExameFisico.Parameters.AddWithValue("@IDCONSULTAEXAMEFISICO", consulta.Consulta.idConsulta);
+                        cmdExameFisico.Parameters.AddWithValue("@EXAMEFISICO", consulta.ExameFisico.exameFisico);
+
+                        retorno = retorno + cmdExameFisico.ExecuteNonQuery();
                     }
-                    cmdEditarConduta.Parameters.AddWithValue("@IDCONDUTA", consulta.Conduta.idConduta);
-                    retorno = retorno + cmdEditarConduta.ExecuteNonQuery();
-                }
-                else
-                {
-                    MySqlCommand cmdConduta = new MySqlCommand(DALSQL.InsertConduta(), connection);
-                    cmdConduta.Parameters.AddWithValue("@IDPACIENTECONDUTA", consulta.Paciente.idPaciente);
-                    cmdConduta.Parameters.AddWithValue("@IDCONSULTACONDUTA", consulta.Consulta.idConsulta);
-                    cmdConduta.Parameters.AddWithValue("@CONDUTA", consulta.Conduta.conduta);
 
-                    retorno = retorno + cmdConduta.ExecuteNonQuery();
-                }
+                    // ------ DADOS HIPOTESE DIAGNOSTICA ------
+                    if (consulta.HipoteseDiagnostica.idHipoteseDiagnostica != 0) {
+                        MySqlCommand cmdEditarHipoteseDiagnostica = new MySqlCommand(DALSQL.EditarHipoteseDiagnostica(consulta.HipoteseDiagnostica), connection);
 
-                // ------ INSERT PEDIDO DE EXAME ------
-                //if (consulta.ExamePedido != null) {
+                        if (consulta.HipoteseDiagnostica.idPacienteHipoteseDiagnostica != 0) {
+                            cmdEditarHipoteseDiagnostica.Parameters.AddWithValue("@IDPACIENTEHIPOTESEDIAGNOSTICA", consulta.HipoteseDiagnostica.idPacienteHipoteseDiagnostica);
+                        }
 
-                // BUSCAR DO BANCO, OS PEDIDOS DE EXAMES
-                MySqlCommand cmdListExamePedido = new MySqlCommand(DALSQL.ConsultaExamePedido(), connection);
-                cmdListExamePedido.Parameters.AddWithValue("@IDCONSULTAEXAMEPEDIDO", consulta.Consulta.idConsulta);
+                        if (consulta.HipoteseDiagnostica.hipoteseDiagnostica != null) {
+                            cmdEditarHipoteseDiagnostica.Parameters.AddWithValue("@HIPOTESEDIAGNOSTICA", consulta.HipoteseDiagnostica.hipoteseDiagnostica);
+                        }
+                        cmdEditarHipoteseDiagnostica.Parameters.AddWithValue("@IDHIPOTESEDIAGNOSTICA", consulta.HipoteseDiagnostica.idHipoteseDiagnostica);
+                        retorno = retorno + cmdEditarHipoteseDiagnostica.ExecuteNonQuery();
+                    } else {
+                        MySqlCommand cmdHipoteseDiagnostica = new MySqlCommand(DALSQL.InsertHipoteseDiagnostica(), connection);
+                        cmdHipoteseDiagnostica.Parameters.AddWithValue("@IDPACIENTEHIPOTESEDIAGNOSTICA", consulta.Paciente.idPaciente);
+                        cmdHipoteseDiagnostica.Parameters.AddWithValue("@IDCONSULTAHIPOTESEDIAGNOSTICA", consulta.Consulta.idConsulta);
+                        cmdHipoteseDiagnostica.Parameters.AddWithValue("@HIPOTESEDIAGNOSTICA", consulta.HipoteseDiagnostica.hipoteseDiagnostica);
 
-                MySqlDataReader readerListExamePedido = cmdListExamePedido.ExecuteReader();
-                List<DadosExamePedido> listExamPedido = new List<DadosExamePedido>();
-
-                if (readerListExamePedido.HasRows)
-                {
-                    while (readerListExamePedido.Read())
-                    {
-                        DadosExamePedido examePedido = new DadosExamePedido();
-                        examePedido.idExamePedido = readerListExamePedido.GetInt32(0);
-                        examePedido.idBaseNomeExameExamePedido = readerListExamePedido.GetInt32(1);
-                        examePedido.idPacienteExamePedido = readerListExamePedido.GetInt32(2);
-                        examePedido.idConsultaExamePedido = readerListExamePedido.GetInt32(3);
-                        listExamPedido.Add(examePedido);
+                        retorno = retorno + cmdHipoteseDiagnostica.ExecuteNonQuery();
                     }
-                    readerListExamePedido.NextResult();
-                }
-                else
-                {
+
+                    // ------ DADOS CONDUTA ------
+                    if (consulta.Conduta.idConduta != 0) {
+                        MySqlCommand cmdEditarConduta = new MySqlCommand(DALSQL.EditarConduta(consulta.Conduta), connection);
+
+                        if (consulta.Conduta.idPacienteConduta != 0) {
+                            cmdEditarConduta.Parameters.AddWithValue("@IDPACIENTECONDUTA", consulta.Conduta.idPacienteConduta);
+                        }
+
+                        if (consulta.Conduta.conduta != null) {
+                            cmdEditarConduta.Parameters.AddWithValue("@CONDUTA", consulta.Conduta.conduta);
+                        }
+                        cmdEditarConduta.Parameters.AddWithValue("@IDCONDUTA", consulta.Conduta.idConduta);
+                        retorno = retorno + cmdEditarConduta.ExecuteNonQuery();
+                    } else {
+                        MySqlCommand cmdConduta = new MySqlCommand(DALSQL.InsertConduta(), connection);
+                        cmdConduta.Parameters.AddWithValue("@IDPACIENTECONDUTA", consulta.Paciente.idPaciente);
+                        cmdConduta.Parameters.AddWithValue("@IDCONSULTACONDUTA", consulta.Consulta.idConsulta);
+                        cmdConduta.Parameters.AddWithValue("@CONDUTA", consulta.Conduta.conduta);
+
+                        retorno = retorno + cmdConduta.ExecuteNonQuery();
+                    }
+
+                    // ------ INSERT PEDIDO DE EXAME ------
+                    //if (consulta.ExamePedido != null) {
+
+                    // BUSCAR DO BANCO, OS PEDIDOS DE EXAMES
+                    MySqlCommand cmdListExamePedido = new MySqlCommand(DALSQL.ConsultaExamePedido(), connection);
+                    cmdListExamePedido.Parameters.AddWithValue("@IDCONSULTAEXAMEPEDIDO", consulta.Consulta.idConsulta);
+
+                    MySqlDataReader readerListExamePedido = cmdListExamePedido.ExecuteReader();
+                    List<DadosExamePedido> listExamPedido = new List<DadosExamePedido>();
+
+                    if (readerListExamePedido.HasRows) {
+                        while (readerListExamePedido.Read()) {
+                            DadosExamePedido examePedido = new DadosExamePedido();
+                            examePedido.idExamePedido = readerListExamePedido.GetInt32(0);
+                            examePedido.idBaseNomeExameExamePedido = readerListExamePedido.GetInt32(1);
+                            examePedido.idPacienteExamePedido = readerListExamePedido.GetInt32(2);
+                            examePedido.idConsultaExamePedido = readerListExamePedido.GetInt32(3);
+                            listExamPedido.Add(examePedido);
+                        }
+                        readerListExamePedido.NextResult();
+                    } else {
+                        readerListExamePedido.Close();
+                    }
                     readerListExamePedido.Close();
-                }
-                readerListExamePedido.Close();
 
-                List<String> listExamePedido = new List<String>();
+                    List<String> listExamePedido = new List<String>();
 
-                if (consulta.ExamePedido != null) {
-                    foreach (var idExamePedido in consulta.ExamePedido.Split(',')) {
-                        if (idExamePedido != "") listExamePedido.Add(idExamePedido);
+                    if (consulta.ExamePedido != null) {
+                        foreach (var idExamePedido in consulta.ExamePedido.Split(',')) {
+                            if (idExamePedido != "") listExamePedido.Add(idExamePedido);
+                        }
                     }
+
+                    List<String> listaExamePedidoInsert = new List<String>();
+                    List<String> listaExamePedidoDelete = new List<String>();
+
+                    foreach (var idExamePedido in listExamePedido) {
+                        var resultado = listExamPedido.Find(x => x.idBaseNomeExameExamePedido == Convert.ToInt32(idExamePedido));
+                        if (resultado == null) listaExamePedidoInsert.Add(idExamePedido);
+                    }
+
+                    foreach (var idExamePedidoBanco in listExamPedido) {
+                        var resultado = listExamePedido.Find(x => Convert.ToInt32(x) == idExamePedidoBanco.idBaseNomeExameExamePedido);
+                        if (resultado == null) listaExamePedidoDelete.Add(idExamePedidoBanco.idBaseNomeExameExamePedido.ToString());
+                    }
+
+
+                    foreach (var examePedidoInsert in listaExamePedidoInsert) {
+                        MySqlCommand cmdExamePedido = new MySqlCommand(DALSQL.InsertExamePedido(), connection);
+                        cmdExamePedido.Parameters.AddWithValue("@IDBASENOMEEXAMEEXAMEPEDIDO", Convert.ToInt32(examePedidoInsert));
+                        cmdExamePedido.Parameters.AddWithValue("@IDPACIENTEEXAMEPEDIDO", consulta.Paciente.idPaciente);
+                        cmdExamePedido.Parameters.AddWithValue("@IDCONSULTAEXAMEPEDIDO", consulta.Consulta.idConsulta);
+
+                        retorno = retorno + cmdExamePedido.ExecuteNonQuery();
+                    }
+
+                    foreach (var examePedidoInsert in listaExamePedidoDelete)  {
+                        MySqlCommand cmdExamePedido = new MySqlCommand(DALSQL.DeleteExamePedido(), connection);
+                        cmdExamePedido.Parameters.AddWithValue("@IDBASENOMEEXAMEEXAMEPEDIDO", Convert.ToInt32(examePedidoInsert));
+
+                        retorno = retorno + cmdExamePedido.ExecuteNonQuery();
+                    }
+
+                    //}
+
+
+
+                    // ------ INSERT MEDICAMENTO ------
+                    //if (consulta.Medicamento != null) {
+
+                    // BUSCAR DO BANCO, OS MEDICAMENTOS
+                    MySqlCommand cmdListMedicamento = new MySqlCommand(DALSQL.ConsultaMedicamentoPrescrito(), connection);
+                    cmdListMedicamento.Parameters.AddWithValue("@IDCONSULTA", consulta.Consulta.idConsulta);
+
+                    MySqlDataReader readerListMedicamento = cmdListMedicamento.ExecuteReader();
+                    List<DadosMedicamentoConsulta> listMedicamento = new List<DadosMedicamentoConsulta>();
+
+                    if (readerListMedicamento.HasRows) {
+                        while (readerListMedicamento.Read()) {
+                            DadosMedicamentoConsulta medicamentoConsulta = new DadosMedicamentoConsulta();
+                            medicamentoConsulta.idConsulta_Medicamento = readerListMedicamento.GetInt32(0);
+                            medicamentoConsulta.idConsultaConsulta_Medicamento = readerListMedicamento.GetInt32(1);
+                            medicamentoConsulta.idMedicamentoConsulta_Medicamento = readerListMedicamento.GetInt32(2);
+                            listMedicamento.Add(medicamentoConsulta);
+                        }
+                        readerListMedicamento.NextResult();
+                    }
+                    readerListMedicamento.Close();
+
+                    List<String> listMedicamentoConsulta = new List<String>();
+
+                    if (consulta.Medicamento != null) {
+                        foreach (var idMedicamento in consulta.Medicamento.Split(',')) {
+                            if (idMedicamento != "") listMedicamentoConsulta.Add(idMedicamento);
+                        }
+                    }
+
+                    List<String> listaMedicamentoInsert = new List<String>();
+                    List<String> listaMedicamentoDelete = new List<String>();
+
+                    foreach (var idMedicamento in listMedicamentoConsulta) {
+                        var resultado = listMedicamento.Find(x => x.idMedicamentoConsulta_Medicamento == Convert.ToInt32(idMedicamento));
+                        if (resultado == null) listaMedicamentoInsert.Add(idMedicamento);
+                    }
+
+                    foreach (var medicamento in listMedicamento) {
+                        var resultado = listMedicamentoConsulta.Find(x => Convert.ToInt32(x) == medicamento.idMedicamentoConsulta_Medicamento);
+                        if (resultado == null) listaMedicamentoDelete.Add(medicamento.idMedicamentoConsulta_Medicamento.ToString());
+                    }
+
+
+                    foreach (var medicamentoInsert in listaMedicamentoInsert) {
+                        MySqlCommand cmdMedicamentoConsultaInsert = new MySqlCommand(DALSQL.InsertMedicamentoConsulta(), connection);
+                        cmdMedicamentoConsultaInsert.Parameters.AddWithValue("@IDCONSULTACONSULTA_MEDICAMENTO", consulta.Consulta.idConsulta);
+                        cmdMedicamentoConsultaInsert.Parameters.AddWithValue("@IDMEDICAMENTOCONSULTA_MEDICAMENTO", Convert.ToInt32(medicamentoInsert));
+
+                        retorno = retorno + cmdMedicamentoConsultaInsert.ExecuteNonQuery();
+                    }
+
+                    foreach (var medicamentoDelete in listaMedicamentoDelete) {
+                        MySqlCommand cmdMedicamentoConsultaDelete = new MySqlCommand(DALSQL.DeleteMedicamentoConsulta(), connection);
+                        cmdMedicamentoConsultaDelete.Parameters.AddWithValue("@IDCONSULTACONSULTA_MEDICAMENTO", consulta.Consulta.idConsulta);
+                        cmdMedicamentoConsultaDelete.Parameters.AddWithValue("@IDMEDICAMENTOCONSULTA_MEDICAMENTO", Convert.ToInt32(medicamentoDelete));
+
+                        retorno = retorno + cmdMedicamentoConsultaDelete.ExecuteNonQuery();
+                    }
+
+                    //}
+                    connection.Close();
+
+                    if (retorno > 0) {
+                        scope.Complete();
+                        return -1;
+                    } else {
+                        scope.Dispose();
+                        return 3;
+                    }
+                } catch (Exception ex) {
+                    scope.Dispose();
+                    throw ex;
                 }
-
-                List<String> listaExamePedidoInsert = new List<String>();
-                List<String> listaExamePedidoDelete = new List<String>();
-
-                foreach (var idExamePedido in listExamePedido) {
-                    var resultado = listExamPedido.Find(x => x.idBaseNomeExameExamePedido == Convert.ToInt32(idExamePedido));
-                    if (resultado == null) listaExamePedidoInsert.Add(idExamePedido);
-                }
-
-                foreach (var idExamePedidoBanco in listExamPedido) {
-                    var resultado = listExamePedido.Find(x => Convert.ToInt32(x) == idExamePedidoBanco.idBaseNomeExameExamePedido);
-                    if (resultado == null) listaExamePedidoDelete.Add(idExamePedidoBanco.idBaseNomeExameExamePedido.ToString());
-                }
-
-
-                foreach (var examePedidoInsert in listaExamePedidoInsert) {
-                    MySqlCommand cmdExamePedido = new MySqlCommand(DALSQL.InsertExamePedido(), connection);
-                    cmdExamePedido.Parameters.AddWithValue("@IDBASENOMEEXAMEEXAMEPEDIDO", Convert.ToInt32(examePedidoInsert));
-                    cmdExamePedido.Parameters.AddWithValue("@IDPACIENTEEXAMEPEDIDO", consulta.Paciente.idPaciente);
-                    cmdExamePedido.Parameters.AddWithValue("@IDCONSULTAEXAMEPEDIDO", consulta.Consulta.idConsulta);
-
-                    retorno = retorno + cmdExamePedido.ExecuteNonQuery();
-                }
-
-                foreach (var examePedidoInsert in listaExamePedidoDelete)  {
-                    MySqlCommand cmdExamePedido = new MySqlCommand(DALSQL.DeleteExamePedido(), connection);
-                    cmdExamePedido.Parameters.AddWithValue("@IDBASENOMEEXAMEEXAMEPEDIDO", Convert.ToInt32(examePedidoInsert));
-
-                    retorno = retorno + cmdExamePedido.ExecuteNonQuery();
-                }
-
-                //}
-
-                connection.Close();
-
-                if (retorno > 0) return -1;
-                else return 3;
-
-            } catch (Exception ex) {
-                throw ex;
             }
         }
 
@@ -954,6 +1030,18 @@ namespace SGCM.AppData.Consulta
                         }
                     }
 
+                    // ------ INSERT PEDIDO DE EXAME ------
+                    if (model.Medicamento != null) {
+                        var listaMedicamento = model.Medicamento.Split(',');
+                        foreach (var idMedicamento in listaMedicamento) {
+                            MySqlCommand cmdExamePedido = new MySqlCommand(DALSQL.InsertMedicamentoConsulta(), connection);
+                            cmdExamePedido.Parameters.AddWithValue("@IDCONSULTACONSULTA_MEDICAMENTO", model.Consulta.idConsulta);
+                            cmdExamePedido.Parameters.AddWithValue("@IDMEDICAMENTOCONSULTA_MEDICAMENTO", Convert.ToInt32(idMedicamento));
+
+                            retornoAtendimento = retornoAtendimento + cmdExamePedido.ExecuteNonQuery();
+                        }
+                    }
+
                     // ------ UPDATE CONSULTA STATUS ------
                     MySqlCommand cmdConsultaStatus = new MySqlCommand(DALSQL.UpdateConsultaStatus(), connection);
                     cmdConsultaStatus.Parameters.AddWithValue("@CONSULTAFINALIZADA", 1);
@@ -1002,6 +1090,44 @@ namespace SGCM.AppData.Consulta
 
                 connection.Close();
                 return listBaseNomeExame;
+            } catch (Exception ex) {
+                throw ex;
+            }
+        }
+
+        public List<GetMedicamento> GetMedicamento() {
+            try {
+                MySqlConnection connection = new MySqlConnection(getStringConnection());
+                connection.Open();
+
+                var DALSQL = new ConsultaDALSQL();
+
+                // ------ MEDICAMENTOS ------
+                MySqlCommand cmdListBaseNomeExame = new MySqlCommand(DALSQL.GetMedicamento(), connection);
+
+                MySqlDataReader readerListMedicamento = cmdListBaseNomeExame.ExecuteReader();
+                List<GetMedicamento> listMedicamento = new List<GetMedicamento>();
+
+                if (readerListMedicamento.HasRows) {
+                    while (readerListMedicamento.Read()) {
+                        GetMedicamento medicamento = new GetMedicamento();
+
+                        medicamento.idMedicamento = readerListMedicamento.GetInt32(0);
+                        medicamento.nomeGenerico = readerListMedicamento.GetString(1);
+                        medicamento.nomeFabrica = readerListMedicamento.GetString(2);
+                        medicamento.fabricante = readerListMedicamento.GetString(3);
+
+                        listMedicamento.Add(medicamento);
+                    }
+                    readerListMedicamento.NextResult();
+                } else {
+                    readerListMedicamento.Close();
+                    connection.Close();
+                }
+                readerListMedicamento.Close();
+
+                connection.Close();
+                return listMedicamento;
             } catch (Exception ex) {
                 throw ex;
             }

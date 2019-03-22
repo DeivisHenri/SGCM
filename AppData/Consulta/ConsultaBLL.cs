@@ -37,7 +37,12 @@ namespace SGCM.AppData.Consulta
                 }
             }
 
-            model = CorrigirDataConsulta(model);
+            DateTime retornoDataConsultaCorrigida = CorrigirDataConsulta(model.consulta.DataConsulta);
+
+            if (retornoDataConsultaCorrigida != default(DateTime)) {
+                model.consulta.DataConsulta = retornoDataConsultaCorrigida;
+                model.consulta.flagPM = true;
+            }
 
             ConsultaDAL consultaDAL = new ConsultaDAL();
 
@@ -156,79 +161,78 @@ namespace SGCM.AppData.Consulta
             return consultaDAL.CadastrarConsulta(model);
         }
 
-        public CadastroConsultaModel CorrigirDataConsulta(CadastroConsultaModel model) {
+        public DateTime CorrigirDataConsulta(DateTime dataConsulta) {
             try {
-                DateTime dataConsulta = model.consulta.DataConsulta;
-
-                int hora = Convert.ToInt32(model.consulta.DataConsulta.ToString().Split(' ')[1].Split(':')[0]);
+                DateTime dataRetorno = new DateTime();
+                int hora = Convert.ToInt32(dataConsulta.ToString().Split(' ')[1].Split(':')[0]);
 
                 if (hora > 11) {
-                    var dataCompletaAntiga = model.consulta.DataConsulta.ToString().Split(' ')[0];
+                    var dataCompletaAntiga = dataConsulta.ToString().Split(' ')[0];
                     int ano = Convert.ToInt32(dataCompletaAntiga.Split('/')[2]);
                     int mes = Convert.ToInt32(dataCompletaAntiga.Split('/')[1]);
                     int dia = Convert.ToInt32(dataCompletaAntiga.Split('/')[0]);
 
-                    var horaCompletaAntiga = model.consulta.DataConsulta.ToString().Split(' ')[1];
+                    var horaCompletaAntiga = dataConsulta.ToString().Split(' ')[1];
                     int horaNova = 0;
                     int minutoAntiga = Convert.ToInt32(horaCompletaAntiga.Split(':')[1]);
                     int segundoAntiga = Convert.ToInt32(horaCompletaAntiga.Split(':')[2]);
 
-                    switch (hora) {
+                    switch (hora)
+                    {
                         case 12:
                             horaNova = 12;
-                            model.consulta.DataConsulta = new DateTime(ano, mes, dia, horaNova, minutoAntiga, segundoAntiga);
+                            dataRetorno = new DateTime(ano, mes, dia, horaNova, minutoAntiga, segundoAntiga);
                             break;
                         case 13:
                             horaNova = 01;
-                            model.consulta.DataConsulta = new DateTime(ano, mes, dia, horaNova, minutoAntiga, segundoAntiga);
+                            dataRetorno = new DateTime(ano, mes, dia, horaNova, minutoAntiga, segundoAntiga);
                             break;
                         case 14:
                             horaNova = 02;
-                            model.consulta.DataConsulta = new DateTime(ano, mes, dia, horaNova, minutoAntiga, segundoAntiga);
+                            dataRetorno = new DateTime(ano, mes, dia, horaNova, minutoAntiga, segundoAntiga);
                             break;
                         case 15:
                             horaNova = 03;
-                            model.consulta.DataConsulta = new DateTime(ano, mes, dia, horaNova, minutoAntiga, segundoAntiga);
+                            dataRetorno = new DateTime(ano, mes, dia, horaNova, minutoAntiga, segundoAntiga);
                             break;
                         case 16:
                             horaNova = 04;
-                            model.consulta.DataConsulta = new DateTime(ano, mes, dia, horaNova, minutoAntiga, segundoAntiga);
+                            dataRetorno = new DateTime(ano, mes, dia, horaNova, minutoAntiga, segundoAntiga);
                             break;
                         case 17:
                             horaNova = 05;
-                            model.consulta.DataConsulta = new DateTime(ano, mes, dia, horaNova, minutoAntiga, segundoAntiga);
+                            dataRetorno = new DateTime(ano, mes, dia, horaNova, minutoAntiga, segundoAntiga);
                             break;
                         case 18:
                             horaNova = 06;
-                            model.consulta.DataConsulta = new DateTime(ano, mes, dia, horaNova, minutoAntiga, segundoAntiga);
+                            dataRetorno = new DateTime(ano, mes, dia, horaNova, minutoAntiga, segundoAntiga);
                             break;
                         case 19:
                             horaNova = 07;
-                            model.consulta.DataConsulta = new DateTime(ano, mes, dia, horaNova, minutoAntiga, segundoAntiga);
+                            dataRetorno = new DateTime(ano, mes, dia, horaNova, minutoAntiga, segundoAntiga);
                             break;
                         case 20:
                             horaNova = 08;
-                            model.consulta.DataConsulta = new DateTime(ano, mes, dia, horaNova, minutoAntiga, segundoAntiga);
+                            dataRetorno = new DateTime(ano, mes, dia, horaNova, minutoAntiga, segundoAntiga);
                             break;
                         case 21:
                             horaNova = 09;
-                            model.consulta.DataConsulta = new DateTime(ano, mes, dia, horaNova, minutoAntiga, segundoAntiga);
+                            dataRetorno = new DateTime(ano, mes, dia, horaNova, minutoAntiga, segundoAntiga);
                             break;
                         case 22:
                             horaNova = 10;
-                            model.consulta.DataConsulta = new DateTime(ano, mes, dia, horaNova, minutoAntiga, segundoAntiga);
+                            dataRetorno = new DateTime(ano, mes, dia, horaNova, minutoAntiga, segundoAntiga);
                             break;
                         case 23:
                             horaNova = 11;
-                            model.consulta.DataConsulta = new DateTime(ano, mes, dia, horaNova, minutoAntiga, segundoAntiga);
+                            dataRetorno = new DateTime(ano, mes, dia, horaNova, minutoAntiga, segundoAntiga);
                             break;
                         default:
                             break;
                     }
-                    model.consulta.flagPM = true;
                 }
 
-                return model;
+                return dataRetorno;
             } catch (Exception ex) {
                 throw ex;
             }
@@ -523,6 +527,13 @@ namespace SGCM.AppData.Consulta
                     consulta.Conduta.idPacienteConduta = consulta.Paciente.idPaciente;
                 }
 
+                DateTime retornoDataConsultaCorrigida = CorrigirDataConsulta(consulta.Consulta.DataConsulta);
+
+                if (retornoDataConsultaCorrigida != default(DateTime)) {
+                    consulta.Consulta.DataConsulta = retornoDataConsultaCorrigida;
+                    consulta.Consulta.flagPM = true;
+                }
+
                 ConsultaDAL consultaDAL = new ConsultaDAL();
                 return consultaDAL.EditarConsulta(consulta);
             } catch (Exception ex) {
@@ -582,6 +593,22 @@ namespace SGCM.AppData.Consulta
                     }
                     model.ExamePedido = listaExamePedidoFinal;
                 }
+
+                if (model.Medicamento != null) {
+                    var listaMedicamento = model.Medicamento.Split(',');
+                    var listaMedicamentoFinal = "";
+                    for (var i = 0; i < listaMedicamento.Length; i++) {
+                        if (listaMedicamento[i] != "") {
+                            if (listaMedicamentoFinal == "") {
+                                listaMedicamentoFinal = listaMedicamento[i];
+                            } else {
+                                listaMedicamentoFinal = listaMedicamentoFinal + "," + listaMedicamento[i];
+                            }
+                        }
+                    }
+                    model.Medicamento = listaMedicamentoFinal;
+                }
+
                 ConsultaDAL consultaDAL = new ConsultaDAL();
                 return consultaDAL.FinalizarAtendimento(model);
             } catch (Exception ex) {
@@ -593,6 +620,15 @@ namespace SGCM.AppData.Consulta
             try {
                 ConsultaDAL consultaDAL = new ConsultaDAL();
                 return consultaDAL.GetBaseNomeExame();
+            } catch (Exception ex) {
+                throw ex;
+            }
+        }
+
+        public List<GetMedicamento> GetMedicamento() {
+            try {
+                ConsultaDAL consultaDAL = new ConsultaDAL();
+                return consultaDAL.GetMedicamento();
             } catch (Exception ex) {
                 throw ex;
             }
