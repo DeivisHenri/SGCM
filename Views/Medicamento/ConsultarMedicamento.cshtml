@@ -100,11 +100,15 @@
 
             if (retorno === true) {
                 $.post('/Medicamento/ExcluirMedicamento', { __RequestVerificationToken: gettoken(), idMedicamento: idMedicamento }, function (data) {
+                    debugger
                     console.log("data: ", data);
                     if (data === 1) {
+                        $('#psqNomeGenerico').val("");
+                        $('#psqNomeFabrica').val("");
+                        $('#psqFabricante').val("");
                         location.reload();
                     } else {
-                        location.reload();
+                        //location.reload();
                     }
                 });
             }

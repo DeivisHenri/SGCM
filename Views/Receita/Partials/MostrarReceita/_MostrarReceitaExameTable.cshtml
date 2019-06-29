@@ -1,0 +1,53 @@
+﻿@using SGCM.Models.Receita;
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+
+@model IPagedList<ListaReceitaExameModel>;
+
+<table id="tabConsultaReceita" title="Tabela Receita" class="table table-striped table-bordered text-center" border="1">
+    <thead>
+        <tr>
+            <td>
+                <div>
+                    Nome Exame
+                    @Html.ActionLink(" ", "MostrarReceita", "Receita", new { sortOrder = "nomeExame" }, new { @class = "glyphicon glyphicon-sort" })
+                </div>
+            </td>
+            <td>Visualizar</td>
+            <td>Imprimir</td>
+        </tr>
+    </thead>
+
+    <tbody>
+        @if (Model != null)
+        {
+            @foreach (var receitaExame in Model)
+            {
+                <tr>
+                    <td>@receitaExame.baseNomeExame</td>
+                    <td>
+                        <div>
+                            <a asp-controller="PDF" asp-action="MostrarExamePDFTela" asp-route-id="@receitaExame.idBaseNomeExameExamePedido" asp-route-username="@receitaExame.idConsulta">Visualizar</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <a asp-controller="PDF" asp-action="BaixarExamePDF" asp-route-id="@receitaExame.idBaseNomeExameExamePedido" asp-route-username="@receitaExame.idConsulta">Baixar</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<br />
+
+<div>
+    <div style="float: right">
+        Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+    </div>
+
+    <div class="justify-content-center">
+        @Html.PagedListPager(Model, page => Url.Action("ReceitaMedicamento", "Receita", new { paginaExame = page }))
+    </div>
+</div>

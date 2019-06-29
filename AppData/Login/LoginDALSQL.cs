@@ -60,6 +60,11 @@ namespace SGCM.AppData.Login {
             command.AppendLine("       Per.flExamesA,");
             command.AppendLine("       Per.flExamesE,");
 
+            command.AppendLine("       Per.flReceitaI,");
+            command.AppendLine("       Per.flReceitaC,");
+            command.AppendLine("       Per.flReceitaA,");
+            command.AppendLine("       Per.flReceitaE,");
+
             command.AppendLine("       Per.flHistoriaMolestiaAtualI,");
             command.AppendLine("       Per.flHistoriaMolestiaAtualC,");
             command.AppendLine("       Per.flHistoriaMolestiaAtualA,");

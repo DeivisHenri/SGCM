@@ -96,111 +96,209 @@ namespace SGCM.AppData.Usuario {
         public string InserirPermissoes() {
             StringBuilder command = new StringBuilder();
 
-            command.AppendLine("INSERT INTO Permissoes(idUsuarioPermissoes,");
-            command.AppendLine("                       flUsuarioI,");
-            command.AppendLine("                       flUsuarioC,");
-            command.AppendLine("                       flUsuarioA,");
-            command.AppendLine("                       flUsuarioE,");
-
-            command.AppendLine("                       flPacienteI,");
-            command.AppendLine("                       flPacienteC,");
-            command.AppendLine("                       flPacienteA,");
-            command.AppendLine("                       flPacienteE,");
-
-            command.AppendLine("                       flConsultaI,");
-            command.AppendLine("                       flConsultaC,");
-            command.AppendLine("                       flConsultaA,");
-            command.AppendLine("                       flConsultaE,");
-
-            command.AppendLine("                       flAusenciaI,");
-            command.AppendLine("                       flAusenciaC,");
-            command.AppendLine("                       flAusenciaA,");
-            command.AppendLine("                       flAusenciaE,");
-
-            command.AppendLine("                       flMedicamentoI,");
-            command.AppendLine("                       FlMedicamentoC,");
-            command.AppendLine("                       flMedicamentoA,");
-            command.AppendLine("                       flMedicamentoE,");
-
-            command.AppendLine("                       flExamesI,");
-            command.AppendLine("                       flExamesC,");
-            command.AppendLine("                       flExamesA,");
-            command.AppendLine("                       flExamesE,");
-
-            command.AppendLine("                       flHistoriaMolestiaAtualI,");
-            command.AppendLine("                       flHistoriaMolestiaAtualC,");
-            command.AppendLine("                       flHistoriaMolestiaAtualA,");
-            command.AppendLine("                       flHistoriaMolestiaAtualE,");
-
-            command.AppendLine("                       flHistoriaPatologicaPregressaI,");
-            command.AppendLine("                       flHistoriaPatologicaPregressaC,");
-            command.AppendLine("                       flHistoriaPatologicaPregressaA,");
-            command.AppendLine("                       flHistoriaPatologicaPregressaE,");
-
-            command.AppendLine("                       flHipoteseDiagnosticaI,");
-            command.AppendLine("                       flHipoteseDiagnosticaC,");
-            command.AppendLine("                       flHipoteseDiagnosticaA,");
-            command.AppendLine("                       flHipoteseDiagnosticaE,");
-
-            command.AppendLine("                       flCondutaI,");
-            command.AppendLine("                       flCondutaC,");
-            command.AppendLine("                       flCondutaA,");
-            command.AppendLine("                       flCondutaE,");
-
-            command.AppendLine("                       flIniciarAtendimento)");
-
+            command.AppendLine("INSERT INTO permissoes(idUsuarioPermissoes,");
+            command.AppendLine("					   flUsuarioI,");
+            command.AppendLine("					   flUsuarioC,");
+            command.AppendLine("					   flUsuarioA,");
+            command.AppendLine("					   flUsuarioE,");
+            command.AppendLine("					   flPacienteI,");
+            command.AppendLine("					   flPacienteC,");
+            command.AppendLine("					   flPacienteA,");
+            command.AppendLine("					   flPacienteE,");
+            command.AppendLine("					   flConsultaI,");
+            command.AppendLine("					   flConsultaC,");
+            command.AppendLine("					   flConsultaA,");
+            command.AppendLine("					   flConsultaE,");
+            command.AppendLine("					   flAusenciaI,");
+            command.AppendLine("					   flAusenciaC,");
+            command.AppendLine("					   flAusenciaA,");
+            command.AppendLine("					   flAusenciaE,");
+            command.AppendLine("					   flMedicamentoI,");
+            command.AppendLine("					   flMedicamentoC,");
+            command.AppendLine("					   flMedicamentoA,");
+            command.AppendLine("					   flMedicamentoE,");
+            command.AppendLine("					   flExamesI,");
+            command.AppendLine("					   flExamesC,");
+            command.AppendLine("					   flExamesA,");
+            command.AppendLine("					   flExamesE,");
+            command.AppendLine("					   flReceitaI,");
+            command.AppendLine("					   flReceitaC,");
+            command.AppendLine("					   flReceitaA,");
+            command.AppendLine("					   flReceitaE,");
+            command.AppendLine("					   flHistoriaMolestiaAtualI,");
+            command.AppendLine("					   flHistoriaMolestiaAtualC,");
+            command.AppendLine("					   flHistoriaMolestiaAtualA,");
+            command.AppendLine("					   flHistoriaMolestiaAtualE,");
+            command.AppendLine("					   flHistoriaPatologicaPregressaI,");
+            command.AppendLine("					   flHistoriaPatologicaPregressaC,");
+            command.AppendLine("					   flHistoriaPatologicaPregressaA,");
+            command.AppendLine("					   flHistoriaPatologicaPregressaE,");
+            command.AppendLine("					   flHipoteseDiagnosticaI,");
+            command.AppendLine("					   flHipoteseDiagnosticaC,");
+            command.AppendLine("					   flHipoteseDiagnosticaA,");
+            command.AppendLine("					   flHipoteseDiagnosticaE,");
+            command.AppendLine("					   flCondutaI,");
+            command.AppendLine("					   flCondutaC,");
+            command.AppendLine("					   flCondutaA,");
+            command.AppendLine("					   flCondutaE,");
+            command.AppendLine("					   flIniciarAtendimento)");
             command.AppendLine("VALUES(@IDUSUARIO,");
-            command.AppendLine("       @FLUSUARIOI,");
-            command.AppendLine("       @FLUSUARIOC,");
-            command.AppendLine("       @FLUSUARIOA,");
-            command.AppendLine("       @FLUSUARIOE,");
+            command.AppendLine("	   @FLUSUARIOI,");
+            command.AppendLine("	   @FLUSUARIOC,");
+            command.AppendLine("	   @FLUSUARIOA,");
+            command.AppendLine("	   @FLUSUARIOE,");
+            command.AppendLine("	   @FLPACIENTEI,");
+            command.AppendLine("	   @FLPACIENTEC,");
+            command.AppendLine("	   @FLPACIENTEA,");
+            command.AppendLine("	   @FLPACIENTEE,");
+            command.AppendLine("	   @FLCONSULTAI,");
+            command.AppendLine("	   @FLCONSULTAC,");
+            command.AppendLine("	   @FLCONSULTAA,");
+            command.AppendLine("	   @FLCONSULTAE,");
+            command.AppendLine("	   @FLAUSENCIAI,");
+            command.AppendLine("	   @FLAUSENCIAC,");
+            command.AppendLine("	   @FLAUSENCIAA,");
+            command.AppendLine("	   @FLAUSENCIAE,");
+            command.AppendLine("	   @FLMEDICAMENTOI,");
+            command.AppendLine("	   @FLMEDICAMENTOC,");
+            command.AppendLine("	   @FLMEDICAMENTOA,");
+            command.AppendLine("	   @FLMEDICAMENTOE,");
+            command.AppendLine("	   @FLEXAMESI,");
+            command.AppendLine("	   @FLEXAMESC,");
+            command.AppendLine("	   @FLEXAMESA,");
+            command.AppendLine("	   @FLEXAMESE,");
+            command.AppendLine("	   @FLRECEITAI,");
+            command.AppendLine("	   @FLRECEITAC,");
+            command.AppendLine("	   @FLRECEITAA,");
+            command.AppendLine("	   @FLRECEITAE,");
+            command.AppendLine("	   @FLHISTORIAMOLESTIAATUALI,");
+            command.AppendLine("	   @FLHISTORIAMOLESTIAATUALC,");
+            command.AppendLine("	   @FLHISTORIAMOLESTIAATUALA,");
+            command.AppendLine("	   @FLHISTORIAMOLESTIAATUALE,");
+            command.AppendLine("	   @FLHISTORIAPATOLOGICAPREGRESSAI,");
+            command.AppendLine("	   @FLHISTORIAPATOLOGICAPREGRESSAC,");
+            command.AppendLine("	   @FLHISTORIAPATOLOGICAPREGRESSAA,");
+            command.AppendLine("	   @FLHISTORIAPATOLOGICAPREGRESSAE,");
+            command.AppendLine("	   @FLHIPOTESEDIAGNOSTICAI,");
+            command.AppendLine("	   @FLHIPOTESEDIAGNOSTICAC,");
+            command.AppendLine("	   @FLHIPOTESEDIAGNOSTICAA,");
+            command.AppendLine("	   @FLHIPOTESEDIAGNOSTICAE,");
+            command.AppendLine("	   @FLCONDUTAI,");
+            command.AppendLine("	   @FLCONDUTAC,");
+            command.AppendLine("	   @FLCONDUTAA,");
+            command.AppendLine("	   @FLCONDUTAE,");
+            command.AppendLine("	   @FLINICIARATENDIMENTO)");
 
-            command.AppendLine("       @FLPACIENTEI,");
-            command.AppendLine("       @FLPACIENTEC,");
-            command.AppendLine("       @FLPACIENTEA,");
-            command.AppendLine("       @FLPACIENTEE,");
+            //command.AppendLine("INSERT INTO Permissoes(idUsuarioPermissoes,");
+            //command.AppendLine("                       flUsuarioI,");
+            //command.AppendLine("                       flUsuarioC,");
+            //command.AppendLine("                       flUsuarioA,");
+            //command.AppendLine("                       flUsuarioE,");
 
-            command.AppendLine("       @FLCONSULTAI,");
-            command.AppendLine("       @FLCONSULTAC,");
-            command.AppendLine("       @FLCONSULTAA,");
-            command.AppendLine("       @FLCONSULTAE,");
+            //command.AppendLine("                       flPacienteI,");
+            //command.AppendLine("                       flPacienteC,");
+            //command.AppendLine("                       flPacienteA,");
+            //command.AppendLine("                       flPacienteE,");
 
-            command.AppendLine("       @FLAUSENCIAI,");
-            command.AppendLine("       @FLAUSENCIAC,");
-            command.AppendLine("       @FLAUSENCIAA,");
-            command.AppendLine("       @FLAUSENCIAE,");
+            //command.AppendLine("                       flConsultaI,");
+            //command.AppendLine("                       flConsultaC,");
+            //command.AppendLine("                       flConsultaA,");
+            //command.AppendLine("                       flConsultaE,");
 
-            command.AppendLine("       @FLMEDICAMENTOI,");
-            command.AppendLine("       @FLMEDICAMENTOC,");
-            command.AppendLine("       @FLMEDICAMENTOA,");
-            command.AppendLine("       @FLMEDICAMENTOE,");
+            //command.AppendLine("                       flAusenciaI,");
+            //command.AppendLine("                       flAusenciaC,");
+            //command.AppendLine("                       flAusenciaA,");
+            //command.AppendLine("                       flAusenciaE,");
 
-            command.AppendLine("       @FLEXAMESI,");
-            command.AppendLine("       @FLEXAMESC,");
-            command.AppendLine("       @FLEXAMESA,");
-            command.AppendLine("       @FLEXAMESE,");
+            //command.AppendLine("                       flMedicamentoI,");
+            //command.AppendLine("                       FlMedicamentoC,");
+            //command.AppendLine("                       flMedicamentoA,");
+            //command.AppendLine("                       flMedicamentoE,");
 
-            command.AppendLine("       @FLHISTORIAMOLESTIAATUALI,");
-            command.AppendLine("       @FLHISTORIAMOLESTIAATUALC,");
-            command.AppendLine("       @FLHISTORIAMOLESTIAATUALA,");
-            command.AppendLine("       @FLHISTORIAMOLESTIAATUALE,");
+            //command.AppendLine("                       flExamesI,");
+            //command.AppendLine("                       flExamesC,");
+            //command.AppendLine("                       flExamesA,");
+            //command.AppendLine("                       flExamesE,");
 
-            command.AppendLine("       @FLHISTORIAPATOLOGICAPREGRESSAI,");
-            command.AppendLine("       @FLHISTORIAPATOLOGICAPREGRESSAC,");
-            command.AppendLine("       @FLHISTORIAPATOLOGICAPREGRESSAA,");
-            command.AppendLine("       @FLHISTORIAPATOLOGICAPREGRESSAE,");
+            //command.AppendLine("                       flReceitaI,");
+            //command.AppendLine("                       flReceitaC,");
+            //command.AppendLine("                       flReceitaA,");
+            //command.AppendLine("                       flReceitaE,");
 
-            command.AppendLine("       @FLHIPOTESEDIAGNOSTICAI,");
-            command.AppendLine("       @FLHIPOTESEDIAGNOSTICAC,");
-            command.AppendLine("       @FLHIPOTESEDIAGNOSTICAA,");
-            command.AppendLine("       @FLHIPOTESEDIAGNOSTICAE,");
+            //command.AppendLine("                       flHistoriaMolestiaAtualI,");
+            //command.AppendLine("                       flHistoriaMolestiaAtualC,");
+            //command.AppendLine("                       flHistoriaMolestiaAtualA,");
+            //command.AppendLine("                       flHistoriaMolestiaAtualE,");
 
-            command.AppendLine("       @FLCONDUTAI,");
-            command.AppendLine("       @FLCONDUTAC,");
-            command.AppendLine("       @FLCONDUTAA,");
-            command.AppendLine("       @FLCONDUTAE,");
+            //command.AppendLine("                       flHistoriaPatologicaPregressaI,");
+            //command.AppendLine("                       flHistoriaPatologicaPregressaC,");
+            //command.AppendLine("                       flHistoriaPatologicaPregressaA,");
+            //command.AppendLine("                       flHistoriaPatologicaPregressaE,");
 
-            command.AppendLine("       @FLINICIARATENDIMENTO)");
+            //command.AppendLine("                       flHipoteseDiagnosticaI,");
+            //command.AppendLine("                       flHipoteseDiagnosticaC,");
+            //command.AppendLine("                       flHipoteseDiagnosticaA,");
+            //command.AppendLine("                       flHipoteseDiagnosticaE,");
+
+            //command.AppendLine("                       flCondutaI,");
+            //command.AppendLine("                       flCondutaC,");
+            //command.AppendLine("                       flCondutaA,");
+            //command.AppendLine("                       flCondutaE,");
+
+            //command.AppendLine("                       flIniciarAtendimento)");
+
+            //command.AppendLine("VALUES(@IDUSUARIO,");
+            //command.AppendLine("       @FLUSUARIOI,");
+            //command.AppendLine("       @FLUSUARIOC,");
+            //command.AppendLine("       @FLUSUARIOA,");
+            //command.AppendLine("       @FLUSUARIOE,");
+
+            //command.AppendLine("       @FLPACIENTEI,");
+            //command.AppendLine("       @FLPACIENTEC,");
+            //command.AppendLine("       @FLPACIENTEA,");
+            //command.AppendLine("       @FLPACIENTEE,");
+
+            //command.AppendLine("       @FLCONSULTAI,");
+            //command.AppendLine("       @FLCONSULTAC,");
+            //command.AppendLine("       @FLCONSULTAA,");
+            //command.AppendLine("       @FLCONSULTAE,");
+
+            //command.AppendLine("       @FLAUSENCIAI,");
+            //command.AppendLine("       @FLAUSENCIAC,");
+            //command.AppendLine("       @FLAUSENCIAA,");
+            //command.AppendLine("       @FLAUSENCIAE,");
+
+            //command.AppendLine("       @FLMEDICAMENTOI,");
+            //command.AppendLine("       @FLMEDICAMENTOC,");
+            //command.AppendLine("       @FLMEDICAMENTOA,");
+            //command.AppendLine("       @FLMEDICAMENTOE,");
+
+            //command.AppendLine("       @FLEXAMESI,");
+            //command.AppendLine("       @FLEXAMESC,");
+            //command.AppendLine("       @FLEXAMESA,");
+            //command.AppendLine("       @FLEXAMESE,");
+
+            //command.AppendLine("       @FLHISTORIAMOLESTIAATUALI,");
+            //command.AppendLine("       @FLHISTORIAMOLESTIAATUALC,");
+            //command.AppendLine("       @FLHISTORIAMOLESTIAATUALA,");
+            //command.AppendLine("       @FLHISTORIAMOLESTIAATUALE,");
+
+            //command.AppendLine("       @FLHISTORIAPATOLOGICAPREGRESSAI,");
+            //command.AppendLine("       @FLHISTORIAPATOLOGICAPREGRESSAC,");
+            //command.AppendLine("       @FLHISTORIAPATOLOGICAPREGRESSAA,");
+            //command.AppendLine("       @FLHISTORIAPATOLOGICAPREGRESSAE,");
+
+            //command.AppendLine("       @FLHIPOTESEDIAGNOSTICAI,");
+            //command.AppendLine("       @FLHIPOTESEDIAGNOSTICAC,");
+            //command.AppendLine("       @FLHIPOTESEDIAGNOSTICAA,");
+            //command.AppendLine("       @FLHIPOTESEDIAGNOSTICAE,");
+
+            //command.AppendLine("       @FLCONDUTAI,");
+            //command.AppendLine("       @FLCONDUTAC,");
+            //command.AppendLine("       @FLCONDUTAA,");
+            //command.AppendLine("       @FLCONDUTAE,");
+
+            //command.AppendLine("       @FLINICIARATENDIMENTO)");
 
             return command.ToString();
         }    

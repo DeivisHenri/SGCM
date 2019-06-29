@@ -531,7 +531,7 @@ namespace SGCM.Controllers {
                             if (retornoFinalizarAtendimento > 0) {
                                 ViewBag.MensagemTitle = "Sucesso";
                                 ViewBag.MensagemBody = "A finalização do atendimento foi realizada com sucesso!";
-                                return RedirectToAction("ConsultarConsulta", "Consulta");
+                                return RedirectToAction("MostrarReceita", "Receita", new { id = model.Consulta.idConsulta });
                             } else {
                                 model.ConsultaLista = objConsultaBLL.ConsultaLista(model.Paciente.idPaciente);
                                 model.ExameLaboratorialLista = objConsultaBLL.ExameLaboratorialLista(model.Paciente.idPaciente);
@@ -701,7 +701,8 @@ namespace SGCM.Controllers {
             }
         }
 
-        private void CarregarDadosUsuarioParaTela() {
+        private void CarregarDadosUsuarioParaTela()
+        {
             ViewData.Add("idUsuario", HttpContext.Session.GetInt32("idUsuario"));
             ViewData.Add("usuario", HttpContext.Session.GetString("usuario"));
 
@@ -749,6 +750,11 @@ namespace SGCM.Controllers {
             ViewData.Add("flExamesC", HttpContext.Session.GetInt32("flExamesC"));
             ViewData.Add("flExamesA", HttpContext.Session.GetInt32("flExamesA"));
             ViewData.Add("flExamesE", HttpContext.Session.GetInt32("flExamesE"));
+
+            ViewData.Add("flReceitaI", HttpContext.Session.GetInt32("flReceitaI"));
+            ViewData.Add("flReceitaC", HttpContext.Session.GetInt32("flReceitaC"));
+            ViewData.Add("flReceitaA", HttpContext.Session.GetInt32("flReceitaA"));
+            ViewData.Add("flReceitaE", HttpContext.Session.GetInt32("flReceitaE"));
 
             ViewData.Add("flHistoriaMolestiaAtualI", HttpContext.Session.GetInt32("flHistoriaMolestiaAtualI"));
             ViewData.Add("flHistoriaMolestiaAtualC", HttpContext.Session.GetInt32("flHistoriaMolestiaAtualC"));

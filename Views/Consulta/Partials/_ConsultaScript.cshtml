@@ -91,7 +91,8 @@
                         $('#btnModalCadastroConsulta').click();
                     } else {
                         $.post('/Consulta/ConsultarPaciente', { __RequestVerificationToken: gettoken(), nome: nomePaciente, cpf: cpfPaciente }, function (data) {
-                            if (data !== null) $('#dataTableCadastrarConsulta').DataTable().clear().rows.add(data).draw();
+                            console.log("data: ", data);
+                            if (data !== null) $('#dataTableCadastrarConsulta').DataTable().clear().rows.add(data.listaConsultaPacienteModel).draw();
                             else {
                                 limparModalConsultaPaciente();
                                 $('#btnFecharPacienteModal').click();
@@ -169,25 +170,29 @@
                 });
 
                 setTimeout(function () {
-                    var dataTable = $('#dataTableExamesFixo').DataTable().rows().data();
-                    var listIdExamePedido = $('#ExamePedido').val().split(',');
+                    debugger;
+                    var listIdExamePedido = $('#ExamePedido').val();
 
-                    dataTable.context[0]._iDisplayLength = 153;
-                    dataTable.draw();
+                    if (listIdExamePedido != undefined) {
+                        var dataTable = $('#dataTableExamesFixo').DataTable().rows().data();
+                        listIdExamePedido = $('#ExamePedido').val().split(',');
 
-                    for (var i = 0; i < dataTable.length; i++) {
-                        for (var o = 0; o < listIdExamePedido.length; o++) {
-                            if (dataTable[i].idBaseNomeExame == listIdExamePedido[o]) {
-                                var id = dataTable[i].idBaseNomeExame + dataTable[i].baseNomeExame;
-                                var input = document.getElementById(id);
-                                $(input).attr("checked", "checked");
+                        dataTable.context[0]._iDisplayLength = 153;
+                        dataTable.draw();
+
+                        for (var i = 0; i < dataTable.length; i++) {
+                            for (var o = 0; o < listIdExamePedido.length; o++) {
+                                if (dataTable[i].idBaseNomeExame == listIdExamePedido[o]) {
+                                    var id = dataTable[i].idBaseNomeExame + dataTable[i].baseNomeExame;
+                                    var input = document.getElementById(id);
+                                    $(input).attr("checked", "checked");
+                                }
                             }
                         }
+
+                        dataTable.context[0]._iDisplayLength = 3;
+                        dataTable.draw();
                     }
-
-                    dataTable.context[0]._iDisplayLength = 3;
-                    dataTable.draw();
-
                 }, 1500);
 
                 $(document).on('change', '.checkBoxNomeExame', function () {
@@ -293,26 +298,28 @@
                 });
 
                 setTimeout(function () {
-                    debugger
-                    var dataTable = $('#dataTableMedicamento').DataTable().rows().data();
-                    var listIdMedicamento = $('#Medicamento').val().split(',');
+                    var listIdMedicamento = $('#Medicamento').val();
 
-                    dataTable.context[0]._iDisplayLength = dataTable.count();
-                    dataTable.draw();
+                    if (listIdMedicamento != undefined) {
+                        var dataTable = $('#dataTableMedicamento').DataTable().rows().data();
+                        listIdMedicamento = $('#Medicamento').val().split(',');
 
-                    for (var i = 0; i < dataTable.length; i++) {
-                        for (var o = 0; o < listIdMedicamento.length; o++) {
-                            if (dataTable[i].idMedicamento == listIdMedicamento[o]) {
-                                var id = dataTable[i].idMedicamento + dataTable[i].nomeGenerico;
-                                var input = document.getElementById(id);
-                                $(input).attr("checked", "checked");
+                        dataTable.context[0]._iDisplayLength = dataTable.count();
+                        dataTable.draw();
+
+                        for (var i = 0; i < dataTable.length; i++) {
+                            for (var o = 0; o < listIdMedicamento.length; o++) {
+                                if (dataTable[i].idMedicamento == listIdMedicamento[o]) {
+                                    var id = dataTable[i].idMedicamento + dataTable[i].nomeGenerico;
+                                    var input = document.getElementById(id);
+                                    $(input).attr("checked", "checked");
+                                }
                             }
                         }
+
+                        dataTable.context[0]._iDisplayLength = 3;
+                        dataTable.draw();
                     }
-
-                    dataTable.context[0]._iDisplayLength = 3;
-                    dataTable.draw();
-
                 }, 1500);
 
                 $(document).on('change', '.checkBoxMedicamento', function () {

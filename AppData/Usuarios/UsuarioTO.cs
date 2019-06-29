@@ -74,6 +74,10 @@ namespace SGCM.AppData.Usuario
         public int flExamesC { get; set; }
         public int flExamesA { get; set; }
         public int flExamesE { get; set; }
+        public int flReceitaI { get; set; }
+        public int flReceitaC { get; set; }
+        public int flReceitaA { get; set; }
+        public int flReceitaE { get; set; }
         public int flHistoriaMolestiaAtualI { get; set; }
         public int flHistoriaMolestiaAtualC { get; set; }
         public int flHistoriaMolestiaAtualA { get; set; }

@@ -1,4 +1,5 @@
 ﻿using SGCM.Models.Paciente.EditarPacienteModel;
+using SGCM.Models.Paciente.RelatorioPacienteModel;
 using System;
 using System.Text;
 
@@ -289,6 +290,35 @@ namespace SGCM.AppData.Paciente
             command.AppendLine("Update paciente");
             command.AppendLine("Set    statusDesativado = @STATUSDESATIVADO");
             command.AppendLine("Where idPessoaPaciente = @IDPESSOAPACIENTE");
+
+            return command.ToString();
+        }
+
+        public string RelatorioPaciente(RelatorioPacienteModel paciente) {
+            StringBuilder command = new StringBuilder();
+
+            command.AppendLine("Select Pac.idPaciente,");
+            command.AppendLine("       Pes.nome,");
+            command.AppendLine("       Pes.cpf,");
+            command.AppendLine("       Pes.telefoneCelular");
+            command.AppendLine("From Pessoa Pes RIGHT JOIN Paciente Pac ON Pes.idPessoa = Pac.idPessoaPaciente ");
+            command.AppendLine("Where Pes.idMedico = @IDMEDICO ");
+
+            if (paciente.psqNome != null && paciente.psqNome != "") {
+                command.AppendLine("AND Pes.nome like @NOME ");
+            }
+
+            if (paciente.psqCPF != null && paciente.psqCPF != "")
+            {
+                command.AppendLine("AND Pes.cpf like @CPF ");
+            }
+
+            if (paciente.psqTelefoneCelular != null && paciente.psqTelefoneCelular != "")
+            {
+                command.AppendLine("AND Pes.telefoneCelular like @TELEFONECELULAR ");
+            }
+
+            command.AppendLine("Order By Pes.nome ASC");
 
             return command.ToString();
         }

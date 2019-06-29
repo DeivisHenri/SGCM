@@ -166,6 +166,43 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
                 dadosPermissoes.flExamesE = valorFalse.ToString();
             }
 
+            /* RECEITAS */
+            if ((dadosPermissoes.flReceitaI == "true") || (dadosPermissoes.flReceitaI == "True"))
+            {
+                dadosPermissoes.flReceitaI = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.flReceitaI = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.flReceitaC == "true") || (dadosPermissoes.flReceitaC == "True"))
+            {
+                dadosPermissoes.flReceitaC = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.flReceitaC = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.flReceitaA == "true") || (dadosPermissoes.flReceitaA == "True"))
+            {
+                dadosPermissoes.flReceitaA = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.flReceitaA = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.flReceitaE == "true") || (dadosPermissoes.flReceitaE == "True"))
+            {
+                dadosPermissoes.flReceitaE = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.flReceitaE = valorFalse.ToString();
+            }
+
             /* MOLESTIA ATUAL */
             if ((dadosPermissoes.flHistoriaMolestiaAtualI == "true") || (dadosPermissoes.flHistoriaMolestiaAtualI == "True")) {
                 dadosPermissoes.flHistoriaMolestiaAtualI = valorTrue.ToString();
@@ -492,6 +529,43 @@ namespace SGCM.AppData.Infraestrutura.UtilMetodo {
             else
             {
                 dadosPermissoes.flExamesE = valorFalse.ToString();
+            }
+
+            /* RECEITAS */
+            if ((dadosPermissoes.flReceitaI == "true") || (dadosPermissoes.flReceitaI == "True"))
+            {
+                dadosPermissoes.flReceitaI = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.flReceitaI = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.flReceitaC == "true") || (dadosPermissoes.flReceitaC == "True"))
+            {
+                dadosPermissoes.flReceitaC = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.flReceitaC = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.flReceitaA == "true") || (dadosPermissoes.flReceitaA == "True"))
+            {
+                dadosPermissoes.flReceitaA = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.flReceitaA = valorFalse.ToString();
+            }
+
+            if ((dadosPermissoes.flReceitaE == "true") || (dadosPermissoes.flReceitaE == "True"))
+            {
+                dadosPermissoes.flReceitaE = valorTrue.ToString();
+            }
+            else
+            {
+                dadosPermissoes.flReceitaE = valorFalse.ToString();
             }
 
             /* MOLESTIA ATUAL */

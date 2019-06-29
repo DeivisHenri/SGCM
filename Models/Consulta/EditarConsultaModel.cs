@@ -74,6 +74,7 @@ namespace SGCM.Models.Consulta.EditarConsultaModel {
         public int idExameFisico { get; set; }
         public int idPacienteExameFisico { get; set; }
         public int idConsultaExameFisico { get; set; }
+        [Display(Name = "Exame Físico")]
         public string exameFisico { get; set; }
     }
 

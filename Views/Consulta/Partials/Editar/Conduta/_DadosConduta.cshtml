@@ -55,6 +55,16 @@
 
 <div class="form-group padding-top-15px">
     <button id="moveAnteriorDadosConduta" type="button" class="btn btn-info btn-brand btn-brand-big margin-right-15-px">&nbsp;Anterior&nbsp;</button>
+
+    @{
+        if (@Model.Consulta.status != 0)
+        {
+            @*<button id="botaoImprimirReceita" type="button" class="btn btn-primary btn-brand btn-brand-big margin-right-15-px">Imprimir Receita</button>*@
+
+            <input type="button" value="Imprimir Receita" class="btn btn-primary btn-brand btn-brand-big margin-right-15-px" onclick="location.href='@Url.Action("MostrarReceita", "Receita", new { id = Model.Consulta.idConsulta })'" />
+        }
+    }
+
     <button type="submit" class="btn btn-success btn-brand btn-brand-big">&nbsp;Salvar&nbsp;</button>
 </div>
 

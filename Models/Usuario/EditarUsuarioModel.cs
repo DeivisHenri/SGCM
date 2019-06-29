@@ -126,6 +126,11 @@ namespace SGCM.Models.Usuario.EditarUsuarioModel
         public string flExamesA { get; set; }
         public string flExamesE { get; set; }
 
+        public string flReceitaI { get; set; }
+        public string flReceitaC { get; set; }
+        public string flReceitaA { get; set; }
+        public string flReceitaE { get; set; }
+
         public string flHistoriaMolestiaAtualI { get; set; }
         public string flHistoriaMolestiaAtualC { get; set; }
         public string flHistoriaMolestiaAtualA { get; set; }

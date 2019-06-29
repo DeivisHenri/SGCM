@@ -1,6 +1,7 @@
 ﻿using SGCM.Models.Paciente.CadastroPacienteModel;
 using SGCM.Models.Paciente.ConsultarPacienteModel;
 using SGCM.Models.Paciente.EditarPacienteModel;
+using SGCM.Models.Paciente.RelatorioPacienteModel;
 using SGCM.AppData.Infraestrutura.UtilMetodo;
 using System.Collections.Generic;
 using System;
@@ -55,6 +56,20 @@ namespace SGCM.AppData.Paciente
                 PacienteDAL pacienteDAL = new PacienteDAL();
                 return pacienteDAL.EditarPaciente(pacienteModel);
             } catch (Exception ex) {
+                throw ex;
+            }
+        }
+
+        public RelatorioPacienteModel RelatorioPaciente(RelatorioPacienteModel paciente, int idMedico) {
+            try {
+                if (paciente.psqCPF != string.Empty && paciente.psqCPF != null ) paciente.psqCPF = UtilMetodo.RemovendoCaracteresEspeciais(paciente.psqCPF);
+                if (paciente.psqTelefoneCelular != string.Empty && paciente.psqTelefoneCelular != null ) paciente.psqTelefoneCelular = UtilMetodo.RemovendoCaracteresEspeciais(paciente.psqTelefoneCelular);
+
+                PacienteDAL pacienteDAL = new PacienteDAL();
+                return pacienteDAL.RelatorioPaciente(paciente, idMedico);
+            }
+            catch (Exception ex)
+            {
                 throw ex;
             }
         }

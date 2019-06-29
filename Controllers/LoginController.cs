@@ -158,6 +158,11 @@ namespace SGCM.Controllers {
             HttpContext.Session.SetInt32("flExamesA", usuarioCompletoTO.permissoesTO.flExamesA);
             HttpContext.Session.SetInt32("flExamesE", usuarioCompletoTO.permissoesTO.flExamesE);
 
+            HttpContext.Session.SetInt32("flReceitaI", usuarioCompletoTO.permissoesTO.flReceitaI);
+            HttpContext.Session.SetInt32("flReceitaC", usuarioCompletoTO.permissoesTO.flReceitaC);
+            HttpContext.Session.SetInt32("flReceitaA", usuarioCompletoTO.permissoesTO.flReceitaA);
+            HttpContext.Session.SetInt32("flReceitaE", usuarioCompletoTO.permissoesTO.flReceitaE);
+
             HttpContext.Session.SetInt32("flHistoriaMolestiaAtualI", usuarioCompletoTO.permissoesTO.flHistoriaMolestiaAtualI);
             HttpContext.Session.SetInt32("flHistoriaMolestiaAtualC", usuarioCompletoTO.permissoesTO.flHistoriaMolestiaAtualC);
             HttpContext.Session.SetInt32("flHistoriaMolestiaAtualA", usuarioCompletoTO.permissoesTO.flHistoriaMolestiaAtualA);
@@ -230,6 +235,11 @@ namespace SGCM.Controllers {
             ViewData.Add("flExamesC", HttpContext.Session.GetInt32("flExamesC"));
             ViewData.Add("flExamesA", HttpContext.Session.GetInt32("flExamesA"));
             ViewData.Add("flExamesE", HttpContext.Session.GetInt32("flExamesE"));
+
+            ViewData.Add("flReceitaI", HttpContext.Session.GetInt32("flReceitaI"));
+            ViewData.Add("flReceitaC", HttpContext.Session.GetInt32("flReceitaC"));
+            ViewData.Add("flReceitaA", HttpContext.Session.GetInt32("flReceitaA"));
+            ViewData.Add("flReceitaE", HttpContext.Session.GetInt32("flReceitaE"));
 
             ViewData.Add("flHistoriaMolestiaAtualI", HttpContext.Session.GetInt32("flHistoriaMolestiaAtualI"));
             ViewData.Add("flHistoriaMolestiaAtualC", HttpContext.Session.GetInt32("flHistoriaMolestiaAtualC"));

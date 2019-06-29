@@ -35,7 +35,7 @@
     string FlExamesE = HttpContextAccessor.HttpContext.Session.GetInt32("flExamesE").ToString();
 
     if ((IDCliente != null) && (IDCliente != "") && (Convert.ToInt32(IDCliente) != 0)) {
-<section class="col-lg-8">
+<section class="col-lg-7">
 
     @{
         if (!(FlUsuarioI == "0") && !(FlUsuarioC == "0") && !(FlUsuarioA == "0") && !(FlUsuarioE == "0"))
@@ -46,7 +46,6 @@
                     <ul class="dropdown-menu">
                         <li><a asp-area="" asp-controller="Usuario" asp-action="CadastroUsuario">Cadastro Usuário</a></li>
                         <li><a asp-area="" asp-controller="Usuario" asp-action="ConsultarUsuario">Consulta Usuário</a></li>
-                        <li><a asp-area="" asp-controller="Usuario" asp-action="Relatorio">Relatório</a></li>
                     </ul>
                 </li>
             </ul>
@@ -70,7 +69,6 @@
                                 <li><a asp-area="" asp-controller="Usuario" asp-action="ConsultarUsuario">Consulta Usuário</a></li>
                             }
                         }
-                        <li><a asp-area="" asp-controller="Usuario" asp-action="Relatorio">Relatório</a></li>
                     </ul>
                 </li>
             </ul>
@@ -86,7 +84,7 @@
                     <ul class="dropdown-menu">
                         <li><a asp-area="" asp-controller="Paciente" asp-action="CadastroPaciente">Cadastro Paciente</a></li>
                         <li><a asp-area="" asp-controller="Paciente" asp-action="ConsultarPaciente">Consulta Paciente</a></li>
-                        <li><a asp-area="" asp-controller="Paciente" asp-action="Relatorio">Relatório</a></li>
+                        <li><a asp-area="" asp-controller="Paciente" asp-action="RelatorioPaciente">Relatório</a></li>
                     </ul>
                 </li>
             </ul>
@@ -110,7 +108,7 @@
                                 <li><a asp-area="" asp-controller="Paciente" asp-action="ConsultarPaciente">Consulta Paciente</a></li>
                             }
                         }
-                        <li><a asp-area="" asp-controller="Paciente" asp-action="Relatorio">Relatório</a></li>
+                        <li><a asp-area="" asp-controller="Paciente" asp-action="RelatorioPaciente">Relatório</a></li>
                     </ul>
                 </li>
             </ul>
@@ -126,7 +124,6 @@
                     <ul class="dropdown-menu">
                         <li><a asp-area="" asp-controller="Consulta" asp-action="CadastrarConsulta">Cadastrar Consulta</a></li>
                         <li><a asp-area="" asp-controller="Consulta" asp-action="ConsultarConsulta">Consultar Consulta</a></li>
-                        <li><a asp-area="" asp-controller="Consulta" asp-action="ConsultarRelatorio">Relatório</a></li>
                     </ul>
                 </li>
             </ul>
@@ -150,8 +147,6 @@
                                 <li><a asp-area="" asp-controller="Consulta" asp-action="ConsultarConsulta">Consultar Consulta</a></li>
                             }
                         }
-
-                        <li><a asp-area="" asp-controller="Consulta" asp-action="Relatorio">Relatório</a></li>
                     </ul>
                 </li>
             </ul>
@@ -167,7 +162,6 @@
                     <ul class="dropdown-menu">
                         <li><a asp-area="" asp-controller="Ausencia" asp-action="CadastrarAusencia">Cadastrar Ausência</a></li>
                         <li><a asp-area="" asp-controller="Ausencia" asp-action="ConsultarAusencia">Consultar Ausência</a></li>
-                        <li><a asp-area="" asp-controller="Ausencia" asp-action="ConsultarRelatorio">Relatório</a></li>
                     </ul>
                 </li>
             </ul>
@@ -191,8 +185,6 @@
                                 <li><a asp-area="" asp-controller="Ausencia" asp-action="ConsultarAusencia">Consultar Ausência</a></li>
                             }
                         }
-
-                        <li><a asp-area="" asp-controller="Consulta" asp-action="Relatorio">Relatório</a></li>
                     </ul>
                 </li>
             </ul>
@@ -208,7 +200,6 @@
                     <ul class="dropdown-menu">
                         <li><a asp-area="" asp-controller="Medicamento" asp-action="CadastrarMedicamento">Cadastrar Medicamento</a></li>
                         <li><a asp-area="" asp-controller="Medicamento" asp-action="ConsultarMedicamento">Consultar Medicamento</a></li>
-                        <li><a asp-area="" asp-controller="Medicamento" asp-action="Relatorio">Relatório</a></li>
                     </ul>
                 </li>
             </ul>
@@ -232,14 +223,13 @@
                                 <li><a asp-area="" asp-controller="Medicamento" asp-action="ConsultarMedicamento">Consultar Medicamento</a></li>
                             }
                         }
-                        <li><a asp-area="" asp-controller="Medicamento" asp-action="Relatorio">Relatório</a></li>
                     </ul>
                 </li>
             </ul>
         }
     }
 
-    @{
+    @*@{
         if (!(FlExamesI == "0") && !(FlExamesC == "0") && !(FlExamesA == "0") && !(FlExamesE == "0"))
         {
             <ul class="nav navbar-nav">
@@ -248,7 +238,6 @@
                     <ul class="dropdown-menu">
                         <li><a asp-area="" asp-controller="Exames" asp-action="CadastroExames">Cadastro Exames</a></li>
                         <li><a asp-area="" asp-controller="Exames" asp-action="PesquisaExames">Pesquisar Exames</a></li>
-                        <li><a asp-area="" asp-controller="Exames" asp-action="Relatorio">Relatório</a></li>
                     </ul>
                 </li>
             </ul>
@@ -272,12 +261,11 @@
                                 <li><a asp-area="" asp-controller="Exames" asp-action="PesquisaExames">Pesquisar Exames</a></li>
                             }
                         }
-                        <li><a asp-area="" asp-controller="Exames" asp-action="Relatorio">Relatório</a></li>
                     </ul>
                 </li>
             </ul>
         }
-    }
+    }*@
 
 </section>
     } else {

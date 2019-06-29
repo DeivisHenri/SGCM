@@ -33,7 +33,7 @@ namespace SGCM.AppData.Login {
                 if (dr.HasRows) {
                     while (dr.Read())
                     {
-                        if (dr.GetInt32(57) == 1) {
+                        if (dr.GetInt32(61) == 1) {
                             loginCompletoTO.usuarioTO.idUsuario = dr.GetInt32(0);
                             loginCompletoTO.usuarioTO.Usuario = dr.GetString(1);
                             
@@ -82,29 +82,34 @@ namespace SGCM.AppData.Login {
                             loginCompletoTO.permissoesTO.flExamesA = dr.GetInt32(38);
                             loginCompletoTO.permissoesTO.flExamesE = dr.GetInt32(39);
 
-                            loginCompletoTO.permissoesTO.flHistoriaMolestiaAtualI = dr.GetInt32(40);
-                            loginCompletoTO.permissoesTO.flHistoriaMolestiaAtualC = dr.GetInt32(41);
-                            loginCompletoTO.permissoesTO.flHistoriaMolestiaAtualA = dr.GetInt32(42);
-                            loginCompletoTO.permissoesTO.flHistoriaMolestiaAtualE = dr.GetInt32(43);
+                            loginCompletoTO.permissoesTO.flReceitaI = dr.GetInt32(40);
+                            loginCompletoTO.permissoesTO.flReceitaC = dr.GetInt32(41);
+                            loginCompletoTO.permissoesTO.flReceitaA = dr.GetInt32(42);
+                            loginCompletoTO.permissoesTO.flReceitaE = dr.GetInt32(43);
 
-                            loginCompletoTO.permissoesTO.flHistoriaPatologicaPregressaI = dr.GetInt32(44);
-                            loginCompletoTO.permissoesTO.flHistoriaPatologicaPregressaC = dr.GetInt32(45);
-                            loginCompletoTO.permissoesTO.flHistoriaPatologicaPregressaA = dr.GetInt32(46);
-                            loginCompletoTO.permissoesTO.flHistoriaPatologicaPregressaE = dr.GetInt32(47);
+                            loginCompletoTO.permissoesTO.flHistoriaMolestiaAtualI = dr.GetInt32(44);
+                            loginCompletoTO.permissoesTO.flHistoriaMolestiaAtualC = dr.GetInt32(45);
+                            loginCompletoTO.permissoesTO.flHistoriaMolestiaAtualA = dr.GetInt32(46);
+                            loginCompletoTO.permissoesTO.flHistoriaMolestiaAtualE = dr.GetInt32(47);
 
-                            loginCompletoTO.permissoesTO.flHipoteseDiagnosticaI = dr.GetInt32(48);
-                            loginCompletoTO.permissoesTO.flHipoteseDiagnosticaC = dr.GetInt32(49);
-                            loginCompletoTO.permissoesTO.flHipoteseDiagnosticaA = dr.GetInt32(50);
-                            loginCompletoTO.permissoesTO.flHipoteseDiagnosticaE = dr.GetInt32(51);
+                            loginCompletoTO.permissoesTO.flHistoriaPatologicaPregressaI = dr.GetInt32(48);
+                            loginCompletoTO.permissoesTO.flHistoriaPatologicaPregressaC = dr.GetInt32(49);
+                            loginCompletoTO.permissoesTO.flHistoriaPatologicaPregressaA = dr.GetInt32(50);
+                            loginCompletoTO.permissoesTO.flHistoriaPatologicaPregressaE = dr.GetInt32(51);
 
-                            loginCompletoTO.permissoesTO.flCondutaI = dr.GetInt32(52);
-                            loginCompletoTO.permissoesTO.flCondutaC = dr.GetInt32(53);
-                            loginCompletoTO.permissoesTO.flCondutaA = dr.GetInt32(54);
-                            loginCompletoTO.permissoesTO.flCondutaE = dr.GetInt32(55);
+                            loginCompletoTO.permissoesTO.flHipoteseDiagnosticaI = dr.GetInt32(52);
+                            loginCompletoTO.permissoesTO.flHipoteseDiagnosticaC = dr.GetInt32(53);
+                            loginCompletoTO.permissoesTO.flHipoteseDiagnosticaA = dr.GetInt32(54);
+                            loginCompletoTO.permissoesTO.flHipoteseDiagnosticaE = dr.GetInt32(55);
 
-                            loginCompletoTO.permissoesTO.flIniciarAtendimento = dr.GetInt32(56);
+                            loginCompletoTO.permissoesTO.flCondutaI = dr.GetInt32(56);
+                            loginCompletoTO.permissoesTO.flCondutaC = dr.GetInt32(57);
+                            loginCompletoTO.permissoesTO.flCondutaA = dr.GetInt32(58);
+                            loginCompletoTO.permissoesTO.flCondutaE = dr.GetInt32(59);
 
-                            loginCompletoTO.usuarioTO.statusDesativado = dr.GetInt32(57).ToString();
+                            loginCompletoTO.permissoesTO.flIniciarAtendimento = dr.GetInt32(60);
+
+                            loginCompletoTO.usuarioTO.statusDesativado = dr.GetInt32(61).ToString();
                         } else {
                             loginCompletoTO.IdRetorno = 1;
                             return loginCompletoTO;

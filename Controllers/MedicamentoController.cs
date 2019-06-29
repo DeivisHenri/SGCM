@@ -98,7 +98,7 @@ namespace SGCM.Controllers
                 if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
                     if ((int)ViewData["flMedicamentoC"] != 0) {
                         MedicamentoBLL objMedicamentoBLL = new MedicamentoBLL();
-                        var viewModel = new ConsultarMedicamentoModel();
+                        //var viewModel = new ConsultarMedicamentoModel();
                         var sort = 0;
 
                         if (HttpContext.Session.GetString("flagNomeGenerico") == null) {
@@ -170,23 +170,31 @@ namespace SGCM.Controllers
                             pageNumber = 1;
                         }
 
-
-                        viewModel.ListaConsultaMedicamentoModel = retornoListaMedicamento.ToPagedList(pageNumber, 10);
-
-                        if (viewModel != null) {
+                        if (retornoListaMedicamento != null) {
                             if (HttpContext.Session.GetString("MensagemTitle") != null && HttpContext.Session.GetString("MensagemBody") != null && HttpContext.Session.GetString("MensagemTitle") != "" && HttpContext.Session.GetString("MensagemBody") != "") {
                                 ViewBag.MensagemTitle = HttpContext.Session.GetString("MensagemTitle");
                                 ViewBag.MensagemBody = HttpContext.Session.GetString("MensagemBody");
                                 HttpContext.Session.SetString("MensagemTitle", "");
                                 HttpContext.Session.SetString("MensagemBody", "");
+
+                                model.psqFabricante = "";
+                                model.psqNomeFabrica = "";
+                                model.psqNomeGenerico = "";
+
+                                ModelState.Clear();
                             }
-                            
-                            return View(viewModel);
+
+                            model.ListaConsultaMedicamentoModel = retornoListaMedicamento.ToPagedList(pageNumber, 10);
+
+                            return View(model);
                         } else {
+                            retornoListaMedicamento = objMedicamentoBLL.ConsultarMedicamento(0, null, null, null);
+                            model.ListaConsultaMedicamentoModel = retornoListaMedicamento.ToPagedList(pageNumber, 10);
+
                             ViewBag.MensagemTitle = "Informação";
                             ViewBag.MensagemBody = "Não existe nenhum registro cadastrado!";
-                            ModelState.Clear();
-                            return View();
+
+                            return View(model);
                         }
                     } else {
                         HttpContext.Session.SetString("MensagemTitle", "Erro");
@@ -353,6 +361,9 @@ namespace SGCM.Controllers
                             HttpContext.Session.SetString("MensagemTitle", "Erro");
                             HttpContext.Session.SetString("MensagemBody", "Ocorreu um erro ao tentar excluir o medicamento, favor entrar em contato com o suporte do sistema!");
                         }
+
+                        ModelState.Clear();
+
                         return Json(retornoExcluirMedicamento);
                         //return RedirectToAction("ConsultarMedicamento", "Medicamento");
                     } else {
@@ -422,6 +433,11 @@ namespace SGCM.Controllers
             ViewData.Add("flExamesC", HttpContext.Session.GetInt32("flExamesC"));
             ViewData.Add("flExamesA", HttpContext.Session.GetInt32("flExamesA"));
             ViewData.Add("flExamesE", HttpContext.Session.GetInt32("flExamesE"));
+
+            ViewData.Add("flReceitaI", HttpContext.Session.GetInt32("flReceitaI"));
+            ViewData.Add("flReceitaC", HttpContext.Session.GetInt32("flReceitaC"));
+            ViewData.Add("flReceitaA", HttpContext.Session.GetInt32("flReceitaA"));
+            ViewData.Add("flReceitaE", HttpContext.Session.GetInt32("flReceitaE"));
 
             ViewData.Add("flHistoriaMolestiaAtualI", HttpContext.Session.GetInt32("flHistoriaMolestiaAtualI"));
             ViewData.Add("flHistoriaMolestiaAtualC", HttpContext.Session.GetInt32("flHistoriaMolestiaAtualC"));

@@ -227,6 +227,39 @@
 
 </div>
 <hr width="100%">
+@* PERMISSOES RECEITAS *@
+<div class="row">
+
+    <div class="col-lg-2 align-a-esquerda">
+        <label class="padding-top-5px">Receitas</label>
+    </div>
+
+    <div class="col-lg-2">
+        <div class="form-check form-check-inline">
+            <input asp-for="@Model.permissoes.flReceitaI" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+        </div>
+    </div>
+
+    <div class="col-lg-2">
+        <div class="form-check form-check-inline">
+            <input asp-for="@Model.permissoes.flReceitaC" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+        </div>
+    </div>
+
+    <div class="col-lg-2">
+        <div class="form-check form-check-inline">
+            <input asp-for="@Model.permissoes.flReceitaA" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+        </div>
+    </div>
+
+    <div class="col-lg-2">
+        <div class="form-check form-check-inline">
+            <input asp-for="@Model.permissoes.flReceitaE" class="form-control form-input form-input-center checkbox-size-box-shadow" type="checkbox" value="True" />
+        </div>
+    </div>
+
+</div>
+<hr width="100%">
 @* PERMISSOES MOLESTIA ATUAL *@
 <div class="row">
 
@@ -297,7 +330,7 @@
 <div class="row">
 
     <div class="col-lg-2 align-a-esquerda">
-        <label class="padding-top-5px">Patológica Pregressa</label>
+        <label class="padding-top-5px">Hipótese Diagnóstica</label>
     </div>
 
     <div class="col-lg-2">
@@ -330,7 +363,7 @@
 <div class="row">
 
     <div class="col-lg-2 align-a-esquerda">
-        <label class="padding-top-5px">Patológica Pregressa</label>
+        <label class="padding-top-5px">Conduta</label>
     </div>
 
     <div class="col-lg-2">

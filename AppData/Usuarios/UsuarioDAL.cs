@@ -134,6 +134,11 @@ namespace SGCM.AppData.Usuario {
                         cmdPermissoes.Parameters.AddWithValue("@FLEXAMESA", Int32.Parse(usuario.permissoes.flExamesA));
                         cmdPermissoes.Parameters.AddWithValue("@FLEXAMESE", Int32.Parse(usuario.permissoes.flExamesE));
 
+                        cmdPermissoes.Parameters.AddWithValue("@FLRECEITAI", Int32.Parse(usuario.permissoes.flReceitaI));
+                        cmdPermissoes.Parameters.AddWithValue("@FLRECEITAC", Int32.Parse(usuario.permissoes.flReceitaC));
+                        cmdPermissoes.Parameters.AddWithValue("@FLRECEITAA", Int32.Parse(usuario.permissoes.flReceitaA));
+                        cmdPermissoes.Parameters.AddWithValue("@FLRECEITAE", Int32.Parse(usuario.permissoes.flReceitaE));
+
                         cmdPermissoes.Parameters.AddWithValue("@FLHISTORIAMOLESTIAATUALI", Int32.Parse(usuario.permissoes.flHistoriaMolestiaAtualI));
                         cmdPermissoes.Parameters.AddWithValue("@FLHISTORIAMOLESTIAATUALC", Int32.Parse(usuario.permissoes.flHistoriaMolestiaAtualC));
                         cmdPermissoes.Parameters.AddWithValue("@FLHISTORIAMOLESTIAATUALA", Int32.Parse(usuario.permissoes.flHistoriaMolestiaAtualA));
@@ -154,7 +159,7 @@ namespace SGCM.AppData.Usuario {
                         cmdPermissoes.Parameters.AddWithValue("@FLCONDUTAA", Int32.Parse(usuario.permissoes.flCondutaA));
                         cmdPermissoes.Parameters.AddWithValue("@FLCONDUTAE", Int32.Parse(usuario.permissoes.flCondutaE));
 
-                        cmdPermissoes.Parameters.AddWithValue("@FLINICIARATENDIMENTO", MySqlDbType.Int32).Value = Int32.Parse(usuario.permissoes.flIniciarAtendimento);
+                        cmdPermissoes.Parameters.AddWithValue("@FLINICIARATENDIMENTO", Int32.Parse(usuario.permissoes.flIniciarAtendimento));
 
                         linhaInserida = linhaInserida + cmdPermissoes.ExecuteNonQuery();
 

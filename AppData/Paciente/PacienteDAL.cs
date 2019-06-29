@@ -6,6 +6,7 @@ using System.Transactions;
 using MySql.Data.MySqlClient;
 using SGCM.AppData.Infraestrutura.UtilMetodo;
 using System.Collections.Generic;
+using SGCM.Models.Paciente.RelatorioPacienteModel;
 
 namespace SGCM.AppData.Paciente
 {
@@ -269,6 +270,58 @@ namespace SGCM.AppData.Paciente
                     scope.Dispose();
                     throw ex;
                 }
+            }
+        }
+
+        public RelatorioPacienteModel RelatorioPaciente(RelatorioPacienteModel paciente, int idMedico) {
+            try {
+                var DALSQL = new PacienteDALSQL();
+                using (MySqlConnection connection = new MySqlConnection(getStringConnection())) {
+
+                    connection.Open();
+
+                    MySqlCommand cmdPaciente = new MySqlCommand(DALSQL.RelatorioPaciente(paciente), connection);
+
+                    cmdPaciente.Parameters.Add("@IDMEDICO", MySqlDbType.Int32).Value = idMedico;
+
+                    if (paciente.psqNome != string.Empty && paciente.psqNome != null) cmdPaciente.Parameters.Add("@NOME", MySqlDbType.String).Value = paciente.psqNome;
+                    if (paciente.psqCPF != string.Empty && paciente.psqCPF != null) cmdPaciente.Parameters.Add("@CPF", MySqlDbType.String).Value = paciente.psqCPF;
+                    if (paciente.psqCPF != string.Empty && paciente.psqTelefoneCelular != null) cmdPaciente.Parameters.Add("@TELEFONECELULAR", MySqlDbType.String).Value = paciente.psqTelefoneCelular;
+
+                    var teste2 = getGeneratedSql(cmdPaciente);
+
+                    MySqlDataReader reader = cmdPaciente.ExecuteReader();
+
+                    RelatorioPacienteModel relatorioPacienteModel = new RelatorioPacienteModel();
+                    relatorioPacienteModel.ListaPacientes = new List<ListPaciente>();
+
+                    if (reader.HasRows) {
+                        while (reader.Read()) {
+                            ListPaciente pacienteModel = new ListPaciente();
+
+                            pacienteModel.idPaciente = reader.GetInt32(0);
+                            pacienteModel.nome = reader.GetString(1);
+                            pacienteModel.cpf = reader.GetString(2);
+                            pacienteModel.telefoneCelular= reader.GetString(3);
+
+                            relatorioPacienteModel.ListaPacientes.Add(pacienteModel);
+                        }
+                        reader.NextResult();
+                    } else {
+                        reader.Close();
+                        connection.Close();
+                        return null;
+                    }
+
+                    reader.Close();
+                    connection.Close();
+
+                    return relatorioPacienteModel;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
 

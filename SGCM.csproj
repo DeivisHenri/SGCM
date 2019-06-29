@@ -121,6 +121,15 @@
     <Content Update="Views\Paciente\_PacienteStyle.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Views\Receita\Partials\MostrarReceita\_MostrarReceitaMedicamentoTable.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Receita\Partials\_ReceitaScript.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Receita\Partials\_ReceitaStyle.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\Usuario\Partials\Consultar\_UsuarioScript.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
@@ -148,6 +157,10 @@
     <Content Update="Views\Usuario\Partials\Editar\_UsuarioStyle.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\rotativa\" />
   </ItemGroup>
 
 </Project>

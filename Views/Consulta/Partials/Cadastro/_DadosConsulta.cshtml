@@ -7,8 +7,6 @@
     <div class="col-lg-4 margin-right-15-px">
         <div class="form-group">
             <label asp-for="@Model.Paciente.Nome" class="control-label form-label"></label>
-            @*<input asp-for="@Model.paciente.Nome" class="form-control form-input form-input-center" onblur="("location.href='"+ Url.Action("ConsultarNome","Consulta", new { nome = @Model.paciente.Nome} )+ "'")" />*@
-            @*<input asp-for="@Model.paciente.Nome" class="form-control form-input form-input-center" onblur="ConsultarNome()" />*@
             <input asp-for="@Model.Paciente.Nome" class="form-control form-input form-input-center" />
             <span asp-validation-for="@Model.Paciente.Nome" class="text-danger"></span>
 
@@ -27,7 +25,7 @@
     @* BOTÃO PESQUISA *@
     <div class="col-lg-1">
         <div class="form-group">
-            <button type="button" id="btnPesquisaPaciente" class="btn btn-primary margin-top-25-px"> <span class="glyphicon glyphicon-search"></span> </button>
+            <button type="button" id="btnPesquisaPaciente" class="btn btn-primary margin-top-25-px"> Pesquisar @*<span class="glyphicon glyphicon-search"></span>*@ </button>
         </div>
     </div>
 

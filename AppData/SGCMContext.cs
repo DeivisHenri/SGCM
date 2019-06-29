@@ -16,6 +16,8 @@ namespace SGCM.AppData {
 
         private string ConnectionString = $"Server={Server};DataBase={DataBase};Uid={User};Pwd={Password};Sslmode=none;";
 
+        //private string ConnectionString = "Server=MYSQL5012.site4now.net;Database=db_a4a495_deivish;Uid=a4a495_deivish;Pwd=123456";
+
         /* CONEXÃO AZURE */
         //private static string Server = "sgcm.mysql.database.azure.com";
         //private static string DataBase = "sgcm";

@@ -115,8 +115,6 @@ namespace SGCM.Controllers
                 if ((ViewData["idUsuario"] != null) && ((int)ViewData["idUsuario"] != 0)) {
                     if ((int)ViewData["flAusenciaC"] != 0) {
 
-                        //if (!ModelState.IsValid) return View();
-
                         if (psqDataAusencia != null && psqDataAusencia != "") {
                             DateTime resultado;
                             if (DateTime.TryParse(psqDataAusencia, out resultado)) {
@@ -126,14 +124,6 @@ namespace SGCM.Controllers
                                 ViewBag.MensagemBody = "A data informada não está no formato correto! Por favor insira DD/MM/YYYY";
                                 return View();
                             }
-
-                            //model.psqDataAusencia = new DateTime(Convert.ToInt32(psqDataAusencia.Split('/')[2]),
-                            //                                     Convert.ToInt32(psqDataAusencia.Split('/')[1]),
-                            //                                     Convert.ToInt32(psqDataAusencia.Split('/')[0]),
-                            //                                     0,
-                            //                                     0,
-                            //                                     0,
-                            //                                     0);
                         }
 
                         AusenciaBLL objAusenciaBLL = new AusenciaBLL();
@@ -617,6 +607,11 @@ namespace SGCM.Controllers
             ViewData.Add("flExamesC", HttpContext.Session.GetInt32("flExamesC"));
             ViewData.Add("flExamesA", HttpContext.Session.GetInt32("flExamesA"));
             ViewData.Add("flExamesE", HttpContext.Session.GetInt32("flExamesE"));
+
+            ViewData.Add("flReceitaI", HttpContext.Session.GetInt32("flReceitaI"));
+            ViewData.Add("flReceitaC", HttpContext.Session.GetInt32("flReceitaC"));
+            ViewData.Add("flReceitaA", HttpContext.Session.GetInt32("flReceitaA"));
+            ViewData.Add("flReceitaE", HttpContext.Session.GetInt32("flReceitaE"));
 
             ViewData.Add("flHistoriaMolestiaAtualI", HttpContext.Session.GetInt32("flHistoriaMolestiaAtualI"));
             ViewData.Add("flHistoriaMolestiaAtualC", HttpContext.Session.GetInt32("flHistoriaMolestiaAtualC"));
