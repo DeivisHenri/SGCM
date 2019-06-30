@@ -264,7 +264,8 @@ namespace SGCM.Controllers {
                         if (retorno == 3) {
                             HttpContext.Session.SetString("MensagemTitle", "Sucesso");
                             HttpContext.Session.SetString("MensagemBody", "O usuário " + model.pessoa.Nome + " foi atualizado com sucesso!");
-                            return RedirectToAction("ConsultaUsuario", "Usuario");
+                            ConsultarUsuarioModel modelConsulta = null;
+                            return RedirectToAction("ConsultarUsuario", "Usuario");
                         } else {
                             ViewBag.MensagemTitle = "Erro";
                             ViewBag.MensagemBody = "Ocorreu um erro na tentiva de editar o usuário: " + ViewData["nome"];

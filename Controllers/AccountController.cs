@@ -120,8 +120,8 @@ namespace SGCM.Controllers {
             {
                 throw new ApplicationException("A code must be supplied for password reset.");
             }
-            var model = new ResetPasswordViewModel { Code = code };
-            return View(model);
+            //var model = new ResetPasswordViewModel { Code = code };
+            return View();
         }
 
         private IActionResult RedirectToLocal(string returnUrl)

@@ -23,6 +23,8 @@ namespace SGCM.AppData.Login {
                 cmdUsuario.Parameters.Add("@USUARIO", MySqlDbType.String).Value = usuario.Username;
                 cmdUsuario.Parameters.Add("@SENHA", MySqlDbType.String).Value = usuario.Password;
 
+                var teste = getGeneratedSql(cmdUsuario);
+
                 MySqlDataReader dr = cmdUsuario.ExecuteReader();
 
                 UsuarioCompletoTO loginCompletoTO = new UsuarioCompletoTO();
@@ -204,6 +206,17 @@ namespace SGCM.AppData.Login {
             {
                 throw ex;
             }
+        }
+
+        private string getGeneratedSql(MySqlCommand cmd)
+        {
+            string result = cmd.CommandText.ToString();
+            foreach (MySqlParameter p in cmd.Parameters)
+            {
+                string isQuted = (p.Value is string) ? "'" : "";
+                result = result.Replace(p.ParameterName.ToString(), isQuted + p.Value.ToString() + isQuted);
+            }
+            return result;
         }
     }
 }

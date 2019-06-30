@@ -12,6 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\Account\RegisterViewModel.cs" />
+    <Compile Remove="Models\Account\ResetPasswordViewModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="IT2media.Extensions.Logging.Abstractions" Version="2.0.0" />
     <PackageReference Include="iTextSharp" Version="5.5.13" />
     <PackageReference Include="jQuery.MaskedInput" Version="1.4.1" />
