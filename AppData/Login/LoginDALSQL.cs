@@ -11,7 +11,8 @@ namespace SGCM.AppData.Login {
 
         public string EfetuarLogin() {
             StringBuilder command = new StringBuilder();
-
+            
+            command.AppendLine("USE db_a4a495_deivish;");
             command.AppendLine("Select Usr.idUsuario,");
             command.AppendLine("       Usr.usuario,");
             

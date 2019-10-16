@@ -9,23 +9,20 @@ using SGCM.Models;
 namespace SGCM.AppData {
     public class SGCMContext {
         /* CONEXÃO LOCALHOST */
-        private static string Server = "localhost";
-        private static string DataBase = "sgcm";
-        private static string User = "root";
-        private static string Password = "";
-
-        private string ConnectionString = $"Server={Server};DataBase={DataBase};Uid={User};Pwd={Password};Sslmode=none;";
-
-        //private string ConnectionString = "Server=MYSQL5012.site4now.net;Database=db_a4a495_deivish;Uid=a4a495_deivish;Pwd=123456";
-
-        /* CONEXÃO AZURE */
-        //private static string Server = "sgcm.mysql.database.azure.com";
+        //private static string Server = "localhost";
         //private static string DataBase = "sgcm";
-        //private static string User = "deivis@sgcm";
-        //private static string Password = "Shaft123";
+        //private static string User = "root";
+        //private static string Password = "";
 
-        //private string ConnectionString = $"Server={Server};DataBase={DataBase};Uid={User};Pwd={Password};Sslmode=Required;";
+        //private string ConnectionString = $"Server={Server};DataBase={DataBase};Uid={User};Pwd={Password};Sslmode=none;"
 
+        /* CONEXÃO SMARTERNET */
+        private static string Server = "MYSQL5012.site4now.net";
+        private static string DataBase = "db_a4a495_deivish";
+        private static string User = "a4a495_deivish";
+        private static string Password = "ShaftDeivis123";
+
+        private string ConnectionString = $"Server={Server};Database={DataBase};Uid={User};Pwd={Password}";
 
         public string StringConnection { get; }
 
